@@ -6,10 +6,15 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.jsx'],
+            input: ['@/app.jsx'],
             refresh: true,
         }),
         tailwindcss(),
         react(),
     ],
+    resolve: {
+        alias: {
+            "@": "resources/js"
+        }
+    }
 });
