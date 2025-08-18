@@ -16,13 +16,18 @@ return new class extends Migration
             $table->string('cnic', 50)->unique();
             $table->string('phone_no', 50);
             $table->string('email', 100)->unique();
-            $table->string('password', 50);
+            $table->string('password');
             $table->string('address', 100);
             $table->string('town', 100);
             $table->string('region', 100);
             $table->string('postal_code', 100);
             $table->string('country', 100);
             $table->timestamps();
+        });
+        Schema::create('customer_password_resets', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
     /**

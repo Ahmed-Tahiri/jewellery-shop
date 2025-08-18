@@ -35,8 +35,8 @@ export default function Signup() {
     };
 
     return (
-        <section className="h-[730px] w-full flex items-center justify-center bg-pink-100">
-            <div className="h-[90%] w-full flex flex-col items-center gap-y-5">
+        <section className=" py-10 w-full flex items-center justify-center bg-pink-100">
+            <div className=" w-full flex flex-col items-center gap-y-5">
                 <div className="flex justify-center items-center">
                     <h1 className="text-2xl font-medium">Signup</h1>
                 </div>
