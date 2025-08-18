@@ -23,4 +23,16 @@ class SessionController extends Controller
             'email' => 'Invalid email or password.',
         ])->withInput($request->only('email', 'password'));
     }
+
+    public function destroy(Request $request)
+    {
+        if (Auth::guard('customer')->check()) {
+            Auth::guard('customer')->logout();
+        }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('Home');
+    }
 }
