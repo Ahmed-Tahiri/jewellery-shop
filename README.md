@@ -41,12 +41,11 @@ cp .env.example .env
 Update `.env` with your configuration:
 
 ```ini
-APP_NAME=Jewellery Shop
+APP_NAME=jewellery_shop
 APP_ENV=local
-APP_KEY=base64:bMP5BwrjB6Ag+K9MDDFfhoqD6jBCYDZLUMHd0VRp0kE=
+APP_KEY=base64:tyZNOX35J/xZvVKV14m6py3ILU9KVBp7m9fIq9dkMw8=
 APP_DEBUG=true
 APP_URL=https://jewellery-shop.test
-
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
