@@ -20,18 +20,18 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $attrs = $request->validate([
-            'first_name'   => ['required', 'min:2', 'max:50'],
-            'last_name'    => ['required', 'min:2', 'max:50'],
-            'phone'        => ['required', 'min:7', 'max:100'],
-            'email'        => ['required', 'email', 'unique:customers,email', 'max:100'],
-            'password'     => ['required', Password::min(6), 'confirmed',],
-            'address'      => ['required', 'min:2', 'max:100'],
-            'town'         => ['required', 'min:2', 'max:100'],
-            'region'       => ['required', 'min:2', 'max:100'],
-            'postal_code'  => ['required', 'min:2', 'max:100'],
-            'cnic'         => ['required', 'min:11', 'max:50', 'unique:customers,cnic'],
-            'country'      => ['required', 'min:2', 'max:100'],
-        ]);
+            'first_name'   => ['required', 'string', 'min:2', 'max:50'],
+            'last_name'    => ['required', 'string', 'min:2', 'max:50'],
+            'phone'        => ['required', 'string', 'regex:/^\+?[0-9]+$/', 'min:7', 'max:100'],
+            'email'        => ['required', 'string', 'email', 'unique:customers,email', 'max:100'],
+            'password'     => ['required', 'string', Password::min(6), 'confirmed',],
+            'address'      => ['required', 'string', 'min:2', 'max:100'],
+            'town'         => ['required', 'string', 'min:2', 'max:100'],
+            'region'       => ['required', 'string', 'min:2', 'max:100'],
+            'postal_code'  => ['required', 'string', 'min:2', 'max:100'],
+            'cnic'         => ['required', 'string', 'regex:/^[0-9]+$/', 'min:11', 'max:50', 'unique:customers,cnic'],
+            'country'      => ['required', 'string', 'min:2', 'max:100'],
+        ], ['cnic.regex' => 'Enter only numeric values', 'phone.regex' => 'Please Enter Valid Phone']);
 
         $customer = Customer::create([
             'first_name'   => $attrs['first_name'],

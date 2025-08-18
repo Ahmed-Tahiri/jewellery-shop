@@ -1,5 +1,4 @@
-import React from "react";
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 
 export default function Signup() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -17,9 +16,7 @@ export default function Signup() {
         password_confirmation: "",
     });
 
-    const inputChangeHandler = (e) => {
-        setData(e.target.name, e.target.value);
-    };
+    const inputChangeHandler = (e) => { setData(e.target.name, e.target.value); };
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -30,9 +27,7 @@ export default function Signup() {
         });
     };
 
-    const handleReset = () => {
-        reset();
-    };
+    const handleReset = () => { reset(); };
 
     return (
         <section className=" py-10 w-full flex items-center justify-center bg-pink-100">
@@ -64,22 +59,20 @@ export default function Signup() {
                         <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="confirmPassword">  Confirm Password </label> <input value={data.password_confirmation} onChange={inputChangeHandler} type="password" name="password_confirmation" id="confirmPassword" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="********" /> {errors.password_confirmation && (<span className="text-red-700 text-sm">    {errors.password_confirmation}</span>)}</div>
                     </div>
 
-
                     <div className="flex flex-row gap-x-10">
                         <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="town">Town </label> <input value={data.town} onChange={inputChangeHandler} type="text" name="town" id="town" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="Lahore" /> {errors.town && (<span className="text-red-700 text-sm">{errors.town}</span>)}</div>
                         <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="region">Region </label> <input value={data.region} onChange={inputChangeHandler} type="text" name="region" id="region" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="South Asia" /> {errors.region && (<span className="text-red-700 text-sm">{errors.region}</span>)}</div>
                     </div>
 
-
                     <div className="flex flex-row gap-x-10">
-                        <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="postalCode">Postal Code </label> <input value={data.postal_code} onChange={inputChangeHandler} type="text" name="postal_code" id="postalCode" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="48800" /> {errors.postal_code && (<span className="text-red-700 text-sm">{errors.postal_code}</span>)}</div>
+                        <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="postalCode">Postal Code </label> <input value={data.postal_code} onChange={inputChangeHandler} type="text" name="postal_code" id="postalCode" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="54000" /> {errors.postal_code && (<span className="text-red-700 text-sm">{errors.postal_code}</span>)}</div>
                         <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="country">Country </label> <input value={data.country} onChange={inputChangeHandler} type="text" name="country" id="country" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="Pakistan" /> {errors.country && (<span className="text-red-700 text-sm">{errors.country}</span>)}</div>
                     </div>
-
+                    <div><p>Already have an account? <Link href={'/login'} className="underline text-red-700">Login</Link></p></div>
 
                     <div className="w-full flex justify-center items-center gap-x-5">
-                        <button type="button" onClick={handleReset} className="w-25 px-4 py-2 bg-blue-400 font-lg rounded hover:bg-blue-500 transition-all ease-linear duration-300 cursor-pointer" disabled={processing}> Reset</button>
-                        <button type="submit" className="w-25 px-4 py-2 bg-red-400 font-lg rounded hover:bg-red-500 transition-all ease-linear duration-300 cursor-pointer disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Signup"}</button>
+                        <div> <button type="button" onClick={handleReset} className="min-w-25 px-4 py-2 bg-blue-400 font-lg rounded hover:bg-blue-500 transition-all ease-linear duration-300 cursor-pointer" disabled={processing}> Reset</button></div>
+                        <div>   <button type="submit" className="min-w-25 px-4 py-2 bg-red-400 font-lg rounded hover:bg-red-500 transition-all ease-linear duration-300 cursor-pointer disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Signup"}</button></div>
                     </div>
                 </form>
             </div>

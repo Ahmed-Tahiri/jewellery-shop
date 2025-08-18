@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 
 export default function Login() {
 
@@ -7,9 +7,7 @@ export default function Login() {
         password: "",
     });
 
-    const inputChangeHandler = (e) => {
-        setData(e.target.name, e.target.value);
-    };
+    const inputChangeHandler = (e) => { setData(e.target.name, e.target.value); };
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -41,6 +39,7 @@ export default function Login() {
                         </div>
 
                     </div>
+                    <div><p>Don't have an account? <Link href={'/signup'} className="underline text-red-700">Signup</Link></p></div>
                     <div className="w-full flex justify-center items-center gap-x-5">
                         <button type="submit" className="min-w-25 px-4 py-2 bg-red-400 font-lg rounded hover:bg-red-500 transition-all ease-linear duration-300 cursor-pointer disabled:opacity-50" disabled={processing}> {processing ? "Logging in..." : "Login"}</button>
                     </div>
@@ -48,6 +47,4 @@ export default function Login() {
             </form>
         </div>
     </section>
-
-
 }
