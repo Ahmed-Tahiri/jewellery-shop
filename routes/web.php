@@ -8,3 +8,4 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 Route::get('/signup', [CustomerController::class, 'index']);
+Route::post('/signup', [CustomerController::class, 'store']);

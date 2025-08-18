@@ -13,4 +13,8 @@ class CustomerController extends Controller
     {
         return Inertia::render('Auth/Signup');
     }
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }
