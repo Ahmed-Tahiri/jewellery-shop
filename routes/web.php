@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -9,3 +10,5 @@ Route::get('/', function () {
 })->name('Home');
 Route::get('/signup', [CustomerController::class, 'index']);
 Route::post('/signup', [CustomerController::class, 'store']);
+
+Route::get('/login', [SessionController::class, 'index']);
