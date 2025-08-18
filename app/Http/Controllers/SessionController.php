@@ -11,4 +11,8 @@ class SessionController extends Controller
     {
         return Inertia::render('Auth/Login');
     }
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }
