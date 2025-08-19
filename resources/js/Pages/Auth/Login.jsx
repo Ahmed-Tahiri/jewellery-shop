@@ -36,6 +36,7 @@ export default function Login() {
                         <div className="flex flex-col items-start justify-start w-full">
                             <label className="text-lg" htmlFor="password">Password </label>
                             <input value={data.password} onChange={inputChangeHandler} type="text" name="password" id="password" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="********" />
+                            <Link className="cursor-pointer text-base text-yellow-700" href={'#'}>Forgot password?</Link>
                         </div>
                     </div>
                     <div><p>Don't have an account? <Link href={'/signup'} className="underline text-yellow-700">Signup</Link></p></div>
