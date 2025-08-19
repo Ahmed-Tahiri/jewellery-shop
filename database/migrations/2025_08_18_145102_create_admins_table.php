@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email', 100)->unique();
             $table->string('password');
             $table->timestamps();
+            $table->enum('role', ['admin']);
         });
 
         Schema::create('admin_password_resets', function (Blueprint $table) {
@@ -30,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('admins');
+        Schema::dropIfExists('admin_password_resets');
     }
 };

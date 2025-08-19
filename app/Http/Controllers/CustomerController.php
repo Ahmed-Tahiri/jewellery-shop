@@ -45,6 +45,7 @@ class CustomerController extends Controller
             'region'       => $attrs['region'],
             'postal_code'  => $attrs['postal_code'],
             'country'      => $attrs['country'],
+            'role' => 'customer'
         ]);
         Auth::guard('customer')->login($customer);
         return redirect()->route('Home')->with('success', 'Account created successfully');

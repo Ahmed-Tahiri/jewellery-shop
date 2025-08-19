@@ -33,7 +33,8 @@ class AdminController extends Controller
             'first_name'   => $attrs['first_name'],
             'last_name'    => $attrs['last_name'],
             'email'        => $attrs['email'],
-            'password'     => Hash::make($attrs['password'])
+            'password'     => Hash::make($attrs['password']),
+            'role' => 'admin'
 
         ]);
         Auth::guard('admin')->login($admin);
