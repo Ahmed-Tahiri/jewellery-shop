@@ -15,6 +15,10 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate(['email' => ['required', 'email'], 'password' => 'required'], ['email.required' => 'Please fill data in fields', 'password.required' => 'Please fill data in fields']);
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('Dashboard')->with('success', 'Login Successful');
+        }
         if (Auth::guard('customer')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('Home')->with('success', 'Login Successful');
@@ -26,7 +30,9 @@ class SessionController extends Controller
 
     public function destroy(Request $request)
     {
-        if (Auth::guard('customer')->check()) {
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        } elseif (Auth::guard('customer')->check()) {
             Auth::guard('customer')->logout();
         }
 

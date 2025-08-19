@@ -1,6 +1,8 @@
 import { FaChevronLeft, FaChevronRight, FaBoxOpen, FaShoppingCart, FaTags, FaLayerGroup, FaUserCircle } from "react-icons/fa";
 import { NavItem } from "./NavItem";
 import { useState } from "react";
+import { FaPowerOff } from "react-icons/fa6";
+import { Link } from "@inertiajs/react";
 export let DesktopSidebar = ({ adminName }) => {
 
 
@@ -33,13 +35,9 @@ export let DesktopSidebar = ({ adminName }) => {
 
             <div className="p-4 border-t">
                 <div className={`flex items-center gap-3 ${open ? "" : "justify-center"}`}>
-                    <FaUserCircle className="text-2xl text-yellow-600" />
-                    {open && (
-                        <div>
-                            <div className="text-sm font-medium text-gray-800">{adminName}</div>
-                            <div className="text-xs text-gray-500">Administrator</div>
-                        </div>
-                    )}
+                    <div>
+                        <Link className="cursor-pointer px-4 flex flex-row gap-x-2 sm:px-5 sm:py-2 py-2 rounded-lg bg-yellow-600 text-white text-sm sm:text-base font-medium shadow hover:bg-yellow-700 transition" method='post' href={'/logout'} > <FaPowerOff className="text-2xl text-white" /> {open && (<span>Logout </span>)}</Link>
+                    </div>
                 </div>
             </div>
         </aside>

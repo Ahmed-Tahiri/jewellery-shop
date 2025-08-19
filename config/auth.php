@@ -77,6 +77,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Customer::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
 
 
 
@@ -115,6 +119,12 @@ return [
         'customers' => [
             'provider' => 'customers',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE',  'customer_password_resets'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'customers' => [
+            'provider' => 'admin',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE',  'admin_password_resets'),
             'expire' => 60,
             'throttle' => 60,
         ],
