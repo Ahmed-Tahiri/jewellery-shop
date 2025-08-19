@@ -34,7 +34,6 @@ class AppServiceProvider extends ServiceProvider
                         $customer =   Auth::guard('customer')->user();
                         return ['id' => $customer->id, 'firstName' => $customer->first_name, 'lastName' => $customer->last_name, 'email' => $customer->email];
                     }
-
                     return null;
                 }
             ]
