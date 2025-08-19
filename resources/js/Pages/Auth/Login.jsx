@@ -23,7 +23,7 @@ export default function Login() {
                 <h1 className="text-2xl font-medium">Login</h1>
             </div>
 
-            <form onSubmit={submitHandler} className="h-100 w-3/10 items-center border-2 px-5 py-7 rounded-2xl gap-y-5 shadow" >
+            <form onSubmit={submitHandler} className="h-100 w-8/10 sm:w-7/10 lg:w-3/10 items-center border-2 px-5 py-7 rounded-2xl gap-y-5 shadow" >
                 {errors.email && (<span className="text-red-700 text-sm w-full text-center block">{errors.email}</span>)}
 
                 {!errors.email && errors.password ? (<span className="text-red-700 text-sm w-full text-center block">{errors.password}</span>) : ''}

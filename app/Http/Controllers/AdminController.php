@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\UniqueEmail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +19,22 @@ class AdminController extends Controller
 
     public function create()
     {
+        if (Admin::first()) {
+            if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
+                return redirect()->route('Home');
+            }
+            return redirect()->route('Dashboard');
+        }
         return Inertia::render('Admin/Signup');
     }
     public function store(Request $request)
     {
+
+
         $attrs = $request->validate([
             'first_name'   => ['required', 'string', 'min:2', 'max:50'],
             'last_name'    => ['required', 'string', 'min:2', 'max:50'],
-            'email'        => ['required', 'string', 'email', 'unique:admins,email', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100', new UniqueEmail],
             'password'     => ['required', 'string', Password::min(6), 'confirmed']
         ]);
 
