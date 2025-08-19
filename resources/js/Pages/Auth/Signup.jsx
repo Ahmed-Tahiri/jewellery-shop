@@ -45,7 +45,7 @@ export default function Signup() {
 
 
                     <div className="flex flex-col md:flex-row gap-x-10">
-                        <div className="flex flex-col items-start justify-start w-full md:w-5/10"> <label className="text-lg" htmlFor="cnic">CNIC</label> <input value={data.cnic} onChange={inputChangeHandler} type="text" name="cnic" id="cnic" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="12345-1234567-8" /> {errors.cnic && (<span className="text-red-700 text-sm">{errors.cnic}</span>)}</div>
+                        <div className="flex flex-col items-start justify-start w-full md:w-5/10"> <label className="text-lg" htmlFor="cnic">CNIC</label> <input value={data.cnic} onChange={inputChangeHandler} type="text" name="cnic" id="cnic" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="1234512345678" /> {errors.cnic && (<span className="text-red-700 text-sm">{errors.cnic}</span>)}</div>
                         <div className="flex flex-col items-start justify-start w-full md:w-5/10"> <label className="text-lg" htmlFor="phone">Phone</label> <input value={data.phone} onChange={inputChangeHandler} type="text" name="phone" id="phone" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="01231234567" /> {errors.phone && (<span className="text-red-700 text-sm">{errors.phone}</span>)}</div>
                     </div>
 
