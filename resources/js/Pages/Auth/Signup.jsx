@@ -30,7 +30,7 @@ export default function Signup() {
     const handleReset = () => { reset(); };
 
     return (
-        <section className=" py-10 w-full flex items-center justify-center bg-pink-100">
+        <section className=" py-10 w-full flex items-center justify-center bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-200">
             <div className=" w-full flex flex-col items-center gap-y-5">
                 <div className="flex justify-center items-center">
                     <h1 className="text-2xl font-medium">Signup</h1>
@@ -68,11 +68,11 @@ export default function Signup() {
                         <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="postalCode">Postal Code </label> <input value={data.postal_code} onChange={inputChangeHandler} type="text" name="postal_code" id="postalCode" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="54000" /> {errors.postal_code && (<span className="text-red-700 text-sm">{errors.postal_code}</span>)}</div>
                         <div className="flex flex-col items-start justify-start w-5/10"> <label className="text-lg" htmlFor="country">Country </label> <input value={data.country} onChange={inputChangeHandler} type="text" name="country" id="country" className="border border-gray-900 rounded w-full px-2 py-1" placeholder="Pakistan" /> {errors.country && (<span className="text-red-700 text-sm">{errors.country}</span>)}</div>
                     </div>
-                    <div><p>Already have an account? <Link href={'/login'} className="underline text-red-700">Login</Link></p></div>
+                    <div><p>Already have an account? <Link href={'/login'} className="underline text-yellow-700">Login</Link></p></div>
 
                     <div className="w-full flex justify-center items-center gap-x-5">
-                        <div> <button type="button" onClick={handleReset} className="min-w-25 px-4 py-2 bg-blue-400 font-lg rounded hover:bg-blue-500 transition-all ease-linear duration-300 cursor-pointer" disabled={processing}> Reset</button></div>
-                        <div>   <button type="submit" className="min-w-25 px-4 py-2 bg-red-400 font-lg rounded hover:bg-red-500 transition-all ease-linear duration-300 cursor-pointer disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Signup"}</button></div>
+                        <div> <button type="button" onClick={handleReset} className="min-w-25 px-4 py-2 bg-transparent text-yellow-600 font-medium border-2 border-yellow-600 font-lg rounded hover:bg-yellow-600 hover:text-white transition-all ease-linear duration-300 cursor-pointer" disabled={processing}> Reset</button></div>
+                        <div>   <button type="submit" className="min-w-25 px-4 py-2 border-2 border-yellow-600 text-white font-medium bg-yellow-600 font-lg rounded hover:bg-yellow-700 transition-all ease-linear duration-300 cursor-pointer disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Signup"}</button></div>
                     </div>
                 </form>
             </div>

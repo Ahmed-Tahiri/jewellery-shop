@@ -17,6 +17,7 @@ Route::get('/login', [SessionController::class, 'index']);
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
+
 Route::get('/admin', [AdminController::class, 'index'])->name('Dashboard');
 Route::get('/admin/signup', [AdminController::class, 'create']);
 Route::post('/admin/signup', [AdminController::class, 'store']);
