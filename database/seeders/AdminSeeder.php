@@ -13,9 +13,10 @@ class AdminSeeder extends Seeder
 
         if (!Admin::exists()) {
             Admin::create([
-                'name' => 'Super Admin',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('ChangeMe123!'),
+                'first_name' => 'Super',
+                'last_name' => 'Admin',
+                'email' => 'admin@jewelleryshop.com',
+                'password' => Hash::make('Admin123'),
                 'role' => 'admin',
             ]);
         }
