@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('region', 100);
             $table->string('postal_code', 100);
             $table->string('country', 100);
+            $table->enum('role', ['customer']);
             $table->timestamps();
         });
         Schema::create('customer_password_resets', function (Blueprint $table) {
@@ -36,5 +37,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('customers');
+        Schema::dropIfExists('customer_password_resets');
     }
 };

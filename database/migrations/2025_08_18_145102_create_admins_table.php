@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('last_name', 50);
             $table->string('email', 100)->unique();
             $table->string('password');
+            $table->enum('role', ['admin']);
             $table->timestamps();
         });
 
@@ -30,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('admins');
+        Schema::dropIfExists('admin_password_resets');
     }
 };

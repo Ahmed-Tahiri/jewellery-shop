@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\UniqueEmail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class CustomerController extends Controller
             'first_name'   => ['required', 'string', 'min:2', 'max:50'],
             'last_name'    => ['required', 'string', 'min:2', 'max:50'],
             'phone'        => ['required', 'string', 'regex:/^\+?[0-9]+$/', 'min:7', 'max:100'],
-            'email'        => ['required', 'string', 'email', 'unique:customers,email', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100', new UniqueEmail],
             'password'     => ['required', 'string', Password::min(6), 'confirmed',],
             'address'      => ['required', 'string', 'min:2', 'max:100'],
             'town'         => ['required', 'string', 'min:2', 'max:100'],
@@ -45,6 +46,7 @@ class CustomerController extends Controller
             'region'       => $attrs['region'],
             'postal_code'  => $attrs['postal_code'],
             'country'      => $attrs['country'],
+            'role' => 'customer'
         ]);
         Auth::guard('customer')->login($customer);
         return redirect()->route('Home')->with('success', 'Account created successfully');
