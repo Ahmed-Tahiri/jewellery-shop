@@ -13,15 +13,8 @@ return new class extends Migration
             $table->id();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->string('cnic', 50)->unique();
-            $table->string('phone_no', 50);
             $table->string('email', 100)->unique();
             $table->string('password');
-            $table->string('address', 100);
-            $table->string('town', 100);
-            $table->string('region', 100);
-            $table->string('postal_code', 100);
-            $table->string('country', 100);
             $table->enum('role', ['customer'])->default('customer');
             $table->timestamps();
         });
