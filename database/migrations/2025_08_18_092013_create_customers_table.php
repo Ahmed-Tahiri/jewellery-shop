@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('region', 100);
             $table->string('postal_code', 100);
             $table->string('country', 100);
-            $table->enum('role', ['customer']);
+            $table->enum('role', ['customer'])->default('customer');
             $table->timestamps();
         });
         Schema::create('customer_password_resets', function (Blueprint $table) {

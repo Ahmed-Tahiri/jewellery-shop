@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\CreateAdmin;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
@@ -18,4 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias(['admin' => AdminMiddleware::class]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {})->create();
+    ->withExceptions(function (Exceptions $exceptions): void {})
+    ->withCommands([CreateAdmin::class])
+    ->create();
