@@ -23,9 +23,9 @@ export default function Signup() {
         <AuthLayout heading='Sign In' description="Please fill you detail to access your account.">
             <div className="w-full flex flex-col">
                 <form className="w-full flex flex-col gap-y-5" onSubmit={submitHandler}>
-
                     <div className="flex flex-col items-start justify-start  w-full gap-y-2">
                         <FormTextInput type={'email'} data={data.email} label={'Email *'} placeholder={'Enter Email Address'} error={errors.email} name={'email'} id={'email'} inputChangeHandler={inputChangeHandler} />
+                        <div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.auth}</span></div>
                     </div>
                     <div className="flex flex-col md:flex-row gap-x-10">
                         <PasswordField data={data.password} inputChangeHandler={inputChangeHandler} error={errors.password} label={'Password *'} />

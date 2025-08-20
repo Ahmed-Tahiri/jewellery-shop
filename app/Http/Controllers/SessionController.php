@@ -14,7 +14,7 @@ class SessionController extends Controller
     }
     public function store(Request $request)
     {
-        $credentials = $request->validate(['email' => ['required', 'email'], 'password' => 'required'], ['email.required' => 'Please fill data in fields', 'password.required' => 'Please fill data in fields']);
+        $credentials = $request->validate(['email' => ['required', 'email'], 'password' => 'required'], ['email.required' => 'Please enter email address', 'password.required' => 'Please enter password']);
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('Dashboard')->with('success', 'Login Successful');
@@ -24,7 +24,7 @@ class SessionController extends Controller
             return redirect()->route('Home')->with('success', 'Login Successful');
         }
         return back()->withErrors([
-            'email' => 'Invalid email or password.',
+            'auth' => 'Invalid email or password.',
         ])->withInput($request->only('email', 'password'));
     }
 
