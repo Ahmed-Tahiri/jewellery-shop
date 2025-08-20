@@ -10,10 +10,10 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('Home');
-Route::get('/signup', [CustomerController::class, 'index']);
+Route::get('/signup', [CustomerController::class, 'index'])->name('Signup');
 Route::post('/signup', [CustomerController::class, 'store']);
 
-Route::get('/signin', [SessionController::class, 'index']);
+Route::get('/signin', [SessionController::class, 'index'])->name('Signin');
 Route::post('/signin', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
