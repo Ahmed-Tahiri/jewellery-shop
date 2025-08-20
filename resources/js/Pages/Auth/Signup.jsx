@@ -1,7 +1,10 @@
 import { Link, useForm } from "@inertiajs/react";
 import { AuthPageSlider } from "../../Components/AuthPageSlider";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { AiOutlineEye } from "react-icons/ai";
+
+import JewelleryLogo from './../../../images/JewelleryLogo.png';
+import { useState } from "react";
+import { PasswordField } from "../../Shared/PasswordField";
+import { FormTextInput } from "../../Shared/FormTextInput";
 
 export default function Signup() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -11,6 +14,7 @@ export default function Signup() {
         password: "",
         password_confirmation: "",
     });
+
     const slidesData = [
         {
             img:
@@ -57,14 +61,42 @@ export default function Signup() {
         });
     };
 
-    const handleReset = () => { reset(); };
 
     return (
         <section className="w-full min-h-screen h-screen bg-white flex justify-center items-center">
-            <div className="w-full h-full flex flex-row">
+            <div className="w-full h-full flex flex-row justify-between">
                 <AuthPageSlider slidesData={slidesData} />
-                <AiOutlineEyeInvisible />
-                <AiOutlineEye />
+                <div className="py-7 px-35 w-[55%] h-full flex flex-col gap-y-7 items-center justify-center">
+                    <div className="w-full h-9 flex justify-start items-center"><img src={JewelleryLogo} className="h-full" alt="Jewellery Logo" /></div>
+                    <div className="w-full flex flex-col gap-y-10">
+                        <div className="w-full flex flex-col gap-y-4">
+                            <h2 className="font-poppins text-semi-black text-3xl font-semibold">Sign Up</h2>
+                            <p className="font-poppins text-light-gray text-md font-normal">Complete the signup form to create your account and discover jewellery that suits your style.</p>
+                        </div>
+
+                        <div className="w-full flex flex-col">
+                            <form className="w-full flex flex-col gap-y-5" onSubmit={submitHandler}>
+                                <div className="flex flex-col md:flex-row gap-x-10">
+                                    <div className="flex flex-col items-start justify-start  w-full md:w-5/10 gap-y-2">
+                                        <FormTextInput type={'text'} data={data.first_name} label={'First Name *'} placeholder={'Enter First Name'} error={errors.first_name} name={'first_name'} id={'fName'} inputChangeHandler={inputChangeHandler} />
+                                    </div>
+                                    <div className="flex flex-col items-start justify-start  w-full md:w-5/10 gap-y-2">
+                                        <FormTextInput type={'text'} data={data.last_name} label={'Last Name *'} placeholder={'Enter Last Name'} error={errors.last_name} name={'last_name'} id={'lName'} inputChangeHandler={inputChangeHandler} />
+                                    </div>
+                                </div>
+                                <div className="flex flex-col items-start justify-start  w-full gap-y-2">
+                                    <FormTextInput type={'email'} data={data.email} label={'Email *'} placeholder={'Enter Email Address'} error={errors.email} name={'email'} id={'email'} inputChangeHandler={inputChangeHandler} />
+                                </div>
+                                <div className="flex flex-col md:flex-row gap-x-10">
+                                    <PasswordField data={data.password} inputChangeHandler={inputChangeHandler} error={errors.password} label={'Password *'} />
+                                    <PasswordField data={data.password_confirmation} inputChangeHandler={inputChangeHandler} label={'Confirm Password *'} name="password_confirmation" id="passwordConfirmation" placeholder="Re-enter Your Password" />
+                                </div>
+                                <div className="w-full"><button type="submit" className="w-full p-2 bg-zinc text-white font-poppins text-base shadow-md font-normal cursor-pointer hover:bg-zinc-dark disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Signup"}</button></div>
+                            </form>
+                            <div className="w-full text-center mt-3"><p className="font-poppins text-base text-semi-black font-medium">Already have an account? <Link href={'/signin'} className="text-zinc underline hover:cursor-pointer hover:font-semibold active:text-mustard">Sign In</Link></p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );

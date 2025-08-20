@@ -22,7 +22,11 @@
         "Noto Color Emoji";
 
     --color-zinc: #0f343d;
-    --color-semi-black: #020202;
+    --color-zinc-dark: #08232a;
+    --color-semi-black: #151515;
     --color-mustard: #f0a71d;
     --color-light-gray: #5c5c5c;
 }
+/* * {
+    color: #08232a;
+} */

@@ -1,9 +1,9 @@
+import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
+import { Navigation, Autoplay, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useEffect, useMemo, useRef, useState } from 'react';
 
 
 
@@ -30,13 +30,8 @@ export let AuthPageSlider = ({ slidesData }) => {
         }
     };
 
-
-    // useEffect(() => {
-    //     if (activeIndex >= totalSlides.length) { setActiveIndex(0) };
-    // }, [totalSlides.length, activeIndex]);
-
     return (
-        <div className="relative w-4/10 min-h-full">
+        <div className="relative w-[45%] min-h-full">
             <div className="w-full h-full shadow">
                 <Swiper
                     modules={[Navigation, Autoplay, A11y]}
@@ -73,7 +68,7 @@ export let AuthPageSlider = ({ slidesData }) => {
                     <div className="w-full flex gap-x-2">
                         {Array.from({ length: slidesData.length }).map((_, pageIdx) => {
                             const isActive = activeIndex === pageIdx;
-                            return (<button key={pageIdx} onClick={() => goToPage(pageIdx)} type="button" aria-label={`Go to slide ${pageIdx + 1}`} aria-current={isActive ? "page" : undefined} className={`flex-1 cursor-pointer rounded text-sm py-0.5 transition-colors duration-150 focus:outline-none ${isActive ? "bg-yellow-400 text-black" : "bg-white/50"}`} />);
+                            return (<button key={pageIdx} onClick={() => goToPage(pageIdx)} type="button" aria-label={`Go to slide ${pageIdx + 1}`} aria-current={isActive ? "page" : undefined} className={`flex-1 cursor-pointer  text-sm py-0.5 transition-colors duration-150 focus:outline-none ${isActive ? "bg-mustard" : "bg-white/50"}`} />);
                         })}
                     </div>
                 </nav>
