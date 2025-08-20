@@ -13,8 +13,8 @@ Route::get('/', function () {
 Route::get('/signup', [CustomerController::class, 'index']);
 Route::post('/signup', [CustomerController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'index']);
-Route::post('/login', [SessionController::class, 'store']);
+Route::get('/signin', [SessionController::class, 'index']);
+Route::post('/signin', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 Route::middleware(['admin'])->group(function () {

@@ -42,7 +42,7 @@ export default function Signup() {
                         <PasswordField data={data.password} inputChangeHandler={inputChangeHandler} error={errors.password} label={'Password *'} />
                         <PasswordField data={data.password_confirmation} inputChangeHandler={inputChangeHandler} label={'Confirm Password *'} name="password_confirmation" id="passwordConfirmation" placeholder="Re-enter Your Password" />
                     </div>
-                    <div className="w-full"><button type="submit" className="w-full p-2 bg-zinc text-white font-poppins text-base shadow-md font-normal cursor-pointer hover:bg-zinc-dark disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Signup"}</button></div>
+                    <div className="w-full"><button type="submit" className="w-full p-2 bg-zinc text-white font-poppins text-base shadow-md font-normal cursor-pointer hover:bg-zinc-dark disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Sign Up"}</button></div>
                 </form>
                 <div className="w-full text-center mt-3"><p className="font-poppins text-base text-semi-black font-medium">Already have an account? <Link href={'/signin'} className="text-zinc underline hover:cursor-pointer hover:font-semibold active:text-mustard">Sign In</Link></p></div>
             </div>

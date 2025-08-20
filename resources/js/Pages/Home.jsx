@@ -30,7 +30,7 @@ export default function Home() {
                 ) : (
                     <div className="flex gap-3 sm:gap-4">
                         <Link href="/signup" className="px-4 sm:px-5 py-2 rounded-lg bg-yellow-600 text-white text-sm sm:text-base font-medium shadow hover:bg-yellow-700 transition" > Signup </Link>
-                        <Link href="/login" className="px-4 sm:px-5 py-2 rounded-lg border border-yellow-600 text-yellow-600 text-sm sm:text-base font-medium shadow hover:bg-yellow-600 hover:text-white transition" >Login</Link>
+                        <Link href="/signin" className="px-4 sm:px-5 py-2 rounded-lg border border-yellow-600 text-yellow-600 text-sm sm:text-base font-medium shadow hover:bg-yellow-600 hover:text-white transition" >Login</Link>
                     </div>
                 )}
             </header>
