@@ -1,5 +1,5 @@
 import { Link, useForm } from "@inertiajs/react";
-import { AuthPageSlider } from "../../Components/AuthPageSlider";
+import { AuthPageSlider } from "../../Shared/AuthPageSlider";
 
 import JewelleryLogo from './../../../images/JewelleryLogo.png';
 import { useState } from "react";
