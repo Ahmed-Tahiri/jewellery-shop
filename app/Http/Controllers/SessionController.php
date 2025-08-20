@@ -15,11 +15,12 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate(['email' => ['required', 'email'], 'password' => 'required'], ['email.required' => 'Please enter email address', 'password.required' => 'Please enter password']);
-        if (Auth::guard('admin')->attempt($credentials)) {
+        $remember = $request->boolean('remember');
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->route('Dashboard')->with('success', 'Login Successful');
         }
-        if (Auth::guard('customer')->attempt($credentials)) {
+        if (Auth::guard('customer')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->route('Home')->with('success', 'Login Successful');
         }
