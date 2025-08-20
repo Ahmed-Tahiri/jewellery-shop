@@ -9,4 +9,13 @@
     --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+
+    --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+
+    --color-zinc: #0f343d;
+    --color-semi-black: #020202;
+    --color-mustard: #f0a71d;
+    --color-light-gray: #5c5c5c;
 }
