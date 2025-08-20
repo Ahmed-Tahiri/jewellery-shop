@@ -68,7 +68,7 @@ export let AuthPageSlider = ({ slidesData }) => {
                     <div className="w-full flex gap-x-2">
                         {Array.from({ length: slidesData.length }).map((_, pageIdx) => {
                             const isActive = activeIndex === pageIdx;
-                            return (<button key={pageIdx} onClick={() => goToPage(pageIdx)} type="button" aria-label={`Go to slide ${pageIdx + 1}`} aria-current={isActive ? "page" : undefined} className={`flex-1 cursor-pointer  text-sm py-0.5 transition-colors duration-150 focus:outline-none ${isActive ? "bg-mustard" : "bg-white/50"}`} />);
+                            return (<button key={pageIdx} onClick={() => goToPage(pageIdx)} type="button" aria-label={`Go to slide ${pageIdx + 1}`} aria-current={isActive ? "page" : undefined} className={`flex-1 cursor-pointer  text-sm py-0.75 transition-colors duration-150 focus:outline-none ${isActive ? "bg-mustard" : "bg-white/50"}`} />);
                         })}
                     </div>
                 </nav>

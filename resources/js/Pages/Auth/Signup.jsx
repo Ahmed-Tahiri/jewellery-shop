@@ -21,7 +21,7 @@ export default function Signup() {
                 `https://images.pexels.com/photos/21263448/pexels-photo-21263448.jpeg?_gl=1*1aj9cgb*_ga*ODAwMTM2Njc2LjE3NTU2OTA1NzE.*_ga_8JE65Q40S6*czE3NTU2OTA1NzAkbzEkZzEkdDE3NTU2OTE4OTgkajU5JGwwJGgw`,
             quote:
                 "This jewelry looks so elegant and eye-catching. The quality feels amazing for the price. I’m really impressed and would definitely recommend it!",
-            name: "Emily Grace",
+            name: "Emily Jackson",
             role: "Happy Customer",
         },
         {
