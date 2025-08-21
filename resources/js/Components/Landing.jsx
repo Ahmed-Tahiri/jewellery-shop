@@ -1,13 +1,45 @@
+import { LandingCard } from "./LandingCard";
+import EarringImg from './../../images/earrings.png';
+import NecklaceImg from './../../images/necklace.png';
+import RingImg from './../../images/rings.png';
+import { Link } from "@inertiajs/react";
+import { LandingServices } from "./LandingServices";
 export let Landing = () => {
+
+
     return (
-        <section className="flex flex-col items-center justify-center text-center px-4 py-16 sm:py-20 bg-gradient-to-r from-yellow-100 via-yellow-200 to-yellow-100">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-                Discover Our Exclusive Jewellery Collection
-            </h2>
-            <p className="text-gray-600 max-w-2xl mb-6 text-sm sm:text-base"> Elegant designs crafted with love and precision. Perfect for every occasion. </p>
-            <button className="px-5 sm:px-6 py-2 sm:py-3 bg-yellow-600 text-white rounded-xl shadow hover:bg-yellow-700 transition text-sm sm:text-base">
-                Shop Now
-            </button>
-        </section>);
+        <section className="w-full py-2 px-20">
+            <div className="w-full h-180 flex flex-row items-center justify-between gap-x-6">
+                <div className="flex w-5/10 bg-powder-gray h-full shadow flex-col justify-between items-center">
+                    <div className="w-full flex flex-col gap-y-6 p-6">
+                        <div className="w-full flex items-center justify-center">
+                            <h4 className="font-poppins font-medium text-[26px] text-mustard uppercase">New Collection</h4>
+                        </div>
+                        <div className="w-full flex items-center justify-center">
+                            <h3 className="font-mod20 font-medium text-5xl text-semi-black ">Modern Earrings</h3>
+                        </div>
+                        <div className="w-full flex items-center justify-center">
+                            <p className="font-poppins font-normal text-base text-semi-black text-center w-6/10">Discover elegant and chic designs with bold, timeless and dazzling modern earrings.</p>
+                        </div>
+                        <div className="w-full flex items-center justify-center">
+                            <div className="flex items-center justify-center"><Link href={'#'} className="w-34 p-2.5 border-2 border-zinc font-poppins font-semibold font-base cursor-pointer" as={'button'}>SHOP NOW</Link></div>
+                        </div>
+                    </div>
+                    <div className="overflow-hidden w-full h-100">
+                        <div className="w-full flex items-end justify-end h-full">
+                            <img src={EarringImg} className="object-cover h-full" />
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-col w-5/10 items-center justify-center h-full gap-y-6">
+                    <LandingCard heading='Modern Necklace' img={NecklaceImg} description={`Graceful modern pieces with timeless charm and elegance.`} link={'#'} />
+                    <LandingCard heading='Modern Rings' img={RingImg} description={`Unique styles with radiant, sleek and fashionable designs.`} link={'#'} bgColor="bg-mustard" textColor="text-semi-black" />
+                </div>
+            </div>
+            <LandingServices />
+        </section>
+    );
 
 }
+
+
