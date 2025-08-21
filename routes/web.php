@@ -10,15 +10,13 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('Home');
-Route::get('/signup', [CustomerController::class, 'index']);
+Route::get('/signup', [CustomerController::class, 'index'])->name('Signup');
 Route::post('/signup', [CustomerController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'index']);
-Route::post('/login', [SessionController::class, 'store']);
+Route::get('/signin', [SessionController::class, 'index'])->name('Signin');
+Route::post('/signin', [SessionController::class, 'store'])->middleware('login.throttle');
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('Dashboard');
 });
-Route::get('/admin/signup', [AdminController::class, 'create']);
-Route::post('/admin/signup', [AdminController::class, 'store']);

@@ -1,6 +1,10 @@
 <?php
 
+use App\Console\Commands\CreateAdmin;
+use App\Console\Commands\DeleteAdmin;
+use App\Console\Commands\UpdateAdmin;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CheckLoginThrottle;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             HandleInertiaRequests::class,
         ]);
-        $middleware->alias(['admin' => AdminMiddleware::class]);
+        $middleware->alias([
+            'admin' => AdminMiddleware::class,
+            'login.throttle' => CheckLoginThrottle::class
+        ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {})->create();
+    ->withExceptions(function (Exceptions $exceptions): void {})
+    ->withCommands([CreateAdmin::class, UpdateAdmin::class, DeleteAdmin::class])
+    ->create();
