@@ -21,15 +21,13 @@ class SessionController extends Controller
         $email = $credentials['email'];
         $ip = $request->ip();
 
-        if (Auth::guard('admin')->attempt($credentials, $remember)) {
-            $this->clearAttempts($email, $ip);
-            $request->session()->regenerate();
-            return redirect()->route('Dashboard')->with('success', 'Login Successful');
-        }
-        if (Auth::guard('customer')->attempt($credentials, $remember)) {
-            $this->clearAttempts($email, $ip);
-            $request->session()->regenerate();
-            return redirect()->route('Home')->with('success', 'Login Successful');
+        $guards = ['admin'    => 'Dashboard', 'customer' => 'Home',];
+        foreach ($guards as $guard => $redirect) {
+            if (Auth::guard($guard)->attempt($credentials, $remember)) {
+                $this->clearAttempts($email, $ip);
+                $request->session()->regenerate();
+                return redirect()->route($redirect)->with('success', 'Signin Successful');
+            }
         }
 
         if ($response = $this->recordAttempt($email, config('signin_throttle.limit'), $ip)) {
@@ -45,16 +43,17 @@ class SessionController extends Controller
     {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect()->route('Signin');
-        } elseif (Auth::guard('customer')->check()) {
+            $redirect = 'Signin';
+        } else {
             Auth::guard('customer')->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect()->route('Home');
+            $redirect = 'Home';
         }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route($redirect);
     }
+
 
     private function clearAttempts($email, $ip)
     {
