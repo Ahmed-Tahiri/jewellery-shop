@@ -1,5 +1,6 @@
 import { Landing } from "../Components/Landing";
 import { SaleHeading } from "../Components/SaleHeading";
+import { Footer } from "../Shared/Footer";
 import { Header } from "../Shared/Header";
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
             <SaleHeading />
             <Header />
             <Landing />
-
+            <Footer />
         </section>
     );
 }
