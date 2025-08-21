@@ -1,7 +1,9 @@
+import { SaleHeading } from "../Components/SaleHeading";
+
 export default function Home() {
     return (
-        <div >
-            hello
-        </div>
+        <section className="w-full">
+            <SaleHeading />
+        </section>
     );
 }
