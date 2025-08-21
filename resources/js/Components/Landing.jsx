@@ -12,7 +12,7 @@ export let Landing = () => {
                 <div className="flex w-5/10 bg-powder-gray h-full shadow flex-col justify-between items-center">
                     <div className="w-full flex flex-col gap-y-6 p-6">
                         <div className="w-full flex items-center justify-center">
-                            <h4 className="font-poppins font-medium text-3xl text-mustard uppercase">New Collection</h4>
+                            <h4 className="font-poppins font-medium text-[26px] text-mustard uppercase">New Collection</h4>
                         </div>
                         <div className="w-full flex items-center justify-center">
                             <h3 className="font-mod20 font-medium text-5xl text-semi-black ">Modern Earrings</h3>
@@ -31,8 +31,8 @@ export let Landing = () => {
                     </div>
                 </div>
                 <div className="flex flex-col w-5/10 items-center justify-center h-full gap-y-6">
-                    <LandingCard heading='Modern Necklace' img={NecklaceImg} description={`Explore graceful and modern pieces that blend elegance, charm and contemporary beauty.`} link={'#'} />
-                    <LandingCard heading='Modern Rings' img={RingImg} description={`Embrace unique and stunning styles with radiant, sleek and fashionable modern rings.`} link={'#'} color="bg-mustard" />
+                    <LandingCard heading='Modern Necklace' img={NecklaceImg} description={`Graceful modern pieces with timeless charm and elegance.`} link={'#'} />
+                    <LandingCard heading='Modern Rings' img={RingImg} description={`Unique styles with radiant, sleek and fashionable designs.`} link={'#'} bgColor="bg-mustard" textColor="text-semi-black" />
                 </div>
             </div>
         </section>
