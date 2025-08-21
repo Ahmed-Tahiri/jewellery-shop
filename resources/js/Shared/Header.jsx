@@ -38,7 +38,6 @@ export let Header = () => {
                 </div>
                 <div>
                     <div className='w-full flex flex-row items-center justify-end gap-x-8'>
-
                         {navIcons.map((icon, idx) => <div key={`navIcon${idx + 1}`}><Link href={icon.link}>{icon.name}</Link></div>)}
                     </div>
 
