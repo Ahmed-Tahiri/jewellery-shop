@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->mergeConfigFrom(
+            config_path('signin_throttle.php'),
+            'signin_throttle'
+        );
     }
 
     /**

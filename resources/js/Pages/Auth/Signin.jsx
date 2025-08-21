@@ -2,7 +2,7 @@ import { Link, useForm } from "@inertiajs/react";
 import { PasswordField } from "../../Shared/PasswordField";
 import { FormTextInput } from "../../Shared/FormTextInput";
 import { AuthLayout } from "../../Shared/AuthLayout";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 
 export default function Signin() {
@@ -12,8 +12,9 @@ export default function Signin() {
         password: "",
         remember: rememberMe
     });
+
     const inputChangeHandler = (e) => { setData(e.target.name, e.target.value); };
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
         post("/signin", {
             onSuccess: () => {
@@ -22,6 +23,7 @@ export default function Signin() {
         });
     };
 
+    useEffect(() => { }, [errors.retry_after])
     return (
         <AuthLayout heading='Sign In' description="Please fill you detail to access your account.">
             <div className="w-full flex flex-col">
@@ -29,6 +31,8 @@ export default function Signin() {
                     <div className="flex flex-col items-start justify-start  w-full gap-y-2">
                         <FormTextInput type={'email'} data={data.email} label={'Email *'} placeholder={'Enter Email Address'} error={errors.email} name={'email'} id={'email'} inputChangeHandler={inputChangeHandler} />
                         {errors.auth && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.auth}</span></div>)}
+                        {errors.retry_after && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.retry_after}</span></div>)}
+                        {errors.retry_block && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.retry_block}</span></div>)}
                     </div>
                     <div className="flex flex-col md:flex-row gap-x-10">
                         <PasswordField data={data.password} inputChangeHandler={inputChangeHandler} error={errors.password} label={'Password *'} />

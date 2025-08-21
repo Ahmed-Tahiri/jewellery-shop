@@ -14,7 +14,7 @@ Route::get('/signup', [CustomerController::class, 'index'])->name('Signup');
 Route::post('/signup', [CustomerController::class, 'store']);
 
 Route::get('/signin', [SessionController::class, 'index'])->name('Signin');
-Route::post('/signin', [SessionController::class, 'store']);
+Route::post('/signin', [SessionController::class, 'store'])->middleware('login.throttle');
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 Route::middleware(['admin'])->group(function () {
