@@ -5,7 +5,7 @@ import { AuthLayout } from "../../Shared/AuthLayout";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 
-export default function Signup() {
+export default function Signin() {
     let [rememberMe, setRememberMe] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
@@ -28,7 +28,7 @@ export default function Signup() {
                 <form className="w-full flex flex-col gap-y-5" onSubmit={submitHandler}>
                     <div className="flex flex-col items-start justify-start  w-full gap-y-2">
                         <FormTextInput type={'email'} data={data.email} label={'Email *'} placeholder={'Enter Email Address'} error={errors.email} name={'email'} id={'email'} inputChangeHandler={inputChangeHandler} />
-                        <div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.auth}</span></div>
+                        {errors.auth && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.auth}</span></div>)}
                     </div>
                     <div className="flex flex-col md:flex-row gap-x-10">
                         <PasswordField data={data.password} inputChangeHandler={inputChangeHandler} error={errors.password} label={'Password *'} />
