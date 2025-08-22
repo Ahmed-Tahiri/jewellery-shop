@@ -1,12 +1,16 @@
-import { FaChevronDown, FaChevronRight, FaRegCalendarCheck } from "react-icons/fa6";
+import { FaRegCalendarCheck } from "react-icons/fa6";
+import { LuSquareArrowOutUpRight, LuClipboardList, LuPackagePlus } from "react-icons/lu";
+import { AiOutlineProduct, AiOutlineUnorderedList } from "react-icons/ai";
+import { BsBoxes, BsCashCoin } from "react-icons/bs";
+import { HiOutlineViewGridAdd } from "react-icons/hi";
+import { TbCategory2, TbHexagonalPrismPlus } from "react-icons/tb";
+import { MdOutlineCategory, MdOutlineSpaceDashboard, MdOutlineCancel } from "react-icons/md";
+import { HiOutlineFaceSmile } from "react-icons/hi2";
 import JewelleryLogo from './../../../images/JewelleryLogo.png';
-import { NavLink } from "../../Components/Admin/NavLink";
-import { Link } from "@inertiajs/react";
-import { useState } from "react";
-import { LuClipboardCheck, LuSquareArrowOutUpRight } from "react-icons/lu";
-import { MdOutlineCancel } from "react-icons/md";
-
+import { NavLi } from "./NavLi";
+import { SidebarDropdown } from "./SidebarDropDown";
 export let Sidebar = () => {
+
 
     const ordersList = [
         {
@@ -25,32 +29,64 @@ export let Sidebar = () => {
             icon: <MdOutlineCancel className="text-light-gray text-xl" />,
         },
     ];
+    const productList = [
+        {
+            title: 'Manage Products',
+            path: '/admin/products',
+            icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
+        },
+        {
+            title: 'Add Product',
+            path: '/admin/products/create',
+            icon: <HiOutlineViewGridAdd className="text-light-gray text-xl" />,
+        },
+        {
+            title: 'Manage Inventory',
+            path: '/admin/inventory',
+            icon: <BsBoxes className="text-light-gray text-xl" />,
+        },
+    ];
+    const categoryList = [
+        {
+            title: 'Manage Categories',
+            path: '/admin/categories',
+            icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
+        },
+        {
+            title: 'Add Category',
+            path: '/admin/categories/create',
+            icon: <LuPackagePlus className="text-light-gray text-xl" />,
+        },
+    ];
+    const subCategoriesList = [
+        {
+            title: 'Manage Sub Categories',
+            path: '/admin/categories',
+            icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
+        },
+        {
+            title: 'Add Sub Category',
+            path: '/admin/categories/create',
+            icon: <TbHexagonalPrismPlus className="text-light-gray text-xl" />,
+        },
+    ];
 
-    const [orderListIsOpen, setOrderListIsOpen] = useState(false);
     return (<div className="w-[18%] h-full shadow bg-white">
-        <div className="w-full flex flex-col items-center justify-center">
-            <div className="w-full py-2 px-3">
+        <div className="w-full flex flex-col items-center justify-center ">
+            <div className="w-full py-2  border-b-[1px] px-3">
                 <img src={JewelleryLogo} alt="jewellery logo" className="w-[75%]" />
             </div>
-            <div className="w-full py-2 px-3 flex">
-                <nav className="py-5 w-full">
-                    <ul className="w-full flex flex-col gap-y-3">
-                        <li className="w-full">
-                            <Link className="inline-block p-2 font-medium bg-mustard shadow rounded w-full font-poppins text-white text-base hover:bg-mustard-light" href={'/admin'}><span className="flex px-8">Dashboard</span></Link>
-                        </li>
-                        <li className="w-full flex flex-col items-start">
-                            <button className="cursor-pointer flex items-center justify-between  p-2 font-medium  rounded w-full font-poppins text-semi-black hover:scale-105 transition-all ease-linear duration-200" onClick={() => setOrderListIsOpen(!orderListIsOpen)}>
-                                <p className="flex">
-                                    <LuClipboardCheck className="text-2xl text-semi-black" />
-                                    <span className="flex px-2 text-base"> All Orders</span>
-                                </p>{orderListIsOpen ? <FaChevronDown className="text-lg text-semi-black transition-all ease-linear duration-200" /> : (<FaChevronRight className="text-lg text-semi-black transition-all ease-linear duration-200" />)}
-                            </button>
-                            <div className={`w-full py-3 px-5 ${orderListIsOpen ? 'block' : 'hidden'} transition-all ease-linear duration-200`}>
-                                <ul className="w-full flex flex-col gap-y-5">
-                                    {ordersList.map((link, idx) => <NavLink key={`OrderLink${idx + 1}`} title={link.title} path={link.path} icon={link.icon} />)}
-                                </ul>
-                            </div>
-                        </li>
+            <div className="w-full mt-2 flex flex-1 ">
+                <nav className="py-5 w-full flex h-150 overflow-y-auto overflow-x-hidden">
+                    <ul className="w-full flex flex-col gap-y-3 px-3">
+                        <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} />
+                        <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} />
+                        <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />
+                        <SidebarDropdown title="Products" icon={<BsBoxes className="text-2xl text-semi-black" />} links={productList} />
+                        <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} />
+                        <SidebarDropdown title="Sub Categories" icon={<MdOutlineCategory className="text-2xl text-semi-black" />} links={subCategoriesList} />
+                        <NavLi path={'/admin/customers'} title={'Customers'} icon={<HiOutlineFaceSmile className="text-2xl text-semi-black" />} />
+                        <NavLi path={'/admin/payment'} title={'Payment'} icon={<BsCashCoin className="text-2xl text-semi-black" />} />
                     </ul>
                 </nav>
             </div>
