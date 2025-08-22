@@ -94,7 +94,7 @@ export let Sidebar = () => {
                     </nav>
                 </div>
                 <div className="w-full py-3  px-3 flex items-center justify-center">
-                    <Link href={'/logout'} as={'button'} className="w-full py-2 px-3 cursor-pointer flex gap-x-3 items-center justify-start font-poppins font-medium transition-all ease-linear duration-200 hover:scale-105"><span><MdOutlineLogout className="text-semi-black text-2xl" /></span><span>Logout</span></Link>
+                    <Link href={'/logout'} as={'button'} method="post" className="w-full py-2 px-3 cursor-pointer flex gap-x-3 items-center justify-start font-poppins font-medium transition-all ease-linear duration-200 hover:scale-105"><span><MdOutlineLogout className="text-semi-black text-2xl" /></span><span>Logout</span></Link>
                 </div>
             </div>
         </div>
