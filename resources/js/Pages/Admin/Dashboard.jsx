@@ -1,31 +1,18 @@
-import { useState } from "react";
-import { Link, usePage } from "@inertiajs/react";
-import { RecentOrders } from "../../Components/RecentOrders";
-import { QuickActions } from "../../Components/QuickActions";
-import { MobileDrawer } from "../../Components/MobileDrawer";
-import { MobileHeader } from "../../Components/MobileHeader";
-import { Stats } from "../../Components/Stats";
-import { DesktopHeader } from "../../Components/DesktopHeader";
-import { DesktopSidebar } from "../../Components/DesktopSidebar";
+import { AdminName } from "../../Shared/Admin/AdminName";
+import { BusinessAnalytics } from "../../Components/Admin/BusinessAnalytics";
+import { TopProducts } from "../../Components/Admin/TopProducts";
 
 export default function Dashboard() {
-    const { auth } = usePage().props || {};
-    const adminName = auth?.firstName || "Admin";
-
     return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
-            <DesktopSidebar adminName={adminName} />
-            <main className="flex-1">
-                <MobileHeader adminName={adminName} />
-                <div className="p-4 md:p-6 ">
-                    <DesktopHeader adminName={adminName} />
-                    <Stats />
-                    <div className="flex flex-col lg:flex-row gap-6 md:pb-10">
-                        <RecentOrders />
-                        <QuickActions />
-                    </div>
+        <section className="w-full min-h-170 ">
+            <div className="w-full flex flex-col gap-y-8">
+                <div className="w-full flex flex-col justify-center items-start">
+                    <h2 className="font-poppins text-4xl text-zinc-dark font-semibold">Dashboard</h2>
+                    <p className="font-poppins text-light-gray ">Welcome back dear, <AdminName />!</p>
                 </div>
-            </main>
-        </div>
+                <BusinessAnalytics />
+                <TopProducts />
+            </div>
+        </section>
     );
 }

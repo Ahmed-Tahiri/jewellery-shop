@@ -1,15 +1,28 @@
 import './bootstrap';
 import './../css/app.css';
 import './../css/style.css';
-import { createInertiaApp } from '@inertiajs/react'
-import { createRoot } from 'react-dom/client'
+import { createInertiaApp } from '@inertiajs/react';
+import { createRoot } from 'react-dom/client';
+import AdminLayout from './Layouts/AdminLayout';
 
 createInertiaApp({
     resolve: name => {
-        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-        return pages[`./Pages/${name}.jsx`]
+        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true });
+        const resolved = pages[`./Pages/${name}.jsx`];
+
+        if (!resolved) {
+            throw new Error(`Page not found: ./Pages/${name}.jsx`);
+        }
+
+        const Page = resolved.default;
+
+        if (!Page.layout && name.startsWith('Admin/')) {
+            Page.layout = page => <AdminLayout>{page}</AdminLayout>;
+        }
+
+        return Page;
     },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />)
+        createRoot(el).render(<App {...props} />);
     },
-})
+});
