@@ -8,7 +8,7 @@ export default function Dashboard() {
 
 
     return (
-        <section className="w-full min-h-screen h-screen">
+        <section className="w-full h-screen min-h-170">
             <div className="w-full flex flex-row h-full">
                 <Sidebar />
                 <div className="w-[82%] bg-powder-gray min-h-full"></div>
