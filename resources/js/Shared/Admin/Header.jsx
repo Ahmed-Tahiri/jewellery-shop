@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 import { LuCalendarDays } from "react-icons/lu";
 import { FaBell } from "react-icons/fa";
-import { usePage } from "@inertiajs/react";
 import { FaCaretDown } from "react-icons/fa6";
+import { AdminName } from "./AdminName";
 
 let FormattedDate = () => {
     const date = new Date();
@@ -20,14 +20,10 @@ let NotificationIcon = ({ count = '0' }) => {
 
 let AdminProfileSection = () => {
 
-    const { auth } = usePage().props || {};
-    let adminFirstName = auth?.firstName || "Super";
-    let adminLastName = auth?.lastName || "Admin";
-    let adminName = `${adminFirstName} ${adminLastName}`
     return (
         <div className="flex flex-row gap-x-1.5">
             <div className="flex flex-col items-end justify-center">
-                <h6 className="font-poppins font-semibold text-semi-black text-base">{adminName}</h6>
+                <h6 className="font-poppins font-semibold text-semi-black text-base"><AdminName /></h6>
                 <p className="font-poppins text-light-gray -mt-0.5 text-sm">Shop Owner</p>
             </div>
             <div className="flex items-center justify-center">
