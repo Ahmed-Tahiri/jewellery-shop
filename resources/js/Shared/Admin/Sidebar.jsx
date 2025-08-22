@@ -74,7 +74,7 @@ export let Sidebar = () => {
     ];
 
     return (
-        <div className="w-64 h-full shadow bg-white">
+        <div className="w-full h-full shadow bg-white">
             <div className="w-full flex flex-col items-center justify-between h-full">
                 <div className="w-full pb-2 pt-3  px-3">
                     <img src={JewelleryLogo} alt="jewellery logo" className="w-[65%]" />
