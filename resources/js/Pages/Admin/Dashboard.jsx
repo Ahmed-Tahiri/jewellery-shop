@@ -1,7 +1,6 @@
 import { AdminName } from "../../Shared/Admin/AdminName";
 import { BusinessAnalytics } from "../../Components/Admin/BusinessAnalytics";
-
-
+import { TopProducts } from "../../Components/Admin/TopProducts";
 
 export default function Dashboard() {
     return (
@@ -12,6 +11,7 @@ export default function Dashboard() {
                     <p className="font-poppins text-light-gray ">Welcome back dear, <AdminName />!</p>
                 </div>
                 <BusinessAnalytics />
+                <TopProducts />
             </div>
         </section>
     );
