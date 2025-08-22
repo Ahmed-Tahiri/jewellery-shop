@@ -11,7 +11,7 @@ export default function Dashboard() {
         <section className="w-full h-screen min-h-170">
             <div className="w-full flex flex-row h-full">
                 <Sidebar />
-                <div className="w-[82%] bg-powder-gray min-h-full"></div>
+                <div className="bg-powder-gray min-h-full flex-1"></div>
             </div>
         </section>
     );
