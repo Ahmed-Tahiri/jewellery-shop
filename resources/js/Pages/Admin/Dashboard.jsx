@@ -1,6 +1,7 @@
 import { AdminName } from "../../Shared/Admin/AdminName";
 import { BusinessAnalytics } from "../../Components/Admin/BusinessAnalytics";
 import { TopProducts } from "../../Components/Admin/TopProducts";
+import { RecentCustomers } from "../../Components/Admin/RecentCustomer";
 
 export default function Dashboard() {
     return (
@@ -12,6 +13,7 @@ export default function Dashboard() {
                 </div>
                 <BusinessAnalytics />
                 <TopProducts />
+                <RecentCustomers />
             </div>
         </section>
     );
