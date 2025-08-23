@@ -1,16 +1,16 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import Cropper from "react-easy-crop";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
     const [imageSrc, setImageSrc] = useState(null);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [showCropper, setShowCropper] = useState(false);
     const [avatarIsForbidden, setAvatarIsForbidden] = useState(false);
-
+    const { errors } = usePage().props;
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
-
+    const fileInputRef = useRef(null);
     const onCropComplete = useCallback((_, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
     }, []);
@@ -75,11 +75,19 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
         });
     };
 
+    const handleCancel = () => {
+        setShowCropper(false);
+        setImageSrc(null);
+        setCroppedAreaPixels(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        router.reload({ only: [], preserveScroll: true });
+    }
     const avatarErrorHandle = () => {
         setAvatarIsForbidden(true);
     }
     return (
         <div className="space-y-4">
+            {errors.avatar && <div className="w-60 flex justify-center items-center"><span className="font-poppins text-red-700 text-sm">{errors.avatar}</span></div>}
             {showCropper ? (
                 <div>
                     <div className="relative w-full h-64 bg-white rounded shadow">
@@ -95,7 +103,7 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
                     </div>
 
                     <div className="flex gap-2 mt-2 w-64 flex-row justify-evenly">
-                        <button onClick={() => { setShowCropper(false); setImageSrc(null); }} className="shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer flex-1 transition-colors ease-linear duration-200 hover:bg-dark-gray"> Cancel </button>
+                        <button onClick={handleCancel} className="shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer flex-1 transition-colors ease-linear duration-200 hover:bg-dark-gray"> Cancel </button>
                         <button onClick={handleUpload} className="shadow px-4 py-2 bg-mustard text-white font-poppins rounded cursor-pointer flex-1 transition-colors ease-linear duration-200 hover:bg-mustard-dark" > Upload </button>
                     </div>
                 </div>
@@ -105,7 +113,7 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
                 </div>
             )}
             {!showCropper && <>  <label htmlFor="avatar" className="w-60 bg-zinc inline-block text-center rounded font-poppins text-base text-white py-2 px-2 cursor-pointer shadow hover:bg-zinc-dark transition-colors ease-linear duration-200">{avatar ? 'Change Avatar' : 'Upload Avatar'} </label>
-                <input type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" /></>}
+                <input ref={fileInputRef} type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" /></>}
         </div>
     );
 };

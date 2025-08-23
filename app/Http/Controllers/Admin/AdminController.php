@@ -87,8 +87,12 @@ class AdminController extends Controller
 
     public function uploadAvatar(Request $request)
     {
-        $request->validate([
+        $avatar = $request->validate([
             'avatar' => 'required|image|max:2048',
+        ], [
+            'avatar.required' => 'Please upload an image.',
+            'avatar.image' => 'Only image files are allowed.',
+            'avatar.max' => 'The avatar must be less than 2MB.',
         ]);
         $admin = Auth::guard('admin')->user();
         if ($admin->avatar && Storage::disk('public')->exists($admin->avatar)) {
