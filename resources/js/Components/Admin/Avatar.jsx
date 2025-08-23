@@ -7,7 +7,6 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [showCropper, setShowCropper] = useState(false);
 
-    // ✅ Add state for crop & zoom
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
 
@@ -77,28 +76,13 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
 
     return (
         <div className="space-y-4">
-            {avatar ? (
-                <img
-                    src={avatar}
-                    alt="admin picture"
-                    className="h-60 w-60 rounded-lg object-cover shadow"
-                />
-            ) : (
-                <div
-                    className="p-2 h-60 w-60 flex items-center justify-center rounded-lg shadow"
-                    style={{ backgroundColor: bgColor }}
-                >
-                    <span className="font-poppins text-semi-black text-[6rem] font-medium">
-                        {adminFirstName[0]}
-                    </span>
-                </div>
-            )}
 
-            <input type="file" accept="image/*" onChange={handleFileChange} />
 
-            {showCropper && (
+
+
+            {showCropper ? (
                 <div>
-                    <div className="relative w-full h-64 bg-black">
+                    <div className="relative w-full h-64 bg-white rounded shadow">
                         <Cropper
                             image={imageSrc}
                             crop={crop}
@@ -110,23 +94,19 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
                         />
                     </div>
 
-                    <div className="flex gap-2 mt-2">
-                        <button
-                            onClick={handleUpload}
-                            className="px-4 py-2 bg-green-600 text-white rounded"
-                        >
-                            Upload
-                        </button>
-                        <button onClick={() => {
-                            setShowCropper(false);
-                            setImageSrc(null);
-                        }}
-                            className="px-4 py-2 bg-red-600 text-white rounded">
-                            Cancel
-                        </button>
+                    <div className="flex gap-2 mt-2 w-64 flex-row justify-evenly">
+                        <button onClick={() => { setShowCropper(false); setImageSrc(null); }} className="shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer flex-1 transition-all ease-linear duration-200 hover:bg-dark-gray"> Cancel </button>
+                        <button onClick={handleUpload} className="shadow px-4 py-2 bg-mustard text-white font-poppins rounded cursor-pointer flex-1 transition-all ease-linear duration-200 hover:bg-mustard-dark" > Upload </button>
                     </div>
                 </div>
+            ) : avatar ? (<div><img src={avatar} alt="admin picture" className="h-60 w-60 rounded-lg object-cover shadow" /></div>) : (
+                <div className="p-2 h-60 w-60 flex items-center justify-center rounded-lg shadow" style={{ backgroundColor: bgColor }}>
+                    <span className="font-poppins text-semi-black text-[6rem] font-medium"> {adminFirstName[0]}  </span>
+                </div>
             )}
+            {!showCropper && <>  <label htmlFor="avatar" className="w-60 bg-zinc inline-block text-center rounded font-poppins text-base text-white py-2 px-2 cursor-pointer shadow">{avatar ? 'Change Avatar' : 'Upload Avatar'} </label>
+                <input type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" /></>}
+
         </div>
     );
 };
