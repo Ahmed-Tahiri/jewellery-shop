@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Rules\UniqueEmail;
 use App\Models\Admin;
 use App\Models\Customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -51,7 +52,9 @@ class AdminController extends Controller
             'email'     => $adminData->email,
             'avatar'    => $adminData->avatar ? Storage::url($adminData->avatar) : null,
             'role'    => $adminData->role,
-            'lastLogin'    => $adminData->last_login_at,
+            'lastLogin'    => $adminData->last_login_at
+                ? Carbon::parse($adminData->last_login_at)->toIso8601String()
+                : null,
         ];
 
         return Inertia::render('Admin/Profile', ['adminData' => $adminDataModified]);

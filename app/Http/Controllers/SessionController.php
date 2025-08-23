@@ -25,7 +25,9 @@ class SessionController extends Controller
         $guards = ['admin'    => 'Dashboard', 'customer' => 'Home',];
         foreach ($guards as $guard => $redirect) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
-                Auth::guard($guard)->user()->last_login_at = Carbon::now();
+                $user = Auth::guard($guard)->user();
+                $user->last_login_at = Carbon::now();
+                $user->save();
                 $this->clearAttempts($email, $ip);
                 $request->session()->regenerate();
                 return redirect()->route($redirect)->with('success', 'Signin Successful');

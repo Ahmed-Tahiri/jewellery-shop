@@ -2,9 +2,11 @@ import { Link, usePage } from "@inertiajs/react";
 import randomColor from "randomcolor";
 import { CiEdit } from "react-icons/ci";
 import { AvatarUploader } from "../../Components/Admin/Avatar";
+import { format } from "date-fns";
 
 export default function AdminProfile() {
 
+    const bgColor = randomColor({ luminosity: 'light' });
     const { adminData } = usePage().props || {};
     let adminFirstName = adminData?.firstName || "Super";
     let adminLastName = adminData?.lastName || "Admin";
@@ -12,8 +14,9 @@ export default function AdminProfile() {
     let role = adminData?.role || "";
     let lastLogin = adminData?.lastLogin || "";
     let avatar = adminData?.avatar || null;
-    console.log(adminData);
-    const bgColor = randomColor({ luminosity: 'light' });
+    const lastLoginFormatted = format(new Date(lastLogin), "EEEE, do MMMM yyyy hh:mm:ss a");
+
+
     return (
         <section className="w-full min-h-170 ">
             <div className="w-full flex flex-col gap-y-8">
@@ -49,11 +52,11 @@ export default function AdminProfile() {
                             </div>
                             <div className="flex flex-col gapy-2 items-start">
                                 <h4 className="font-poppins text-base  font-normal">Role:</h4>
-                                <p className="font-poppins text-light-gray text-base font-medium">{role}</p>
+                                <p className="font-poppins text-light-gray text-base font-medium capitalize">{role}</p>
                             </div>
                             <div className="flex flex-col gapy-2 items-start">
                                 <h4 className="font-poppins text-base  font-normal">Last Login at:</h4>
-                                <p className="font-poppins text-light-gray text-base font-medium">29 dec 2019</p>
+                                <p className="font-poppins text-light-gray text-base font-medium">{lastLoginFormatted}</p>
                             </div>
                         </div>
 
