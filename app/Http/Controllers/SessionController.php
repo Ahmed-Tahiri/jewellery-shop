@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoginAttempt;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -24,6 +25,7 @@ class SessionController extends Controller
         $guards = ['admin'    => 'Dashboard', 'customer' => 'Home',];
         foreach ($guards as $guard => $redirect) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
+                Auth::guard($guard)->user()->last_login_at = Carbon::now();
                 $this->clearAttempts($email, $ip);
                 $request->session()->regenerate();
                 return redirect()->route($redirect)->with('success', 'Signin Successful');

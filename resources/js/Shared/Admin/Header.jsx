@@ -2,9 +2,10 @@ import { format } from "date-fns";
 import { LuCalendarDays } from "react-icons/lu";
 import { FaBell } from "react-icons/fa";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
-import { AdminName, AdminEmail } from "./AdminData";
+import { AuthAvatar, AuthEmail, AuthFName, AuthLName } from "../AuthData";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
+import randomColor from "randomcolor";
 
 let FormattedDate = () => {
     const date = new Date();
@@ -20,16 +21,16 @@ let NotificationIcon = ({ count = '0' }) => {
     </div>
 }
 
-
 let AdminProfileOption = ({ isOpen, setIsOpen }) => {
+    const bgColor = randomColor({ luminosity: 'light' });
     return (
         <div className={`${isOpen ? 'block' : 'hidden'} top-10 right-3 w-60 absolute bg-white shadow p-2 rounded transition-all ease-linear duration-200`}>
             <div className='flex flex-row gap-x-3 items-center justify-start border-b-[1px] border-gray-300 py-1 w-full'>
-                <div className="rounded-full h-6 w-6 overflow-hidden flex items-center justify-center shadow"><img src="https://www.shareicon.net/data/2016/07/05/791214_man_512x512.png" alt="Profile Picture" />
-                </div>
+                {AuthAvatar() ? <div className="rounded-full h-6 w-6 overflow-hidden flex items-center justify-center shadow"><img src={AuthAvatar()} alt="Profile Picture" />
+                </div> : <div className={`rounded-full h-6 w-6 overflow-hidden flex items-center justify-center shadow`} style={{ backgroundColor: bgColor }}><span className="font-poppins text-base font-bold text-semi-black">{AuthFName()[0]}</span></div>}
                 <div className='flex flex-col items-start justify-center'>
-                    <p className='font-poppins text-semi-black text-xs font-semibold'><AdminName /></p>
-                    <p className='font-poppins text-light-gray text-[10px]'>{<AdminEmail />}</p>
+                    <p className='font-poppins text-semi-black text-xs font-semibold'><AuthFName /> <AuthLName /></p>
+                    <p className='font-poppins text-light-gray text-[10px]'>{<AuthEmail />}</p>
                 </div>
             </div>
             <div className="w-full  border-b-[1px] border-gray-300 flex items-center justify-start">
@@ -43,17 +44,19 @@ let AdminProfileOption = ({ isOpen, setIsOpen }) => {
 }
 let AdminProfileSection = () => {
 
+    const bgColor = randomColor({ luminosity: 'light' });
     let [optionsIsOpen, setOptionIsOpen] = useState(false);
     return (
         <div className="flex flex-row gap-x-1.5">
             <div className="flex flex-col items-end justify-center">
-                <h6 className="font-poppins font-semibold text-semi-black text-base"><AdminName /></h6>
+                <h6 className="font-poppins font-semibold text-semi-black text-base"><AuthFName /> <AuthLName /></h6>
                 <p className="font-poppins text-light-gray -mt-0.5 text-sm">Shop Owner</p>
             </div>
             <div className="flex items-center justify-center relative">
                 <button onClick={() => setOptionIsOpen(!optionsIsOpen)} className="w-18 flex items-center justify-end gap-x-1 cursor-pointer">
-                    <div className="rounded-full h-12 w-12 overflow-hidden flex items-center justify-center shadow"><img src="https://www.shareicon.net/data/2016/07/05/791214_man_512x512.png" alt="Profile Picture" />
-                    </div>
+                    {AuthAvatar() ?
+                        <div className="rounded-full h-12 w-12 overflow-hidden flex items-center justify-center shadow"><img src={AuthAvatar()} alt="Profile Picture" />
+                        </div> : <div className={`rounded-full h-12 w-12 overflow-hidden flex items-center justify-center shadow`} style={{ backgroundColor: bgColor }}><span className="font-poppins text-4xl font-semibold text-semi-black">{AuthFName()[0]}</span></div>}
                     <span className="transition-all ease-linear duration-200">{optionsIsOpen ? <FaCaretUp className="text-light-gray text-base" /> : <FaCaretDown className="text-light-gray text-base" />}</span>
                 </button>
                 <AdminProfileOption isOpen={optionsIsOpen} setIsOpen={setOptionIsOpen} />

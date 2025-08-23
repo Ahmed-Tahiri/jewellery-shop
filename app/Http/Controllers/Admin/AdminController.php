@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Rules\UniqueEmail;
 use App\Models\Admin;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
@@ -18,7 +20,7 @@ class AdminController extends Controller
 
         $customersData = Customer::orderBy('created_at', 'desc')
             ->take(7)
-            ->get(['first_name', 'last_name', 'email', 'created_at', 'id']);
+            ->get(['first_name', 'last_name', 'email', 'created_at', 'id', 'avatar']);
         $customerDataModified = [];
 
         foreach ($customersData as $customer) {
@@ -29,23 +31,33 @@ class AdminController extends Controller
                 'email' => $customer['email'],
                 'datejoined' => $customer['created_at'],
                 'status' => 'active',
-                'avatar' => null,
+                'avatar' => $customer['avatar'],
             ];
         }
 
         return Inertia::render('Admin/Dashboard', ['recentCustomers' => $customerDataModified]);
     }
 
-    public function create()
+    public function edit(Admin $admin)
     {
-        if (Admin::first()) {
-            if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-                return redirect()->route('Home');
-            }
-            return redirect()->route('Dashboard');
+        if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
+            return redirect()->route('Home');
         }
-        return Inertia::render('Admin/Signup');
+        $adminData = Admin::first(['first_name', 'last_name', 'email', 'id', 'avatar', 'role', 'last_login_at']);
+        $adminDataModified = [
+            'id'        => $adminData->id,
+            'firstName' => $adminData->first_name,
+            'lastName'  => $adminData->last_name,
+            'email'     => $adminData->email,
+            'avatar'    => $adminData->avatar ? Storage::url($adminData->avatar) : null,
+            'role'    => $adminData->role,
+            'lastLogin'    => $adminData->last_login_at,
+        ];
+
+        return Inertia::render('Admin/Profile', ['adminData' => $adminDataModified]);
     }
+
+
     public function store(Request $request)
     {
 
@@ -67,5 +79,22 @@ class AdminController extends Controller
         ]);
         Auth::guard('admin')->login($admin);
         return redirect()->route('Dashboard')->with('success', 'Account created successfully');
+    }
+
+
+    public function uploadAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|max:2048',
+        ]);
+        $admin = Auth::guard('admin')->user();
+        if ($admin->avatar && Storage::disk('public')->exists($admin->avatar)) {
+            Storage::disk('public')->delete($admin->avatar);
+        }
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $admin->avatar = $path;
+        $admin->save();
+
+        return redirect()->back()->with('success', 'Avatar updated!');
     }
 }
