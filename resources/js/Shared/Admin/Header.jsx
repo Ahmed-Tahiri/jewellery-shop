@@ -22,11 +22,16 @@ let NotificationIcon = ({ count = '0' }) => {
 }
 
 let AdminProfileOption = ({ isOpen, setIsOpen }) => {
+    const [avatarIsForbidden, setAvatarIsForbidden] = useState(false);
+
+    const avatarErrorHandle = () => {
+        setAvatarIsForbidden(true);
+    }
     const bgColor = randomColor({ luminosity: 'light' });
     return (
         <div className={`${isOpen ? 'block' : 'hidden'} top-10 right-3 w-60 absolute bg-white shadow p-2 rounded transition-all ease-linear duration-200`}>
             <div className='flex flex-row gap-x-3 items-center justify-start border-b-[1px] border-gray-300 py-1 w-full'>
-                {AuthAvatar() ? <div className="rounded-full h-6 w-6 overflow-hidden flex items-center justify-center shadow"><img src={AuthAvatar()} alt="Profile Picture" />
+                {AuthAvatar() && !avatarIsForbidden ? <div className="rounded-full h-6 w-6 overflow-hidden flex items-center justify-center shadow"><img onError={avatarErrorHandle} src={AuthAvatar()} alt="Profile Picture" />
                 </div> : <div className={`rounded-full h-6 w-6 overflow-hidden flex items-center justify-center shadow`} style={{ backgroundColor: bgColor }}><span className="font-poppins text-base font-bold text-semi-black">{AuthFName()[0]}</span></div>}
                 <div className='flex flex-col items-start justify-center'>
                     <p className='font-poppins text-semi-black text-xs font-semibold'><AuthFName /> <AuthLName /></p>
@@ -44,8 +49,13 @@ let AdminProfileOption = ({ isOpen, setIsOpen }) => {
 }
 let AdminProfileSection = () => {
 
-    const bgColor = randomColor({ luminosity: 'light' });
     let [optionsIsOpen, setOptionIsOpen] = useState(false);
+    const [avatarIsForbidden, setAvatarIsForbidden] = useState(false);
+    const bgColor = randomColor({ luminosity: 'light' });
+
+    const avatarErrorHandle = () => {
+        setAvatarIsForbidden(true);
+    }
     return (
         <div className="flex flex-row gap-x-1.5">
             <div className="flex flex-col items-end justify-center">
@@ -54,8 +64,8 @@ let AdminProfileSection = () => {
             </div>
             <div className="flex items-center justify-center relative">
                 <button onClick={() => setOptionIsOpen(!optionsIsOpen)} className="w-18 flex items-center justify-end gap-x-1 cursor-pointer">
-                    {AuthAvatar() ?
-                        <div className="rounded-full h-12 w-12 overflow-hidden flex items-center justify-center shadow"><img src={AuthAvatar()} alt="Profile Picture" />
+                    {AuthAvatar() && !avatarIsForbidden ?
+                        <div className="rounded-full h-12 w-12 overflow-hidden flex items-center justify-center shadow"><img onError={avatarErrorHandle} src={AuthAvatar()} alt="Profile Picture" />
                         </div> : <div className={`rounded-full h-12 w-12 overflow-hidden flex items-center justify-center shadow`} style={{ backgroundColor: bgColor }}><span className="font-poppins text-4xl font-semibold text-semi-black">{AuthFName()[0]}</span></div>}
                     <span className="transition-all ease-linear duration-200">{optionsIsOpen ? <FaCaretUp className="text-light-gray text-base" /> : <FaCaretDown className="text-light-gray text-base" />}</span>
                 </button>

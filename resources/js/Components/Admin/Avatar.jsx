@@ -6,6 +6,7 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
     const [imageSrc, setImageSrc] = useState(null);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [showCropper, setShowCropper] = useState(false);
+    const [avatarIsForbidden, setAvatarIsForbidden] = useState(false);
 
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
@@ -74,12 +75,11 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
         });
     };
 
+    const avatarErrorHandle = () => {
+        setAvatarIsForbidden(true);
+    }
     return (
         <div className="space-y-4">
-
-
-
-
             {showCropper ? (
                 <div>
                     <div className="relative w-full h-64 bg-white rounded shadow">
@@ -95,18 +95,17 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
                     </div>
 
                     <div className="flex gap-2 mt-2 w-64 flex-row justify-evenly">
-                        <button onClick={() => { setShowCropper(false); setImageSrc(null); }} className="shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer flex-1 transition-all ease-linear duration-200 hover:bg-dark-gray"> Cancel </button>
-                        <button onClick={handleUpload} className="shadow px-4 py-2 bg-mustard text-white font-poppins rounded cursor-pointer flex-1 transition-all ease-linear duration-200 hover:bg-mustard-dark" > Upload </button>
+                        <button onClick={() => { setShowCropper(false); setImageSrc(null); }} className="shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer flex-1 transition-colors ease-linear duration-200 hover:bg-dark-gray"> Cancel </button>
+                        <button onClick={handleUpload} className="shadow px-4 py-2 bg-mustard text-white font-poppins rounded cursor-pointer flex-1 transition-colors ease-linear duration-200 hover:bg-mustard-dark" > Upload </button>
                     </div>
                 </div>
-            ) : avatar ? (<div><img src={avatar} alt="admin picture" className="h-60 w-60 rounded-lg object-cover shadow" /></div>) : (
+            ) : avatar && !avatarIsForbidden ? (<div><img src={avatar} alt="admin picture" className="h-60 w-60 rounded-lg object-cover shadow" onError={avatarErrorHandle} /></div>) : (
                 <div className="p-2 h-60 w-60 flex items-center justify-center rounded-lg shadow" style={{ backgroundColor: bgColor }}>
                     <span className="font-poppins text-semi-black text-[6rem] font-medium"> {adminFirstName[0]}  </span>
                 </div>
             )}
-            {!showCropper && <>  <label htmlFor="avatar" className="w-60 bg-zinc inline-block text-center rounded font-poppins text-base text-white py-2 px-2 cursor-pointer shadow">{avatar ? 'Change Avatar' : 'Upload Avatar'} </label>
+            {!showCropper && <>  <label htmlFor="avatar" className="w-60 bg-zinc inline-block text-center rounded font-poppins text-base text-white py-2 px-2 cursor-pointer shadow hover:bg-zinc-dark transition-colors ease-linear duration-200">{avatar ? 'Change Avatar' : 'Upload Avatar'} </label>
                 <input type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" /></>}
-
         </div>
     );
 };
