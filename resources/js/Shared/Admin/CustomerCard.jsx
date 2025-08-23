@@ -1,7 +1,9 @@
 import { Link } from "@inertiajs/react";
+import { format } from "date-fns";
 import { FaEye, FaUserEdit } from "react-icons/fa";
 
 export let CustomerCard = ({ customer, index }) => {
+    const formattedDate = customer.datejoined ? format(new Date(customer.datejoined), "EEEE, do MMMM yyyy") : "N/A";
     return (
         <tr className={`${index % 2 === 0 ? "bg-powder-gray" : "bg-white"} hover:bg-gray-50 transition shadow`}>
             <td className="px-3 py-2 w-16">
@@ -16,7 +18,7 @@ export let CustomerCard = ({ customer, index }) => {
             <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{customer.firstname}</td>
             <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{customer.lastname}</td>
             <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{customer.email}</td>
-            <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{customer.datejoined}</td>
+            <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{formattedDate}</td>
             <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{customer.status}</td>
             <td className="px-3 py-2 font-poppins font-normal text-base  flex items-center justify-center gap-3 mt-2">
                 <Link href={`/admin/customers/${customer.id}`} className="text-blue-600 hover:text-blue-800">

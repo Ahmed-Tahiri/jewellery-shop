@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rules\UniqueEmail;
 use App\Models\Admin;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,25 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/Dashboard');
+
+        $customersData = Customer::orderBy('created_at', 'desc')
+            ->take(7)
+            ->get(['first_name', 'last_name', 'email', 'created_at', 'id']);
+        $customerDataModified = [];
+
+        foreach ($customersData as $customer) {
+            $customerDataModified[] = [
+                'id' => $customer['id'],
+                'firstname' => $customer['first_name'],
+                'lastname' => $customer['last_name'],
+                'email' => $customer['email'],
+                'datejoined' => $customer['created_at'],
+                'status' => 'active',
+                'avatar' => null,
+            ];
+        }
+
+        return Inertia::render('Admin/Dashboard', ['recentCustomers' => $customerDataModified]);
     }
 
     public function create()

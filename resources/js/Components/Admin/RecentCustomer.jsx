@@ -1,26 +1,8 @@
+import { usePage } from "@inertiajs/react";
 import { CustomerCard } from "../../Shared/Admin/CustomerCard";
 
 export let RecentCustomers = () => {
-    const customers = [
-        {
-            id: 1,
-            firstname: "Ahmed",
-            lastname: "Tahiri",
-            email: "ahmed@example.com",
-            avatar: null,
-            datejoined: "2025-08-20",
-            status: "Active",
-        },
-        {
-            id: 2,
-            firstname: "Sara",
-            lastname: "Khan",
-            email: "sara@example.com",
-            avatar: "https://i.pravatar.cc/40?img=2",
-            datejoined: "2025-08-21",
-            status: "Block",
-        },
-    ];
+    let { recentCustomers } = usePage().props;
 
     return (
         <div className="flex w-full bg-white shadow rounded flex-col gap-y-5 p-5">
@@ -39,7 +21,7 @@ export let RecentCustomers = () => {
                         </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-300">
-                        {customers.map((c, idx) => (
+                        {recentCustomers.map((c, idx) => (
                             <CustomerCard key={c.id} customer={c} index={idx} />
                         ))}
                     </tbody>
