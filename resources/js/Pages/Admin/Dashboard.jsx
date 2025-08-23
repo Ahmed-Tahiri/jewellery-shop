@@ -1,4 +1,4 @@
-import { AdminName } from "../../Shared/Admin/AdminName";
+import { AdminName } from "../../Shared/Admin/AdminData";
 import { BusinessAnalytics } from "../../Components/Admin/BusinessAnalytics";
 import { TopProducts } from "../../Components/Admin/TopProducts";
 import { RecentCustomers } from "../../Components/Admin/RecentCustomer";

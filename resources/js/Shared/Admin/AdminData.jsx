@@ -4,5 +4,10 @@ export let AdminName = () => {
     let adminFirstName = auth?.firstName || "Super";
     let adminLastName = auth?.lastName || "Admin";
     let adminName = `${adminFirstName} ${adminLastName}`
-    return <span>{adminName}</span>
+    return adminName;
+}
+export let AdminEmail = () => {
+    const { auth } = usePage().props || {};
+    let adminEmail = auth?.email || "admin@jewelleryshop.com";
+    return adminEmail;
 }
