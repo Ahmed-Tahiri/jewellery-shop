@@ -60,12 +60,12 @@ class AdminController extends Controller
         Auth::guard('admin')->login($admin);
         return redirect()->route('Dashboard')->with('success', 'Account created successfully');
     }
-    public function edit(Admin $admin)
+    public function edit()
     {
         if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
             return redirect()->route('Home');
         }
-        $adminData = Admin::first(['first_name', 'last_name', 'email', 'id', 'avatar', 'role', 'last_login_at']);
+        $adminData =  Auth::guard('admin')->user();
         $adminDataModified = [
             'id'        => $adminData->id,
             'firstName' => $adminData->first_name,
@@ -86,7 +86,7 @@ class AdminController extends Controller
             return redirect()->route('Home');
         }
 
-        $adminData = Admin::first();
+        $adminData = Auth::guard('admin')->user();
 
         $attrs = $request->validate([
             'first_name' => ['nullable', 'string', 'min:2', 'max:50'],

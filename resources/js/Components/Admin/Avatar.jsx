@@ -11,6 +11,7 @@ export let AvatarUploader = ({ avatar, adminFirstName }) => {
     const { errors } = usePage().props;
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
+    const [isSuccessful, setIsSuccessful] = useState(false);
     const fileInputRef = useRef(null);
     const onCropComplete = useCallback((_, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
@@ -73,6 +74,7 @@ export let AvatarUploader = ({ avatar, adminFirstName }) => {
             onSuccess: () => {
                 setShowCropper(false);
                 setImageSrc(null);
+                setIsSuccessful(true);
             },
         });
     };
@@ -90,6 +92,7 @@ export let AvatarUploader = ({ avatar, adminFirstName }) => {
     return (
         <div className="space-y-4">
             {errors.avatar && <div className="w-60 flex justify-center items-center"><span className="font-poppins text-red-700 text-sm">{errors.avatar}</span></div>}
+            <div className={`${isSuccessful ? 'flex' : 'hidden'} w-60 justify-center items-center`}><span className="font-poppins text-green-700 text-sm">Avatar Updated Successfully</span></div>
             {showCropper ? (
                 <div>
                     <div className="relative w-full h-64 bg-white rounded shadow">
