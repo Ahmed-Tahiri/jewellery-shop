@@ -29,34 +29,18 @@ export default function AdminProfile() {
         last_name: '',
         email: ''
     });
-    let adminFieldData = [
-        {
-            label: 'First Name',
-            value: adminFirstName
-        },
-        {
-            label: 'Last Name',
-            value: adminLastName
-        },
-        {
-            label: 'email',
-            value: email
-        },
-        {
-            label: 'Role',
-            value: role
-        },
-        {
-            label: 'Last Login at:',
-            value: lastLoginFormatted
-        },
-    ];
+    let adminFieldData = [{ label: 'First Name', value: adminFirstName }, { label: 'Last Name', value: adminLastName }, { label: 'email', value: email }, { label: 'Role', value: role }, { label: 'Last Login at:', value: lastLoginFormatted }];
 
     let inputChangeHandler = (e) => { setData(e.target.name, e.target.value); }
     const editSaveHandle = () => {
 
     }
     const editCancelHandle = () => {
+        setData({
+            first_name: '',
+            last_name: '',
+            email: ''
+        });
         setCanEdit(false);
     }
     let formSubmitHandler = (e) => {
@@ -107,6 +91,5 @@ export default function AdminProfile() {
                 </div>
             </div>
         </section>
-
-    )
+    );
 }
