@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email', 100)->unique();
             $table->string('password');
             $table->enum('role', ['admin'])->default('admin');
+            $table->string('avatar')->nullable();
+            $table->dateTime('last_login_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -28,14 +30,32 @@ class AppServiceProvider extends ServiceProvider
             [
                 'auth' => function () {
                     if (Auth::guard('admin')->check()) {
-
-                        $customer =   Auth::guard('admin')->user();
-                        return ['id' => $customer->id, 'firstName' => $customer->first_name, 'lastName' => $customer->last_name, 'email' => $customer->email];
+                        $adminData = Auth::guard('admin')->user();
+                        $adminDataModified = [
+                            'id'        => $adminData->id,
+                            'firstName' => $adminData->first_name,
+                            'lastName'  => $adminData->last_name,
+                            'email'     => $adminData->email,
+                            'avatar'    => $adminData->avatar ? Storage::url($adminData->avatar) : null,
+                            'lastLogin'    => $adminData->last_login_at
+                                ? Carbon::parse($adminData->last_login_at)->toIso8601String()
+                                : null,
+                        ];
+                        return $adminDataModified;
                     }
                     if (Auth::guard('customer')->check()) {
-
-                        $customer =   Auth::guard('customer')->user();
-                        return ['id' => $customer->id, 'firstName' => $customer->first_name, 'lastName' => $customer->last_name, 'email' => $customer->email];
+                        $customerData = Auth::guard('customer')->user();
+                        $customerDataModified = [
+                            'id'        => $customerData->id,
+                            'firstName' => $customerData->first_name,
+                            'lastName'  => $customerData->last_name,
+                            'email'     => $customerData->email,
+                            'avatar'    => $customerData->avatar ? Storage::url($customerData->avatar) : null,
+                            'lastLogin'    => $customerData->last_login_at
+                                ? Carbon::parse($customerData->last_login_at)->toIso8601String()
+                                : null,
+                        ];
+                        return $customerDataModified;
                     }
                     return null;
                 }

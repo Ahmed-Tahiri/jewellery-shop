@@ -1,6 +1,7 @@
-import { AdminName } from "../../Shared/Admin/AdminName";
+import { AuthFName } from "../../Shared/AuthData";
 import { BusinessAnalytics } from "../../Components/Admin/BusinessAnalytics";
 import { TopProducts } from "../../Components/Admin/TopProducts";
+import { RecentCustomers } from "../../Components/Admin/RecentCustomer";
 
 export default function Dashboard() {
     return (
@@ -8,10 +9,11 @@ export default function Dashboard() {
             <div className="w-full flex flex-col gap-y-8">
                 <div className="w-full flex flex-col justify-center items-start">
                     <h2 className="font-poppins text-4xl text-zinc-dark font-semibold">Dashboard</h2>
-                    <p className="font-poppins text-light-gray ">Welcome back dear, <AdminName />!</p>
+                    <p className="font-poppins text-light-gray ">Welcome back dear, <AuthFName />!</p>
                 </div>
                 <BusinessAnalytics />
                 <TopProducts />
+                <RecentCustomers />
             </div>
         </section>
     );
