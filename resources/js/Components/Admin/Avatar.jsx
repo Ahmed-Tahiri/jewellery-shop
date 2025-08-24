@@ -68,7 +68,7 @@ export let AvatarUploader = ({ avatar, adminFirstName }) => {
         const formData = new FormData();
         formData.append("avatar", file);
 
-        router.post("/admin/avatar", formData, {
+        router.post("/admin/profile/avatar", formData, {
             forceFormData: true,
             onSuccess: () => {
                 setShowCropper(false);

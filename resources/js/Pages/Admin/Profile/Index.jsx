@@ -1,9 +1,9 @@
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { CiEdit } from "react-icons/ci";
-import { AvatarUploader } from "../../Components/Admin/Avatar";
+import { AvatarUploader } from "../../../Components/Admin/Avatar";
 import { format } from "date-fns";
 import { useState } from "react";
-import { FormTextInput } from "../../Shared/FormTextInput";
+import { FormTextInput } from "../../../Shared/FormTextInput";
 
 
 let AdminDataField = ({ label, value }) => {

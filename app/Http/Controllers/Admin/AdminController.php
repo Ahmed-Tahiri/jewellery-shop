@@ -78,7 +78,7 @@ class AdminController extends Controller
                 : null,
         ];
 
-        return Inertia::render('Admin/Profile', ['adminData' => $adminDataModified]);
+        return Inertia::render('Admin/Profile/Index', ['adminData' => $adminDataModified]);
     }
     public function update(Request $request)
     {
