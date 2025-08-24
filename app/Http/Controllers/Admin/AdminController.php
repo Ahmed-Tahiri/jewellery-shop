@@ -38,29 +38,6 @@ class AdminController extends Controller
 
         return Inertia::render('Admin/Dashboard', ['recentCustomers' => $customerDataModified]);
     }
-
-    public function edit(Admin $admin)
-    {
-        if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('Home');
-        }
-        $adminData = Admin::first(['first_name', 'last_name', 'email', 'id', 'avatar', 'role', 'last_login_at']);
-        $adminDataModified = [
-            'id'        => $adminData->id,
-            'firstName' => $adminData->first_name,
-            'lastName'  => $adminData->last_name,
-            'email'     => $adminData->email,
-            'avatar'    => $adminData->avatar ? Storage::url($adminData->avatar) : null,
-            'role'    => $adminData->role,
-            'lastLogin'    => $adminData->last_login_at
-                ? Carbon::parse($adminData->last_login_at)->toIso8601String()
-                : null,
-        ];
-
-        return Inertia::render('Admin/Profile', ['adminData' => $adminDataModified]);
-    }
-
-
     public function store(Request $request)
     {
 
@@ -83,6 +60,54 @@ class AdminController extends Controller
         Auth::guard('admin')->login($admin);
         return redirect()->route('Dashboard')->with('success', 'Account created successfully');
     }
+    public function edit(Admin $admin)
+    {
+        if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
+            return redirect()->route('Home');
+        }
+        $adminData = Admin::first(['first_name', 'last_name', 'email', 'id', 'avatar', 'role', 'last_login_at']);
+        $adminDataModified = [
+            'id'        => $adminData->id,
+            'firstName' => $adminData->first_name,
+            'lastName'  => $adminData->last_name,
+            'email'     => $adminData->email,
+            'avatar'    => $adminData->avatar ? Storage::url($adminData->avatar) : null,
+            'role'    => $adminData->role,
+            'lastLogin'    => $adminData->last_login_at
+                ? Carbon::parse($adminData->last_login_at)->toIso8601String()
+                : null,
+        ];
+
+        return Inertia::render('Admin/Profile', ['adminData' => $adminDataModified]);
+    }
+    public function update(Request $request)
+    {
+        if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
+            return redirect()->route('Home');
+        }
+
+        $adminData = Admin::first();
+
+        $attrs = $request->validate([
+            'first_name' => ['nullable', 'string', 'min:2', 'max:50'],
+            'last_name'  => ['nullable', 'string', 'min:2', 'max:50'],
+            'email'      => ['nullable', 'string', 'email', 'max:100', new UniqueEmail($adminData->id)],
+        ]);
+
+        if (!empty($attrs['first_name'])) {
+            $adminData->first_name = $attrs['first_name'];
+        }
+        if (!empty($attrs['last_name'])) {
+            $adminData->last_name = $attrs['last_name'];
+        }
+        if (!empty($attrs['email']) && $adminData->email !== $attrs['email']) {
+            $adminData->email = $attrs['email'];
+        }
+        $adminData->save();
+
+        return redirect()->back()->with('success', 'Admin Data updated successfully');
+    }
+
 
 
     public function uploadAvatar(Request $request)

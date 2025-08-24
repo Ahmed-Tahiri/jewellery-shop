@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
                         return $adminDataModified;
                     }
                     if (Auth::guard('customer')->check()) {
-                        $customerData = Auth::guard('admin')->user();
+                        $customerData = Auth::guard('customer')->user();
                         $customerDataModified = [
                             'id'        => $customerData->id,
                             'firstName' => $customerData->first_name,

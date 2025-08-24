@@ -21,5 +21,6 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('Dashboard');
     Route::get('/admin/profile', [AdminController::class, 'edit']);
+    Route::put('/admin/profile', [AdminController::class, 'update']);
     Route::post('/admin/avatar', [AdminController::class, 'uploadAvatar']);
 });

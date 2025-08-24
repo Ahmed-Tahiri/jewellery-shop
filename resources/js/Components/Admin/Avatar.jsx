@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useRef } from "react";
 import Cropper from "react-easy-crop";
 import { router, usePage } from "@inertiajs/react";
+import randomColor from "randomcolor";
 
-export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
+export let AvatarUploader = ({ avatar, adminFirstName }) => {
     const [imageSrc, setImageSrc] = useState(null);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [showCropper, setShowCropper] = useState(false);
@@ -15,6 +16,7 @@ export let AvatarUploader = ({ avatar, bgColor, adminFirstName }) => {
         setCroppedAreaPixels(croppedAreaPixels);
     }, []);
 
+    const bgColor = randomColor({ luminosity: 'light' });
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
