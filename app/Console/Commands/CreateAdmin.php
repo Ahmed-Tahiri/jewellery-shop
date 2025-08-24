@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Admin;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,8 +33,7 @@ class CreateAdmin extends Command
             'first_name' => $this->argument('first_name'),
             'last_name' => $this->argument('last_name'),
             'email' => $this->argument('email'),
-            'password' => Hash::make($this->argument('password')),
-            'role' => 'admin',
+            'password' => Hash::make($this->argument('password'))
         ]);
 
         $this->info('Admin created successfully.');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rules\UniqueEmail;
 use App\Models\Customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,7 +32,7 @@ class CustomerController extends Controller
             'last_name'    => $attrs['last_name'],
             'email'        => $attrs['email'],
             'password'     => Hash::make($attrs['password']),
-            'role' => 'customer'
+            'last_login_at' => Carbon::now()
         ]);
         Auth::guard('customer')->login($customer);
         return redirect()->route('Home')->with('success', 'Account created successfully');
