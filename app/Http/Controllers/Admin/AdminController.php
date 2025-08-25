@@ -91,7 +91,7 @@ class AdminController extends Controller
         $attrs = $request->validate([
             'first_name' => ['nullable', 'string', 'min:2', 'max:50'],
             'last_name'  => ['nullable', 'string', 'min:2', 'max:50'],
-            'email'      => ['nullable', 'string', 'email', 'max:100', new UniqueEmail($adminData->id)],
+            'email'      => ['nullable', 'string', 'email', 'max:100', new UniqueEmail($adminData->id, null)],
         ]);
 
         if (!empty($attrs['first_name'])) {
