@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoginAttempt;
+use App\Models\Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class SessionController extends Controller
@@ -14,22 +16,41 @@ class SessionController extends Controller
     {
         return Inertia::render('Auth/Signin');
     }
+
     public function store(Request $request)
     {
-        $credentials = $request->validate(['email' => ['required', 'email'], 'password' => 'required'], ['email.required' => 'Please enter email address', 'password.required' => 'Please enter password']);
+        $credentials = $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
+        ], [
+            'email.required'    => 'Please enter email address',
+            'password.required' => 'Please enter password',
+        ]);
+
         $remember = $request->boolean('remember');
+        $email    = $credentials['email'];
+        $ip       = $request->ip();
 
-        $email = $credentials['email'];
-        $ip = $request->ip();
+        if ($request->session()->has('guard')) {
+            return back()->withErrors([
+                'auth' => 'You are already logged in as ' . $request->session()->get('guard') . '. Please logout first.',
+            ]);
+        }
+        $guards = [
+            'admin'    => 'Dashboard',
+            'customer' => 'Home',
+        ];
 
-        $guards = ['admin'    => 'Dashboard', 'customer' => 'Home',];
         foreach ($guards as $guard => $redirect) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
                 $user = Auth::guard($guard)->user();
-                $user->last_login_at = Carbon::now();
+                $user->last_login_at = now();
                 $user->save();
+
                 $this->clearAttempts($email, $ip);
+
                 $request->session()->regenerate();
+                $request->session()->put('guard', $guard);
                 return redirect()->route($redirect)->with('success', 'Signin Successful');
             }
         }
@@ -40,8 +61,9 @@ class SessionController extends Controller
 
         return back()->withErrors([
             'auth' => 'Invalid email or password.',
-        ])->withInput($request->only('email', 'password'));
+        ])->withInput($request->only('email'));
     }
+
 
     public function destroy(Request $request)
     {
@@ -55,9 +77,10 @@ class SessionController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->forget('guard');
+
         return redirect()->route($redirect);
     }
-
 
     private function clearAttempts($email, $ip)
     {

@@ -54,7 +54,7 @@ class AdminController extends Controller
             'last_name'    => $attrs['last_name'],
             'email'        => $attrs['email'],
             'password'     => Hash::make($attrs['password']),
-            'role' => 'admin'
+            'last_login_at' => Carbon::now()
 
         ]);
         Auth::guard('admin')->login($admin);
