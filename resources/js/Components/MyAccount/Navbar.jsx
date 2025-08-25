@@ -20,7 +20,7 @@ export let Navbar = () => {
         },
         {
             title: 'Manage Addresses',
-            path: '/myaccount/addresses',
+            path: '/myaccount/address',
         },
         {
             title: 'Password Manager',

@@ -22,4 +22,9 @@ class Phone extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
 }
