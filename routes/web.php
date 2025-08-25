@@ -31,4 +31,5 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['customer'])->group(function () {
     Route::get('/myaccount', [MyAccountController::class, 'index']);
+    Route::get('/myaccount/logout', [MyAccountController::class, 'logout']);
 });

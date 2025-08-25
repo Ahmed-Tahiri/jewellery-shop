@@ -17,7 +17,7 @@ export default function Index() {
         e.preventDefault();
         put("/myaccount", {
             onSuccess: () => {
-                reset("password", "password_confirmation");
+
             },
         });
     };
@@ -25,7 +25,7 @@ export default function Index() {
 
 
     return (
-        <div className="w-4/5 flex flex-col items-start gap-y-7">
+        <div className="w-7/9 flex flex-col items-start gap-y-7">
             <div className="relative w-30">
                 <div className="shadow overflow-hidden h-30 w-30 rounded-full">
                     <img src="https://i0.wp.com/therighthairstyles.com/wp-content/uploads/2014/03/1-medium-layered-haircut-for-square-face.jpg?w=500&ssl=1" alt="customer profile picture" />

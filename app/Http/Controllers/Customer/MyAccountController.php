@@ -13,4 +13,8 @@ class MyAccountController extends CustomerController
     {
         return Inertia::render('MyAccount/Index');
     }
+    public function logout()
+    {
+        return Inertia::render('MyAccount/Logout');
+    }
 }
