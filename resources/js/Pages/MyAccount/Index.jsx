@@ -34,6 +34,7 @@ export default function Index() {
             </div>
             <div className="w-full">
                 <form onSubmit={submitHandler} className="w-full flex flex-col items-start">
+
                     <div className="w-full flex flex-col items-start gap-y-5">
                         <div className="w-full flex gap-x-5">
                             <div className="w-1/2">

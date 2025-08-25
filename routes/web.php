@@ -36,4 +36,5 @@ Route::middleware(['customer'])->group(function () {
     Route::get('/myaccount/logout', [MyAccountController::class, 'logout']);
     Route::get('/myaccount/address', [AddressController::class, 'index']);
     Route::get('/myaccount/password', [CustomerPasswordController::class, 'index']);
+    Route::put('/myaccount/password', [CustomerPasswordController::class, 'update']);
 });
