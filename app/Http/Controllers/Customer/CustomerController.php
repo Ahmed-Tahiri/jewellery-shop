@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
 use App\Rules\UniqueEmail;
 use App\Models\Customer;
 use Carbon\Carbon;

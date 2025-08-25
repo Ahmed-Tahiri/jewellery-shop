@@ -3,7 +3,6 @@ import EarringImg from './../../images/earrings.png';
 import NecklaceImg from './../../images/necklace.png';
 import RingImg from './../../images/rings.png';
 import { Link } from "@inertiajs/react";
-import { LandingServices } from "./LandingServices";
 export let Landing = () => {
 
 
@@ -36,7 +35,6 @@ export let Landing = () => {
                     <LandingCard heading='Modern Rings' img={RingImg} description={`Unique styles with radiant, sleek and fashionable designs.`} link={'#'} bgColor="bg-mustard" textColor="text-semi-black" />
                 </div>
             </div>
-            <LandingServices />
         </section>
     );
 

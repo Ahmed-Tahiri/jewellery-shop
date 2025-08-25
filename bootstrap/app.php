@@ -5,6 +5,7 @@ use App\Console\Commands\DeleteAdmin;
 use App\Console\Commands\UpdateAdmin;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CheckLoginThrottle;
+use App\Http\Middleware\CustomerMiddleware;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -22,7 +23,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'admin' => AdminMiddleware::class,
-            'login.throttle' => CheckLoginThrottle::class
+            'login.throttle' => CheckLoginThrottle::class,
+            'customer' => CustomerMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {})

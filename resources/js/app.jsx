@@ -4,6 +4,7 @@ import './../css/style.css';
 import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
 import AdminLayout from './Layouts/AdminLayout';
+import MyAccountLayout from './Layouts/MyAccountLayout';
 
 createInertiaApp({
     resolve: name => {
@@ -13,11 +14,13 @@ createInertiaApp({
         if (!resolved) {
             throw new Error(`Page not found: ./Pages/${name}.jsx`);
         }
-
         const Page = resolved.default;
 
         if (!Page.layout && name.startsWith('Admin/')) {
             Page.layout = page => <AdminLayout>{page}</AdminLayout>;
+        }
+        if (!Page.layout && name.startsWith('MyAccount/')) {
+            Page.layout = page => <MyAccountLayout>{page}</MyAccountLayout>;
         }
 
         return Page;

@@ -31,7 +31,7 @@ export let LandingServices = () => {
             icon: <PiHeadsetLight className="text-zinc text-[42px]" />
         },
     ]
-    return <div className="w-full flex flex-row justify-between items-center py-10">
+    return <div className="w-full flex flex-row justify-between items-center py-10 px-20">
         {services.map((service, idx) => <Service key={`landingService${idx + 1}`} name={service.name} description={service.description} icon={service.icon} />)}
     </div>
 }
