@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PasswordController;
+use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
@@ -34,4 +35,5 @@ Route::middleware(['customer'])->group(function () {
     Route::get('/myaccount', [MyAccountController::class, 'index']);
     Route::get('/myaccount/logout', [MyAccountController::class, 'logout']);
     Route::get('/myaccount/address', [AddressController::class, 'index']);
+    Route::get('/myaccount/password', [CustomerPasswordController::class, 'index']);
 });
