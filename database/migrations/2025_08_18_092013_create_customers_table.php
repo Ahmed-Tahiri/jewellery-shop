@@ -36,10 +36,10 @@ return new class extends Migration
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('street')->nullable();
-            $table->string('town')->nullable();
+            $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
-            $table->string('zip_code')->nullable();
+            $table->string('zipcode')->nullable();
             $table->string('phone', 30)->nullable();
             $table->string('email', 100)->nullable();
             $table->boolean('is_primary')->default(false);

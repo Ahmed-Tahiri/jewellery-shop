@@ -20,9 +20,9 @@ class SignupCompleteController extends Customer
         $customer = Auth::guard('customer')->user();
         $attrs = $request->validate([
             'phone'    => ['required', 'string', "regex:/^(?:\+?\d{7,30}|0\d{6,29})$/", 'min:7', 'max:30'],
-            'gender_id' => ['required', Rule::exists('genders', 'id')],
+            'gender_id' => ['required'],
         ], [
-            'gender_id.exists' => 'Selected gender is invalid.',
+            'gender_id.required' => 'Please select gender for better experience.',
         ]);
 
 

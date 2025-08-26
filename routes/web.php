@@ -39,7 +39,11 @@ Route::middleware(['customer'])->group(function () {
     Route::post('/myaccount/avatar', [MyAccountController::class, 'uploadAvatar']);
     Route::post('/myaccount/avatar/cancel', [MyAccountController::class, 'cancelAvatarUpload']);
     Route::get('/myaccount/logout', [MyAccountController::class, 'logout']);
-    Route::get('/myaccount/address', [AddressController::class, 'index']);
+    Route::get('/myaccount/address', [AddressController::class, 'index'])->name("myaccount.address");
+    Route::delete('/myaccount/address/{address}', [AddressController::class, 'destroy'])->name('address.destroy');
+    Route::put('/myaccount/address/{address}', [AddressController::class, 'update'])->name('address.update');
+    Route::get('/myaccount/address/{address}/edit', [AddressController::class, 'edit'])->name('address.edit');
+    Route::post('/myaccount/address', [AddressController::class, 'store']);
     Route::get('/myaccount/password', [CustomerPasswordController::class, 'index']);
     Route::put('/myaccount/password', [CustomerPasswordController::class, 'update']);
 });

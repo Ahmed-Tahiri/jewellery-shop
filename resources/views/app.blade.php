@@ -11,6 +11,7 @@
         rel="stylesheet">
 
     @viteReactRefresh
+    @routes
     @vite('resources/js/app.jsx')
     @inertiaHead
 </head>
