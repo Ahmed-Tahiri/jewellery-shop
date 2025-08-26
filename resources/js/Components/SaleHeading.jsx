@@ -3,8 +3,8 @@ import { FaFacebookF, FaInstagram, FaPinterestP, FaXTwitter, FaYoutube } from "r
 
 export let SaleHeading = () => {
     return (
-        <div className="w-full bg-zinc py-3 px-20">
-            <div className="w-full flex flex-row justify-between items-center">
+        <div className="w-full bg-zinc py-3 px-20 flex items-center justify-center">
+            <div className="w-full max-w-7xl mx-auto flex flex-row items-center justify-between gap-x-3">
                 <div className="text-white font-poppins text-base"><p>Call Us: <span>+123-456-789</span></p></div>
                 <div><h6 className="font-poppins text-white text-base">Sign up and GET 25% OFF for your first order. <Link href={'/signup'} className="underline text-mustard">Signup up now</Link></h6></div>
                 <div className="flex flex-row justify-end items-center gap-x-2">

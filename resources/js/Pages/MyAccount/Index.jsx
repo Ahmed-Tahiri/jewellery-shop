@@ -29,7 +29,7 @@ export default function Index() {
         setData("gender_id", data.gender_id || "");
     }, [data.gender_id, setData]);
     return (
-        <div className="w-7/9 flex flex-col items-start gap-y-7">
+        <div className="w-6/8 flex flex-col items-start gap-y-7">
             <div className={`${isSuccessful ? 'block' : 'hidden'}`}>
                 <span className="text-green-700 font-poppins text-sm">Password Updated Successfully</span>
             </div>

@@ -31,7 +31,7 @@ export let AuthPageSlider = ({ slidesData }) => {
     };
 
     return (
-        <div className="relative w-[45%] min-h-full">
+        <div className="relative w-[45%] min-h-full hidden lg:block">
             <div className="w-full h-full shadow">
                 <Swiper
                     modules={[Navigation, Autoplay, A11y]}

@@ -47,7 +47,7 @@ export default function Address() {
 
 
     return (
-        <div className="w-7/9">
+        <div className="w-6/8">
             <div className="w-full flex flex-col gap-y-5">
                 {Array.isArray(addresses) && addresses.length > 0 ? (<div className="flex flex-col p-2 divide-y divide-gray-300 border-[1px] border-gray-300 shadow-sm">
                     {addresses.map((address, idx) => <AddressCard key={`AddressNo.${idx + 1}`} city={address.city} id={address.id} street={address.street} />)}

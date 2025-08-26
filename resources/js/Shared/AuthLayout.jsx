@@ -36,10 +36,10 @@ export let AuthLayout = ({ heading, description, children }) => {
         },
 
     ];
-    return (<section className="w-full min-h-screen h-screen bg-white flex justify-center items-center">
+    return (<section className="w-full min-h-screen h-screen bg-white flex justify-center items-center px-30 lg:px-0">
         <div className="w-full h-full flex flex-row justify-between">
             <AuthPageSlider slidesData={slidesData} />
-            <div className="py-7 px-35 w-[55%] h-full flex flex-col gap-y-7 items-center justify-center">
+            <div className="py-7 lg:px-10 xl:15 2xl:px-35 w-[55%] min-w-[800px] h-full flex flex-col gap-y-7 items-center justify-center">
                 <div className="w-full h-9 flex justify-start items-center"><img src={JewelleryLogo} className="h-full" alt="Jewellery Logo" /></div>
                 <div className="w-full flex flex-col gap-y-10">
                     <div className="w-full flex flex-col gap-y-4">

@@ -7,8 +7,8 @@ export let Landing = () => {
 
 
     return (
-        <section className="w-full py-2 px-20">
-            <div className="w-full h-180 flex flex-row items-center justify-between gap-x-6">
+        <section className="w-full py-2 px-20 flex items-center justify-center">
+            <div className="w-full h-180 flex flex-row items-center justify-between gap-x-6 max-w-7xl">
                 <div className="flex w-5/10 bg-powder-gray h-full shadow flex-col justify-between items-center">
                     <div className="w-full flex flex-col gap-y-6 p-6">
                         <div className="w-full flex items-center justify-center">

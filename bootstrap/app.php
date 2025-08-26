@@ -33,7 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
-            if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) { //! app()->environment(['local', 'testing']) && include this in condition to prevent local environment from server error pages
+            if (in_array($response->getStatusCode(), [500, 503, 404, 403])) { //! app()->environment(['local', 'testing']) && include this in condition to prevent local environment from server error pages
                 return Inertia::render('ErrorPage', ['status' => $response->getStatusCode(), 'role' => Auth::guard('admin')->user()->role ?? ''])
                     ->toResponse($request)
                     ->setStatusCode($response->getStatusCode());

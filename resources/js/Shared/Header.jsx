@@ -23,21 +23,21 @@ export let Header = () => {
         { name: <GoPerson className='text-zinc text-2xl' />, link: '/myaccount' },
     ]
     return (
-        <div className="w-full bg-white py-7 px-20">
-            <div className="w-full flex flex-row items-center justify-between gap-x-3">
+        <div className="w-full bg-white py-7 px-20 flex items-center justify-center">
+            <div className="w-full max-w-7xl mx-auto flex flex-row items-center justify-between gap-x-3">
                 <div className="w-30 flex items-center justify-start">
                     <Link className='w-full' href={'/'}> <img src={JewelleryLogo} alt='JewelleryLogo' className='w-full' /></Link>
                 </div>
                 <div className='w-6/10 flex flex-row items-center justify-center'>
                     <nav className='w-full flex flex-row items-center justify-center'>
-                        <ul className='w-full flex flex-row items-center justify-center gap-x-10'>
+                        <ul className='w-full flex flex-row items-center justify-center gap-x-7'>
                             {navLinks.map((nav, idx) => <NavLink key={`nav-link-${idx + 1}`} link={nav.link} name={nav.name} />)}
 
                         </ul>
                     </nav>
                 </div>
                 <div>
-                    <div className='w-full flex flex-row items-center justify-end gap-x-8'>
+                    <div className='w-full flex flex-row items-center justify-end gap-x-6'>
                         {navIcons.map((icon, idx) => <div key={`navIcon${idx + 1}`}><Link href={icon.link}>{icon.name}</Link></div>)}
                     </div>
 

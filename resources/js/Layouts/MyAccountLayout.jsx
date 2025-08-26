@@ -12,9 +12,11 @@ export default function MyAccountLayout({ children }) {
             <SaleHeading />
             <Header />
             <SectionHeading heading={'My Account'} breadcrumb={'Home / My Account'} />
-            <main className="w-full px-20 py-15 flex flex-row gap-x-8">
-                <Navbar />
-                {children}
+            <main className="w-full px-20 py-15">
+                <div className="w-full flex flex-row gap-x-8 max-w-7xl mx-auto">
+                    <Navbar />
+                    {children}
+                </div>
             </main>
             <LandingServices />
             <Footer />
