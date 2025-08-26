@@ -44,7 +44,7 @@ export default function Signup() {
                     </div>
                     <div className="w-full"><button type="submit" className="w-full p-2 bg-zinc text-white font-poppins text-base shadow-md font-normal cursor-pointer hover:bg-zinc-dark disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Sign Up"}</button></div>
                 </form>
-                <div className="w-full text-center mt-3"><p className="font-poppins text-base text-semi-black font-medium">Already have an account? <Link href={'/signin'} className="text-zinc underline hover:cursor-pointer hover:font-semibold active:text-mustard">Sign In</Link></p></div>
+                <div className="w-full text-center mt-3"><p className="font-poppins text-base text-semi-black font-medium">Already have an account? <Link href={route('signin')} className="text-zinc underline hover:cursor-pointer hover:font-semibold active:text-mustard">Sign In</Link></p></div>
             </div>
         </AuthLayout>
     );
