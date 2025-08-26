@@ -14,13 +14,13 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Home');
-})->name('home')->middleware('auth:customer');
+})->name('home')->middleware('customer_or_guest');
 Route::get('/signup', [CustomerController::class, 'index'])->name('signup')->middleware('guest');
 Route::post('/signup', [CustomerController::class, 'store']);
-Route::get('/signup/complete', [SignupCompleteController::class, 'index'])->name('signup.complete')->middleware('auth:customer');
+Route::get('/signup/complete', [SignupCompleteController::class, 'index'])->name('signup.complete')->middleware('guest');
 Route::post('/signup/complete', [SignupCompleteController::class, 'store']);
 Route::post('/signin', [SessionController::class, 'store'])->middleware(['login.throttle'])->name('signin.post');
-Route::get('/signin', [SessionController::class, 'index'])->name('signin');
+Route::get('/signin', [SessionController::class, 'index'])->name('signin')->middleware('guest');
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware(['auth:admin,customer']);
 
 
