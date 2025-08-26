@@ -19,10 +19,9 @@ Route::get('/signup', [CustomerController::class, 'index'])->name('signup')->mid
 Route::post('/signup', [CustomerController::class, 'store']);
 Route::get('/signup/complete', [SignupCompleteController::class, 'index'])->name('signup.complete')->middleware('guest');
 Route::post('/signup/complete', [SignupCompleteController::class, 'store']);
-Route::post('/signin', [SessionController::class, 'store'])->middleware(['login.throttle'])->name('signin.post');
 Route::get('/signin', [SessionController::class, 'index'])->name('signin')->middleware('guest');
+Route::post('/signin', [SessionController::class, 'store'])->middleware(['login.throttle'])->name('signin.post');
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware(['auth:admin,customer']);
-
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
