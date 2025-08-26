@@ -20,7 +20,7 @@ export let Header = () => {
         { name: <RiSearch2Line className='text-zinc text-2xl' />, link: '#' },
         { name: <GoHeart className='text-zinc text-2xl' />, link: '#' },
         { name: <HiOutlineShoppingBag className='text-zinc text-2xl' />, link: '#' },
-        { name: <GoPerson className='text-zinc text-2xl' />, link: '#' },
+        { name: <GoPerson className='text-zinc text-2xl' />, link: '/myaccount' },
     ]
     return (
         <div className="w-full bg-white py-7 px-20">

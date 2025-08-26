@@ -58,12 +58,12 @@ class AdminController extends Controller
 
         ]);
         Auth::guard('admin')->login($admin);
-        return redirect()->route('Dashboard')->with('success', 'Account created successfully');
+        return redirect()->route('dashboard')->with('success', 'Account created successfully');
     }
     public function edit()
     {
         if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('Home');
+            return redirect()->route('home');
         }
         $adminData =  Auth::guard('admin')->user();
         $adminDataModified = [
@@ -83,7 +83,7 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('Home');
+            return redirect()->route('home');
         }
 
         $adminData = Auth::guard('admin')->user();
@@ -91,7 +91,7 @@ class AdminController extends Controller
         $attrs = $request->validate([
             'first_name' => ['nullable', 'string', 'min:2', 'max:50'],
             'last_name'  => ['nullable', 'string', 'min:2', 'max:50'],
-            'email'      => ['nullable', 'string', 'email', 'max:100', new UniqueEmail($adminData->id)],
+            'email'      => ['nullable', 'string', 'email', 'max:100', new UniqueEmail($adminData->id, null)],
         ]);
 
         if (!empty($attrs['first_name'])) {

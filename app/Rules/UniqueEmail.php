@@ -9,19 +9,29 @@ use Illuminate\Support\Facades\DB;
 class UniqueEmail implements ValidationRule
 {
     protected $currentAdminId;
+    protected $currentCustomerId;
 
-    public function __construct($currentAdminId = null)
+    public function __construct($currentAdminId = null, $currentCustomerId = null)
     {
         $this->currentAdminId = $currentAdminId;
+        $this->currentCustomerId = $currentCustomerId;
     }
+
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $existsInCustomers = DB::table('customers')->where('email', $value)->exists();
-        $query = DB::table('admins')->where('email', $value);
-        if ($this->currentAdminId) {
-            $query->where('id', '!=', $this->currentAdminId);
+
+        $customerQuery = DB::table('customers')->where('email', $value);
+        if ($this->currentCustomerId) {
+            $customerQuery->where('id', '!=', $this->currentCustomerId);
         }
-        $existsInAdmins = $query->exists();
+        $existsInCustomers = $customerQuery->exists();
+
+        $adminQuery = DB::table('admins')->where('email', $value);
+        if ($this->currentAdminId) {
+            $adminQuery->where('id', '!=', $this->currentAdminId);
+        }
+        $existsInAdmins = $adminQuery->exists();
+
         if ($existsInCustomers || $existsInAdmins) {
             $fail("The $attribute has already been taken.");
         }

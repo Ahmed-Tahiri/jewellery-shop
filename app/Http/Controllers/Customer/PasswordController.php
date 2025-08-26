@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Customer\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
-class PasswordController extends AdminController
+class PasswordController extends CustomerController
 {
+
     public function index()
     {
-        return Inertia::render('Admin/Profile/Password');
+        return Inertia::render('MyAccount/Password');
     }
-
 
     public function update(Request $request)
     {
-        if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('home');
+        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role === 'admin') {
+            return redirect()->route('signin');
         }
         $attrs = $request->validate([
             'current_password'     => ['required', 'string'],
@@ -28,8 +29,8 @@ class PasswordController extends AdminController
 
         ]);
 
-        $authAdmin = Auth::guard('admin')->user();
-        if (!Hash::check($attrs['current_password'], $authAdmin->password)) {
+        $authCustomer = Auth::guard('customer')->user();
+        if (!Hash::check($attrs['current_password'], $authCustomer->password)) {
             return back()->withErrors(['current_password' => 'Current password does not match']);
         }
 
@@ -37,7 +38,7 @@ class PasswordController extends AdminController
             return back()->withErrors(['new_password' => 'New password cannot be the same as current password']);
         }
 
-        $authAdmin->update([
+        $authCustomer->update([
             'password' => Hash::make($attrs['new_password']),
         ]);
 

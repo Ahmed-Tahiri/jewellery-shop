@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
 use App\Rules\UniqueEmail;
 use App\Models\Customer;
 use Carbon\Carbon;
@@ -35,6 +36,6 @@ class CustomerController extends Controller
             'last_login_at' => Carbon::now()
         ]);
         Auth::guard('customer')->login($customer);
-        return redirect()->route('Home')->with('success', 'Account created successfully');
+        return redirect()->route('signup.complete')->with('success', 'Account created successfully');
     }
 }
