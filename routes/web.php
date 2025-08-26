@@ -7,23 +7,24 @@ use App\Http\Controllers\Customer\AddressController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SignupCompleteController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
 Route::get('/', function () {
     return Inertia::render('Home');
-})->name('Home');
-Route::get('/signup', [CustomerController::class, 'index'])->name('Signup')->middleware('guest');
+})->name('home');
+Route::get('/signup', [CustomerController::class, 'index'])->name('signup')->middleware('guest');
 Route::post('/signup', [CustomerController::class, 'store']);
-
-Route::get('/signin', [SessionController::class, 'index'])->name('Signin')->middleware('guest');
+Route::get('/signup/complete', [SignupCompleteController::class, 'index'])->name('signup.complete')->middleware('auth:customer');
+Route::post('/signup/complete', [SignupCompleteController::class, 'store'])->name('signin');
 Route::post('/signin', [SessionController::class, 'store'])->middleware(['login.throttle']);
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware(['auth:admin,customer']);
 
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('Dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/admin/profile', [AdminController::class, 'edit']);
     Route::put('/admin/profile', [AdminController::class, 'update']);
     Route::post('/admin/profile/avatar', [AdminController::class, 'uploadAvatar']);

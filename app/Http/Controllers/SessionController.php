@@ -37,8 +37,8 @@ class SessionController extends Controller
             ]);
         }
         $guards = [
-            'admin'    => 'Dashboard',
-            'customer' => 'Home',
+            'admin'    => 'dashboard',
+            'customer' => 'home',
         ];
 
         foreach ($guards as $guard => $redirect) {
@@ -69,10 +69,10 @@ class SessionController extends Controller
     {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-            $redirect = 'Signin';
+            $redirect = 'signin';
         } else {
             Auth::guard('customer')->logout();
-            $redirect = 'Home';
+            $redirect = 'home';
         }
 
         $request->session()->invalidate();

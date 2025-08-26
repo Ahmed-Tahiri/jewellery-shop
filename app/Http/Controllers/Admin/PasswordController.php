@@ -19,7 +19,7 @@ class PasswordController extends AdminController
     public function update(Request $request)
     {
         if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('Home');
+            return redirect()->route('home');
         }
         $attrs = $request->validate([
             'current_password'     => ['required', 'string'],

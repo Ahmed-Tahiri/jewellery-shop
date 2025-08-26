@@ -58,12 +58,12 @@ class AdminController extends Controller
 
         ]);
         Auth::guard('admin')->login($admin);
-        return redirect()->route('Dashboard')->with('success', 'Account created successfully');
+        return redirect()->route('dashboard')->with('success', 'Account created successfully');
     }
     public function edit()
     {
         if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('Home');
+            return redirect()->route('home');
         }
         $adminData =  Auth::guard('admin')->user();
         $adminDataModified = [
@@ -83,7 +83,7 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->role === 'customer') {
-            return redirect()->route('Home');
+            return redirect()->route('home');
         }
 
         $adminData = Auth::guard('admin')->user();
