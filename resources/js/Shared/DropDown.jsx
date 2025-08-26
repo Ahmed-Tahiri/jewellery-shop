@@ -15,8 +15,6 @@ export const DropDown = ({ customerGender, setGender }) => {
     const [selected, setSelected] = useState(
         options.find(opt => opt.id === Number(customerGender)) || null
     );
-    console.log(customerGender);
-
     useEffect(() => {
         function handleDocClick(e) {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {

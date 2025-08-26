@@ -1,12 +1,12 @@
 import { BiEditAlt } from "react-icons/bi";
 import { FormTextInput } from './../../Shared/FormTextInput';
-import { useForm, usePage } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import { DropDown } from "../../Shared/DropDown";
 import { useEffect, useState } from "react";
 export default function Index() {
 
-    const { customer } = usePage().props;
-
+    const { customer, temp_avatar } = usePage().props;
+    const [isForbidden, setIsForbidden] = useState(false);
     const { data, setData, put, processing, errors } = useForm({
         first_name: customer?.first_name ?? "",
         last_name: customer?.last_name ?? "",
@@ -34,10 +34,23 @@ export default function Index() {
                 <span className="text-green-700 font-poppins text-sm">Password Updated Successfully</span>
             </div>
             <div className="relative w-30">
-                <div className="shadow overflow-hidden h-30 w-30 rounded-full">
-                    <img src="https://i0.wp.com/therighthairstyles.com/wp-content/uploads/2014/03/1-medium-layered-haircut-for-square-face.jpg?w=500&ssl=1" alt="customer profile picture" />
-                </div>
-                <button className="h-7 w-7 absolute bg-zinc rounded-full bottom-1 right-0 border-2 border-white text-center"><BiEditAlt className="text-white text-xl ms-0.5" /></button>
+                {(temp_avatar || customer.avatar) && !isForbidden ? (
+                    <div className="shadow overflow-hidden h-30 w-30 rounded-full">
+                        <img
+                            src={temp_avatar ? temp_avatar : customer.avatar}
+                            alt="customer profile picture"
+                            className="h-full w-full object-cover"
+                            onError={() => setIsForbidden(true)}
+                        />
+                    </div>
+                ) : (
+                    <div className="shadow overflow-hidden h-30 w-30 rounded-full bg-mustard flex items-center justify-center">
+                        <span className="text-6xl font-poppins font-semibold text-semi-black">
+                            {customer.first_name[0]}
+                        </span>
+                    </div>
+                )}
+                <Link href={'myaccount/avatar'} className="h-7 w-7 absolute bg-zinc rounded-full bottom-1 right-0 border-2 border-white text-center"><BiEditAlt className="text-white text-xl ms-0.5" /></Link>
             </div>
             <div className="w-full">
                 <form onSubmit={submitHandler} className="w-full flex flex-col items-start">

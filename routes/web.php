@@ -34,6 +34,9 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['customer'])->group(function () {
     Route::get('/myaccount', [MyAccountController::class, 'index']);
     Route::put('/myaccount', [MyAccountController::class, 'update']);
+    Route::get('/myaccount/avatar', [MyAccountController::class, 'avatar']);
+    Route::post('/myaccount/avatar', [MyAccountController::class, 'uploadAvatar']);
+    Route::post('/myaccount/avatar/cancel', [MyAccountController::class, 'cancelAvatarUpload']);
     Route::get('/myaccount/logout', [MyAccountController::class, 'logout']);
     Route::get('/myaccount/address', [AddressController::class, 'index']);
     Route::get('/myaccount/password', [CustomerPasswordController::class, 'index']);
