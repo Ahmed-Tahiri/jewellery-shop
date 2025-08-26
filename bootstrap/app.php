@@ -10,6 +10,8 @@ use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -27,6 +29,16 @@ return Application::configure(basePath: dirname(__DIR__))
             'customer' => CustomerMiddleware::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {})
+    ->withExceptions(function (Exceptions $exceptions): void {
+
+        $exceptions->respond(function (Response $response) {
+            if ($response->getStatusCode() === 404) {
+                return Inertia::render('Errors/NotFound');
+            }
+            if ($response->getStatusCode() === 403) {
+                return Inertia::render('Errors/Forbidden');
+            }
+        });;
+    })
     ->withCommands([CreateAdmin::class, UpdateAdmin::class, DeleteAdmin::class])
     ->create();
