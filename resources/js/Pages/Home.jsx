@@ -6,7 +6,7 @@ import { Header } from "../Shared/Header";
 
 export default function Home() {
     return (
-        <section className="w-full">
+        <section className="w-full relative">
             <SaleHeading />
             <Header />
             <Landing />
