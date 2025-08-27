@@ -29,10 +29,10 @@ export let SaleHeading = () => {
     }, [messages.length]);
 
     return (
-        <div className={`w-full bg-zinc py-3 px-3 relative top-0 sm:px-6 md:px-10 lg:px-20  items-center justify-center`}>
+        <div className={`w-full bg-zinc py-3 px-3 relative top-0 sm:px-6 md:px-10 lg:px-15 xl:px-20  items-center justify-center`}>
             <div className="w-full max-w-7xl mx-auto flex flex-row items-center justify-center md:justify-between gap-x-3">
                 <div className="text-white font-poppins text-base md:block hidden"><p>Call Us: <span>+123-456-789</span></p></div>
-                <div><h6 ref={heading} className="font-poppins text-white text-xs md:text-base flex md:flex-row flex-col items-center gap-1">{auth === null ? (<><span>Sign up and GET 25% OFF for your first order.</span> <Link href={'/signup'} className="underline text-mustard">Signup up now</Link></>) : <span>{messages[index]}</span>}</h6></div>
+                <div><h6 ref={heading} className="font-poppins text-white text-xs md:text-base flex md:flex-row flex-col items-center gap-1">{auth === null ? (<><span>Sign up and GET 25% OFF for your first order.</span> <Link href={'/signup'} className="underline text-mustard">Signup up now</Link></>) : <span className="text-center text-xs md:text-base">{messages[index]}</span>}</h6></div>
                 <div className="lg:flex hidden flex-row justify-end items-center gap-x-2">
                     <div className="p-1 bg-mustard rounded-full">
                         <Link href={'#'}><FaFacebookF className="text-zinc text-lg" /></Link>
