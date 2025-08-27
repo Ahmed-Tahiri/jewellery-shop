@@ -1,9 +1,9 @@
-import { LandingServices } from "../Components/LandingServices";
 import { SaleHeading } from './../Components/SaleHeading';
 import { Header } from './../Shared/Header';
 import { Footer } from './../Shared/Footer';
 import { SectionHeading } from "../Shared/SectionHeading";
 import { Navbar } from "../Components/MyAccount/Navbar";
+import { Services } from "../Components/Services";
 
 
 export default function MyAccountLayout({ children }) {
@@ -18,7 +18,7 @@ export default function MyAccountLayout({ children }) {
                     {children}
                 </div>
             </main>
-            <LandingServices />
+            <Services />
             <Footer />
         </section>
     );

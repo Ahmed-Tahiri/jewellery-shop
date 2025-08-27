@@ -13,11 +13,11 @@ let Service = ({ name, description, icon }) => {
         </div>
     </div>
 }
-export let LandingServices = () => {
+export let Services = () => {
     let services = [
         {
             name: "Free Shipping",
-            description: "Free shipping for order above Rs5000",
+            description: "Free shipping for order above 5000 PKR",
             icon: <MdOutlineLocalShipping className="text-zinc text-[42px]" />
         },
         {
