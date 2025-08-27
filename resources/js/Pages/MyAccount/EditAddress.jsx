@@ -35,7 +35,7 @@ export default function EditAddress() {
     };
 
     return (
-        <div className="w-7/9">
+        <div className="w-6/8">
             <div className="w-full flex flex-col gap-y-5">
                 <div className="w-full flex items-center justify-start">
                     <h5 className="font-poppins text-semi-black font-medium text-xl"> Update Address</h5>

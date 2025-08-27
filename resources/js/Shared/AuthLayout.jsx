@@ -36,15 +36,15 @@ export let AuthLayout = ({ heading, description, children }) => {
         },
 
     ];
-    return (<section className="w-full min-h-screen h-screen bg-white flex justify-center items-center">
-        <div className="w-full h-full flex flex-row justify-between">
+    return (<section className="w-full min-h-[730px] h-screen bg-white flex justify-center items-center px-2 lg:px-0">
+        <div className="w-full h-full flex flex-row justify-center lg:justify-between">
             <AuthPageSlider slidesData={slidesData} />
-            <div className="py-7 px-35 w-[55%] h-full flex flex-col gap-y-7 items-center justify-center">
-                <div className="w-full h-9 flex justify-start items-center"><img src={JewelleryLogo} className="h-full" alt="Jewellery Logo" /></div>
+            <div className="py-7 px-5 sm:px-10 xl:15 2xl:px-30 w-full lg:w-[55%] max-w-[800px] h-full flex flex-col gap-y-7 items-center justify-start lg:justify-center">
+                <div className="w-full h-8 lg:h-9 flex justify-start items-center"><img src={JewelleryLogo} className="h-full" alt="Jewellery Logo" /></div>
                 <div className="w-full flex flex-col gap-y-10">
                     <div className="w-full flex flex-col gap-y-4">
-                        <h2 className="font-poppins text-semi-black text-3xl font-semibold">{heading}</h2>
-                        <p className="font-poppins text-light-gray text-md font-normal">{description}</p>
+                        <h2 className="font-poppins text-semi-black sm:text-[28px] text-2xl lg:text-3xl font-semibold whitespace-nowrap">{heading}</h2>
+                        <p className="font-poppins text-light-gray md:text-sm text-[13px] lg:text-base font-normal">{description}</p>
                     </div>
                     {children}
                 </div>

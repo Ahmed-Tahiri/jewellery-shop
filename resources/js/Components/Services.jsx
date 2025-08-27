@@ -13,11 +13,11 @@ let Service = ({ name, description, icon }) => {
         </div>
     </div>
 }
-export let LandingServices = () => {
+export let Services = () => {
     let services = [
         {
             name: "Free Shipping",
-            description: "Free shipping for order above Rs5000",
+            description: "Free shipping for order above 5000 PKR",
             icon: <MdOutlineLocalShipping className="text-zinc text-[42px]" />
         },
         {
@@ -31,7 +31,9 @@ export let LandingServices = () => {
             icon: <PiHeadsetLight className="text-zinc text-[42px]" />
         },
     ]
-    return <div className="w-full flex flex-row justify-between items-center py-10 px-20">
-        {services.map((service, idx) => <Service key={`landingService${idx + 1}`} name={service.name} description={service.description} icon={service.icon} />)}
+    return <div className="flex justify-center items-center py-10 px-5 md:px-10 lg:px-15 xl:px-20">
+        <div className="w-full flex flex-col md:flex-row items-start justify-start md:justify-between md:items-center max-w-7xl gap-10 lg:gap-0">
+            {services.map((service, idx) => <Service key={`landingService${idx + 1}`} name={service.name} description={service.description} icon={service.icon} />)}
+        </div>
     </div>
 }

@@ -32,7 +32,7 @@ export let Navbar = () => {
         },
 
     ];
-    return <div className="w-2/9">
+    return <div className="w-2/8">
         <ul className="flex flex-col items-start gap-y-3 w-full">
             {navLinks.map((link, idx) => <NavLink key={`myAccountNav${idx + 1}`} path={link.path} title={link.title} />)}
         </ul>

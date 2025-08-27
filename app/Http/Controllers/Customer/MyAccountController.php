@@ -19,6 +19,9 @@ class MyAccountController extends CustomerController
     {
 
         $customer = Auth::guard('customer')->user();
+        if (!$customer) {
+            return redirect()->route('signin');
+        }
         $genders = Gender::all(['id', 'gender']);
 
         $CustomerData = $customer->only([
