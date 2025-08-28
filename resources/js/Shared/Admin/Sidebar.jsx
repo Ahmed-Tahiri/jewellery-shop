@@ -10,12 +10,12 @@ import JewelleryLogo from './../../../images/JewelleryLogo.png';
 import { NavLi } from "./NavLi";
 import { SidebarDropdown } from "./SidebarDropDown";
 import { Link } from "@inertiajs/react";
-import { useState } from "react";
+import { useNav } from "../../Context/AdminNavbarContext";
 
-export let Sidebar = ({ setNavIsOpen }) => {
+export let Sidebar = () => {
 
 
-
+    const { setNavIsOpen } = useNav();
 
     const ordersList = [
         {
@@ -88,14 +88,14 @@ export let Sidebar = ({ setNavIsOpen }) => {
                 <div className="w-full mt-2 flex flex-1 ">
                     <nav className="py-5 w-full flex h-[550px] overflow-y-auto overflow-x-hidden">
                         <ul className="w-full flex flex-col gap-y-3 px-3">
-                            <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} setNavIsOpen={setNavIsOpen} />
-                            <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} setNavIsOpen={setNavIsOpen} />
-                            <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} setNavIsOpen={setNavIsOpen} />
-                            <SidebarDropdown title="Products" icon={<BsBoxes className="text-2xl text-semi-black" />} links={productList} setNavIsOpen={setNavIsOpen} />
-                            <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} setNavIsOpen={setNavIsOpen} />
-                            <SidebarDropdown title="Sub Categories" icon={<MdOutlineCategory className="text-2xl text-semi-black" />} links={subCategoriesList} setNavIsOpen={setNavIsOpen} />
-                            <NavLi path={'/admin/customers'} title={'Customers'} icon={<HiOutlineFaceSmile className="text-2xl text-semi-black" />} setNavIsOpen={setNavIsOpen} />
-                            <NavLi path={'/admin/payment'} title={'Payment'} icon={<BsCashCoin className="text-2xl text-semi-black" />} setNavIsOpen={setNavIsOpen} />
+                            <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} />
+                            <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} />
+                            <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />
+                            <SidebarDropdown title="Products" icon={<BsBoxes className="text-2xl text-semi-black" />} links={productList} />
+                            <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} />
+                            <SidebarDropdown title="Sub Categories" icon={<MdOutlineCategory className="text-2xl text-semi-black" />} links={subCategoriesList} />
+                            <NavLi path={'/admin/customers'} title={'Customers'} icon={<HiOutlineFaceSmile className="text-2xl text-semi-black" />} />
+                            <NavLi path={'/admin/payment'} title={'Payment'} icon={<BsCashCoin className="text-2xl text-semi-black" />} />
                         </ul>
                     </nav>
                 </div>

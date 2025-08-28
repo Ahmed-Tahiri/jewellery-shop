@@ -6,6 +6,7 @@ import { AuthAvatar, AuthEmail, AuthFName, AuthLName } from "../AuthData";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import { useNav } from "../../Context/AdminNavbarContext";
 
 let FormattedDate = () => {
     const date = new Date();
@@ -74,7 +75,9 @@ let AdminProfileSection = () => {
 }
 
 
-export let Header = ({ setNavIsOpen }) => {
+export let Header = () => {
+
+    const { setNavIsOpen } = useNav();
     return <header className="w-full bg-white shadow py-3 px-5">
         <div className="w-full flex flex-row items-center justify-end">
             <div className=" w-full flex justify-between items-center ">

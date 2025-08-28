@@ -1,8 +1,9 @@
 import { Link, usePage } from "@inertiajs/react"
 import React from "react";
+import { useNav } from "../../Context/AdminNavbarContext";
 
-export let NavLi = ({ title, path, icon, setNavIsOpen }) => {
-
+export let NavLi = ({ title, path, icon }) => {
+    const { setNavIsOpen } = useNav();
     let { url } = usePage();
     let cleanUrl = url.split('?')[0];
     let isActive = cleanUrl === path;
