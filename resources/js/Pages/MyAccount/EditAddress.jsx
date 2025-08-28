@@ -88,7 +88,7 @@ export default function EditAddress() {
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" disabled={processing} className={`font-poppins md:text-base text-sm  w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2 px-3 text-center ${processing ? "opacity-50" : "opacity-100"}`}> {processing ? "Updating Address..." : "Update Address"}</button>
+                                <button type="submit" disabled={processing} className={`font-poppins md:text-base text-sm  w-40 md:w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2 px-3 text-center ${processing ? "opacity-50" : "opacity-100"}`}> {processing ? "Updating Address..." : "Update Address"}</button>
                             </div>
                         </div>
                     </form>

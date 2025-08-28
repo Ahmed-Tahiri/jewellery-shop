@@ -41,7 +41,7 @@ export default function Password() {
                 <PasswordField label={'New Password'} data={data.new_password} inputChangeHandler={inputChangeHandler} name="new_password" id="newPassword" placeholder="Enter New Password" error={errors.new_password} />
                 <PasswordField label={'Confirm New Password'} data={data.new_password_confirmation} inputChangeHandler={inputChangeHandler} name="new_password_confirmation" id="newPasswordConfirmation" placeholder="Re-enter New Password" error={errors.new_password_confirmation} />
                 <div>
-                    <button type="submit" disabled={processing} className={`font-poppins md:text-base text-sm w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2  px-3 text-center ${processing ? 'opacity-50' : 'opacity-100'}`}>
+                    <button type="submit" disabled={processing} className={`font-poppins md:text-base text-sm w-40 md:w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2  px-3 text-center ${processing ? 'opacity-50' : 'opacity-100'}`}>
                         {processing ? 'Updating Password...' : 'Update Password'}
                     </button>
                 </div>

@@ -114,7 +114,7 @@ export default function Address() {
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" disabled={processing} className={`md:text-base text-sm font-poppins w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2  px-3 text-center ${processing ? 'opacity-50' : 'opacity-100'}`}>
+                                <button type="submit" disabled={processing} className={`md:text-base text-sm font-poppins w-40 md:w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2  px-3 text-center ${processing ? 'opacity-50' : 'opacity-100'}`}>
                                     {processing ? 'Adding Address...' : 'Add Address'}
                                 </button>
                             </div>
