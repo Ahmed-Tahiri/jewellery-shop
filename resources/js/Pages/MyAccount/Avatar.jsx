@@ -97,19 +97,20 @@ export default function Avatar() {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 flex flex-col sm:items-start items-center w-full">
             {errors.avatar && (
-                <div className="w-60 flex justify-center items-center">
+                <div className="lg:w-60 w-full flex justify-center items-center">
                     <span className="font-poppins text-red-700 text-sm">{errors.avatar}</span>
                 </div>
             )}
 
             {showCropper ? (
-                <div>
-                    <div className="relative w-full h-64 bg-white rounded-full shadow overflow-hidden">
+                <div className="flex w-full flex-col items-center">
+                    <div className="relative h-30 w-30 sm:h-40 sm:w-40 md:h-46 md:w-46 lg:h-60 lg:w-60  bg-white rounded-full shadow overflow-hidden">
                         <Cropper image={imageSrc}
                             crop={crop}
                             zoom={zoom}
+                            cropShape="round"
                             aspect={1}
                             onCropChange={setCrop}
                             onCropComplete={onCropComplete}
@@ -117,18 +118,18 @@ export default function Avatar() {
                         />
                     </div>
 
-                    <div className="flex gap-2 mt-5 w-64 flex-row justify-evenly">
-                        <button onClick={handleCancel} className="shadow px-4 py-2 border-2 border-zinc text-zinc font-poppins cursor-pointer flex-1 hover:bg-zinc-dark hover:text-white hover:border-zinc-dark transition" >  Cancel  </button>
-                        <button onClick={handleUpload} className="border-2 border-zinc shadow px-4 py-2 bg-zinc text-white font-poppins cursor-pointer flex-1 hover:bg-zinc-dark hover:border-zinc-dark transition"> Upload</button>
+                    <div className="flex gap-2 mt-5  w-full md:w-46 lg:w-60  flex-row justify-center">
+                        <button onClick={handleCancel} className="md:text-base text-sm shadow px-4 py-2 border-2 border-zinc text-zinc font-poppins cursor-pointer md:flex-1 hover:bg-zinc-dark hover:text-white hover:border-zinc-dark transition " >  Cancel  </button>
+                        <button onClick={handleUpload} className="border-2 border-zinc shadow px-4 py-2 bg-zinc text-white font-poppins cursor-pointer md:flex-1 hover:bg-zinc-dark hover:border-zinc-dark transition md:text-base text-sm"> Upload</button>
                     </div>
                 </div>
             ) : avatar && !avatarIsForbidden ? (
-                <div className="h-60 w-60 overflow-hidden shadow rounded-full">
-                    <img src={avatar} alt="profile avatar" className="h-60 w-60 object-cover" onError={avatarErrorHandle} />
+                <div className="h-30 w-30 sm:h-40 sm:w-40 md:h-46 md:w-46 lg:h-60 lg:w-60  overflow-hidden shadow rounded-full">
+                    <img src={avatar} alt="profile avatar" className="h-30 w-30 sm:h-40 sm:w-40 md:h-46 md:w-46 lg:h-60 lg:w-60  object-cover" onError={avatarErrorHandle} />
                 </div>
             ) : (
-                <div className="p-2 h-60 w-60 flex items-center justify-center rounded-full shadow bg-mustard">
-                    <span className="font-poppins text-semi-black text-[6rem] font-medium">
+                <div className="p-2 h-30 w-30 sm:h-40 sm:w-40 md:h-46 md:w-46 lg:h-60 lg:w-60 flex items-center justify-center rounded-full shadow bg-mustard">
+                    <span className="font-poppins text-semi-black text-5xl sm:text-7xl md:text-8xl  font-medium">
                         {auth.firstName[0]}
                     </span>
                 </div>
@@ -136,7 +137,7 @@ export default function Avatar() {
 
             {!showCropper && (
                 <>
-                    <label htmlFor="avatar" className="block w-60 text-center border-2 border-zinc shadow px-4 py-2 bg-zinc text-white font-poppins cursor-pointer transition hover:bg-zinc-dark hover:border-zinc-dark"
+                    <label htmlFor="avatar" className="block sm:w-40 md:w-46 lg:w-60 md:text-base text-sm text-center border-2 border-zinc shadow px-4 py-2 bg-zinc text-white font-poppins cursor-pointer transition hover:bg-zinc-dark hover:border-zinc-dark"
                     > {avatar ? "Change Avatar" : "Upload Avatar"}</label>
                     <input ref={fileInputRef} type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" />
                 </>

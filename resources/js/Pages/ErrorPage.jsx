@@ -3,6 +3,7 @@ import { Error } from "../Components/Error";
 import { SaleHeading } from "../Components/SaleHeading";
 import { Footer } from "../Shared/Footer";
 import { Header } from "../Shared/Header";
+import { MobileHeader } from "../Shared/MobileHeader";
 
 export default function ErrorPage({ status, role }) {
 
@@ -53,6 +54,7 @@ export default function ErrorPage({ status, role }) {
         <section className="w-full">
             <SaleHeading />
             <Header />
+            <MobileHeader />
             <Error
                 code={code}
                 message={message}

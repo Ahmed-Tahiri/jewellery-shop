@@ -4,15 +4,18 @@ import { AiOutlineProduct, AiOutlineUnorderedList } from "react-icons/ai";
 import { BsBoxes, BsCashCoin } from "react-icons/bs";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { TbCategory2, TbHexagonalPrismPlus } from "react-icons/tb";
-import { MdOutlineCategory, MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout } from "react-icons/md";
+import { MdOutlineCategory, MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { HiOutlineFaceSmile } from "react-icons/hi2";
 import JewelleryLogo from './../../../images/JewelleryLogo.png';
 import { NavLi } from "./NavLi";
 import { SidebarDropdown } from "./SidebarDropDown";
 import { Link } from "@inertiajs/react";
+import { useNav } from "../../Context/AdminNavbarContext";
 
 export let Sidebar = () => {
 
+
+    const { setNavIsOpen } = useNav();
 
     const ordersList = [
         {
@@ -76,7 +79,10 @@ export let Sidebar = () => {
     return (
         <div className="w-full h-full shadow bg-white">
             <div className="w-full flex flex-col items-center justify-between h-full">
-                <div className="w-full pb-2 pt-3  px-3">
+                <div className='w-full flex lg:hidden items-center justify-start mt-2 p-2'>
+                    <button className='flex flex-row items-center gap-x-1' onClick={() => setNavIsOpen(false)}><MdOutlineClose className='text-zinc text-3xl' /></button>
+                </div>
+                <div className="w-full hidden sm:flex pb-2 pt-3  px-3 flex-row gap-x-2">
                     <img src={JewelleryLogo} alt="jewellery logo" className="w-[65%]" />
                 </div>
                 <div className="w-full mt-2 flex flex-1 ">
@@ -93,7 +99,7 @@ export let Sidebar = () => {
                         </ul>
                     </nav>
                 </div>
-                <div className="w-full py-3  px-3 flex items-center justify-center">
+                <div className="w-full py-3  px-3 flex items-center justify-center lg:pb-0 pb-5">
                     <Link href={'/logout'} as={'button'} method="post" className="w-full py-2 px-3 cursor-pointer flex gap-x-3 items-center justify-start font-poppins font-medium transition-all ease-linear duration-200 hover:scale-105"><span><MdOutlineLogout className="text-semi-black text-2xl" /></span><span>Logout</span></Link>
                 </div>
             </div>

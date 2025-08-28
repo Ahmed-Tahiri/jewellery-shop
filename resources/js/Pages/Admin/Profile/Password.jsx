@@ -1,6 +1,7 @@
 import { router, useForm } from "@inertiajs/react";
 import { PasswordField } from "../../../Shared/PasswordField";
 import { useState } from "react";
+import { AdminSectionHeading } from "../../../Shared/Admin/AdminSectionHeading";
 
 
 export default function AdminPassword() {
@@ -39,7 +40,7 @@ export default function AdminPassword() {
         <section className="w-full min-h-170 ">
             <div className="w-full flex flex-col gap-y-8">
                 <div className="w-full flex flex-col justify-center items-start">
-                    <h2 className="font-poppins text-4xl text-zinc-dark font-semibold">My Profile</h2>
+                    <AdminSectionHeading heading={'My Profile'} />
                 </div>
                 <div className="flex flex-col w-full bg-white shadow rounded gap-y-5 p-5">
                     <div className="w-full flex flex-row gap-x-5  items-center justify-between border-b-[1px] border-gray-300 pb-4">
@@ -55,8 +56,8 @@ export default function AdminPassword() {
                                 <PasswordField label={'New Password'} data={data.new_password} inputChangeHandler={inputChangeHandler} name="new_password" id="newPassword" placeholder="Enter New Password" error={errors.new_password} />
                                 <PasswordField label={'Confirm New Password'} data={data.new_password_confirmation} inputChangeHandler={inputChangeHandler} name="new_password_confirmation" id="newPasswordConfirmation" placeholder="Re-enter New Password" error={errors.new_password_confirmation} />
                                 <div className="flex flex-row gap-x-3 w-full justify-end items-center mt-5">
-                                    <button type="reset" onClick={editCancelHandle} form="adminUpdateForm" className="w-24 shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer transition-colors ease-linear duration-200 hover:bg-dark-gray"> Cancel </button>
-                                    <button className={`w-24 shadow px-4 py-2 bg-mustard text-white font-poppins rounded cursor-pointer transition-colors ease-linear duration-200 hover:bg-mustard-dark ${processing ? 'opacity-50' : 'opacity-100'}`} form="adminUpdateForm" type="submit" disabled={processing}> {processing ? 'Saving...' : 'Save'} </button>
+                                    <button type="reset" onClick={editCancelHandle} form="adminUpdateForm" className="w-24 shadow px-4 py-2 bg-light-gray text-white font-poppins rounded cursor-pointer transition-colors ease-linear duration-200 hover:bg-dark-gray md:text-base text-sm"> Cancel </button>
+                                    <button className={`w-24 shadow px-4 py-2 bg-mustard text-white font-poppins rounded cursor-pointer transition-colors ease-linear duration-200 hover:bg-mustard-dark ${processing ? 'opacity-50' : 'opacity-100'} md:text-base text-sm`} form="adminUpdateForm" type="submit" disabled={processing}> {processing ? 'Saving...' : 'Save'} </button>
                                 </div>
                             </form>
                         </div>
