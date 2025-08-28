@@ -1,6 +1,7 @@
 import { router, useForm } from "@inertiajs/react";
 import { PasswordField } from "../../../Shared/PasswordField";
 import { useState } from "react";
+import { AdminSectionHeading } from "../../../Shared/Admin/AdminSectionHeading";
 
 
 export default function AdminPassword() {
@@ -39,7 +40,7 @@ export default function AdminPassword() {
         <section className="w-full min-h-170 ">
             <div className="w-full flex flex-col gap-y-8">
                 <div className="w-full flex flex-col justify-center items-start">
-                    <h2 className="font-poppins text-4xl text-zinc-dark font-semibold">My Profile</h2>
+                    <AdminSectionHeading heading={'My Profile'} />
                 </div>
                 <div className="flex flex-col w-full bg-white shadow rounded gap-y-5 p-5">
                     <div className="w-full flex flex-row gap-x-5  items-center justify-between border-b-[1px] border-gray-300 pb-4">
