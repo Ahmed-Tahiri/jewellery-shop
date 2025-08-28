@@ -31,7 +31,7 @@ export default function Index() {
     return (
         <div className="lg:w-6/8 md:w-5/7 w-10/12 flex flex-col items-start gap-y-7">
             <div className={`${isSuccessful ? 'block' : 'hidden'}`}>
-                <span className="text-green-700 font-poppins text-sm">Password Updated Successfully</span>
+                <span className="text-green-700 font-poppins text-sm">Profile Updated Successfully</span>
             </div>
             <div className="relative w-30">
                 {(temp_avatar || customer.avatar) && !isForbidden ? (
