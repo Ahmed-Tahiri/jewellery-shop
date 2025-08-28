@@ -29,7 +29,7 @@ function InnerLayout({ children }) {
                     <div className="fixed top-0 left-0 lg:left-70 right-0 z-40">
                         <Header />
                     </div>
-                    <main className="flex-1 overflow-auto p-6 mt-12 md:mt-15 lg:mt-18 bg-powder-gray">
+                    <main className="flex-1 overflow-auto p-6 mt-15  lg:mt-18 bg-powder-gray">
                         {children}
                     </main>
                 </div>
