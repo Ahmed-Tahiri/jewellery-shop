@@ -56,7 +56,7 @@ export default function Index() {
                 <form onSubmit={submitHandler} className="w-full flex flex-col items-start">
 
                     <div className="w-full flex flex-col items-start gap-y-5">
-                        <div className="w-full flex md:flex-row flex-col gap-x-5">
+                        <div className="w-full flex md:flex-row flex-col gap-5">
                             <div className="w-full md:w-1/2">
                                 <FormTextInput label={'First Name *'} type={'text'} name={'first_name'} id={'fName'} inputChangeHandler={inputChangeHandler} error={errors.first_name} data={data.first_name} placeholder={'Please Enter First Name'} />
                             </div>
