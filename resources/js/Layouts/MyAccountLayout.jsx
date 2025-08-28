@@ -13,7 +13,7 @@ export default function MyAccountLayout({ children }) {
             <Header />
             <SectionHeading heading={'My Account'} breadcrumb={'Home / My Account'} />
             <main className="w-full px-5 md:px-10 lg:px-15 xl:px-20 py-15">
-                <div className="w-full flex flex-row gap-x-2 md:gap-x-6 lg:gap-x-8 max-w-7xl mx-auto">
+                <div className="w-full flex flex-row gap-x-4 md:gap-x-6 lg:gap-x-8 max-w-7xl mx-auto">
                     <Navbar />
                     {children}
                 </div>
