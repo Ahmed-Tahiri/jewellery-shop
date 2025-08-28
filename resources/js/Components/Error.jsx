@@ -1,4 +1,4 @@
-import { Link, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import leaf from './../../images/plants.png';
 
 export let Error = ({ code, message, description, redirectTitle, redirectPath }) => {

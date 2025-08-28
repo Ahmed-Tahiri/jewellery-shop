@@ -39,7 +39,7 @@ export default function Signin() {
                     </div>
                     <div className="w-full flex items-center justify-between -mt-3 mb-3">
                         <div className="flex flex-row gap-x-1 items-center mt-1">
-                            <label htmlFor="remember" className="relative flex flex-row items-center gap-x-2 cursor-pointer select-none">
+                            <label htmlFor="remember" className="relative flex flex-row items-center md:gap-x-2 gap-x-1 cursor-pointer select-none">
                                 <div className="relative flex flex-row items-center">
                                     <input
                                         type="checkbox"
@@ -50,14 +50,14 @@ export default function Signin() {
                                             setRememberMe(e.target.checked);
                                             setData((prev) => ({ ...prev, remember: e.target.checked }));
                                         }}
-                                        className="appearance-none h-[18px] w-[18px] border-2 border-zinc rounded  bg-transparent checked:bg-zinc checked:border-zinc" />
+                                        className="appearance-none md:h-[18px] md:w-[18px] w-[15px] h-[15px] border-2 border-zinc rounded  bg-transparent checked:bg-zinc checked:border-zinc" />
                                     <span className={`absolute top-[2px] left-[2px] flex items-center justify-center w-[14px] h-[14px] ${rememberMe ? "opacity-100" : "opacity-0"} transition-opacity duration-150`} > <FaCheck className="text-white text-xs" />   </span>
                                 </div>
-                                <span className="text-zinc font-poppins text-sm font-semibold">Remember me</span>
+                                <span className="text-zinc font-poppins text-[13px] md:text-sm font-semibold">Remember me</span>
                             </label>
 
                         </div>
-                        <div><Link className="text-zinc font-poppins text-sm font-semibold underline" href={'/password'}>Forgot Password?</Link></div>
+                        <div><Link className="text-zinc font-poppins text-[13px] md:text-sm font-semibold underline" href={'/password'}>Forgot Password?</Link></div>
                     </div>
                     <div className="w-full"><button type="submit" className="w-full p-2 bg-zinc text-white font-poppins text-base shadow-md font-normal cursor-pointer hover:bg-zinc-dark disabled:opacity-50" disabled={processing}> {processing ? "Signing in..." : "Sign In"}</button></div>
                 </form>
