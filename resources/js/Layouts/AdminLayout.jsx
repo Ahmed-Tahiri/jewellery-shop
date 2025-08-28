@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Sidebar } from "../Shared/Admin/Sidebar";
 import { Header } from "../Shared/Admin/Header";
 
 export default function AdminLayout({ children }) {
+
+    let [navIsOpen, setNavIsOpen] = useState(false);
+
     return (
         <section className="w-full h-screen min-h-170">
             <div className="w-full flex flex-row h-full">
-                <aside className="z-50 w-64 fixed flex-shrink-0 left-0 top-0 bottom-0">
-                    <Sidebar />
+                <aside className={`${navIsOpen ? "translate-x-0" : "-translate-x-full"} z-50 w-4/5 sm:w-7/10 md:w-4/10 lg:w-70 fixed flex-shrink-0 left-0 top-0 bottom-0 transition-transform ease-linear duration-200 lg:translate-x-0 lg:pb-0`}>
+                    <Sidebar setNavIsOpen={setNavIsOpen} />
                 </aside>
 
-                <div className="flex-1 ms-64 flex flex-col">
-                    <div className="fixed top-0 left-64 right-0 z-40">
-                        <Header />
+                <div className="flex-1 lg:ms-70 flex flex-col w-full lg:w-auto">
+                    <div className="fixed top-0 left-0 lg:left-70 right-0 z-40">
+                        <Header setNavIsOpen={setNavIsOpen} />
                     </div>
-                    <main className="flex-1 overflow-auto p-6 mt-[72px] bg-powder-gray">
+                    <main className="flex-1 overflow-auto p-6 mt-12  md:mt-15 lg:mt-18 bg-powder-gray">
                         {children}
                     </main>
                 </div>

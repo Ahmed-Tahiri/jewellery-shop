@@ -7,7 +7,7 @@ export let RecentCustomers = () => {
     return (
         <div className="flex w-full bg-white shadow rounded flex-col gap-y-5 p-5">
             <h4 className="font-poppins text-lg font-medium text-semi-black">Recent Customers</h4>
-            <div className="flex flex-row flex-wrap gap-y-3 items-center">
+            <div className="flex flex-row flex-wrap gap-y-3 items-center overflow-x-scroll">
                 <table className="min-w-full border-collapse bg-white md:overflow-x-auto overflow-x-scroll">
                     <thead className="bg-zinc text-white text-left text-sm font-medium font-poppins">
                         <tr>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa6";
 import { NavLink } from "../../Components/Admin/NavLink";
 
-export let SidebarDropdown = ({ title, icon, links }) => {
+export let SidebarDropdown = ({ title, icon, links, setNavIsOpen }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -18,7 +18,7 @@ export let SidebarDropdown = ({ title, icon, links }) => {
             <div className={`w-full py-3 px-5 ${isOpen ? "block" : "hidden"} transition-all ease-linear duration-200`}  >
                 <ul className="w-full flex flex-col gap-y-5">
                     {links.map((link, idx) => (
-                        <NavLink key={`${title}Link${idx + 1}`} title={link.title} path={link.path} icon={link.icon} />
+                        <NavLink key={`${title}Link${idx + 1}`} title={link.title} path={link.path} icon={link.icon} setNavIsOpen={setNavIsOpen} />
                     ))}
                 </ul>
             </div>
