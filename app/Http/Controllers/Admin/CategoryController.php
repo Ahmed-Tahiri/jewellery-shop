@@ -14,7 +14,9 @@ class CategoryController extends AdminController
     public  function index()
     {
 
-        $categories = Category::all(['id', 'name', 'is_active']);
+        $categories = Category::withCount('subCategories')
+            ->get(['id', 'name', 'is_active']);
+
         $subCategories = SubCategory::all(['id', 'name', 'is_active', 'parent_id']);
         return Inertia::render('Admin/Category/Index', ['categories' => $categories]);
     }
