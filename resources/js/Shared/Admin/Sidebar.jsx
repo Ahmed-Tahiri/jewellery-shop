@@ -1,3 +1,4 @@
+import JewelleryLogo from './../../../images/JewelleryLogo.png';
 import { FaRegCalendarCheck } from "react-icons/fa6";
 import { LuSquareArrowOutUpRight, LuClipboardList, LuPackagePlus } from "react-icons/lu";
 import { AiOutlineProduct, AiOutlineUnorderedList } from "react-icons/ai";
@@ -6,7 +7,7 @@ import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { TbCategory2, TbHexagonalPrismPlus } from "react-icons/tb";
 import { MdOutlineCategory, MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { HiOutlineFaceSmile } from "react-icons/hi2";
-import JewelleryLogo from './../../../images/JewelleryLogo.png';
+import { RiCoupon3Line } from "react-icons/ri";
 import { NavLi } from "./NavLi";
 import { SidebarDropdown } from "./SidebarDropDown";
 import { Link } from "@inertiajs/react";
@@ -57,22 +58,11 @@ export let Sidebar = () => {
             path: '/admin/categories',
             icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
         },
+
         {
             title: 'Add Category',
             path: '/admin/categories/create',
             icon: <LuPackagePlus className="text-light-gray text-xl" />,
-        },
-    ];
-    const subCategoriesList = [
-        {
-            title: 'Manage Sub Categories',
-            path: '/admin/categories',
-            icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
-        },
-        {
-            title: 'Add Sub Category',
-            path: '/admin/categories/create',
-            icon: <TbHexagonalPrismPlus className="text-light-gray text-xl" />,
         },
     ];
 
@@ -93,7 +83,7 @@ export let Sidebar = () => {
                             <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />
                             <SidebarDropdown title="Products" icon={<BsBoxes className="text-2xl text-semi-black" />} links={productList} />
                             <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} />
-                            <SidebarDropdown title="Sub Categories" icon={<MdOutlineCategory className="text-2xl text-semi-black" />} links={subCategoriesList} />
+                            <NavLi path={'/admin/discounts'} title={'Discounts'} icon={<RiCoupon3Line className="text-2xl text-semi-black" />} />
                             <NavLi path={'/admin/customers'} title={'Customers'} icon={<HiOutlineFaceSmile className="text-2xl text-semi-black" />} />
                             <NavLi path={'/admin/payment'} title={'Payment'} icon={<BsCashCoin className="text-2xl text-semi-black" />} />
                         </ul>
