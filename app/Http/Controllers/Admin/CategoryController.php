@@ -10,6 +10,10 @@ class CategoryController extends AdminController
 {
     public  function index()
     {
-        return Inertia::render('Admin/Categories');
+        return Inertia::render('Admin/Category/Index');
+    }
+    public  function create()
+    {
+        return Inertia::render('Admin/Category/Create');
     }
 }

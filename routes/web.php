@@ -32,6 +32,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/profile/password', [PasswordController::class, 'index']);
     Route::put('/admin/profile/password', [PasswordController::class, 'update']);
     Route::get('/admin/categories', [CategoryController::class, 'index']);
+    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
