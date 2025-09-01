@@ -82,7 +82,7 @@ export let Sidebar = () => {
                 </div>
                 <div className="w-full mt-2 flex flex-1 ">
                     <nav className="py-5 w-full flex h-[550px] overflow-y-auto overflow-x-hidden">
-                        <ul className="w-full flex flex-col gap-y-3 px-3">
+                        <ul className="w-full flex flex-col gap-y-0 px-3">
                             <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} />
                             <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} />
                             <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />

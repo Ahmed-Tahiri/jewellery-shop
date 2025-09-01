@@ -7,7 +7,7 @@ export let SidebarDropdown = ({ title, icon, links }) => {
 
     return (
         <li className="w-full flex flex-col items-start">
-            <button className="cursor-pointer flex items-center justify-between p-2 font-medium rounded w-full font-poppins text-semi-black hover:scale-105 transition-all ease-linear duration-200" onClick={() => setIsOpen(!isOpen)} >
+            <button className="cursor-pointer flex items-center justify-between p-3 font-medium rounded w-full font-poppins text-semi-black hover:scale-105 transition-all ease-linear duration-200" onClick={() => setIsOpen(!isOpen)} >
                 <p className="flex items-center">
                     {icon}
                     <span className="flex px-2 text-base">{title}</span>
