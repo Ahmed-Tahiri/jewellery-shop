@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
@@ -30,6 +31,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/profile/avatar', [AdminController::class, 'uploadAvatar']);
     Route::get('/admin/profile/password', [PasswordController::class, 'index']);
     Route::put('/admin/profile/password', [PasswordController::class, 'update']);
+    Route::get('/admin/categories', [CategoryController::class, 'index']);
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
