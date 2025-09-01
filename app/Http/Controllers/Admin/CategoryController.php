@@ -13,7 +13,10 @@ class CategoryController extends AdminController
 {
     public  function index()
     {
-        return Inertia::render('Admin/Category/Index');
+
+        $categories = Category::all(['id', 'name', 'is_active']);
+        $subCategories = SubCategory::all(['id', 'name', 'is_active', 'parent_id']);
+        return Inertia::render('Admin/Category/Index', ['categories' => $categories]);
     }
     public  function create()
     {
@@ -70,5 +73,12 @@ class CategoryController extends AdminController
             }
         }
         return redirect()->route('admin.categories');
+    }
+
+
+    public function statusUpdate(Request $request, Category $category)
+    {
+        $category->is_active = $request->input('is_active');
+        $category->save();
     }
 }

@@ -41,6 +41,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/products/create', [CategoryController::class, 'index'])->name('admin.products.create');
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.categories.post');
+    Route::put('/admin/categories/{category}/status', [CategoryController::class, 'statusUpdate'])->name('admin.categories.status.update');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
 });
 
