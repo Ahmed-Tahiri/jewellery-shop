@@ -5,7 +5,7 @@ import { AiOutlineProduct, AiOutlineUnorderedList } from "react-icons/ai";
 import { BsBoxes, BsCashCoin } from "react-icons/bs";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { TbCategory2, TbHexagonalPrismPlus } from "react-icons/tb";
-import { MdOutlineCategory, MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout, MdOutlineClose } from "react-icons/md";
+import { MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { HiOutlineFaceSmile } from "react-icons/hi2";
 import { RiCoupon3Line } from "react-icons/ri";
 import { NavLi } from "./NavLi";
@@ -64,6 +64,11 @@ export let Sidebar = () => {
             path: '/admin/categories/create',
             icon: <LuPackagePlus className="text-light-gray text-xl" />,
         },
+        {
+            title: 'Add Sub Category',
+            path: '/admin/subcategories/create',
+            icon: <TbHexagonalPrismPlus className="text-light-gray text-xl" />,
+        },
     ];
 
     return (
@@ -81,7 +86,6 @@ export let Sidebar = () => {
                             <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} />
                             <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} />
                             <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />
-                            <SidebarDropdown title="Products" icon={<BsBoxes className="text-2xl text-semi-black" />} links={productList} />
                             <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} />
                             <NavLi path={'/admin/discounts'} title={'Discounts'} icon={<RiCoupon3Line className="text-2xl text-semi-black" />} />
                             <NavLi path={'/admin/customers'} title={'Customers'} icon={<HiOutlineFaceSmile className="text-2xl text-semi-black" />} />
