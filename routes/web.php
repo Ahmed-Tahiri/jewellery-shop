@@ -31,8 +31,17 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/profile/avatar', [AdminController::class, 'uploadAvatar']);
     Route::get('/admin/profile/password', [PasswordController::class, 'index']);
     Route::put('/admin/profile/password', [PasswordController::class, 'update']);
-    Route::get('/admin/categories', [CategoryController::class, 'index']);
-    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::get('/admin/inventory', [CategoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/orders', [CategoryController::class, 'index'])->name('admin.orders');
+    Route::get('/admin/orders/complete', [CategoryController::class, 'index'])->name('admin.orders.complete');
+    Route::get('/admin/orders/cancel', [CategoryController::class, 'index'])->name('admin.orders.cancel');
+    Route::get('/admin/subcategories/create', [CategoryController::class, 'index'])->name('admin.subcategories.create');
+    Route::get('/admin/inventory', [CategoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/products', [CategoryController::class, 'index'])->name('admin.products');
+    Route::get('/admin/products/create', [CategoryController::class, 'index'])->name('admin.products.create');
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.categories.post');
+    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');

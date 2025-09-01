@@ -21,52 +21,52 @@ export let Sidebar = () => {
     const ordersList = [
         {
             title: 'Manage Orders',
-            path: '/admin/orders',
+            path: 'admin.orders',
             icon: <LuSquareArrowOutUpRight className="text-light-gray text-xl" />,
         },
         {
             title: 'Complete Orders',
-            path: '/admin/orders/complete',
+            path: 'admin.orders.complete',
             icon: <FaRegCalendarCheck className="text-light-gray text-xl" />,
         },
         {
             title: 'Cancel Orders',
-            path: '/admin/orders/cancel',
+            path: 'admin.orders.cancel',
             icon: <MdOutlineCancel className="text-light-gray text-xl" />,
         },
     ];
     const productList = [
         {
             title: 'Manage Products',
-            path: '/admin/products',
+            path: 'admin.products',
             icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
         },
         {
             title: 'Add Product',
-            path: '/admin/products/create',
+            path: 'admin.products.create',
             icon: <HiOutlineViewGridAdd className="text-light-gray text-xl" />,
         },
         {
             title: 'Manage Inventory',
-            path: '/admin/inventory',
+            path: 'admin.inventory',
             icon: <BsBoxes className="text-light-gray text-xl" />,
         },
     ];
     const categoryList = [
         {
             title: 'Manage Categories',
-            path: '/admin/categories',
+            path: 'admin.categories',
             icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
         },
 
         {
             title: 'Add Category',
-            path: '/admin/categories/create',
+            path: 'admin.categories.create',
             icon: <LuPackagePlus className="text-light-gray text-xl" />,
         },
         {
             title: 'Add Sub Category',
-            path: '/admin/subcategories/create',
+            path: 'admin.subcategories.create',
             icon: <TbHexagonalPrismPlus className="text-light-gray text-xl" />,
         },
     ];

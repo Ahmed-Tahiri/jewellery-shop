@@ -11,7 +11,7 @@ class SubCategory extends Model
     /** @use HasFactory<\Database\Factories\SubCategoryFactory> */
     use HasFactory;
 
-
+    protected $guarded = [];
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

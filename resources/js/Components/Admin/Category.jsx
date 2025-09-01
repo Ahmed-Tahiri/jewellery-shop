@@ -8,7 +8,7 @@ export let CategorySection = ({ categories }) => {
         <div className={`w-full flex flex-row gap-x-5  items-center justify-between border-b-[1px] border-gray-300 pb-4`}>
             <h4 className={`font-poppins text-lg font-medium text-semi-black `}>Parent Categories</h4>
 
-            <SectionLink path={'categories.create'} title={'Add Category'} />
+            <SectionLink path={'admin.categories.create'} title={'Add Category'} />
 
         </div>
         <div className="w-full flex flex-row gap-10 flex-wrap items-start justify-start">
