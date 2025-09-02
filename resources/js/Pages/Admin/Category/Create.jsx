@@ -4,16 +4,17 @@ import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../Shared/FormTextArea";
 import { SubCategory } from "../../../Components/Admin/SubCategory";
+import { CategoryImg } from "../../../Components/Admin/CategoryImg";
 
 export default function Create() {
 
 
     const [canAdd, setCanAdd] = useState(false);
-    const [subcategories, setSubcategories] = useState([]);
+    const [croppedImage, setCroppedImage] = useState(null);
     let { post, errors, data, setData, reset } = useForm({
         name: '',
         description: '',
-        sub_categories: subcategories
+        image: null
     });
 
     let inputChangeHandler = (e) => {
@@ -25,16 +26,19 @@ export default function Create() {
         );
         setCanAdd(hasAnyValue);
     }
-    useEffect(() => {
-        setData('sub_categories', subcategories);
-    }, [subcategories]);
     let formSubmitHandler = (e) => {
         e.preventDefault();
+
+        if (croppedImage) {
+            setData('image', croppedImage);
+        }
+
         post(route('admin.categories'), {
-            onSuccess: () => route('admin.categories')
+            data: data,
+            forceFormData: true,
         });
     }
-
+    useEffect(() => { setData('image', croppedImage); }, [croppedImage]);
     return (
         <section className="w-full min-h-170">
             <div className="w-full flex flex-col gap-y-8">
@@ -56,19 +60,27 @@ export default function Create() {
                     </div>
                 </div>
                 <div className="w-full flex gap-5 flex-row items-start justify-between">
-                    <div className="w-6/10 p-5 bg-white rounded shadow flex flex-col gap-y-3">
+                    <div className="w-7/10 p-5 bg-white rounded shadow flex flex-col gap-y-3">
                         <h6 className="font-poppins text-lg font-medium">Category Information</h6>
                         <div className="w-full mt-5">
-                            <form id="categoryForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3">
+                            <form encType="multipart/form-data" id="categoryForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3">
                                 <FormTextInput label={'Name *'} name={'name'} id={'name'} placeholder={'Enter Category Name'} data={data.name} inputChangeHandler={inputChangeHandler} type={'text'} error={errors.name} />
                                 <FormTextArea label={'Description *'} name={'description'} id={'description'} placeholder={'Write Description Here...'} data={data.description} inputChangeHandler={inputChangeHandler} error={errors.description} />
                             </form>
                         </div>
                     </div>
-                    <SubCategory canAdd={canAdd} subcategories={subcategories} setSubcategories={setSubcategories} />
+
+                    <CategoryImg onImageCropped={(blob) => setCroppedImage(blob)} setCanAdd={setCanAdd} />
                 </div>
             </div>
         </section>
     );
 
 }
+// const [subcategories, setSubcategories] = useState([]);
+{/* <SubCategory canAdd={canAdd} subcategories={subcategories} setSubcategories={setSubcategories} /> */ }
+// onSuccess: () => route('admin.categories')
+// useEffect(() => {
+//     setData('sub_categories', subcategories);
+// }, [subcategories]);
+// sub_categories: subcategories
