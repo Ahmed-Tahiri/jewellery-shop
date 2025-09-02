@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
+import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, useForm } from "@inertiajs/react";
-import { FormTextInput } from "../../../Shared/FormTextInput";
-import { FormTextArea } from "../../../Shared/FormTextArea";
-import { CategoryImg } from "../../../Components/Admin/CategoryImg";
+import { FormTextInput } from "../../../../Shared/FormTextInput";
+import { FormTextArea } from "../../../../Shared/FormTextArea";
+import { CategoryImg } from "../../../../Components/Admin/CategoryImg";
 
 export default function Create() {
 

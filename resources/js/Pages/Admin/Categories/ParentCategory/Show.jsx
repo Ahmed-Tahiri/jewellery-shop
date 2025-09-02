@@ -1,9 +1,9 @@
-import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
+import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, usePage } from "@inertiajs/react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Pie } from "react-chartjs-2";
-import { CategoryData } from "../../../Components/Admin/CategoryData";
+import { CategoryData } from "../../../../Components/Admin/CategoryData";
 import { format } from "date-fns";
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);

@@ -2,7 +2,7 @@ import { Link, usePage } from "@inertiajs/react";
 import { SectionLink } from "../../Shared/Admin/SectionLink";
 import { CategoryCard } from "../../Shared/Admin/CategoryCard";
 
-export let CategorySection = () => {
+export let ParentCategorySection = () => {
     let { categories } = usePage().props;
 
     return <div className="flex w-full bg-white shadow rounded flex-col gap-y-5 p-5">

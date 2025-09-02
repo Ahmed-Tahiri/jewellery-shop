@@ -19,11 +19,11 @@ class CategoryController extends Controller
             ->get(['id', 'name', 'is_active', 'image', 'created_at']);
 
         $subCategories = SubCategory::all(['id', 'name', 'is_active', 'parent_id', 'created_at']);
-        return Inertia::render('Admin/Category/Index', ['categories' => $categories]);
+        return Inertia::render('Admin/Categories/Index', ['categories' => $categories]);
     }
     public  function create()
     {
-        return Inertia::render('Admin/Category/Create');
+        return Inertia::render('Admin/Categories/ParentCategory/Create');
     }
     public  function store(Request $request)
     {
@@ -104,14 +104,14 @@ class CategoryController extends Controller
 
     public function edit(Request $request, Category $category)
     {
-        return Inertia::render('Admin/Category/Edit', ['category' => $category]);
+        return Inertia::render('Admin/Categories/ParentCategory/Edit', ['category' => $category]);
     }
 
 
     public function show(Request $request, Category $category)
     {
         $category->load(['subCategories:name,parent_id']);
-        return Inertia::render('Admin/Category/Show', ['category' => $category, 'percentage' => '33']);
+        return Inertia::render('Admin/Categories/ParentCategory/Show', ['category' => $category, 'percentage' => '33']);
     }
 
 

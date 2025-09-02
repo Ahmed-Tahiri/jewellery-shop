@@ -1,4 +1,5 @@
-import { CategorySection } from "../../../Components/Admin/Category";
+
+import { ParentCategorySection } from "../../../Components/Admin/ParentCategory";
 import { AdminSectionHeading } from "../../../Shared/Admin/AdminSectionHeading";
 
 
@@ -10,7 +11,7 @@ export default function Index() {
                 <div className="w-full flex flex-col justify-center items-start">
                     <AdminSectionHeading heading={'Categories'} />
                 </div>
-                <CategorySection />
+                <ParentCategorySection />
             </div>
         </section>
     );
