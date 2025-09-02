@@ -11,7 +11,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
 export default function Show() {
     const { category, percentage } = usePage().props;
     const createdAtFormatted = category.created_at ? format(new Date(category.created_at), "EEEE, do MMMM yyyy p") : "N/A";
-    const updatedAtFormatted = category.updated_at ? format(new Date(category.created_at), "EEEE, do MMMM yyyy p") : "N/A";
+    const updatedAtFormatted = category.updated_at ? format(new Date(category.updated_at), "EEEE, do MMMM yyyy p") : "N/A";
     let totalSales = 100 - percentage;
 
     const data = {
