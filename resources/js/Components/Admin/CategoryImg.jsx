@@ -4,8 +4,12 @@ import { useCallback, useState } from "react";
 import getCroppedImg from "../../Utilities/CropImage";
 import { usePage } from "@inertiajs/react";
 
-export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
+export let CategoryImg = ({ onImageCropped, setCanEdit }) => {
 
+    let { url } = usePage();
+    let cleanUrl = url.split('?')[0];
+    const { category } = usePage().props;
+    const [categoryImg, setCategoryImg] = useState(category?.image ?? null);
     const [imageSrc, setImageSrc] = useState(null);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
@@ -15,6 +19,7 @@ export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
     const { errors } = usePage().props;
 
     const onFileChange = async (e) => {
+
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -24,7 +29,7 @@ export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
             };
             reader.readAsDataURL(file);
         }
-        setCanAdd(true);
+        setCanEdit(true);
     };
 
     const onCropComplete = useCallback((_, croppedAreaPixels) => {
@@ -35,6 +40,7 @@ export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
         try {
             const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
             const previewUrl = URL.createObjectURL(croppedBlob);
+            setCategoryImg(null);
             setCroppedImage(previewUrl);
             setShowCropper(false);
             onImageCropped(croppedBlob);
@@ -46,7 +52,7 @@ export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
 
     return (
         <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
-            <h6 className="font-poppins text-lg font-medium">{`Add Category Image`}</h6>
+            <h6 className="font-poppins text-lg font-medium">{`${cleanUrl === '/admin/categories/create' ? 'Upload Category Image' : 'Update Category Image'}`}</h6>
             <div className="w-full flex items-center justify-center flex-col gap-y-5">
                 {errors.image && (<div><span className="text-red-700 text-sm -mt-1">{errors.image}</span></div>)}
                 {
@@ -67,13 +73,14 @@ export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
                                 </div>
                             </div>
                         </div>
-                    ) : <div className={`flex w-56 h-75 shadow-sm border-2 border-gray-300 ${croppedImage ? '' : 'p-3'} flex-col justify-between items-center`}>
+                    ) : <div className={`flex w-56 h-75 shadow-sm border-2 border-gray-300 ${croppedImage || categoryImg ? '' : 'p-3'} flex-col justify-between items-center`}>
+
                         <div className="flex w-full h-full items-center flex-col gap-y-5">
-                            {!croppedImage ?
+                            {croppedImage ? (<div className="w-full h-full bg-white"><img src={croppedImage} alt="Cropped" className="w-full h-full" /></div>) : categoryImg ? (<div className="w-full h-full bg-white"><img src={`/storage/${categoryImg}`} alt="Cropped" className="w-full h-full" /></div>) :
                                 (<>
                                     <div className="w-full flex items-center justify-center"><GiBigDiamondRing className="text-light-gray text-7xl" /></div>
                                     <p className="font-poppins text-sm text-light-gray text-center w-full">Please upload an image with a <strong>3:4 ratio </strong>(e.g., 600×800, 750×1000) in JPG, JPEG, or PNG format.</p>
-                                </>) : (<div className="w-full h-full bg-white"><img src={croppedImage} alt="Cropped" className="w-full h-full" /></div>)}
+                                </>)}
                         </div>
                     </div>
                 }
@@ -84,7 +91,9 @@ export let CategoryImg = ({ onImageCropped, setCanAdd }) => {
                             <button className="px-4 flex-1 py-2 bg-zinc text-white shadow-sm text-sm font-poppins cursor-pointer ease-linear transition-colors duration-200 hover:bg-zinc-dark" onClick={showCroppedImage}>  Save </button>
                         </div>) :
                         (<form className="w-full flex items-center justify-center">
-                            <label htmlFor="image" className="w-56 text-center shadow-sm text-sm p-2 bg-zinc text-white font-poppins cursor-pointer hover:bg-zinc-dark transition-colors ease-linear duration-200">{!croppedImage ? 'Add Category Image' : 'Change Category Image'}</label>
+                            <label htmlFor="image" className="w-56 text-center shadow-sm text-sm p-2 bg-zinc text-white font-poppins cursor-pointer hover:bg-zinc-dark transition-colors ease-linear duration-200">
+                                {!croppedImage ? `${cleanUrl === '/admin/categories/create' ? 'Add Category Image' : 'Update Category Image'}` : 'Change Category Image'}
+                            </label>
                             <input type="file" accept="image/*" name="image" id="image" className="hidden" onChange={onFileChange} />
                         </form>)
                     }

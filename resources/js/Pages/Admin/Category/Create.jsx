@@ -3,7 +3,6 @@ import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeadin
 import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../Shared/FormTextArea";
-import { SubCategory } from "../../../Components/Admin/SubCategory";
 import { CategoryImg } from "../../../Components/Admin/CategoryImg";
 
 export default function Create() {

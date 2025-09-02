@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -60,14 +61,68 @@ class CategoryController extends Controller
 
 
 
+    public function update(Request $request, Category $category)
+    {
+
+        $attrs = $request->validate(
+            [
+                'name' => ['required', 'string', 'min:3', 'max:50', "regex:/^[A-Za-z\s'-]+$/", 'unique:categories,name,' . $category->id],
+                'description' => ['required', 'string', 'min:10'],
+                'image'  => 'nullable|sometimes|file|image|max:5120'
+            ],
+            [
+                'name.required' => "Category name is required",
+                'name.min' => "Category name must be at least 3 characters long.",
+                'name.max' => "Category name cannot exceed 50 characters.",
+                'name.regex' => "Category name can only contain letters, spaces, hyphens (-), and apostrophes (').",
+                'name.unique' => "Category name already exists.",
+
+                'description.required' => "Category description is required",
+                'description.min' => "Category description  must be at least 10 characters long.",
+
+                'image.image' => 'Only image files are allowed.',
+                'image.max' => 'The image must be less than 2MB.',
+            ]
+        );
+
+
+        if ($request->hasFile('image')) {
+            if ($category->image && Storage::disk('public')->exists($category->image)) {
+                Storage::disk('public')->delete($category->image);
+            }
+            $path = $request->file('image')->store('categories_images', 'public');
+            $attrs['image'] = $path;
+        } else {
+            $attrs['image'] = $category->image;
+        }
+
+        $attrs['slug'] = Str::slug($attrs['name']);
+
+        $category->update($attrs);
+        return redirect()->route('admin.categories')->with('success', 'Category data updated successfully');
+    }
+
     public function edit(Request $request, Category $category)
     {
         return Inertia::render('Admin/Category/Edit', ['category' => $category]);
     }
+
+
     public function show(Request $request, Category $category)
     {
-        return Inertia::render('Admin/Category/Show', ['category' => $category]);
+        $category->load([
+            'subCategories:name'
+        ]);
+        return Inertia::render('Admin/Category/Show', ['category' => $category, 'percentage' => '33']);
     }
+
+
+    public function destroy(Category $category)
+    {
+        $category->delete($category->id);
+        return redirect()->route('admin.categories')->with('success', 'Category deleted successfully');
+    }
+
 
     public function statusUpdate(Request $request, Category $category)
     {

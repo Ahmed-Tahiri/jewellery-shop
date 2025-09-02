@@ -25,28 +25,39 @@ Route::post('/signin', [SessionController::class, 'store'])->middleware(['login.
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware(['auth:admin,customer']);
 
 Route::middleware(['admin'])->group(function () {
+
     Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/admin/profile', [AdminController::class, 'edit']);
     Route::put('/admin/profile', [AdminController::class, 'update']);
     Route::post('/admin/profile/avatar', [AdminController::class, 'uploadAvatar']);
+
     Route::get('/admin/profile/password', [PasswordController::class, 'index']);
     Route::put('/admin/profile/password', [PasswordController::class, 'update']);
+
     Route::get('/admin/inventory', [CategoryController::class, 'index'])->name('admin.inventory');
+
     Route::get('/admin/orders', [CategoryController::class, 'index'])->name('admin.orders');
     Route::get('/admin/orders/complete', [CategoryController::class, 'index'])->name('admin.orders.complete');
     Route::get('/admin/orders/cancel', [CategoryController::class, 'index'])->name('admin.orders.cancel');
-    Route::get('/admin/subcategories/create', [CategoryController::class, 'index'])->name('admin.subcategories.create');
+
     Route::get('/admin/inventory', [CategoryController::class, 'index'])->name('admin.inventory');
+
     Route::get('/admin/products', [CategoryController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/create', [CategoryController::class, 'index'])->name('admin.products.create');
+
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+    Route::post('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update.post');
+
     Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.categories.post');
-    Route::post('/admin/categories/image/upload', [CategoryController::class, 'imgUpload'])->name('admin.categories.image.post');
-    Route::put('/admin/categories/{category}/status', [CategoryController::class, 'statusUpdate'])->name('admin.categories.status.update');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
     Route::get('/admin/categories/{category}/show', [CategoryController::class, 'show'])->name('admin.categories.show');
-    Route::get('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+    Route::patch('/admin/categories/{category}/status', [CategoryController::class, 'statusUpdate'])->name('admin.categories.status.update');
+    Route::post('/admin/categories/image/upload', [CategoryController::class, 'imgUpload'])->name('admin.categories.image.post');
+
+    Route::get('/admin/subcategories/create', [CategoryController::class, 'index'])->name('admin.subcategories.create');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');

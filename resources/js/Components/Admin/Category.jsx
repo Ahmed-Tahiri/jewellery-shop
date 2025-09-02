@@ -20,6 +20,7 @@ export let CategorySection = () => {
                             <th className="px-3 py-2 border-x-1 border-zinc-dark w-16">Id</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Image</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Name</th>
+                            <th className="px-3 py-2 border-x-1 border-zinc-dark">Total Sales</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Total Sub Categories</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Added On</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Is Active</th>
