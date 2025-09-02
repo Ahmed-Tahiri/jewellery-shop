@@ -4,12 +4,14 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Pie } from "react-chartjs-2";
 import { CategoryData } from "../../../Components/Admin/CategoryData";
+import { format } from "date-fns";
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
 
 export default function Show() {
     const { category, percentage } = usePage().props;
-
+    const createdAtFormatted = category.created_at ? format(new Date(category.created_at), "EEEE, do MMMM yyyy p") : "N/A";
+    const updatedAtFormatted = category.updated_at ? format(new Date(category.created_at), "EEEE, do MMMM yyyy p") : "N/A";
     let totalSales = 100 - percentage;
 
     const data = {
@@ -95,7 +97,9 @@ export default function Show() {
                                     <CategoryData heading={'Name:'} data={category.name} />
                                     <CategoryData heading={'Description:'} data={category.description} />
                                     <CategoryData heading={'Slug:'} data={category.slug} />
-                                    <CategoryData heading={'Sub Categories:'} data={category.slug} />
+                                    <CategoryData heading={'Sub categories:'} data={category.sub_categories} />
+                                    <CategoryData heading={'Created at:'} data={createdAtFormatted} />
+                                    <CategoryData heading={'Last update at:'} data={updatedAtFormatted} />
                                 </div>
                             </div>
                             <div className="w-full flex gap-x-2 justify-end">

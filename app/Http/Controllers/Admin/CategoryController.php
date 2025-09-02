@@ -110,9 +110,7 @@ class CategoryController extends Controller
 
     public function show(Request $request, Category $category)
     {
-        $category->load([
-            'subCategories:name'
-        ]);
+        $category->load(['subCategories:name,parent_id']);
         return Inertia::render('Admin/Category/Show', ['category' => $category, 'percentage' => '33']);
     }
 
