@@ -68,6 +68,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.post');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
