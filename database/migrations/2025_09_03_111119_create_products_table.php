@@ -41,7 +41,7 @@ return new class extends Migration
             // Sample: 5
             $table->integer('stock')->default(0);
 
-            // Sample: 7 (days)
+            // Sample: Estimated time for delivery(7 days)
             $table->integer('lead_time_days')->default(0);
 
             // Physical & jewellery specifics
