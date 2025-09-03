@@ -28,14 +28,8 @@ return new class extends Migration
             // Sample: long product description, care instructions, story, HTML allowed
             $table->longText('long_description')->nullable();
 
-            // Single-brand store: keep brand static, but field left for clarity
-            // Sample: "MyBrand"
-            $table->string('brand')->nullable();
-
-            // Commerce
             // Sample: 1299.00
             $table->decimal('price', 12, 2)->nullable();
-
 
             // Sample: true
             $table->boolean('is_published')->default(false);
@@ -68,11 +62,7 @@ return new class extends Migration
 
             // Dimensions in mm (JSON encoded recommended). Sample: {"width":2.5,"height":1.8}
             $table->json('dimensions_mm')->nullable()->comment('Sample: {"width":2.5,"height":1.8} (mm)');
-
-
             $table->boolean('is_customizable')->default(false);
-
-
 
             // Admin/operational
             // Sample: 199.50 (your internal cost)
@@ -80,7 +70,6 @@ return new class extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-
             // Indexes for common filters
             $table->index(['is_published', 'status']);
             $table->index(['price']);
