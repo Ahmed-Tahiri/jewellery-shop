@@ -4,9 +4,11 @@ namespace App\Models\Product;
 
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Container\Attributes\Tag;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
@@ -14,7 +16,6 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
     protected $guarded = [];
-
 
 
     public function variants(): HasMany
@@ -29,6 +30,11 @@ class Product extends Model
     {
         return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'product_tag');
+    }
+
     public function getDefaultVariantAttribute()
     {
         return $this->variants()->where('is_default', true)->first();
