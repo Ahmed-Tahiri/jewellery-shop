@@ -4,15 +4,19 @@ import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../Shared/FormTextArea";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
+import { SecondaryImgCard } from "../../../Shared/Admin/SecondaryImageCard";
+import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
 
 export default function Create() {
 
     const [canAdd, setCanAdd] = useState(false);
+    const [secondaryImgs, setSecondaryImgs] = useState([]);
     const [croppedImage, setCroppedImage] = useState(null);
     let { post, errors, data, setData, reset } = useForm({
         name: '',
         description: '',
-        primary_image: null
+        primary_image: null,
+        secondaryImgs: secondaryImgs
     });
 
     let inputChangeHandler = (e) => {
@@ -37,7 +41,7 @@ export default function Create() {
         });
     }
     useEffect(() => { setData('primary_image', croppedImage); }, [croppedImage]);
-
+    useEffect(() => { setData('secondaryImgs', secondaryImgs); console.log(secondaryImgs) }, [secondaryImgs])
     return (
         <section className="w-full min-h-170">
             <div className="w-full flex flex-col gap-y-8">
@@ -68,7 +72,17 @@ export default function Create() {
                             </form>
                         </div>
                     </div>
-                    <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
+                    <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
+                        <h6 className="font-poppins text-lg font-medium">Product Images</h6>
+                        <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
+                        <div className="p-2 flex flex-row items-center justify-start">
+                            <SecondaryImgList
+                                setSecondaryImgs={setSecondaryImgs}
+                                setCanEdit={setCanAdd}
+                                initialImages={[]}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
