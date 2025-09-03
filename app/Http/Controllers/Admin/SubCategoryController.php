@@ -29,6 +29,7 @@ class SubCategoryController extends Controller
             'subcategories.*.name' => ['required_with:subcategories', 'string', 'min:3', 'max:50', "regex:/^[A-Za-z\s'-]+$/",],
             'subcategories.*.description' => ['required_with:subcategories', 'string', 'min:10',],
         ], [
+            'parent.required' => 'Please select parent category',
             'subcategories.*.name.required_with' => "Subcategory name is required.",
             'subcategories.*.name.min' => "Subcategory name must be at least 3 characters long.",
             'subcategories.*.name.max' => "Subcategory name cannot exceed 50 characters.",
