@@ -83,9 +83,17 @@ export default function Create() {
     };
 
     let inputChangeHandler = (name, value) => {
-        if (name === "name") setSubName(value);
-        if (name === "description") setSubDescription(value);
-        const hasAnyValue = [subName, subDescription].some(
+        let updatedName = subName;
+        let updatedDescription = subDescription;
+        if (name === "name") {
+            updatedName = value;
+            setSubName(value);
+        }
+        if (name === "description") {
+            updatedDescription = value;
+            setSubDescription(value);
+        }
+        const hasAnyValue = [updatedName, updatedDescription].some(
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
