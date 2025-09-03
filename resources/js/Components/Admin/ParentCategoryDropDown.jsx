@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa6";
 
-export let ParenCategoryDropDown = ({ categories, setParent }) => {
+export let ParenCategoryDropDown = ({ categories, setParent, existingParent = null }) => {
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef(null);
 
 
 
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState(existingParent ?? null);
     useEffect(() => {
         function handleDocClick(e) {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {

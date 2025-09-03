@@ -1,79 +1,16 @@
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, usePage } from "@inertiajs/react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import { Pie } from "react-chartjs-2";
 import { CategoryData } from "../../../../Components/Admin/CategoryData";
 import { format } from "date-fns";
+import { PieChart } from "../../../../Shared/Admin/PieChart";
 
-ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
+
 
 export default function Show() {
     const { category, percentage } = usePage().props;
     const createdAtFormatted = category.created_at ? format(new Date(category.created_at), "EEEE, do MMMM yyyy p") : "N/A";
     const updatedAtFormatted = category.updated_at ? format(new Date(category.updated_at), "EEEE, do MMMM yyyy p") : "N/A";
-    let totalSales = 100 - percentage;
 
-    const data = {
-        labels: ["Other Sales", `Sales from ${category.name}`],
-        datasets: [
-            {
-                label: "Sales Distribution",
-                data: [totalSales, percentage],
-                backgroundColor: [
-                    "#0f343d",
-                    "#ffa12d",
-                ],
-                borderColor: [
-                    "#08232a",
-                    "#e88f23",
-                ],
-                borderWidth: 1,
-            },
-        ],
-    };
-
-    const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            title: {
-                display: true,
-                text: `Sales Distribution - ${category.name}`,
-                font: {
-                    size: 18,
-                    family: "Poppins, sans-serif",
-                    weight: '600'
-                },
-                padding: {
-                    top: 10,
-                    bottom: 20,
-                },
-            },
-            legend: {
-                position: "bottom",
-                labels: {
-                    padding: 15
-                },
-            },
-            tooltip: {
-                callbacks: {
-                    label: function (context) {
-                        return `${context.label}: ${context.raw}% Sales`;
-                    },
-                },
-            },
-            datalabels: {
-                formatter: (value) => value + "%",
-                color: "#fff",
-                font: {
-                    weight: 500,
-                    size: 16,
-                    family: "Poppins, sans-serif",
-                },
-            },
-        },
-    };
 
     return (
         <section className="w-full min-h-170">
@@ -111,7 +48,7 @@ export default function Show() {
 
                     <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-3">
                         <div className="w-full h-80">
-                            <Pie data={data} options={options} />
+                            <PieChart percentage={percentage} category={category} />
                         </div>
                     </div>
                 </div>

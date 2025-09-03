@@ -48,12 +48,8 @@ export default function Create() {
         } else if (!/^[A-Za-z\s'-]+$/.test(name)) {
             errorsObj.name = "Subcategory name can only contain letters, spaces, hyphens (-), and apostrophes (').";
         } else if (
-            subcategories.some(
-                (cat) => cat.name.toLowerCase() === name.toLowerCase()
-            )
-        ) {
-            errorsObj.name = "This subcategory name already exists. Please choose a unique name.";
-        }
+            subcategories.some((cat) => cat.name.toLowerCase() === name.toLowerCase())
+        ) { errorsObj.name = "This subcategory name already exists. Please choose a unique name."; }
 
         if (!description) {
             errorsObj.description = "Description is required.";
@@ -141,4 +137,3 @@ export default function Create() {
         </div>
     </section>
 }
-

@@ -1,4 +1,4 @@
-import { Link, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { SectionLink } from "../../Shared/Admin/SectionLink";
 import { SubCategoryCard } from "../../Shared/Admin/SubCategoryCard";
 
@@ -35,6 +35,5 @@ export let SubCategorySection = () => {
                 </table>
             </div>
         </div>
-
     </div>;
 }

@@ -76,10 +76,3 @@ export default function Create() {
     );
 
 }
-// const [subcategories, setSubcategories] = useState([]);
-{/* <SubCategory canAdd={canAdd} subcategories={subcategories} setSubcategories={setSubcategories} /> */ }
-// onSuccess: () => route('admin.categories')
-// useEffect(() => {
-//     setData('sub_categories', subcategories);
-// }, [subcategories]);
-// sub_categories: subcategories

@@ -46,10 +46,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/products', [CategoryController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/create', [CategoryController::class, 'index'])->name('admin.products.create');
 
+
+
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+
     Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
     Route::post('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update.post');
-
     Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.categories.post');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
@@ -61,6 +63,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/subcategories/create', [SubCategoryController::class, 'create'])->name('admin.subcategories.create');
     Route::post('/admin/subcategories', [SubCategoryController::class, 'store'])->name('admin.subcategories.post');
     Route::patch('/admin/subcategories/{subcategory}/status', [SubCategoryController::class, 'statusUpdate'])->name('admin.subcategories.status.update');
+    Route::get('/admin/subcategories/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('admin.subcategories.edit');
+    Route::get('/admin/subcategories/{subcategory}/show', [SubCategoryController::class, 'show'])->name('admin.subcategories.show');
+    Route::put('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('admin.subcategories.update');
+    Route::delete('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
