@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            // FK to products
-            $table->unsignedBigInteger('product_id')->index();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
 
             // Sample: "RNG-001-18K-US6"
             $table->string('sku', 64)->unique();
@@ -44,11 +42,6 @@ return new class extends Migration
             $table->boolean('is_default')->default(false);
 
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
-
             $table->index(['product_id', 'ring_size']);
         });
     }

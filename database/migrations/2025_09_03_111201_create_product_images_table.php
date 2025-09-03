@@ -13,25 +13,12 @@ return new class extends Migration
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            // FK to product and optional variant
-            $table->unsignedBigInteger('product_id')->index();
-            $table->unsignedBigInteger('variant_id')->nullable()->index();
-
-            // File URL or storage path. Sample: "storage/products/rng-001/1.jpg"
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('variant_id')->constrained('product_variants')->cascadeOnDelete();
             $table->string('url');
-
-            // Alt text for accessibility. Sample: "Classic solitaire ring - front view"
             $table->string('alt_text')->nullable();
-
-            // Order position in gallery. Sample: 0 for primary image
-            $table->unsignedSmallInteger('position')->default(0);
-
+            $table->unsignedSmallInteger('position')->default(0); // Order position in gallery. Sample: 0 for primary image
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('variant_id')->references('id')->on('product_variants')->onDelete('cascade');
-
             $table->index(['product_id', 'position']);
         });
     }

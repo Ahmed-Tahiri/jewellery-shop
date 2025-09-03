@@ -21,7 +21,7 @@ return new class extends Migration
 
             // Sample: "Classic Solitaire Ring"
             $table->string('name', 255);
-
+            $table->foreignId('subcategory_id')->constrained('sub_categories')->cascadeOnDelete();
             // Sample: "A classic 0.50ct solitaire diamond ring..." (short text)
             $table->text('short_description')->nullable();
 
