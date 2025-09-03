@@ -1,0 +1,53 @@
+import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
+import { Link, usePage } from "@inertiajs/react";
+import { CategoryData } from "../../../../Components/Admin/CategoryData";
+import { format } from "date-fns";
+import { PieChart } from "../../../../Shared/Admin/PieChart";
+
+
+export default function Show() {
+    const { subcategory, percentage } = usePage().props;
+    const createdAtFormatted = subcategory.created_at ? format(new Date(subcategory.created_at), "EEEE, do MMMM yyyy p") : "N/A";
+    const updatedAtFormatted = subcategory.updated_at ? format(new Date(subcategory.updated_at), "EEEE, do MMMM yyyy p") : "N/A";
+
+    return (
+        <section className="w-full min-h-170">
+            <div className="w-full flex flex-col gap-y-8">
+                <div className="w-full flex flex-row justify-between items-center">
+                    <AdminSectionSubHeading heading={"Sub Category Information"} />
+                    <div className="flex flex-row items-center justify-end">
+                        <Link className="flex items-center justify-center font-poppins text-base bg-light-gray text-white p-2 min-w-24" href={route("admin.categories")} >Back</Link>
+                    </div>
+                </div>
+
+                <div className="w-full flex gap-5 flex-row items-start justify-between">
+                    <div className="w-7/10 p-5 bg-white rounded shadow flex flex-col gap-y-3">
+                        <div className="w-full flex flex-col items-start gap-y-4">
+                            <h2 className="font-poppins w-full text-xl font-medium text-semi-black pb-3 border-b-[1px] border-gray-300">Overview</h2>
+                            <div className="w-full flex flex-row gap-x-5 justify-between items-center border-1 border-gray-300 rounded p-2 ">
+                                <div className="flex flex-col w-full  py-2 px-3 gap-y-2">
+                                    <CategoryData heading={'Name:'} data={subcategory.name} />
+                                    <CategoryData heading={'Description:'} data={subcategory.description} />
+                                    <CategoryData heading={'Slug:'} data={subcategory.slug} />
+                                    <CategoryData heading={'Sub categories:'} data={subcategory.sub_categories} />
+                                    <CategoryData heading={'Created at:'} data={createdAtFormatted} />
+                                    <CategoryData heading={'Last update at:'} data={updatedAtFormatted} />
+                                </div>
+                            </div>
+                            <div className="w-full flex gap-x-2 justify-end">
+                                <Link href={route('admin.subcategories.edit', subcategory.id)} className="min-w-25  font-poppins p-2 bg-zinc text-white text-center shadow-sm cursor-pointer  hover:bg-zinc-dark transition-colors ease-linear duration-200">Edit</Link>
+                                <Link method="delete" as={'button'} href={route('admin.subcategories.destroy', subcategory.id)} className="min-w-25  font-poppins p-2 bg-mustard text-white hover:bg-mustard-dark text-center shadow-sm cursor-pointer transition-colors ease-linear duration-200">Delete</Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-3">
+                        <div className="w-full h-80">
+                            <PieChart percentage={percentage} category={subcategory} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

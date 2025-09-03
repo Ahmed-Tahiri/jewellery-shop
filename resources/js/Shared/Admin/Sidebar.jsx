@@ -5,7 +5,7 @@ import { AiOutlineProduct, AiOutlineUnorderedList } from "react-icons/ai";
 import { BsBoxes, BsCashCoin } from "react-icons/bs";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { TbCategory2, TbHexagonalPrismPlus } from "react-icons/tb";
-import { MdOutlineCategory, MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout, MdOutlineClose } from "react-icons/md";
+import { MdOutlineSpaceDashboard, MdOutlineCancel, MdOutlineLogout, MdOutlineClose } from "react-icons/md";
 import { HiOutlineFaceSmile } from "react-icons/hi2";
 import { RiCoupon3Line } from "react-icons/ri";
 import { NavLi } from "./NavLi";
@@ -21,48 +21,53 @@ export let Sidebar = () => {
     const ordersList = [
         {
             title: 'Manage Orders',
-            path: '/admin/orders',
+            path: 'admin.orders',
             icon: <LuSquareArrowOutUpRight className="text-light-gray text-xl" />,
         },
         {
             title: 'Complete Orders',
-            path: '/admin/orders/complete',
+            path: 'admin.orders.complete',
             icon: <FaRegCalendarCheck className="text-light-gray text-xl" />,
         },
         {
             title: 'Cancel Orders',
-            path: '/admin/orders/cancel',
+            path: 'admin.orders.cancel',
             icon: <MdOutlineCancel className="text-light-gray text-xl" />,
         },
     ];
     const productList = [
         {
             title: 'Manage Products',
-            path: '/admin/products',
+            path: 'admin.products',
             icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
         },
         {
             title: 'Add Product',
-            path: '/admin/products/create',
+            path: 'admin.products.create',
             icon: <HiOutlineViewGridAdd className="text-light-gray text-xl" />,
         },
         {
             title: 'Manage Inventory',
-            path: '/admin/inventory',
+            path: 'admin.inventory',
             icon: <BsBoxes className="text-light-gray text-xl" />,
         },
     ];
     const categoryList = [
         {
             title: 'Manage Categories',
-            path: '/admin/categories',
+            path: 'admin.categories',
             icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
         },
 
         {
             title: 'Add Category',
-            path: '/admin/categories/create',
+            path: 'admin.categories.create',
             icon: <LuPackagePlus className="text-light-gray text-xl" />,
+        },
+        {
+            title: 'Add Sub Category',
+            path: 'admin.subcategories.create',
+            icon: <TbHexagonalPrismPlus className="text-light-gray text-xl" />,
         },
     ];
 
@@ -77,11 +82,10 @@ export let Sidebar = () => {
                 </div>
                 <div className="w-full mt-2 flex flex-1 ">
                     <nav className="py-5 w-full flex h-[550px] overflow-y-auto overflow-x-hidden">
-                        <ul className="w-full flex flex-col gap-y-3 px-3">
+                        <ul className="w-full flex flex-col gap-y-0 px-3">
                             <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} />
                             <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} />
                             <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />
-                            <SidebarDropdown title="Products" icon={<BsBoxes className="text-2xl text-semi-black" />} links={productList} />
                             <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} />
                             <NavLi path={'/admin/discounts'} title={'Discounts'} icon={<RiCoupon3Line className="text-2xl text-semi-black" />} />
                             <NavLi path={'/admin/customers'} title={'Customers'} icon={<HiOutlineFaceSmile className="text-2xl text-semi-black" />} />
