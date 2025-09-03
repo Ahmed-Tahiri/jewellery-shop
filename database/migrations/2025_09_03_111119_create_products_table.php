@@ -36,8 +36,6 @@ return new class extends Migration
             // Sample: 1299.00
             $table->decimal('price', 12, 2)->nullable();
 
-            // Sample: 1499.00
-            $table->decimal('compare_at_price', 12, 2)->nullable();
 
             // Sample: true
             $table->boolean('is_published')->default(false);
