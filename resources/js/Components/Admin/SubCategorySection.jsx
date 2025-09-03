@@ -1,9 +1,10 @@
 import { Link, usePage } from "@inertiajs/react";
 import { SectionLink } from "../../Shared/Admin/SectionLink";
-import { CategoryCard } from "../../Shared/Admin/CategoryCard";
+import { SubCategoryCard } from "../../Shared/Admin/SubCategoryCard";
+
 
 export let SubCategorySection = () => {
-    let { subcategories } = usePage().props;
+    const { subcategories } = usePage().props;
 
     return <div className="flex w-full bg-white shadow rounded flex-col gap-y-5 p-5">
 
@@ -27,9 +28,9 @@ export let SubCategorySection = () => {
                         </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-300 shadow">
-                        {/* {subcategories.map((c, idx) => (
-                            <CategoryCard key={c.id} category={c} index={idx} />
-                        ))} */}
+                        {subcategories.map((c, idx) => (
+                            <SubCategoryCard key={c.id} category={c} index={idx} />
+                        ))}
                     </tbody>
                 </table>
             </div>

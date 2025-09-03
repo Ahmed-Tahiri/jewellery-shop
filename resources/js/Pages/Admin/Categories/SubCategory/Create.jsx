@@ -4,7 +4,7 @@ import { Link, useForm, usePage } from "@inertiajs/react";
 import { FormTextInput } from "../../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../../Shared/FormTextArea";
 import { ParenCategoryDropDown } from "../../../../Components/Admin/ParentCategoryDropDown";
-import { SubCategoryCard } from "../../../../Components/Admin/SubCategoryCard";
+import { SubCategoryMiniCard } from "../../../../Components/Admin/SubCategoryMiniCard";
 
 export default function Create() {
     const [canAdd, setCanAdd] = useState(false);
@@ -115,7 +115,7 @@ export default function Create() {
                     <h6 className="font-poppins text-lg font-medium text-semi-black"> Sub Category Information
                     </h6>
                     <div className="w-full mt-5">
-                        <div className="w-full flex flex-wrap justify-start items-center flex-row gap-5"> {subcategories.map((sub, i) => (<SubCategoryCard key={sub.id} sub={sub} subCategoryRemoveHandler={subCategoryRemoveHandler} />))} </div>
+                        <div className="w-full flex flex-wrap justify-start items-center flex-row gap-5"> {subcategories.map((sub, i) => (<SubCategoryMiniCard key={sub.id} sub={sub} subCategoryRemoveHandler={subCategoryRemoveHandler} />))} </div>
 
                         <form id="categoryForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3" >
 

@@ -1,5 +1,5 @@
 import { MdOutlineCancel } from "react-icons/md";
-export let SubCategoryCard = ({ sub, subCategoryRemoveHandler }) => {
+export let SubCategoryMiniCard = ({ sub, subCategoryRemoveHandler }) => {
 
     return <div className="relative">
         <p className="p-2 bg-yellow-400/40 text-amber-900 font-poppins text-sm shadow-xs">{sub.name}</p>

@@ -60,6 +60,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/subcategories/create', [SubCategoryController::class, 'create'])->name('admin.subcategories.create');
     Route::post('/admin/subcategories', [SubCategoryController::class, 'store'])->name('admin.subcategories.post');
+    Route::patch('/admin/subcategories/{subcategory}/status', [SubCategoryController::class, 'statusUpdate'])->name('admin.subcategories.status.update');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');

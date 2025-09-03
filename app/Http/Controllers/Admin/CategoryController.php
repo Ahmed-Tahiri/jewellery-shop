@@ -18,8 +18,8 @@ class CategoryController extends Controller
         $categories = Category::withCount('subCategories')
             ->get(['id', 'name', 'is_active', 'image', 'created_at']);
 
-        $subCategories = SubCategory::all(['id', 'name', 'is_active', 'parent_id', 'created_at']);
-        return Inertia::render('Admin/Categories/Index', ['categories' => $categories]);
+        $subCategories = SubCategory::with('category:id,name')->get(['id', 'name', 'is_active', 'parent_id', 'created_at']);
+        return Inertia::render('Admin/Categories/Index', ['categories' => $categories, 'subcategories' => $subCategories]);
     }
     public  function create()
     {

@@ -63,4 +63,9 @@ class SubCategoryController extends Controller
 
         return redirect()->route('admin.categories')->with('success', 'Subcategories added successfully.');
     }
+    public function statusUpdate(Request $request, SubCategory $subcategory)
+    {
+        $subcategory->is_active = $request->input('is_active');
+        $subcategory->save();
+    }
 }
