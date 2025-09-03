@@ -3,37 +3,64 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
 
-class SubCategoryController extends Controller {}
+class SubCategoryController extends Controller
+{
 
 
+    public function create(Request $request)
+    {
+        $categories = Category::all();
+        return Inertia::render('Admin/Categories/SubCategory/Create', ['categories' => $categories]);
+    }
 
-    //   $subAttrs = $request->validate([
-    //         'sub_categories' => ['array', 'nullable'],
-    //         'sub_categories.*.name' => ['required_with:sub_categories', 'string', 'min:3', 'max:50', "regex:/^[A-Za-z\s'-]+$/"],
-    //         'sub_categories.*.description' => ['required_with:sub_categories', 'string', 'min:10'],
-    //     ], [
-    //         'sub_categories.*.name.required_with' => "Subcategory name is required.",
-    //         'sub_categories.*.name.min' => "Subcategory name must be at least 3 characters long.",
-    //         'sub_categories.*.name.max' => "Subcategory name cannot exceed 50 characters.",
-    //         'sub_categories.*.name.regex' => "Subcategory name can only contain letters, spaces, hyphens (-), and apostrophes (').",
+    public function store(Request $request)
+    {
 
-    //         'sub_categories.*.description.required_with' => "Subcategory description is required.",
-    //         'sub_categories.*.description.min' => "Subcategory description must be at least 10 characters long.",
-    //     ]);
+        $validated = $request->validate([
+            'parent' => ['required', 'exists:categories,id'],
+            'subcategories' => ['array', 'nullable'],
+            'subcategories.*.name' => ['required_with:subcategories', 'string', 'min:3', 'max:50', "regex:/^[A-Za-z\s'-]+$/",],
+            'subcategories.*.description' => ['required_with:subcategories', 'string', 'min:10',],
+        ], [
+            'subcategories.*.name.required_with' => "Subcategory name is required.",
+            'subcategories.*.name.min' => "Subcategory name must be at least 3 characters long.",
+            'subcategories.*.name.max' => "Subcategory name cannot exceed 50 characters.",
+            'subcategories.*.name.regex' => "Subcategory name can only contain letters, spaces, hyphens (-), and apostrophes (').",
 
-    
-        // if (!empty($subAttrs) && $subAttrs) {
-        //     $subAttrs = $request->input('sub_categories');
-        //     foreach ($subAttrs as $subCat) {
-        //         unset($subCat['id']);
-        //         $newData = [
-        //             'name' => $subCat['name'],
-        //             'description' => $subCat['description'],
-        //             'slug' => Str::slug($subCat['name']),
-        //             'parent_id' => $category->id,
-        //         ];
-        //         SubCategory::create($newData);
-        //     }
-        // }
+            'subcategories.*.description.required_with' => "Subcategory description is required.",
+            'subcategories.*.description.min' => "Subcategory description must be at least 10 characters long.",
+        ]);
+
+
+        if (!empty($validated['subcategories'])) {
+            foreach ($validated['subcategories'] as $sub) {
+                $exists = SubCategory::where('parent_id', $validated['parent'])
+                    ->whereRaw('LOWER(name) = ?', [strtolower($sub['name'])])
+                    ->exists();
+
+                if ($exists) {
+                    return back()->withErrors([
+                        'subcategories' => "The subcategory '{$sub['name']}' already exists under this parent category."
+                    ])->withInput();
+                }
+            }
+        }
+
+        foreach ($validated['subcategories'] as $sub) {
+            SubCategory::create([
+                'slug' => Str::slug($sub['name']),
+                'parent_id' => $validated['parent'],
+                'name' => $sub['name'],
+                'description' => $sub['description'],
+            ]);
+        }
+
+        return redirect()->route('admin.categories')->with('success', 'Subcategories added successfully.');
+    }
+}

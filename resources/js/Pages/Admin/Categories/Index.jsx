@@ -1,5 +1,6 @@
 
-import { ParentCategorySection } from "../../../Components/Admin/ParentCategory";
+import { ParentCategorySection } from "../../../Components/Admin/ParentCategorySection";
+import { SubCategorySection } from "../../../Components/Admin/SubCategorySection";
 import { AdminSectionHeading } from "../../../Shared/Admin/AdminSectionHeading";
 
 
@@ -12,6 +13,7 @@ export default function Index() {
                     <AdminSectionHeading heading={'Categories'} />
                 </div>
                 <ParentCategorySection />
+                <SubCategorySection />
             </div>
         </section>
     );

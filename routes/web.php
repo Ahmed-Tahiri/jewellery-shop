@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PasswordController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
 use App\Http\Controllers\Customer\CustomerController;
@@ -57,7 +58,8 @@ Route::middleware(['admin'])->group(function () {
     Route::patch('/admin/categories/{category}/status', [CategoryController::class, 'statusUpdate'])->name('admin.categories.status.update');
     Route::post('/admin/categories/image/upload', [CategoryController::class, 'imgUpload'])->name('admin.categories.image.post');
 
-    Route::get('/admin/subcategories/create', [CategoryController::class, 'index'])->name('admin.subcategories.create');
+    Route::get('/admin/subcategories/create', [SubCategoryController::class, 'create'])->name('admin.subcategories.create');
+    Route::post('/admin/subcategories', [SubCategoryController::class, 'store'])->name('admin.subcategories.post');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
