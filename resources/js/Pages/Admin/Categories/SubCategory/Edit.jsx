@@ -73,7 +73,7 @@ export default function Edit() {
                     <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-3 min-h-111">
                         <h6 className="font-poppins text-lg font-medium text-semi-black"> Select Parent Category  </h6>
                         <div className="w-full mt-5">
-                            <ParenCategoryDropDown categories={categories} setParent={setParent} existingParent={existingParent} />
+                            <ParenCategoryDropDown categories={categories} setParent={setParent} existingParent={existingParent} setCanEdit={setCanEdit} />
                         </div>
                     </div>
                 </div>

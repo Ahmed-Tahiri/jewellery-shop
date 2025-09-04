@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa6";
 
-export let ParenCategoryDropDown = ({ categories, setParent, existingParent = null }) => {
+export let ParenCategoryDropDown = ({ categories, setParent, existingParent = null, setCanEdit }) => {
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef(null);
 
@@ -22,6 +22,7 @@ export let ParenCategoryDropDown = ({ categories, setParent, existingParent = nu
         setSelected(opt);
         setParent(opt.id);
         setIsOpen(false);
+        setCanEdit(true);
     }
 
 

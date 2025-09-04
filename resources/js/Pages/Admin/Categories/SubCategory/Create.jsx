@@ -134,7 +134,7 @@ export default function Create() {
 
                     <div className="w-full mt-5 flex flex-col items-start">
                         {errors.parent && (<span className="text-red-700 text-sm mb-2">{errors.parent}</span>)}
-                        <ParenCategoryDropDown categories={categories} setParent={setParent} />
+                        <ParenCategoryDropDown categories={categories} setParent={setParent} setCanEdit={setCanAdd} />
                     </div>
                 </div>
             </div>
