@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
 import { Link, useForm } from "@inertiajs/react";
-import { FormTextInput } from "../../../Shared/FormTextInput";
-import { FormTextArea } from "../../../Shared/FormTextArea";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
 import { ProductForm } from "../../../Components/Admin/ProductForm";
@@ -13,9 +11,24 @@ export default function Create() {
     const [secondaryUploadError, setSecondaryUploadError] = useState(false);
     const [secondaryImgs, setSecondaryImgs] = useState([]);
     const [croppedImage, setCroppedImage] = useState(null);
+
     let { post, errors, data, setData, reset } = useForm({
         name: '',
-        description: '',
+        sku: '',
+        price: '',
+        metal_type: '',
+        metal_purity: '',
+        short_description: '',
+        long_description: '',
+        subcategory_id: '',
+        status: '',
+        stock: '',
+        color_tone: '',
+        finish: '',
+        weight_grams: '',
+        dimensions: '',
+        lead_time_days: '',
+        cost: '',
         primary_image: null,
         secondary_images: secondaryImgs
     });

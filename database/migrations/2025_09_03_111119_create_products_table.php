@@ -46,16 +46,10 @@ return new class extends Migration
 
             // Physical & jewellery specifics
             // Sample: "Gold" (Gold, Platinum, Silver, Stainless steel...)
-            $table->string('metal_type', 50)->nullable()->index();
-
-            // Sample: "18K" or "14K" or "925"
-            $table->string('metal_purity', 20)->nullable()->index();
-
-            // Sample: "polished" (polished, matte, hammered)
-            $table->string('finish', 50)->nullable();
-
-            // Sample: "yellow" (yellow, white, rose)
-            $table->string('color_tone', 20)->nullable();
+            $table->foreignId('metal_id')->nullable()->constrained('metals')->nullOnDelete();
+            $table->foreignId('metal_purity_id')->nullable()->constrained('metal_purities')->nullOnDelete();
+            $table->foreignId('finish_id')->nullable()->constrained('product_finishes')->nullOnDelete();
+            $table->foreignId('color_id')->nullable()->constrained('color_tones')->nullOnDelete();
 
             // Total product weight in grams. Sample: 3.45
             $table->decimal('weight_grams', 8, 3)->nullable();
