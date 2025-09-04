@@ -14,6 +14,7 @@ export let CategoryImg = ({ onImageCropped, setCanEdit }) => {
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
     const [showCropper, setShowCropper] = useState(false);
+    const [categoryImgError, setCategoryImgError] = useState(false);
     const [zoom, setZoom] = useState(1);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const { errors } = usePage().props;
@@ -21,6 +22,12 @@ export let CategoryImg = ({ onImageCropped, setCanEdit }) => {
     const onFileChange = async (e) => {
 
         const file = e.target.files[0];
+        const maxSize = 3 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setCategoryImgError(true);
+            e.target.value = "";
+            return;
+        }
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
@@ -54,7 +61,10 @@ export let CategoryImg = ({ onImageCropped, setCanEdit }) => {
         <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
             <h6 className="font-poppins text-lg font-medium">{`${cleanUrl === '/admin/categories/create' ? 'Upload Category Image' : 'Update Category Image'}`}</h6>
             <div className="w-full flex items-center justify-center flex-col gap-y-5">
-                {errors.image && (<div><span className="text-red-700 text-sm -mt-1">{errors.image}</span></div>)}
+                {(errors.image || categoryImgError) && <div className="flex flex-col items-center w-full gap-y-1">
+                    {errors.image && (<div><span className="text-red-700 text-sm -mt-1">{errors.image}</span></div>)}
+                    {categoryImgError && (<div><span className="text-red-700 text-sm -mt-1">Image is too large! Max allowed size is 3 MB.</span></div>)}
+                </div>}
                 {
                     showCropper ? (
                         <div className="relative bg-white flex items-center justify-center h-75 w-56">
