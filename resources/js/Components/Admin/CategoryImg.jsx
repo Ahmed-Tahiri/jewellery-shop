@@ -94,7 +94,7 @@ export let CategoryImg = ({ onImageCropped, setCanEdit }) => {
                             <label htmlFor="image" className="w-56 text-center shadow-sm text-sm p-2 bg-zinc text-white font-poppins cursor-pointer hover:bg-zinc-dark transition-colors ease-linear duration-200">
                                 {!croppedImage ? `${cleanUrl === '/admin/categories/create' ? 'Add Category Image' : 'Update Category Image'}` : 'Change Category Image'}
                             </label>
-                            <input type="file" accept="image/*" name="image" id="image" className="hidden" onChange={onFileChange} />
+                            <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" name="image" id="image" className="hidden" onChange={onFileChange} />
                         </form>)
                     }
                 </div>

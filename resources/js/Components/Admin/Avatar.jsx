@@ -117,7 +117,7 @@ export let AvatarUploader = ({ avatar, adminFirstName }) => {
                 </div>
             )}
             {!showCropper && <>  <label htmlFor="avatar" className="w-60 bg-zinc inline-block text-center  font-poppins  text-white py-2 px-2 cursor-pointer shadow hover:bg-zinc-dark transition-colors ease-linear duration-200 md:text-base text-sm">{avatar ? 'Change Avatar' : 'Upload Avatar'} </label>
-                <input ref={fileInputRef} type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" /></>}
+                <input ref={fileInputRef} type="file" name="avatar" id="avatar" accept="image/png, image/jpeg, image/jpg, image/webp" onChange={handleFileChange} className="hidden" /></>}
         </div>
     );
 };

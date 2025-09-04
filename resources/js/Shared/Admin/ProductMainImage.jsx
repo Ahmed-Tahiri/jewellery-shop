@@ -2,20 +2,21 @@ import { GiBigDiamondRing } from "react-icons/gi";
 import Cropper from "react-easy-crop";
 import { useCallback, useState } from "react";
 import getCroppedImg from "../../Utilities/CropImage";
-import { usePage } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 
 
 export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
 
     let { url } = usePage();
     let cleanUrl = url.split('?')[0];
+    const { errors } = usePage().props;
     const [imageSrc, setImageSrc] = useState(null);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
     const [showCropper, setShowCropper] = useState(false);
+    const [primaryImgError, setPrimaryImgError] = useState(false);
     const [zoom, setZoom] = useState(1);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
-    const { errors } = usePage().props;
 
     const photoDeleteHandler = () => {
         setImageSrc(null);
@@ -26,11 +27,18 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
     const onFileChange = async (e) => {
 
         const file = e.target.files[0];
+        const maxSize = 3 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setPrimaryImgError(true);
+            e.target.value = "";
+            return;
+        }
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
                 setImageSrc(reader.result);
                 setShowCropper(true);
+                setPrimaryImgError(false);
             };
             reader.readAsDataURL(file);
         }
@@ -55,7 +63,10 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
     }, [imageSrc, croppedAreaPixels]);
 
     return (<div className="w-full flex items-center justify-center flex-col gap-y-5">
-        {errors.image && (<div><span className="text-red-700 text-sm -mt-1">{errors.image}</span></div>)}
+        {(errors.primary_image || primaryImgError) && <div className="flex flex-col items-center w-full gap-y-1">
+            {errors.primary_image && (<div><span className="text-red-700 text-sm -mt-1">{errors.primary_image}</span></div>)}
+            {primaryImgError && (<div><span className="text-red-700 text-sm -mt-1">Image is too large! Max allowed size is 3 MB.</span></div>)}
+        </div>}
         <div className="border-2 border-gray-300 shadow-xs  bg-white h-97 w-84 p-2 flex flex-col items-center gap-y-3">
             {
                 showCropper ? (
@@ -79,11 +90,8 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
 
                     <div className="flex w-full h-full items-center flex-col gap-y-5">
                         {croppedImage ? (<div className="w-full h-full bg-white"><img src={croppedImage} alt="Cropped" className="w-full h-full object-cover" /></div>) :
-                            (<>
-
-                                <div className="w-full flex items-center justify-center"><GiBigDiamondRing className="text-light-gray text-7xl" /></div>
-                                <p className="font-poppins text-sm text-light-gray text-center w-full">Please upload primary image with a <strong>transparent background</strong> and <strong>1:1 ratio </strong>(e.g., 800×800, 1000×1000) in JPG, JPEG, or PNG format.</p>
-
+                            (<><div className="w-full flex items-center justify-center"><GiBigDiamondRing className="text-light-gray text-7xl" /></div>
+                                <p className="font-poppins text-sm text-light-gray text-center w-full">Please upload primary image with a <strong>transparent background</strong> and <strong>1:1 ratio </strong>(e.g., 800×800, 1000×1000) in JPG, JPEG, or PNG format. Max size <strong>2MB</strong>.</p>
                             </>)}
                     </div>
                 </div>
@@ -99,7 +107,7 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
                             <label htmlFor="image" className="min-w-38 flex-1 text-center shadow-sm text-sm p-2 bg-zinc text-white font-poppins cursor-pointer hover:bg-zinc-dark transition-colors ease-linear duration-200">
                                 {!croppedImage ? 'Add Product Image' : 'Change Photo'}
                             </label>
-                            <input type="file" accept="image/*" name="image" id="image" className="hidden" onChange={onFileChange} />
+                            <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" name="image" id="image" className="hidden" onChange={onFileChange} />
                         </form>
                         {croppedImage && <button onClick={photoDeleteHandler} className="flex-1 text-center shadow-sm text-sm p-2 bg-mustard text-white font-poppins cursor-pointer hover:bg-mustard-dark transition-colors ease-linear duration-200 min-w-38">Delete Photo</button>}
                     </div>)

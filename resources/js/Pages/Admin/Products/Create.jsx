@@ -4,19 +4,19 @@ import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../Shared/FormTextArea";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
-import { SecondaryImgCard } from "../../../Shared/Admin/SecondaryImageCard";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
 
 export default function Create() {
 
     const [canAdd, setCanAdd] = useState(false);
+    const [secondaryUploadError, setSecondaryUploadError] = useState(false);
     const [secondaryImgs, setSecondaryImgs] = useState([]);
     const [croppedImage, setCroppedImage] = useState(null);
     let { post, errors, data, setData, reset } = useForm({
         name: '',
         description: '',
         primary_image: null,
-        secondaryImgs: secondaryImgs
+        secondary_images: secondaryImgs
     });
 
     let inputChangeHandler = (e) => {
@@ -41,7 +41,8 @@ export default function Create() {
         });
     }
     useEffect(() => { setData('primary_image', croppedImage); }, [croppedImage]);
-    useEffect(() => { setData('secondaryImgs', secondaryImgs); console.log(secondaryImgs) }, [secondaryImgs])
+    useEffect(() => { setData('secondary_images', secondaryImgs) }, [secondaryImgs])
+
     return (
         <section className="w-full min-h-170">
             <div className="w-full flex flex-col gap-y-8">
@@ -75,17 +76,15 @@ export default function Create() {
                     <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
                         <h6 className="font-poppins text-lg font-medium">Product Images</h6>
                         <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
-                        <div className="p-2 flex flex-row items-center justify-start">
-                            <SecondaryImgList
-                                setSecondaryImgs={setSecondaryImgs}
-                                setCanEdit={setCanAdd}
-                                initialImages={[]}
-                            />
+                        <div className="p-2 w-full flex items-start justify-start gap-y-2 flex-col">
+                            {errors.secondary_images && (<span className="text-red-700 text-sm -mt-1">{errors.secondary_images}</span>)}
+                            {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 text-sm -mt-1"> {errors[key]}  </span>)))}
+                            {secondaryUploadError && (<div><span className="text-red-700 text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
+                            <SecondaryImgList setSecondaryImgs={setSecondaryImgs} setCanEdit={setCanAdd} initialImages={[]} setError={setSecondaryUploadError} />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     );
-
 }

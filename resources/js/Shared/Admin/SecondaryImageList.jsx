@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { SecondaryImgCard } from "./SecondaryImageCard";
 
-
-export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages = [] }) => {
+export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages = [], setError }) => {
     const [images, setImages] = useState([...initialImages, null]);
 
     useEffect(() => setSecondaryImgs(images.filter((img) => img !== null)), [images]);
@@ -12,7 +11,7 @@ export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages =
             const updated = [...prev];
             updated[index] = blob;
 
-            if (index === prev.length - 1) {
+            if (index === prev.length - 1 && updated.length < 6) {
                 updated.push(null);
             }
             return updated;
@@ -24,7 +23,7 @@ export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages =
             const updated = [...prev];
             updated.splice(index, 1);
 
-            if (!updated.includes(null)) {
+            if (!updated.includes(null) && updated.length < 6) {
                 updated.push(null);
             }
             return updated;
@@ -40,6 +39,7 @@ export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages =
                     file={img}
                     onImageChange={(blob) => handleImageChange(idx, blob)}
                     onImageDelete={() => handleImageDelete(idx)}
+                    setError={setError}
                 />
             ))}
         </div>
