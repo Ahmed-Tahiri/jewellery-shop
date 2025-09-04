@@ -5,6 +5,7 @@ import { FormTextInput } from "../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../Shared/FormTextArea";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
+import { ProductForm } from "../../../Components/Admin/ProductForm";
 
 export default function Create() {
 
@@ -64,25 +65,26 @@ export default function Create() {
                     </div>
                 </div>
                 <div className="w-full flex gap-5 flex-row items-start justify-between">
-                    <div className="w-7/10 p-5 bg-white rounded shadow flex flex-col gap-y-3">
-                        <h6 className="font-poppins text-lg font-medium">Category Information</h6>
-                        <div className="w-full mt-5">
-                            <form encType="multipart/form-data" id="productForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3">
-                                <FormTextInput label={'Name *'} name={'name'} id={'name'} placeholder={'Enter Category Name'} data={data.name} inputChangeHandler={inputChangeHandler} type={'text'} error={errors.name} />
-                                <FormTextArea label={'Description *'} name={'description'} id={'description'} placeholder={'Write Description Here...'} data={data.description} inputChangeHandler={inputChangeHandler} error={errors.description} />
-                            </form>
+                    <form encType="multipart/form-data" id="productForm" onSubmit={formSubmitHandler} className="w-full  flex-row flex items-start justify-between  gap-3">
+                        <div className="w-7/10">
+                            <ProductForm
+                                errors={errors}
+                                data={data}
+                                inputChangeHandler={inputChangeHandler}
+                                setCanEdit={setCanAdd}
+                            />
                         </div>
-                    </div>
-                    <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
-                        <h6 className="font-poppins text-lg font-medium">Product Images</h6>
-                        <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
-                        <div className="p-2 w-full flex items-start justify-start gap-y-2 flex-col">
-                            {errors.secondary_images && (<span className="text-red-700 text-sm -mt-1">{errors.secondary_images}</span>)}
-                            {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 text-sm -mt-1"> {errors[key]}  </span>)))}
-                            {secondaryUploadError && (<div><span className="text-red-700 text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
-                            <SecondaryImgList setSecondaryImgs={setSecondaryImgs} setCanEdit={setCanAdd} initialImages={[]} setError={setSecondaryUploadError} />
+                        <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
+                            <h6 className="font-poppins text-lg font-medium">Product Images</h6>
+                            <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
+                            <div className="p-2 w-full flex items-start justify-start gap-y-2 flex-col">
+                                {errors.secondary_images && (<span className="text-red-700 text-sm -mt-1">{errors.secondary_images}</span>)}
+                                {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 text-sm -mt-1"> {errors[key]}  </span>)))}
+                                {secondaryUploadError && (<div><span className="text-red-700 text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
+                                <SecondaryImgList setSecondaryImgs={setSecondaryImgs} setCanEdit={setCanAdd} initialImages={[]} setError={setSecondaryUploadError} />
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </section>
