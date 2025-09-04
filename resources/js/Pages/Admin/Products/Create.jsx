@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
-import { Link, useForm } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
 import { ProductForm } from "../../../Components/Admin/ProductForm";
-
+import { DropDown } from "../../../Shared/Admin/DropDown";
 export default function Create() {
 
     const [canAdd, setCanAdd] = useState(false);
+    const [parentCategory, setParentCategory] = useState(null);
+    const [relatedSubCategories, setRelatedSubCategories] = useState([]);
+    const { categories, subcategories } = usePage().props;
     const [secondaryUploadError, setSecondaryUploadError] = useState(false);
     const [secondaryImgs, setSecondaryImgs] = useState([]);
     const [croppedImage, setCroppedImage] = useState(null);
@@ -54,8 +57,9 @@ export default function Create() {
             forceFormData: true,
         });
     }
-    useEffect(() => { setData('primary_image', croppedImage); }, [croppedImage]);
-    useEffect(() => { setData('secondary_images', secondaryImgs) }, [secondaryImgs])
+    useEffect(() => setData('primary_image', croppedImage), [croppedImage]);
+    useEffect(() => setData('secondary_images', secondaryImgs), [secondaryImgs]);
+    useEffect(() => setRelatedSubCategories(subcategories.filter(cat => cat.parent_id === parentCategory)), [parentCategory]);
 
     return (
         <section className="w-full min-h-170">
@@ -78,23 +82,33 @@ export default function Create() {
                     </div>
                 </div>
                 <div className="w-full flex gap-5 flex-row items-start justify-between">
-                    <form encType="multipart/form-data" id="productForm" onSubmit={formSubmitHandler} className="w-full  flex-row flex items-start justify-between  gap-3">
+                    <form encType="multipart/form-data" id="productForm" onSubmit={formSubmitHandler} className="w-full  flex-row flex items-start justify-between  gap-5">
                         <div className="w-7/10">
                             <ProductForm
                                 errors={errors}
                                 data={data}
                                 inputChangeHandler={inputChangeHandler}
                                 setCanEdit={setCanAdd}
+                                setData={setData}
                             />
                         </div>
-                        <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-5">
-                            <h6 className="font-poppins text-lg font-medium">Product Images</h6>
-                            <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
-                            <div className="p-2 w-full flex items-start justify-start gap-y-2 flex-col">
-                                {errors.secondary_images && (<span className="text-red-700 text-sm -mt-1">{errors.secondary_images}</span>)}
-                                {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 text-sm -mt-1"> {errors[key]}  </span>)))}
-                                {secondaryUploadError && (<div><span className="text-red-700 text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
-                                <SecondaryImgList setSecondaryImgs={setSecondaryImgs} setCanEdit={setCanAdd} initialImages={[]} setError={setSecondaryUploadError} />
+                        <div className="w-3/10 flex flex-col gap-5">
+                            <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
+                                <h6 className="font-poppins text-lg font-medium">Product Images</h6>
+                                <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
+                                <div className="p-2 w-full flex items-start justify-start gap-y-2 flex-col">
+                                    {errors.secondary_images && (<span className="text-red-700 text-sm -mt-1">{errors.secondary_images}</span>)}
+                                    {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 text-sm -mt-1"> {errors[key]}  </span>)))}
+                                    {secondaryUploadError && (<div><span className="text-red-700 text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
+                                    <SecondaryImgList setSecondaryImgs={setSecondaryImgs} setCanEdit={setCanAdd} initialImages={[]} setError={setSecondaryUploadError} />
+                                </div>
+                            </div>
+                            <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
+                                <h6 className="font-poppins text-lg font-medium">Category</h6>
+                                <div className="flex flex-col items-start gap-y-3 w-full">
+                                    <DropDown setOption={(cat) => setParentCategory(cat)} data={categories} inputLabel="Parent *" dropDownLabel="Choose Parent Category" setCanEdit={setCanAdd} />
+                                    <DropDown data={relatedSubCategories} setOption={(cat) => setData('subcategory_id', cat)} inputLabel="Sub *" dropDownLabel="Choose Parent To Load Sub" setCanEdit={setCanAdd} />
+                                </div>
                             </div>
                         </div>
                     </form>

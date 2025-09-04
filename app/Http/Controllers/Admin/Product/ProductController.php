@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product\Metal;
+use App\Models\Product\MetalPurity;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -19,7 +21,14 @@ class ProductController extends Controller
     {
         $categories = Category::all(['name', 'id']);
         $subcategories = SubCategory::all(['id', 'name', 'parent_id']);
-        return Inertia::render('Admin/Products/Create', ['categories' => $categories, 'subcategories' => $subcategories]);
+        $metals = Metal::all(['id', 'name']);
+        $metal_purities = MetalPurity::all(['id', 'purity as name']);
+        return Inertia::render('Admin/Products/Create', [
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'metals' => $metals,
+            'metal_purities' => $metal_purities,
+        ]);
     }
     public function store(Request $request)
     {

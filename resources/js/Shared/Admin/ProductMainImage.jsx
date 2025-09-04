@@ -104,12 +104,12 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
                         <button className="px-4 flex-1 py-2 bg-zinc text-white shadow-sm text-sm font-poppins cursor-pointer ease-linear transition-colors duration-200 hover:bg-zinc-dark" onClick={showCroppedImage}>  Save </button>
                     </div>) :
                     (<div className="flex w-full flex-row items-center justify-between gap-x-2">
-                        <form className="flex-1 flex items-center justify-center">
+                        <div className="flex-1 flex items-center justify-center">
                             <label htmlFor="image" className="min-w-38 flex-1 text-center shadow-sm text-sm p-2 bg-zinc text-white font-poppins cursor-pointer hover:bg-zinc-dark transition-colors ease-linear duration-200">
                                 {!croppedImage ? 'Add Product Image' : 'Change Photo'}
                             </label>
                             <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" name="image" id="image" className="hidden" onChange={onFileChange} />
-                        </form>
+                        </div>
                         {croppedImage && <button onClick={photoDeleteHandler} className="flex-1 text-center shadow-sm text-sm p-2 bg-mustard text-white font-poppins cursor-pointer hover:bg-mustard-dark transition-colors ease-linear duration-200 min-w-38">Delete Photo</button>}
                     </div>)
                 }

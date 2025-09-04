@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('color_tones', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('hex_code')->unique();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
