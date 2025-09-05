@@ -32,7 +32,6 @@ export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdi
                         <DropDown data={metals} setOption={(metal) => setData('metal_type', metal)} dropDownLabel="Choose Metal" inputLabel="Metal Type *" setCanEdit={setCanEdit} />
                         <DropDown data={metal_purities} setOption={(purity) => setData('metal_purity', purity)} dropDownLabel="Choose Metal Purity" inputLabel="Metal Purity (optional)" setCanEdit={setCanEdit} />
 
-
                         <div className="w-full">
                             <ColorPicker colors={colors} value={data.color_tone} onChange={(name) => setData('color_tone', name)}
                                 onAddColor={(newColor) => setColors([...colors, { id: colors.length + 1, ...newColor }])}
