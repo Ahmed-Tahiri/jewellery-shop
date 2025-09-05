@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ColorTone extends Model
 {
+    protected $guarded = [];
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'color_id');

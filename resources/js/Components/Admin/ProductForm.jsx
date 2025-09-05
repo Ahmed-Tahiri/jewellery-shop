@@ -6,17 +6,10 @@ import { FormNumInput } from "../../Shared/FormNumInput";
 import { ColorPicker } from "../../Shared/Admin/ColorPicker";
 import { useState } from "react";
 
-const initialColors = [
-    { id: 1, name: "Red", hex: "#FF0000" },
-    { id: 2, name: "Green", hex: "#008000" },
-    { id: 3, name: "Blue", hex: "#0000FF" },
-    { id: 4, name: "Brown", hex: "#8B4513" },
-    { id: 5, name: "Gold", hex: "#FFD700" },
-    { id: 6, name: "Silver", hex: "#C0C0C0" },
-];
+
 export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdit }) => {
-    const [colors, setColors] = useState(initialColors);
-    const { metals, metal_purities } = usePage().props;
+    const { metals, metal_purities, color_tones } = usePage().props;
+    const [colors, setColors] = useState(color_tones);
 
     return (<div className="flex w-full flex-col gap-y-5">
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product\ColorTone;
 use App\Models\Product\Metal;
 use App\Models\Product\MetalPurity;
 use App\Models\SubCategory;
@@ -23,11 +24,13 @@ class ProductController extends Controller
         $subcategories = SubCategory::all(['id', 'name', 'parent_id']);
         $metals = Metal::all(['id', 'name']);
         $metal_purities = MetalPurity::all(['id', 'purity as name']);
+        $color_tones = ColorTone::all(['id', 'name', 'hex_code']);
         return Inertia::render('Admin/Products/Create', [
             'categories' => $categories,
             'subcategories' => $subcategories,
             'metals' => $metals,
             'metal_purities' => $metal_purities,
+            'color_tones' => $color_tones,
         ]);
     }
     public function store(Request $request)
