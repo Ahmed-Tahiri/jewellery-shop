@@ -51,7 +51,7 @@ class Product extends Model
     }
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tags::class, 'product_tag');
+        return $this->belongsToMany(Tags::class, 'product_tag', 'product_id', 'tag_id');
     }
 
     public function getDefaultVariantAttribute()

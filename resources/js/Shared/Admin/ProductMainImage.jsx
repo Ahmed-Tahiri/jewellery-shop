@@ -27,7 +27,6 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
     const onFileChange = async (e) => {
 
         const file = e.target.files[0];
-        const [primaryImgError, setPrimaryImgError] = useState(false);
         const maxSize = 3 * 1024 * 1024;
         if (file.size > maxSize) {
             setPrimaryImgError(true);

@@ -32,7 +32,7 @@ export let ColorPicker = ({ colors, value, onChange, onAddColor }) => {
                     <div className="w-10 text-center" key={`colorNo${c.id}`}>
                         <button
                             type="button"
-                            onClick={() => onChange(c.name)}
+                            onClick={() => onChange(c)}
                             className={`cursor-pointer rounded-full w-full aspect-square border shadow-sm transition  ${value === c.name ? "ring-2 ring-offset-2" : "hover:scale-105"}`}
                             style={{ background: c.hex_code }}
                             title={c.name}

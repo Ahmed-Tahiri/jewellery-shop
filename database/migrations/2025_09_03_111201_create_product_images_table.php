@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('product_images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
-            $table->foreignId('variant_id')->constrained('product_variants')->cascadeOnDelete();
+            $table->foreignId('variant_id')->nullable()->constrained('product_variants')->cascadeOnDelete();
             $table->string('url');
             $table->string('alt_text')->nullable();
-            $table->unsignedSmallInteger('position')->default(0); // Order position in gallery. Sample: 0 for primary image
             $table->timestamps();
-            $table->index(['product_id', 'position']);
+            $table->index(['product_id']);
         });
     }
 

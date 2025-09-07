@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::create('product_tag', function (Blueprint $table) {
-            $table->primary(['product_id', 'tag_id']);
+            $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->foreignId('tag_id')->constrained('tags')->cascadeOnDelete();
             $table->timestamps();

@@ -36,7 +36,7 @@ return new class extends Migration
 
             // Ring size label (store user-facing string, e.g., "6" or "M 1/2")
             // Sample: "6"
-            $table->string('ring_size', 20)->nullable()->index();
+            $table->string('ring_size', 20)->nullable();
 
             // Necklace length in mm. Sample: 450 (18 inches ~ 457.2 mm)
             $table->decimal('bracelet_size', 6, 2)->nullable();

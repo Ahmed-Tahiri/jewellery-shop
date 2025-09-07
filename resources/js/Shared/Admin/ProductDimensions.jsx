@@ -44,13 +44,14 @@ export let ProductDimensions = ({ setData, errors, setCanEdit }) => {
         setCanEdit(true);
     };
     useEffect(() => {
-        setData("dimension", dimensions);
+        setData("dimensions", dimensions);
     }, [dimensions, setData]);
 
     return (
         <div className=" flex flex-col gap-y-3 my-5">
             <h6 className="sm:text-lg text-base font-poppins font-medium text-semi-black">Dimensions *</h6>
-            <div className="flex flex-col gap-y-4 justify-end">
+            {errors.dimensions && (<span className="text-red-700 text-sm -mt-1">{errors.dimensions}</span>)}
+            <div className="flex flex-col gap-y-4 w-full">
                 <DimensionInput error={errors.dimensions} label="Height" field="height" dimensions={dimensions} inputChangeHandler={inputChangeHandler} />
                 <DimensionInput error={errors.dimensions} label="Width" field="width" dimensions={dimensions} inputChangeHandler={inputChangeHandler} />
                 <DimensionInput error={errors.dimensions} label="Length" field="length" dimensions={dimensions} inputChangeHandler={inputChangeHandler} />

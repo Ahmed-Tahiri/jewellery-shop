@@ -33,15 +33,25 @@ export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdi
                     <div className="w-full flex items-start justify-start flex-col gap-y-3">
                         <FormNumInput label={'Product Weight (grams) *'} name={'weight_grams'} id={'weightGrams'} placeholder={'Enter Product Weight In Grams'} data={data.weight_grams} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.weight_grams} pattern={"^(0|[1-9]\d*)$"} />
                         <ProductDimensions inputChangeHandler={inputChangeHandler} errors={errors} data={data.dimensions} setData={setData} setCanEdit={setCanEdit} />
-                        <DropDown data={finishes} setOption={(finish) => setData('finish', finish)} dropDownLabel="Choose Finish" inputLabel="Product Finish *" setCanEdit={setCanEdit} />
-                        <DropDown data={metals} setOption={(metal) => setData('metal_type', metal)} dropDownLabel="Choose Metal" inputLabel="Metal Type *" setCanEdit={setCanEdit} />
-                        <DropDown data={metal_purities} setOption={(purity) => setData('metal_purity', purity)} dropDownLabel="Choose Metal Purity" inputLabel="Metal Purity (optional)" setCanEdit={setCanEdit} />
+                        <div className="w-full flex flex-col gap-y-1">
+                            <DropDown data={finishes} setOption={(finish) => setData('finish', finish)} dropDownLabel="Choose Finish" inputLabel="Product Finish *" setCanEdit={setCanEdit} />
+                            {errors.finish && (<span className="text-red-700 text-sm ">{errors.finish}</span>)}
+                        </div>
+                        <div className="w-full flex flex-col gap-y-1">
+                            <DropDown data={metals} setOption={(metal) => setData('metal_type', metal)} dropDownLabel="Choose Metal" inputLabel="Metal Type *" setCanEdit={setCanEdit} />
+                            {errors.metal_type && (<span className="text-red-700 text-sm ">{errors.metal_type}</span>)}
+                        </div>
+                        <div className="w-full flex flex-col gap-y-1">
 
-                        <div className="w-full">
-                            <ColorPicker colors={colors} value={data.color_tone} onChange={(name) => setData('color_tone', name)}
+                            <DropDown data={metal_purities} setOption={(purity) => setData('metal_purity', purity)} dropDownLabel="Choose Metal Purity" inputLabel="Metal Purity (optional)" setCanEdit={setCanEdit} />
+                            {errors.metal_purity && (<span className="text-red-700 text-sm ">{errors.metal_purity}</span>)}
+                        </div>
+                        <div className="w-full flex flex-col items-start">
+                            <ColorPicker colors={colors} value={data.color_tone} onChange={(color) => setData('color_tone', color)}
                                 onAddColor={(newColor) => setColors([...colors, { id: colors.length + 1, ...newColor }])}
                             />
-                            <p className="mt-4 text-base font-poppins text-semi-black font-normal"> Selected color: <strong>{data.color_tone}</strong>  </p>
+                            <p className="mt-4 text-base font-poppins text-semi-black font-normal"> Selected color: <strong>{data.color_tone.name}</strong>  </p>
+                            {errors.color_tone && (<span className="text-red-700 text-sm ">{errors.color_tone}</span>)}
                         </div>
                     </div>
                 </div>
@@ -61,17 +71,21 @@ export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdi
                     <h6 className="font-poppins text-lg font-medium">Product Status</h6>
                     <div className="w-full mt-5">
                         <div className="w-full flex items-start justify-start flex-col gap-y-3">
-                            <DropDown data={statuses} setOption={(status) => setData('status', status)} dropDownLabel="Choose Status" inputLabel="Status *" setCanEdit={setCanEdit} />
-                            <FormNumInput label={'Stock Quantity *'} name={'stock_quantity'} id={'stockQuantity'} placeholder={'Enter Time In Days'} data={data.stock_quantity} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.stock_quantity} pattern={"^(0|[1-9]\d*)$"} />
+                            <div className="w-full flex flex-col gap-y-1">
+
+                                <DropDown data={statuses} setOption={(status) => setData('status', status)} dropDownLabel="Choose Status" inputLabel="Status *" setCanEdit={setCanEdit} />
+                                {errors.status && (<span className="text-red-700 text-sm ">{errors.status}</span>)}
+                            </div>
+                            <FormNumInput label={'Stock Quantity *'} name={'stock_quantity'} id={'stockQuantity'} placeholder={'Enter Stock Quantity'} data={data.stock_quantity} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.stock_quantity} pattern={"^(0|[1-9]\d*)$"} />
                             <h6 className="w-full sm:text-lg text-base font-poppins font-medium text-semi-black">Stock Status</h6>
                             <div className=" flex w-full items-center gap-x-3">
                                 <label className="flex text-sm font-poppins font-medium text-semi-black cursor-pointer gap-x-1">
                                     <input type="radio" name={`stock_status`} value="in stock" checked={data.stock_status === 'in stock'} onChange={(e) => { setData('stock_status', e.target.value); setCanEdit(true) }} />{" "}
-                                    In Stock
+                                    <span>In Stock</span>
                                 </label>
                                 <label className="flex text-sm font-poppins font-medium text-semi-black cursor-pointer gap-x-1">
                                     <input type="radio" name={`stock_status`} value="out of stock" checked={data.stock_status === 'out of stock'} onChange={(e) => { setData('stock_status', e.target.value); setCanEdit(true) }} /> {" "}
-                                    Out Of Stock
+                                    <span>Out Of Stock</span>
                                 </label>
                             </div>
                         </div>

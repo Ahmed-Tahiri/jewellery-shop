@@ -25,7 +25,7 @@ export default function Create() {
         metal_purity: '',
         short_description: '',
         long_description: '',
-        subcategory_id: '',
+        subcategory: '',
         status: '',
         stock_quantity: '',
         stock_status: '',
@@ -109,8 +109,9 @@ export default function Create() {
                             <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
                                 <h6 className="font-poppins text-lg font-medium">Category</h6>
                                 <div className="flex flex-col items-start gap-y-3 w-full">
+                                    {errors.subcategory && (<span className="text-red-700 text-sm ">{errors.subcategory}</span>)}
                                     <DropDown setOption={(cat) => setParentCategory(cat)} data={categories} inputLabel="Parent *" dropDownLabel="Choose Parent Category" setCanEdit={setCanAdd} />
-                                    <DropDown data={relatedSubCategories} setOption={(cat) => setData('subcategory_id', cat)} inputLabel="Sub *" dropDownLabel="Choose Parent To Load Sub" setCanEdit={setCanAdd} />
+                                    <DropDown data={relatedSubCategories} setOption={(cat) => setData('subcategory', cat)} inputLabel="Sub *" dropDownLabel="Choose Parent To Load Sub" setCanEdit={setCanAdd} />
                                 </div>
                             </div>
                             <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
