@@ -2,9 +2,8 @@
 
 namespace App\Models\Product;
 
-use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Container\Attributes\Tag;
+use App\Models\Tags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,9 +29,29 @@ class Product extends Model
     {
         return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
+    public function metal(): BelongsTo
+    {
+        return $this->belongsTo(Metal::class, 'metal_id');
+    }
+    public function metal_purity(): BelongsTo
+    {
+        return $this->belongsTo(MetalPurity::class, 'metal_purity_id');
+    }
+    public function color_tone(): BelongsTo
+    {
+        return $this->belongsTo(ColorTone::class, 'color_id');
+    }
+    public function finish(): BelongsTo
+    {
+        return $this->belongsTo(ProductFinish::class, 'finish_id');
+    }
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'product_tag');
+        return $this->belongsToMany(Tags::class, 'product_tag', 'product_id', 'tag_id');
     }
 
     public function getDefaultVariantAttribute()

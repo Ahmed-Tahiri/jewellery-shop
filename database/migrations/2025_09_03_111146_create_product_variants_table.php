@@ -24,13 +24,19 @@ return new class extends Migration
             // Variant-specific price (nullable = inherit from product)
             // Sample: 1299.00
             $table->decimal('price', 12, 2)->nullable();
-
+            $table->decimal('cost', 12, 2)->nullable();
+            $table->boolean('is_active')->default(false);
             // Sample: 3
-            $table->integer('stock')->default(0);
+            $table->foreignId('metal_id')->nullable()->constrained('metals')->nullOnDelete();
+            $table->foreignId('metal_purity_id')->nullable()->constrained('metal_purities')->nullOnDelete();
+            $table->foreignId('finish_id')->nullable()->constrained('product_finishes')->nullOnDelete();
+            $table->foreignId('color_id')->nullable()->constrained('color_tones')->nullOnDelete();
+            $table->integer('stock_quantity')->default(0);
+            $table->enum('stock_status', ['in stock', 'out of stock']);
 
             // Ring size label (store user-facing string, e.g., "6" or "M 1/2")
             // Sample: "6"
-            $table->string('ring_size', 20)->nullable()->index();
+            $table->string('ring_size', 20)->nullable();
 
             // Necklace length in mm. Sample: 450 (18 inches ~ 457.2 mm)
             $table->decimal('bracelet_size', 6, 2)->nullable();
@@ -42,7 +48,6 @@ return new class extends Migration
             $table->boolean('is_default')->default(false);
 
             $table->timestamps();
-            $table->index(['product_id', 'ring_size']);
         });
     }
 

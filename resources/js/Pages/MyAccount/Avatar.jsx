@@ -139,7 +139,7 @@ export default function Avatar() {
                 <>
                     <label htmlFor="avatar" className="block sm:w-40 md:w-46 lg:w-60 md:text-base text-sm text-center border-2 border-zinc shadow px-4 py-2 bg-zinc text-white font-poppins cursor-pointer transition hover:bg-zinc-dark hover:border-zinc-dark"
                     > {avatar ? "Change Avatar" : "Upload Avatar"}</label>
-                    <input ref={fileInputRef} type="file" name="avatar" id="avatar" accept="image/*" onChange={handleFileChange} className="hidden" />
+                    <input ref={fileInputRef} type="file" name="avatar" id="avatar" accept="image/png, image/jpeg, image/jpg, image/webp" onChange={handleFileChange} className="hidden" />
                 </>
             )}
         </div>

@@ -100,7 +100,7 @@ export default function Create() {
             <div className="w-full flex flex-row justify-between items-center">
                 <AdminSectionSubHeading heading={"Add Sub Category"} />
                 <div className="flex flex-row items-center justify-end">
-                    {subcategories.length > 0 ? (<div className="flex flex-row items-center justify-end gap-x-3"> <Link className="cursor-pointer flex items-center justify-center font-poppins text-base bg-light-gray text-white p-2 min-w-24" href={"/admin/categories"} onClick={() => reset()} > Cancel </Link> <button className="cursor-pointer flex items-center justify-center font-poppins text-base bg-mustard text-white p-2 min-w-24" form="categoryForm" > Save All </button> </div>
+                    {subcategories.length > 0 ? (<div className="flex flex-row items-center justify-end gap-x-3"> <Link className="cursor-pointer flex items-center justify-center font-poppins text-base bg-light-gray text-white p-2 min-w-24" href={"/admin/categories"} onClick={() => reset()} > Cancel </Link> <button className="cursor-pointer flex items-center justify-center font-poppins text-base bg-mustard text-white p-2 min-w-24" form="subcategoryForm" > Save All </button> </div>
                     ) : (<Link className="flex items-center justify-center font-poppins text-base bg-light-gray text-white p-2 min-w-24" href={"/admin/categories"} onClick={() => reset()} > Cancel </Link>
                     )}
                 </div>
@@ -113,7 +113,7 @@ export default function Create() {
                     <div className="w-full mt-5">
                         <div className="w-full flex flex-wrap justify-start items-center flex-row gap-5"> {subcategories.map((sub, i) => (<SubCategoryMiniCard key={sub.id} sub={sub} subCategoryRemoveHandler={subCategoryRemoveHandler} />))} </div>
 
-                        <form id="categoryForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3" >
+                        <form id="subcategoryForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3" >
 
                             {errors.subcategories && (<span className="text-red-700 text-sm mt-2">{errors.subcategories}</span>)}
 
@@ -131,7 +131,11 @@ export default function Create() {
 
                 <div className="w-3/10 p-5 bg-white rounded shadow flex flex-col gap-y-3 min-h-111">
                     <h6 className="font-poppins text-lg font-medium text-semi-black"> Select Parent Category  </h6>
-                    <div className="w-full mt-5"> <ParenCategoryDropDown categories={categories} setParent={setParent} />   </div>
+
+                    <div className="w-full mt-5 flex flex-col items-start">
+                        {errors.parent && (<span className="text-red-700 text-sm mb-2">{errors.parent}</span>)}
+                        <ParenCategoryDropDown categories={categories} setParent={setParent} setCanEdit={setCanAdd} />
+                    </div>
                 </div>
             </div>
         </div>

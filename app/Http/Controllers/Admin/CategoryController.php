@@ -32,7 +32,7 @@ class CategoryController extends Controller
             [
                 'name' => ['required', 'string', 'min:3', 'max:50', "regex:/^[A-Za-z\s'-]+$/", 'unique:categories'],
                 'description' => ['required', 'string', 'min:10'],
-                'image' => 'required|image|max:2048',
+                'image' => 'required|image|max:3072',
             ],
             [
                 'name.required' => "Category name is required",
@@ -68,7 +68,7 @@ class CategoryController extends Controller
             [
                 'name' => ['required', 'string', 'min:3', 'max:50', "regex:/^[A-Za-z\s'-]+$/", 'unique:categories,name,' . $category->id],
                 'description' => ['required', 'string', 'min:10'],
-                'image'  => 'nullable|sometimes|file|image|max:5120'
+                'image'  => 'nullable|sometimes|file|image|max:3072'
             ],
             [
                 'name.required' => "Category name is required",
@@ -124,26 +124,9 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories')->with('success', 'Category deleted successfully');
     }
 
-
     public function statusUpdate(Request $request, Category $category)
     {
         $category->is_active = $request->input('is_active');
         $category->save();
-    }
-    public function imgUpload(Request $request)
-    {
-        $img = $request->validate([
-            'image' => 'required|image|max:2048',
-        ], [
-            'image.required' => 'Please upload an image.',
-            'image.image' => 'Only image files are allowed.',
-            'image.max' => 'The image must be less than 2MB.',
-        ]);
-
-        $file = $request->file('image');
-        $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('temp_categories_images', $filename, 'public');
-        session(['temp_categories_images' => $filename]);
-        return back()->with('success', 'Image uploaded successfully');
     }
 }

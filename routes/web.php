@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PasswordController;
+use App\Http\Controllers\Admin\Product\ColorToneController;
+use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SignupCompleteController;
+use App\Models\Product\Product;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -43,10 +46,6 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/inventory', [CategoryController::class, 'index'])->name('admin.inventory');
 
-    Route::get('/admin/products', [CategoryController::class, 'index'])->name('admin.products');
-    Route::get('/admin/products/create', [CategoryController::class, 'index'])->name('admin.products.create');
-
-
 
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
 
@@ -67,6 +66,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/subcategories/{subcategory}/show', [SubCategoryController::class, 'show'])->name('admin.subcategories.show');
     Route::put('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
+
+    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
+    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.post');
+    Route::post('/admin/products/color', [ColorToneController::class, 'store'])->name('admin.products.add.color');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');

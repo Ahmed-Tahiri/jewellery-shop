@@ -26,7 +26,7 @@ export default function getCroppedImg(imageSrc, pixelCrop) {
                     return;
                 }
                 resolve(blob);
-            }, "image/jpeg");
+            }, "image/webp", 0.8);
         };
         image.onerror = (error) => reject(error);
     });
