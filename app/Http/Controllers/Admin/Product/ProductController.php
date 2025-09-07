@@ -122,19 +122,21 @@ class ProductController extends Controller
         ];
 
         $product = Product::create($data);
-        $data['price'] = $validated['price'];
-        $data['stock_quantity'] = $validated['stock_quantity'];
-        $data['stock_status'] = $validated['stock_status'];
-        $data['metal_id'] = $validated['metal_type'];
-        $data['metal_purity_id'] = $validated['metal_purity'] ?? null;
-        $data['finish_id'] = $validated['finish'];
-        $data['color_id'] = $validated['color_tone']['id'];
-        $data['weight_grams'] = $validated['weight_grams'];
-        $data['cost'] = $validated['cost'];
-        $data['primary_image'] = $validated['primary_image'];
-        $data['secondary_images'] = $validated['secondary_images'];
-        !$product->variants()->exists() ??  $data['is_default'] = true;
-        $productVariant = new ProductVariantController()->store($request, $product, $data);
+        $variantData['product_id'] = $product->id;
+        $variantData['sku'] = $validated['sku'];
+        $variantData['price'] = $validated['price'];
+        $variantData['stock_quantity'] = $validated['stock_quantity'];
+        $variantData['stock_status'] = $validated['stock_status'];
+        $variantData['metal_id'] = $validated['metal_type'];
+        $variantData['metal_purity_id'] = $validated['metal_purity'] ?? null;
+        $variantData['finish_id'] = $validated['finish'];
+        $variantData['color_id'] = $validated['color_tone']['id'];
+        $variantData['weight_grams'] = $validated['weight_grams'];
+        $variantData['cost'] = $validated['cost'];
+        // $variantData['primary_image'] = $validated['primary_image'];
+        // $variantData['secondary_images'] = $validated['secondary_images'];
+        !$product->variants()->exists() ??  $variantData['is_default'] = true;
+        $productVariant = new ProductVariantController()->store($request, $product, $variantData);
         $tags =  new TagsController()->store($data);
         $product->tags()->sync($tags);
 
