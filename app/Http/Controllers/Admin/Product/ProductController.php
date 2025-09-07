@@ -35,28 +35,23 @@ class ProductController extends Controller
             'color_tone.id' => ['required', 'exists:color_tones,id'],
 
             'dimensions' => [
-                'required',
                 function ($attribute, $value, $fail) {
+                    $rq = request();
                     if (
-                        empty($value['length']['value']) &&
-                        empty($value['width']['value']) &&
-                        empty($value['height']['value']) &&
-                        empty($value['diameter']['value'])
+                        empty($rq->input('height_mm')) &&
+                        empty($rq->input('width_mm')) &&
+                        empty($rq->input('length_mm')) &&
+                        empty($rq->input('diameter_mm'))
                     ) {
                         $fail('At least one dimension (length, width, height, diameter) must be provided.');
                     }
                 },
             ],
 
-            'dimensions.length.value' => ['nullable', 'decimal:0,2'],
-            'dimensions.width.value'  => ['nullable', 'decimal:0,2'],
-            'dimensions.height.value' => ['nullable', 'decimal:0,2'],
-            'dimensions.diameter.value' => ['nullable', 'decimal:0,2'],
-            'dimensions.length.unit' => ['nullable', 'in:cm,mm'],
-            'dimensions.width.unit'  => ['nullable', 'in:cm,mm'],
-            'dimensions.height.unit' => ['nullable', 'in:cm,mm'],
-            'dimensions.diameter.unit' => ['nullable', 'in:cm,mm'],
-
+            'length_mm' => ['nullable', 'decimal:0,2'],
+            'width_mm'  => ['nullable', 'decimal:0,2'],
+            'height_mm' => ['nullable', 'decimal:0,2'],
+            'diameter_mm' => ['nullable', 'decimal:0,2'],
             'long_description' => ['required', 'min:50'],
             'status' => ['required', 'exists:statuses,id'],
             'stock_quantity' => ['required', 'integer'],
@@ -122,19 +117,18 @@ class ProductController extends Controller
             'subcategory_id'     => $validated['subcategory'],
             'short_description'  => $validated['short_description'],
             'long_description'   => $validated['long_description'],
-            'price'              => $validated['price'],
             'status_id'          => $validated['status'],
-            'stock_quantity'     => $validated['stock_quantity'],
-            'stock_status'       => $validated['stock_status'],
             'lead_time_days'     => $validated['lead_time_days'] ?? 0,
-            'metal_id'           => $validated['metal_type'],
-            'metal_purity_id'    => $validated['metal_purity'] ?? null,
-            'finish_id'          => $validated['finish'],
-            'color_id'           => $validated['color_tone']['id'],
-            'weight_grams'       => $validated['weight_grams'],
-            'dimensions_mm'      => json_encode($validated['dimensions']),
-            'cost'               => $validated['cost'],
         ];
+        // 'price'              => $validated['price'],
+        // 'stock_quantity'     => $validated['stock_quantity'],
+        // 'stock_status'       => $validated['stock_status'],
+        // 'metal_id'           => $validated['metal_type'],
+        // 'metal_purity_id'    => $validated['metal_purity'] ?? null,
+        // 'finish_id'          => $validated['finish'],
+        // 'color_id'           => $validated['color_tone']['id'],
+        // 'weight_grams'       => $validated['weight_grams'],
+        // 'cost'               => $validated['cost'],
 
 
         $product = Product::create($data);

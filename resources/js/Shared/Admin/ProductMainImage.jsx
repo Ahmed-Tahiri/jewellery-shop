@@ -64,8 +64,8 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
 
     return (<div className="w-full flex items-center justify-center flex-col gap-y-5">
         {(errors.primary_image || primaryImgError) && <div className="flex flex-col items-center w-full gap-y-1">
-            {errors.primary_image && (<div><span className="text-red-700 text-sm -mt-1">{errors.primary_image}</span></div>)}
-            {primaryImgError && (<div><span className="text-red-700 text-sm -mt-1">Image is too large! Max allowed size is 3 MB.</span></div>)}
+            {errors.primary_image && (<div><span className="text-red-700 font-poppins text-sm -mt-1">{errors.primary_image}</span></div>)}
+            {primaryImgError && (<div><span className="text-red-700 font-poppins text-sm -mt-1">Image is too large! Max allowed size is 3 MB.</span></div>)}
         </div>}
         <div className="border-2 border-gray-300 shadow-xs  bg-white h-97 w-84 p-2 flex flex-col items-center gap-y-3">
             {

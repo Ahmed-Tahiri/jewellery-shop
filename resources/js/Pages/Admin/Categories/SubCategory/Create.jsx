@@ -115,7 +115,7 @@ export default function Create() {
 
                         <form id="subcategoryForm" onSubmit={formSubmitHandler} className="w-full flex items-start justify-start flex-col gap-y-3" >
 
-                            {errors.subcategories && (<span className="text-red-700 text-sm mt-2">{errors.subcategories}</span>)}
+                            {errors.subcategories && (<span className="text-red-700 font-poppins text-sm mt-2">{errors.subcategories}</span>)}
 
                             <FormTextInput label={"Name *"} name={"name"} id={"name"} placeholder={"Enter Sub Category Name"} data={subName} inputChangeHandler={(e) => inputChangeHandler(e.target.name, e.target.value)} type={"text"} error={fieldErrors.name} />
                             <FormTextArea label={"Description *"} name={"description"} id={"description"} placeholder={"Write Description Here..."} data={subDescription} inputChangeHandler={(e) => inputChangeHandler(e.target.name, e.target.value)} error={fieldErrors.description} />
@@ -133,7 +133,7 @@ export default function Create() {
                     <h6 className="font-poppins text-lg font-medium text-semi-black"> Select Parent Category  </h6>
 
                     <div className="w-full mt-5 flex flex-col items-start">
-                        {errors.parent && (<span className="text-red-700 text-sm mb-2">{errors.parent}</span>)}
+                        {errors.parent && (<span className="text-red-700 font-poppins text-sm mb-2">{errors.parent}</span>)}
                         <ParenCategoryDropDown categories={categories} setParent={setParent} setCanEdit={setCanAdd} />
                     </div>
                 </div>

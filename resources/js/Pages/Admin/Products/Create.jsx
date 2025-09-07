@@ -33,6 +33,10 @@ export default function Create() {
         finish: '',
         weight_grams: '',
         dimensions: '',
+        height_mm: '',
+        width_mm: '',
+        length_mm: '',
+        diameter_mm: '',
         lead_time_days: '',
         cost: '',
         primary_image: null,
@@ -100,16 +104,16 @@ export default function Create() {
                                 <h6 className="font-poppins text-lg font-medium">Product Images</h6>
                                 <ProductMainImage onImageCropped={(blob) => setCroppedImage(blob)} setCanEdit={setCanAdd} />
                                 <div className="p-2 w-full flex items-start justify-start gap-y-2 flex-col">
-                                    {errors.secondary_images && (<span className="text-red-700 text-sm -mt-1">{errors.secondary_images}</span>)}
-                                    {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 text-sm -mt-1"> {errors[key]}  </span>)))}
-                                    {secondaryUploadError && (<div><span className="text-red-700 text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
+                                    {errors.secondary_images && (<span className="text-red-700 font-poppins text-sm -mt-1">{errors.secondary_images}</span>)}
+                                    {Object.keys(errors).map((key) => (key.startsWith("secondary_images.") && (<span key={key} className="text-red-700 font-poppins text-sm -mt-1"> {errors[key]}  </span>)))}
+                                    {secondaryUploadError && (<div><span className="text-red-700 font-poppins text-sm mb-3">Image is too large! Max allowed size is 2MB.</span></div>)}
                                     <SecondaryImgList setSecondaryImgs={setSecondaryImgs} setCanEdit={setCanAdd} initialImages={[]} setError={setSecondaryUploadError} />
                                 </div>
                             </div>
                             <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
                                 <h6 className="font-poppins text-lg font-medium">Category</h6>
                                 <div className="flex flex-col items-start gap-y-3 w-full">
-                                    {errors.subcategory && (<span className="text-red-700 text-sm ">{errors.subcategory}</span>)}
+                                    {errors.subcategory && (<span className="text-red-700 font-poppins text-sm ">{errors.subcategory}</span>)}
                                     <DropDown setOption={(cat) => setParentCategory(cat)} data={categories} inputLabel="Parent *" dropDownLabel="Choose Parent Category" setCanEdit={setCanAdd} />
                                     <DropDown data={relatedSubCategories} setOption={(cat) => setData('subcategory', cat)} inputLabel="Sub *" dropDownLabel="Choose Parent To Load Sub" setCanEdit={setCanAdd} />
                                 </div>
