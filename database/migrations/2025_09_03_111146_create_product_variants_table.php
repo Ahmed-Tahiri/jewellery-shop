@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('label', 120)->nullable();
             $table->decimal('price', 12, 2)->nullable();
             $table->decimal('cost', 12, 2)->nullable();
-            $table->boolean('is_active')->default(false);
             $table->foreignId('metal_id')->nullable()->constrained('metals')->nullOnDelete();
             $table->foreignId('metal_purity_id')->nullable()->constrained('metal_purities')->nullOnDelete();
             $table->foreignId('finish_id')->nullable()->constrained('product_finishes')->nullOnDelete();

@@ -120,22 +120,23 @@ class ProductController extends Controller
             'status_id'          => $validated['status'],
             'lead_time_days'     => $validated['lead_time_days'] ?? 0,
         ];
-        // 'price'              => $validated['price'],
-        // 'stock_quantity'     => $validated['stock_quantity'],
-        // 'stock_status'       => $validated['stock_status'],
-        // 'metal_id'           => $validated['metal_type'],
-        // 'metal_purity_id'    => $validated['metal_purity'] ?? null,
-        // 'finish_id'          => $validated['finish'],
-        // 'color_id'           => $validated['color_tone']['id'],
-        // 'weight_grams'       => $validated['weight_grams'],
-        // 'cost'               => $validated['cost'],
-
 
         $product = Product::create($data);
+        $data['price'] = $validated['price'];
+        $data['stock_quantity'] = $validated['stock_quantity'];
+        $data['stock_status'] = $validated['stock_status'];
+        $data['metal_id'] = $validated['metal_type'];
+        $data['metal_purity_id'] = $validated['metal_purity'] ?? null;
+        $data['finish_id'] = $validated['finish'];
+        $data['color_id'] = $validated['color_tone']['id'];
+        $data['weight_grams'] = $validated['weight_grams'];
+        $data['cost'] = $validated['cost'];
+        $data['primary_image'] = $validated['primary_image'];
+        $data['secondary_images'] = $validated['secondary_images'];
+        !$product->variants()->exists() ??  $data['is_default'] = true;
+        $productVariant = new ProductVariantController()->store($request, $product, $data);
         $tags =  new TagsController()->store($data);
         $product->tags()->sync($tags);
-        new ProductImageController()->store($validated['primary_image'], $validated['secondary_images'], $product);
-
 
         return redirect()->route('admin.products')->with('success', 'Product added successfully');
     }

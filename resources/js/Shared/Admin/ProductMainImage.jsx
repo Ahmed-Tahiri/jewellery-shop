@@ -2,7 +2,7 @@ import { GiBigDiamondRing } from "react-icons/gi";
 import Cropper from "react-easy-crop";
 import { useCallback, useState } from "react";
 import getCroppedImg from "../../Utilities/CropImage";
-import { useForm, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 
 
 export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
