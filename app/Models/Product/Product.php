@@ -45,6 +45,10 @@ class Product extends Model
     {
         return $this->belongsTo(ProductFinish::class, 'finish_id');
     }
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tags::class, 'product_tag');

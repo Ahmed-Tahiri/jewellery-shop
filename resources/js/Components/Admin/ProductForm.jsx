@@ -4,12 +4,15 @@ import { FormTextArea } from "../../Shared/FormTextArea";
 import { FormTextInput } from "../../Shared/FormTextInput";
 import { FormNumInput } from "../../Shared/FormNumInput";
 import { ColorPicker } from "../../Shared/Admin/ColorPicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ProductDimensions } from "../../Shared/Admin/ProductDimensions";
 
 
 export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdit }) => {
-    const { metals, metal_purities, color_tones } = usePage().props;
+    const { metals, metal_purities, color_tones, finishes, statuses } = usePage().props;
     const [colors, setColors] = useState(color_tones);
+
+    useEffect(() => { data.stock_quantity > 0 ? setData('stock_status', 'in stock') : setData('stock_status', 'out of stock') }, [data.stock_quantity]);
 
     return (<div className="flex w-full flex-col gap-y-5">
 
@@ -29,6 +32,8 @@ export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdi
                 <div className="w-full mt-5">
                     <div className="w-full flex items-start justify-start flex-col gap-y-3">
                         <FormNumInput label={'Product Weight (grams) *'} name={'weight_grams'} id={'weightGrams'} placeholder={'Enter Product Weight In Grams'} data={data.weight_grams} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.weight_grams} pattern={"^(0|[1-9]\d*)$"} />
+                        <ProductDimensions inputChangeHandler={inputChangeHandler} errors={errors} data={data.dimensions} setData={setData} setCanEdit={setCanEdit} />
+                        <DropDown data={finishes} setOption={(finish) => setData('finish', finish)} dropDownLabel="Choose Finish" inputLabel="Product Finish *" setCanEdit={setCanEdit} />
                         <DropDown data={metals} setOption={(metal) => setData('metal_type', metal)} dropDownLabel="Choose Metal" inputLabel="Metal Type *" setCanEdit={setCanEdit} />
                         <DropDown data={metal_purities} setOption={(purity) => setData('metal_purity', purity)} dropDownLabel="Choose Metal Purity" inputLabel="Metal Purity (optional)" setCanEdit={setCanEdit} />
 
@@ -41,16 +46,38 @@ export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdi
                     </div>
                 </div>
             </div>
-            <div className="w-1/2 p-5 bg-white rounded shadow flex flex-col gap-y-3">
-                <h6 className="font-poppins text-lg font-medium">Additional Information</h6>
-                <div className="w-full mt-5">
-                    <div className="w-full flex items-start justify-start flex-col gap-y-3">
-                        <FormTextArea label={'Long Description *'} name={'long_description'} id={'longDescription'} placeholder={'Write Long Description Here...'} data={data.long_description} inputChangeHandler={inputChangeHandler} error={errors.long_description} rows={9} />
-                        <FormNumInput label={'Estimated Delivery Time (optional)'} name={'lead_time_days'} id={'leadingTimeDays'} placeholder={'Enter Time In Days'} data={data.lead_time_days} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.lead_time_days} pattern={"^(0|[1-9]\d*)$"} />
+            <div className="flex flex-col gap-5 w-1/2">
+
+                <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-3">
+                    <h6 className="font-poppins text-lg font-medium">Additional Information</h6>
+                    <div className="w-full mt-5">
+                        <div className="w-full flex items-start justify-start flex-col gap-y-3">
+                            <FormTextArea label={'Long Description *'} name={'long_description'} id={'longDescription'} placeholder={'Write Long Description Here...'} data={data.long_description} inputChangeHandler={inputChangeHandler} error={errors.long_description} rows={9} />
+                            <FormNumInput label={'Estimated Delivery Time (optional)'} name={'lead_time_days'} id={'leadingTimeDays'} placeholder={'Enter Time In Days'} data={data.lead_time_days} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.lead_time_days} pattern={"^(0|[1-9]\d*)$"} />
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-3">
+                    <h6 className="font-poppins text-lg font-medium">Product Status</h6>
+                    <div className="w-full mt-5">
+                        <div className="w-full flex items-start justify-start flex-col gap-y-3">
+                            <DropDown data={statuses} setOption={(status) => setData('status', status)} dropDownLabel="Choose Status" inputLabel="Status *" setCanEdit={setCanEdit} />
+                            <FormNumInput label={'Stock Quantity *'} name={'stock_quantity'} id={'stockQuantity'} placeholder={'Enter Time In Days'} data={data.stock_quantity} inputChangeHandler={inputChangeHandler} type={'number'} error={errors.stock_quantity} pattern={"^(0|[1-9]\d*)$"} />
+                            <h6 className="w-full sm:text-lg text-base font-poppins font-medium text-semi-black">Stock Status</h6>
+                            <div className=" flex w-full items-center gap-x-3">
+                                <label className="flex text-sm font-poppins font-medium text-semi-black cursor-pointer gap-x-1">
+                                    <input type="radio" name={`stock_status`} value="in stock" checked={data.stock_status === 'in stock'} onChange={(e) => { setData('stock_status', e.target.value); setCanEdit(true) }} />{" "}
+                                    In Stock
+                                </label>
+                                <label className="flex text-sm font-poppins font-medium text-semi-black cursor-pointer gap-x-1">
+                                    <input type="radio" name={`stock_status`} value="out of stock" checked={data.stock_status === 'out of stock'} onChange={(e) => { setData('stock_status', e.target.value); setCanEdit(true) }} /> {" "}
+                                    Out Of Stock
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>);
 }

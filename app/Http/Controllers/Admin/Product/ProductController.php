@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product\ColorTone;
 use App\Models\Product\Metal;
 use App\Models\Product\MetalPurity;
+use App\Models\Product\ProductFinish;
+use App\Models\Product\Status;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,12 +27,16 @@ class ProductController extends Controller
         $metals = Metal::all(['id', 'name']);
         $metal_purities = MetalPurity::all(['id', 'purity as name']);
         $color_tones = ColorTone::all(['id', 'name', 'hex_code']);
+        $statuses = Status::all(['id', 'status as name']);
+        $finishes = ProductFinish::all(['id', 'name']);
         return Inertia::render('Admin/Products/Create', [
             'categories' => $categories,
             'subcategories' => $subcategories,
             'metals' => $metals,
             'metal_purities' => $metal_purities,
             'color_tones' => $color_tones,
+            'statuses' => $statuses,
+            'finishes' => $finishes,
         ]);
     }
     public function store(Request $request)

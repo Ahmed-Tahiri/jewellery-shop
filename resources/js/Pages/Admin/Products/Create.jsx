@@ -5,6 +5,8 @@ import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
 import { ProductForm } from "../../../Components/Admin/ProductForm";
 import { DropDown } from "../../../Shared/Admin/DropDown";
+import { FormNumInput } from "../../../Shared/FormNumInput";
+import { FormTextInput } from "../../../Shared/FormTextInput";
 export default function Create() {
 
     const [canAdd, setCanAdd] = useState(false);
@@ -25,7 +27,8 @@ export default function Create() {
         long_description: '',
         subcategory_id: '',
         status: '',
-        stock: '',
+        stock_quantity: '',
+        stock_status: '',
         color_tone: '',
         finish: '',
         weight_grams: '',
@@ -108,6 +111,13 @@ export default function Create() {
                                 <div className="flex flex-col items-start gap-y-3 w-full">
                                     <DropDown setOption={(cat) => setParentCategory(cat)} data={categories} inputLabel="Parent *" dropDownLabel="Choose Parent Category" setCanEdit={setCanAdd} />
                                     <DropDown data={relatedSubCategories} setOption={(cat) => setData('subcategory_id', cat)} inputLabel="Sub *" dropDownLabel="Choose Parent To Load Sub" setCanEdit={setCanAdd} />
+                                </div>
+                            </div>
+                            <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
+                                <h6 className="font-poppins text-lg font-medium">Product Pricing</h6>
+                                <div className="flex flex-col items-start gap-y-3 w-full">
+                                    <FormTextInput label={'Cost *'} name={'cost'} id={'cost'} placeholder={'Enter Product Cost'} error={errors.cost} type={'text'} inputChangeHandler={inputChangeHandler} data={data.cost} />
+                                    <FormTextInput label={'Price *'} name={'price'} id={'price'} placeholder={'Enter Product Sale Price'} error={errors.price} type={'text'} inputChangeHandler={inputChangeHandler} data={data.price} />
                                 </div>
                             </div>
                         </div>

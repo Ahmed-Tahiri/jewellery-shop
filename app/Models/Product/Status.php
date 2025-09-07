@@ -5,11 +5,13 @@ namespace App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ProductFinish extends Model
+class Status extends Model
 {
     protected $guarded = [];
-    public function products(): HasMany
+
+
+    public function status(): HasMany
     {
-        return $this->hasMany(Product::class, 'finish_id');
+        return $this->hasMany(Product::class, 'status_id');
     }
 }
