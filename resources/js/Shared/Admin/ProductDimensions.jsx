@@ -51,6 +51,11 @@ export let ProductDimensions = ({ setData, errors, setCanEdit }) => {
         <div className=" flex flex-col gap-y-3 my-5">
             <h6 className="sm:text-lg text-base font-poppins font-medium text-semi-black">Dimensions *</h6>
             {errors.dimensions && (<span className="text-red-700 text-sm -mt-1">{errors.dimensions}</span>)}
+            <p className="text-light-gray font-poppins text-start text-sm -mt-3">
+                Fill the dimension(s) relevant to the product.
+                Example: use <b>Length</b> for necklaces, <b>Diameter</b> for rings.
+                Leave others blank if not applicable.
+            </p>
             <div className="flex flex-col gap-y-4 w-full">
                 <DimensionInput error={errors.dimensions} label="Height" field="height" dimensions={dimensions} inputChangeHandler={inputChangeHandler} />
                 <DimensionInput error={errors.dimensions} label="Width" field="width" dimensions={dimensions} inputChangeHandler={inputChangeHandler} />

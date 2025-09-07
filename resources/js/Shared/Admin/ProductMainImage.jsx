@@ -99,8 +99,8 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
             <div className="w-full">
                 {showCropper ?
                     (<div className="flex justify-between items-center gap-2 w-full">
-                        <button className="px-4 flex-1 py-2 bg-mustard text-white shadow-sm text-sm font-poppins cursor-pointer ease-linear transition-colors duration-200 hover:bg-mustard-dark" onClick={() => { setShowCropper(false); errors.image = null }} > Cancel</button>
-                        <button className="px-4 flex-1 py-2 bg-zinc text-white shadow-sm text-sm font-poppins cursor-pointer ease-linear transition-colors duration-200 hover:bg-zinc-dark" onClick={showCroppedImage}>  Save </button>
+                        <button type="button" className="px-4 flex-1 py-2 bg-mustard text-white shadow-sm text-sm font-poppins cursor-pointer ease-linear transition-colors duration-200 hover:bg-mustard-dark" onClick={() => { setShowCropper(false); errors.image = null }} > Cancel</button>
+                        <button type="button" className="px-4 flex-1 py-2 bg-zinc text-white shadow-sm text-sm font-poppins cursor-pointer ease-linear transition-colors duration-200 hover:bg-zinc-dark" onClick={showCroppedImage}>  Save </button>
                     </div>) :
                     (<div className="flex w-full flex-row items-center justify-between gap-x-2">
                         <div className="flex-1 flex items-center justify-center">
@@ -109,7 +109,7 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
                             </label>
                             <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" name="image" id="image" className="hidden" onChange={onFileChange} />
                         </div>
-                        {croppedImage && <button onClick={photoDeleteHandler} className="flex-1 text-center shadow-sm text-sm p-2 bg-mustard text-white font-poppins cursor-pointer hover:bg-mustard-dark transition-colors ease-linear duration-200 min-w-38">Delete Photo</button>}
+                        {croppedImage && <button type="button" onClick={photoDeleteHandler} className="flex-1 text-center shadow-sm text-sm p-2 bg-mustard text-white font-poppins cursor-pointer hover:bg-mustard-dark transition-colors ease-linear duration-200 min-w-38">Delete Photo</button>}
                     </div>)
                 }
             </div>
