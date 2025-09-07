@@ -16,11 +16,11 @@ class TagsController extends Controller
     public function store($data): array
     {
         $tags = [];
-        $subCategory = SubCategory::with('category')->find($data['subcategory_id']);
-        $metal = Metal::find($data['metal_id']);
-        $color = ColorTone::find($data['color_id']);
-        $finish = ProductFinish::find($data['finish_id']);
-        $metalPurity = !empty($data['metal_purity_id']) ? MetalPurity::find($data['metal_purity_id']) : null;
+        $subCategory = SubCategory::with('category')->find($data['subcategory']);
+        $metal = Metal::find($data['metal_type']);
+        $color = ColorTone::find($data['color_tone']['id']);
+        $finish = ProductFinish::find($data['finish']);
+        $metalPurity = !empty($data['metal_purity']) ? MetalPurity::find($data['metal_purity']) : null;
         if ($subCategory) {
             $tags[] =  Str::studly($subCategory->name);
             if ($subCategory->category) {

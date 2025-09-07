@@ -122,24 +122,9 @@ class ProductController extends Controller
         ];
 
         $product = Product::create($data);
-        $variantData['product_id'] = $product->id;
-        $variantData['sku'] = $validated['sku'];
-        $variantData['price'] = $validated['price'];
-        $variantData['stock_quantity'] = $validated['stock_quantity'];
-        $variantData['stock_status'] = $validated['stock_status'];
-        $variantData['metal_id'] = $validated['metal_type'];
-        $variantData['metal_purity_id'] = $validated['metal_purity'] ?? null;
-        $variantData['finish_id'] = $validated['finish'];
-        $variantData['color_id'] = $validated['color_tone']['id'];
-        $variantData['weight_grams'] = $validated['weight_grams'];
-        $variantData['cost'] = $validated['cost'];
-        // $variantData['primary_image'] = $validated['primary_image'];
-        // $variantData['secondary_images'] = $validated['secondary_images'];
-        !$product->variants()->exists() ??  $variantData['is_default'] = true;
-        $productVariant = new ProductVariantController()->store($request, $product, $variantData);
-        $tags =  new TagsController()->store($data);
+        $tags =  new TagsController()->store($validated);
         $product->tags()->sync($tags);
-
+        (new ProductVariantController())->createVariant($product, $validated);
         return redirect()->route('admin.products')->with('success', 'Product added successfully');
     }
 }

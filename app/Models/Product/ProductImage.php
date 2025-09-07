@@ -12,13 +12,8 @@ class ProductImage extends Model
     use HasFactory;
     protected $guarded = [];
 
-
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
     public function variant(): BelongsTo
     {
-        return $this->belongsTo(ProductVariant::class, 'variant_id');
+        return $this->belongsTo(ProductVariant::class, 'product_variant_id');
     }
 }
