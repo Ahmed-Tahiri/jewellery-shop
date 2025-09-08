@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('product_variant_id')->constrained('product_variants')->cascadeOnDelete();
             $table->string('url');
             $table->string('alt_text')->nullable();
+            $table->boolean('is_primary')->default(false);
             $table->timestamps();
             $table->index(['product_variant_id']);
         });

@@ -25,12 +25,13 @@ class ProductImageController extends Controller
         $imageData = [
             'product_variant_id' => $data['id'],
             'url' => $path,
+            'is_primary' => true,
             'alt_text' => $altText,
         ];
         if (!empty($secondaryImages) && count($secondaryImages) > 0) {
             foreach ($secondaryImages as $key => $image) {
                 $secondaryPath = $image->store("product_images/$category/$subcategoryName/$sku/secondary", 'public');
-                $secondaryImgAltText = $data['name'] . " Image $key";
+                $secondaryImgAltText = $parentProduct['name'] . " Image " . ($key + 1);
                 $secondaryImageData = [
                     'product_variant_id' => $data['id'],
                     'url' =>    $secondaryPath,

@@ -10,6 +10,7 @@ use App\Models\Product\Metal;
 use App\Models\Product\MetalPurity;
 use App\Models\Product\Product;
 use App\Models\Product\ProductFinish;
+use App\Models\Product\ProductVariant;
 use App\Models\Product\Status;
 use App\Models\SubCategory;
 use App\Services\ProductVariantService;
@@ -82,7 +83,27 @@ class ProductController extends Controller
 
     public function index()
     {
-        return Inertia::render('Admin/Products/Index');
+        $variants = ProductVariant::select('id', 'sku', 'product_id')
+            ->with([
+                'product:id,subcategory_id,name,is_active,created_at',
+                'product.subcategory:id,name,parent_id',
+                'product.subcategory.category:id,name',
+                'primaryImage:product_variant_id,url,alt_text'
+            ])
+            ->where('is_default', true)
+            ->get()->map(function ($variant) {
+                return [
+                    'id' => $variant->product?->id,
+                    'sku' => $variant?->sku,
+                    'created_at' => $variant->product?->created_at,
+                    'name' => $variant->product?->name,
+                    'is_active' => $variant->product?->is_active,
+                    'subcategory' => $variant->product?->subcategory?->name,
+                    'category' => $variant->product?->subcategory?->category?->name,
+                    'image' => $variant->primaryImage
+                ];
+            });
+        return Inertia::render('Admin/Products/Index', ['products' => $variants]);
     }
     public function create()
     {
@@ -129,5 +150,21 @@ class ProductController extends Controller
         $product->tags()->sync($tags);
         $productVariantService->create($product, $validated);
         return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) added successfully!");
+    }
+
+
+    public function statusUpdate(Request $request, Product $product)
+    {
+        $activeInput = $request->input('is_active');
+        $product->is_active = $activeInput;
+        if ($activeInput === 1) {
+            $status = Status::where('status', 'active')->first();
+            $product->status_id = $status->id;
+        } else {
+            $status = Status::where('status', 'draft')->first();
+            $product->status_id = $status->id;
+        }
+        $product->save();
+        return redirect()->back()->with('success', 'Status updated successfully');
     }
 }

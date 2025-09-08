@@ -74,6 +74,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.post');
     Route::post('/admin/products/color', [ColorToneController::class, 'store'])->name('admin.products.add.color');
+    Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+    Route::get('/admin/products/{product}/show', [ProductController::class, 'show'])->name('admin.products.show');
+    Route::patch('/admin/products/{product}/status', [ProductController::class, 'statusUpdate'])->name('admin.products.status.update');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
