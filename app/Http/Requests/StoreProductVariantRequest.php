@@ -19,6 +19,7 @@ class StoreProductVariantRequest extends FormRequest
             'metal_purity' => ['nullable', 'exists:metal_purities,id'],
             'finish' => ['required', 'exists:product_finishes,id'],
             'color_tone.id' => ['required', 'exists:color_tones,id'],
+            'is_default' => 'boolean',
 
             'dimensions' => [
                 function ($attribute, $value, $fail) {

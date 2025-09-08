@@ -14,6 +14,7 @@ export default function Create({ product }) {
 
     let { post, errors, data, setData, reset } = useForm({
         sku: '',
+        is_default: false,
         stock_quantity: '',
         stock_status: '',
         metal_type: '',

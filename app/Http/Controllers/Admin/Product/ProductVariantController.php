@@ -9,6 +9,7 @@ use App\Models\Product\Metal;
 use App\Models\Product\MetalPurity;
 use App\Models\Product\Product;
 use App\Models\Product\ProductFinish;
+use App\Models\Product\ProductVariant;
 use App\Services\ProductVariantService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,7 +26,6 @@ class ProductVariantController extends Controller
     }
     public function create(Product $product)
     {
-
         $metals = Metal::all(['id', 'name']);
         $metal_purities = MetalPurity::all(['id', 'purity as name']);
         $color_tones = ColorTone::all(['id', 'name', 'hex_code']);
@@ -41,9 +41,17 @@ class ProductVariantController extends Controller
 
     public function store(StoreProductVariantRequest $request, Product $product, ProductVariantService $variantService)
     {
-
         $validated = $request->validated();
         $variant = $variantService->create($product, $validated);
+        if ($validated['is_default'] && (bool)$validated['is_default'] === true) {
+            $variants = ProductVariant::where('product_id', $product->id)->get();
+            foreach ($variants as $prodVariant) {
+                $prodVariant->is_default = false;
+                $prodVariant->save();
+            }
+            $variant->is_default = true;
+            $variant->save();
+        };
         return redirect()
             ->route('admin.products.variants.successful', $product->id)
             ->with('success', "{$product->name} variant SKU:({$variant->sku}) added successfully!");
