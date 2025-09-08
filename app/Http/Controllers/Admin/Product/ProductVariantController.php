@@ -6,9 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Product\Product;
 use App\Models\Product\ProductVariant;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductVariantController extends Controller
 {
+
+
+    public function index()
+    {
+        return Inertia::render('Admin/Products/Variant/Index');
+    }
+
     public function createVariant(Product $product, array $validated)
     {
         $variantData['product_id'] = $product->id;
@@ -53,7 +61,6 @@ class ProductVariantController extends Controller
         $variantData['cost'] = $validated['cost'];
         $variantData['is_default'] = ! $product->variants()->exists();
         $this->createVariant($product, $validated);
-
-        return redirect()->route('dashboard')->with('success', 'Variant created successfully!');
+        return redirect()->route('admin.products.variants.successful')->with('success', 'Variant created successfully!');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\Product\ColorToneController;
 use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\Product\ProductVariantController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
@@ -67,6 +68,8 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
 
+    Route::get('/admin/products/variants/create', [ProductVariantController::class, 'create'])->name('admin.products.variants.create');
+    Route::get('/admin/products/variants/successful', [ProductVariantController::class, 'index'])->name('admin.products.variants.successful');
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.post');
