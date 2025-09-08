@@ -83,7 +83,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $variants = ProductVariant::select('id', 'sku', 'product_id')
+        $variants = ProductVariant::select('id', 'sku', 'product_id', 'price', 'cost')
             ->with([
                 'product:id,subcategory_id,name,is_active,created_at',
                 'product.subcategory:id,name,parent_id',
@@ -94,11 +94,12 @@ class ProductController extends Controller
             ->get()->map(function ($variant) {
                 return [
                     'id' => $variant->product?->id,
+                    'price' => $variant?->price,
+                    'cost' => $variant?->cost,
                     'sku' => $variant?->sku,
                     'created_at' => $variant->product?->created_at,
                     'name' => $variant->product?->name,
                     'is_active' => $variant->product?->is_active,
-                    'subcategory' => $variant->product?->subcategory?->name,
                     'category' => $variant->product?->subcategory?->category?->name,
                     'image' => $variant->primaryImage
                 ];

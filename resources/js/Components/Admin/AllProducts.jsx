@@ -16,12 +16,12 @@ export let AllProducts = ({ products }) => {
                     <table className="min-w-full border-collapse bg-white md:overflow-x-auto overflow-x-scroll">
                         <thead className="bg-zinc text-white text-left text-sm font-medium font-poppins">
                             <tr>
-                                <th className="px-3 py-2 border-x-1 border-zinc-dark w-16">Id</th>
-                                <th className="px-3 py-2 border-x-1 border-zinc-dark">Image</th>
+                                <th className="px-3 py-2 border-x-1 border-zinc-dark w-16">Image</th>
                                 <th className="px-3 py-2 border-x-1 border-zinc-dark">Name</th>
                                 <th className="px-3 py-2 border-x-1 border-zinc-dark">SKU</th>
                                 <th className="px-3 py-2 border-x-1 border-zinc-dark">Category</th>
-                                <th className="px-3 py-2 border-x-1 border-zinc-dark">Sub Category</th>
+                                <th className="px-3 py-2 border-x-1 border-zinc-dark">Price</th>
+                                <th className="px-3 py-2 border-x-1 border-zinc-dark">Cost</th>
                                 <th className="px-3 py-2 border-x-1 border-zinc-dark">Added On</th>
                                 <th className="px-3 py-2 border-x-1 border-zinc-dark">Is Active</th>
                                 <th className="px-3 py-2 border-x-1 border-zinc-dark text-center">Actions</th>

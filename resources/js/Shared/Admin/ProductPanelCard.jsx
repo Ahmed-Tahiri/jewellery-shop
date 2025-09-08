@@ -19,12 +19,12 @@ export let ProductPanelCard = ({ product, index }) => {
     };
     return <tr className={`${index % 2 === 0 ? "bg-powder-gray" : "bg-white"} hover:bg-gray-50 transition shadow`}>
 
-        <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.id}</td>
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300"><img className="h-10 shadow-xs" src={`/storage/${product.image.url}`} alt={product.image.alt_text} /></td>
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.name}</td>
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.sku}</td>
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.category}</td>
-        <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.subcategory}</td>
+        <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.price}</td>
+        <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{product.cost}</td>
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{formattedDate}</td>
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300 text-center"><Switch onChange={handleChange} checked={checked} height={20} width={40} /></td>
         <td className="px-3 py-2 font-poppins font-normal text-base  flex items-center justify-center gap-3 mt-2">
