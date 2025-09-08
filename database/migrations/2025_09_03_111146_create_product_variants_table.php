@@ -15,8 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->string('sku')->unique();
-            // e.g. "18K / US 6"
-            $table->string('label', 120)->nullable();
+            $table->string('size', 120)->nullable();
             $table->decimal('price', 12, 2)->nullable();
             $table->decimal('cost', 12, 2)->nullable();
             $table->foreignId('metal_id')->nullable()->constrained('metals')->nullOnDelete();

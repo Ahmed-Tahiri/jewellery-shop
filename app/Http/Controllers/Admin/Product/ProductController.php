@@ -12,7 +12,6 @@ use App\Models\Product\Product;
 use App\Models\Product\ProductFinish;
 use App\Models\Product\Status;
 use App\Models\SubCategory;
-use App\Models\Tags;
 use App\Services\ProductVariantService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -49,6 +48,7 @@ class ProductController extends Controller
                 },
             ],
 
+            'size' => ['nullable', 'decimal:0,2'],
             'length_mm' => ['nullable', 'decimal:0,2'],
             'width_mm'  => ['nullable', 'decimal:0,2'],
             'height_mm' => ['nullable', 'decimal:0,2'],
@@ -111,6 +111,7 @@ class ProductController extends Controller
                 $attributes["secondary_images.$index"] = "Secondary image " . ($index + 1);
             }
         }
+
         $validated = $request->validate($this->productValidationRules(),   $this->productValidationMessages(),   $attributes);
         $data = [
             'sku'                => $validated['sku'],

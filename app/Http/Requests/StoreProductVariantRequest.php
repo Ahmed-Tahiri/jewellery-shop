@@ -34,6 +34,7 @@ class StoreProductVariantRequest extends FormRequest
                 },
             ],
 
+            'size' => ['nullable', 'decimal:0,2'],
             'length_mm' => ['nullable', 'decimal:0,2'],
             'width_mm'  => ['nullable', 'decimal:0,2'],
             'height_mm' => ['nullable', 'decimal:0,2'],

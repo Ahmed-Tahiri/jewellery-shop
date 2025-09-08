@@ -42,7 +42,6 @@ class ProductVariantController extends Controller
     public function store(StoreProductVariantRequest $request, Product $product, ProductVariantService $variantService)
     {
         $validated = $request->validated();
-
         $variant = $variantService->create($product, $validated);
 
         return redirect()

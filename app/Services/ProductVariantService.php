@@ -40,6 +40,7 @@ class ProductVariantService
             'metal_purity_id'   => $validated['metal_purity'],
             'finish_id'         => $validated['finish'],
             'color_id'          => $colorId,
+            'size'              => $validated['size'],
             'weight_grams'      => $validated['weight_grams'],
             'cost'              => $validated['cost'],
             'height_mm'         => $validated['height_mm'],

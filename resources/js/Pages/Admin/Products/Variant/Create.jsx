@@ -1,5 +1,5 @@
-export default function Create({ Product }) {
+export default function Create({ product }) {
 
-    return <pre>{Product}</pre>
+    return <pre>{product}</pre>
 
 }
