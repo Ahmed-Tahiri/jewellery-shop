@@ -143,8 +143,12 @@ class ProductController extends Controller
             'short_description'  => $validated['short_description'],
             'long_description'   => $validated['long_description'],
             'status_id'          => $validated['status'],
-            'lead_time_days'     => $validated['lead_time_days'] ?? 0,
+            'lead_time_days'     => $validated['lead_time_days'],
         ];
+        $status = Status::where('status', 'active')->first();
+        if ($status->id === (int) $validated['status']) {
+            $data['is_active'] = true;
+        }
 
         $product = Product::create($data);
         $tags =  new TagsController()->store($validated);
@@ -153,7 +157,11 @@ class ProductController extends Controller
         return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) added successfully!");
     }
 
-
+    public function show(Product $product)
+    {
+        $productData = ['id' => $product->id];
+        return Inertia::render('Admin/Products/Show', ['product' => $productData]);
+    }
     public function statusUpdate(Request $request, Product $product)
     {
         $activeInput = $request->input('is_active');

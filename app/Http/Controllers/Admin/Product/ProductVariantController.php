@@ -41,11 +41,11 @@ class ProductVariantController extends Controller
 
     public function store(StoreProductVariantRequest $request, Product $product, ProductVariantService $variantService)
     {
+
         $validated = $request->validated();
         $variant = $variantService->create($product, $validated);
-
         return redirect()
-            ->route('admin.products.variants.successful')
+            ->route('admin.products.variants.successful', $product->id)
             ->with('success', "{$product->name} variant SKU:({$variant->sku}) added successfully!");
     }
 }

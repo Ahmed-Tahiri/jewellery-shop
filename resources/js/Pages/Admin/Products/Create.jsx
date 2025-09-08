@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
-import { ProductForm } from "../../../Components/Admin/ProductForm";
+import { ProductForm } from "../../../Components/Admin/FullProductForm";
 import { DropDown } from "../../../Shared/Admin/DropDown";
 import { FormNumInput } from "../../../Shared/FormNumInput";
 import { FormTextInput } from "../../../Shared/FormTextInput";
+import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
 export default function Create() {
 
     const [canAdd, setCanAdd] = useState(false);

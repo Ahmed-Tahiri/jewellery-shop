@@ -69,6 +69,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/admin/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
 
     Route::get('/admin/products/{product}/variants/create', [ProductVariantController::class, 'create'])->name('admin.products.variants.create');
+    Route::post('/admin/products/{product}/variants', [ProductVariantController::class, 'store'])->name('admin.products.variants.post');
     Route::get('/admin/products/{product}/variants/successful', [ProductVariantController::class, 'index'])->name('admin.products.variants.successful');
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');

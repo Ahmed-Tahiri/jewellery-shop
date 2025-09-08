@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('long_description')->nullable();
             $table->boolean('is_active')->default(false);
             $table->foreignId('status_id')->default(1)->constrained('statuses');
-            $table->integer('lead_time_days')->default(0);
+            $table->integer('lead_time_days')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->index(['is_active', 'status_id']);
