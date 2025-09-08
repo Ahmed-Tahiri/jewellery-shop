@@ -13,6 +13,7 @@ use App\Models\Product\ProductFinish;
 use App\Models\Product\Status;
 use App\Models\SubCategory;
 use App\Models\Tags;
+use App\Services\ProductVariantService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -72,6 +73,7 @@ class ProductController extends Controller
             'secondary_images.max' => 'Maximum 6 secondary images are allowed.',
             'secondary_images.*.max' => ':attribute is too large (max 2MB).',
             'metal_type.required' => 'Please select metal type.',
+            'finish.required' => 'Please select finish type.',
             'color_tone.id.required' => 'Please select color tone.',
             'status.required' => 'Please select status.',
             'subcategory.required' => 'Please select categories.',
@@ -101,7 +103,7 @@ class ProductController extends Controller
             'finishes' => $finishes,
         ]);
     }
-    public function store(Request $request)
+    public function store(Request $request, ProductVariantService $productVariantService)
     {
         $attributes = [];
         if ($request->hasFile('secondary_images')) {
@@ -124,7 +126,7 @@ class ProductController extends Controller
         $product = Product::create($data);
         $tags =  new TagsController()->store($validated);
         $product->tags()->sync($tags);
-        (new ProductVariantController())->createVariant($product, $validated);
+        $productVariantService->create($product, $validated);
         return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) added successfully!");
     }
 }
