@@ -125,6 +125,6 @@ class ProductController extends Controller
         $tags =  new TagsController()->store($validated);
         $product->tags()->sync($tags);
         (new ProductVariantController())->createVariant($product, $validated);
-        return redirect()->route('admin.products.variants.successful')->with('success', 'Variant created successfully!');
+        return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) added successfully!");
     }
 }

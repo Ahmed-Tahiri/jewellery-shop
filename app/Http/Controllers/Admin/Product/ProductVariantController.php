@@ -12,9 +12,11 @@ class ProductVariantController extends Controller
 {
 
 
-    public function index()
+    public function index(Product $product)
     {
-        return Inertia::render('Admin/Products/Variant/Index');
+        return Inertia::render('Admin/Products/Variant/Index', [
+            'product' => ['id' => $product->id, 'name' => $product->name]
+        ]);
     }
 
     public function createVariant(Product $product, array $validated)
@@ -40,7 +42,7 @@ class ProductVariantController extends Controller
 
         new ProductImageController()->store(
             $validated['primary_image'],
-            $validated['secondary_images'],
+            $validated['secondary_images'] ?? null,
             $productVariant
         );
 
@@ -61,6 +63,6 @@ class ProductVariantController extends Controller
         $variantData['cost'] = $validated['cost'];
         $variantData['is_default'] = ! $product->variants()->exists();
         $this->createVariant($product, $validated);
-        return redirect()->route('admin.products.variants.successful')->with('success', 'Variant created successfully!');
+        return redirect()->route('admin.products.variants.successful')->with('success', "$product->name variant SKU:(" . $variantData['sku'] . ") added successfully!)");
     }
 }
