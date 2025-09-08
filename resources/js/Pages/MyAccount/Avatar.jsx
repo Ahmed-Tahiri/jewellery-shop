@@ -100,7 +100,7 @@ export default function Avatar() {
         <div className="space-y-4 flex flex-col sm:items-start items-center w-full">
             {errors.avatar && (
                 <div className="lg:w-60 w-full flex justify-center items-center">
-                    <span className="font-poppins text-red-700 text-sm">{errors.avatar}</span>
+                    <span className="text-red-700 font-poppins text-sm">{errors.avatar}</span>
                 </div>
             )}
 

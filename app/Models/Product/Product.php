@@ -21,10 +21,6 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariant::class, 'product_id');
     }
-    public function images(): HasMany
-    {
-        return $this->hasMany(ProductImage::class, 'product_id');
-    }
     public function subcategory(): BelongsTo
     {
         return $this->belongsTo(SubCategory::class, 'subcategory_id');

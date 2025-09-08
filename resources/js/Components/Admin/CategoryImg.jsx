@@ -62,8 +62,8 @@ export let CategoryImg = ({ onImageCropped, setCanEdit }) => {
             <h6 className="font-poppins text-lg font-medium">{`${cleanUrl === '/admin/categories/create' ? 'Upload Category Image' : 'Update Category Image'}`}</h6>
             <div className="w-full flex items-center justify-center flex-col gap-y-5">
                 {(errors.image || categoryImgError) && <div className="flex flex-col items-center w-full gap-y-1">
-                    {errors.image && (<div><span className="text-red-700 text-sm -mt-1">{errors.image}</span></div>)}
-                    {categoryImgError && (<div><span className="text-red-700 text-sm -mt-1">Image is too large! Max allowed size is 3 MB.</span></div>)}
+                    {errors.image && (<div><span className="text-red-700 font-poppins text-sm -mt-1">{errors.image}</span></div>)}
+                    {categoryImgError && (<div><span className="text-red-700 font-poppins text-sm -mt-1">Image is too large! Max allowed size is 3 MB.</span></div>)}
                 </div>}
                 {
                     showCropper ? (

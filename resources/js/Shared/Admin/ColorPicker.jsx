@@ -50,8 +50,8 @@ export let ColorPicker = ({ colors, value, onChange, onAddColor }) => {
             {showAdd && (
                 <div className="p-4 border-2 border-gray-300  space-y-3 mt-3 w-full">
                     <div className="text-base font-poppins  text-semi-black font-medium w-full">Add New Color</div>
-                    {errors.hex_code && (<div><span className="text-red-700 text-sm -mt-1">{errors.hex_code}</span></div>)}
-                    {errors.color_name && (<div><span className="text-red-700 text-sm -mt-1">{errors.color_name}</span></div>)}
+                    {errors.hex_code && (<div><span className="text-red-700 font-poppins text-sm -mt-1">{errors.hex_code}</span></div>)}
+                    {errors.color_name && (<div><span className="text-red-700 font-poppins text-sm -mt-1">{errors.color_name}</span></div>)}
                     <input
                         type="text"
                         placeholder="Enter New Color Name"

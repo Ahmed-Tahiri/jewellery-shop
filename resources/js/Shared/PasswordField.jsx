@@ -11,7 +11,7 @@ export let PasswordField = ({ label, inputChangeHandler, data, error = null, nam
                 <input value={data} onChange={inputChangeHandler} type={`${passIsVisible ? 'text' : 'password'}`} name={name} id={id} className="font-poppins  p-2 text-semi-black outline-0 border-0 text-sm sm:text-base" placeholder={placeholder} autoComplete="off" />
                 <div className="w-10 me-1"><button type="button" className="cursor-pointer w-full flex items-center justify-center transition-all ease-linear duration-200" onClick={() => setPassIsVisible(!passIsVisible)}>{passIsVisible ? (<AiOutlineEyeInvisible className="text-zinc hover:text-light-gray text-xl md:text-2xl" />) : (<AiOutlineEye className="text-zinc hover:text-light-gray text-xl md:text-2xl" />)}</button></div>
             </div>
-            {error && (<span className="text-red-700 text-sm -mt-1">{error}</span>)}
+            {error && (<span className="text-red-700 font-poppins text-sm -mt-1">{error}</span>)}
         </div>
     </div>
 }

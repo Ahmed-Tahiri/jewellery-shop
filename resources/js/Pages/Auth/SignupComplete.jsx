@@ -35,7 +35,7 @@ export default function SignupComplete() {
                     <div className="w-full flex flex-col gap-y-2">
                         <p className="sm:text-lg text-base font-poppins font-medium text-semi-black">Gender *</p>
                         <DropDown customerGender={data.gender_id} setGender={(id) => setData('gender_id', id)} />
-                        {errors.gender_id && (<span className="text-red-700 text-sm -mt-1">{errors.gender_id}</span>)}
+                        {errors.gender_id && (<span className="text-red-700 font-poppins text-sm -mt-1">{errors.gender_id}</span>)}
                     </div>
 
                     <div className="w-full"><button type="submit" className="w-full p-2 bg-zinc text-white font-poppins text-base shadow-md font-normal cursor-pointer hover:bg-zinc-dark disabled:opacity-50" disabled={processing}> {processing ? "Signing up..." : "Sign Up"}</button></div>

@@ -13,7 +13,7 @@ class MetalSeeder extends Seeder
      */
     public function run(): void
     {
-        $metals = ['Gold', 'Silver', 'White Gold', 'Bronze', 'Titanium', 'Brass', 'Rose Gold', 'Palladium', 'Glass', 'Ceramic',   'Tungsten', 'Stainless Steel'];
+        $metals = ['Gold', 'Silver', 'White Gold', 'Bronze', 'Titanium', 'Brass', 'Rose Gold', 'Palladium', 'Platinum', 'Glass', 'Ceramic',   'Tungsten', 'Stainless Steel'];
         foreach ($metals as $metal) {
             Metal::create(['name' => $metal]);
         }

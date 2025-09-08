@@ -77,7 +77,7 @@ export default function Index() {
                                 customerGender={data.gender_id}
                                 setGender={(id) => setData("gender_id", id)}
                             />
-                            {errors.gender_id && (<span className="text-red-700 text-sm -mt-1">{errors.gender_id}</span>)}
+                            {errors.gender_id && (<span className="text-red-700 font-poppins text-sm -mt-1">{errors.gender_id}</span>)}
                         </div>
                         <div>
                             <button type="submit" disabled={processing} className={`md:text-base text-sm font-poppins w-40 md:w-50 shadow-xs bg-zinc text-white hover:bg-zinc-dark cursor-pointer py-2  px-3 text-center ${processing ? 'opacity-50' : 'opacity-100'}`}>
