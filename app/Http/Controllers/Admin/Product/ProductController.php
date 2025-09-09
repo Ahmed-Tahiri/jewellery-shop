@@ -159,10 +159,22 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $productData =   $product->load(['subcategory:parent_id,id', 'subcategory.category', 'status', 'variants.images', 'variants.metal', 'variants.color_tone']);
-
+        $productData =   $product->load(['subcategory:parent_id,id,name', 'subcategory.category', 'status', 'variants.images', 'variants.metal', 'variants.color_tone']);
+        $productFormattedData = [
+            'id' => $productData->id,
+            'name' => $productData->name,
+            'category' => $productData->subcategory->category->name,
+            'subcategory' => $productData->subcategory->name,
+            'variants' => $productData->variants,
+            'shortDescription' => $productData->short_description,
+            'longDescription' => $productData->long_description,
+            'estimatedDeliverTime' => $productData->lead_time_days,
+            'sku' => $productData->sku,
+            'createdAt' => $productData->created_at,
+            'updatedAt' => $productData->updated_at,
+        ];
         $images = $productData->variants->pluck('images')->collapse()->unique('url')->values();
-        return Inertia::render('Admin/Products/Show', ['product' => $productData, 'productImages' => $images]);
+        return Inertia::render('Admin/Products/Show', ['product' => $productFormattedData, 'productImages' => $images]);
     }
     public function statusUpdate(Request $request, Product $product)
     {

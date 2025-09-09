@@ -1,8 +1,8 @@
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, usePage } from "@inertiajs/react";
-import { CategoryData } from "../../../../Components/Admin/CategoryData";
 import { format } from "date-fns";
 import { PieChart } from "../../../../Shared/Admin/PieChart";
+import { ItemData } from "../../../../Components/Admin/ItemData";
 
 
 
@@ -31,12 +31,12 @@ export default function Show() {
                                     <img className="w-full object-cover shadow-sm rounded-sm" src={`/storage/${category.image}`} alt="category img" />
                                 </div>
                                 <div className="flex flex-col w-7/10 border-s-[1px] border-gray-300 py-2 px-3 gap-y-2">
-                                    <CategoryData heading={'Name:'} data={category.name} />
-                                    <CategoryData heading={'Description:'} data={category.description} />
-                                    <CategoryData heading={'Slug:'} data={category.slug} />
-                                    <CategoryData heading={'Sub categories:'} data={category.sub_categories} />
-                                    <CategoryData heading={'Created at:'} data={createdAtFormatted} />
-                                    <CategoryData heading={'Last update at:'} data={updatedAtFormatted} />
+                                    <ItemData heading={'Name:'} data={category.name} />
+                                    <ItemData heading={'Description:'} data={category.description} />
+                                    <ItemData heading={'Slug:'} data={category.slug} />
+                                    <ItemData heading={'Sub categories:'} data={category.sub_categories} />
+                                    <ItemData heading={'Created at:'} data={createdAtFormatted} />
+                                    <ItemData heading={'Last update at:'} data={updatedAtFormatted} />
                                 </div>
                             </div>
                             <div className="w-full flex gap-x-2 justify-end">
