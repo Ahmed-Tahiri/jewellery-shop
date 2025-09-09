@@ -34,6 +34,7 @@ export default function Show({ product, productImages }) {
                                     <ItemData heading={'Short Description:'} data={product.shortDescription} />
                                     <ItemData heading={'Long Description:'} data={product.longDescription} />
                                     <ItemData heading={'Estimated Delivery Time:'} data={product.estimatedDeliverTime} />
+                                    <ItemData heading={'Status:'} data={product.status} />
                                     <ItemData heading={'Created At:'} data={createdAtFormatted} />
                                     <ItemData heading={'Last Updated At:'} data={updatedAtFormatted} />
                                 </div>
