@@ -78,6 +78,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
     Route::get('/admin/products/{product}/show', [ProductController::class, 'show'])->name('admin.products.show');
     Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::patch('/admin/products/{product}/status', [ProductController::class, 'statusUpdate'])->name('admin.products.status.update');
 });
 

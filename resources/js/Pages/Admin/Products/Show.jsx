@@ -32,7 +32,7 @@ export default function Show({ product, productImages }) {
                                     <ItemData heading={'Product Category:'} data={product.category} />
                                     <ItemData heading={'Product Subcategory:'} data={product.subcategory} />
                                     <ItemData heading={'Short Description:'} data={product.shortDescription} />
-                                    {/* <ItemData heading={'Long Description:'} data={product.longDescription} /> */}
+                                    <ItemData heading={'Long Description:'} data={product.longDescription} />
                                     <ItemData heading={'Estimated Delivery Time:'} data={product.estimatedDeliverTime} />
                                     <ItemData heading={'Created At:'} data={createdAtFormatted} />
                                     <ItemData heading={'Last Updated At:'} data={updatedAtFormatted} />

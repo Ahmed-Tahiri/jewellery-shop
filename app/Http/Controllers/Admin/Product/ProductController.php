@@ -14,12 +14,33 @@ use App\Models\Product\ProductVariant;
 use App\Models\Product\Status;
 use App\Models\SubCategory;
 use App\Services\ProductVariantService;
+use App\Services\SlugService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
+/**
+ * @method static creating(\Closure $callback)
+ * @method static updating(\Closure $callback)
+ */
 class ProductController extends Controller
 {
+    protected static function booted(): void
+    {
+        static::creating(function (Product $product) {
+            $slugService = app(SlugService::class);
+            $product->slug = $slugService->createSlug($product->name, static::class);
+        });
+
+        static::updating(function (Product $product) {
+            if ($product->isDirty('name')) {
+                $slugService = app(SlugService::class);
+                $product->slug = $slugService->createSlug($product->name, static::class, 'slug', $product->id);
+            }
+        });
+    }
+
     protected function productValidationRules(): array
     {
         return [
@@ -137,7 +158,6 @@ class ProductController extends Controller
         $validated = $request->validate($this->productValidationRules(),   $this->productValidationMessages(),   $attributes);
         $data = [
             'sku'                => $validated['sku'],
-            'slug'               => Str::slug($validated['name']),
             'name'               => $validated['name'],
             'subcategory_id'     => $validated['subcategory'],
             'short_description'  => $validated['short_description'],
@@ -170,11 +190,71 @@ class ProductController extends Controller
             'longDescription' => $productData->long_description,
             'estimatedDeliverTime' => $productData->lead_time_days,
             'sku' => $productData->sku,
+            'status' => $productData->status->status,
             'createdAt' => $productData->created_at,
             'updatedAt' => $productData->updated_at,
         ];
         $images = $productData->variants->pluck('images')->collapse()->unique('url')->values();
         return Inertia::render('Admin/Products/Show', ['product' => $productFormattedData, 'productImages' => $images]);
+    }
+    public function edit(Product $product)
+    {
+        $categories = Category::all(['name', 'id']);
+        $subcategories = SubCategory::all(['id', 'name', 'parent_id']);
+        $statuses = Status::all(['id', 'status as name']);
+        $productData =   $product->load(['subcategory:parent_id,id,name', 'subcategory.category', 'status']);
+        $productFormattedData = [
+            'id' => $productData->id,
+            'name' => $productData->name,
+            'category' => $productData->subcategory->category,
+            'subcategory' => $productData->subcategory,
+            'shortDescription' => $productData->short_description,
+            'longDescription' => $productData->long_description,
+            'estimatedDeliverTime' => $productData->lead_time_days,
+            'sku' => $productData->sku,
+            'status' => [
+                'id' => $productData->status->id,
+                'name' => $productData->status->status,
+            ],
+        ];
+
+        return Inertia::render('Admin/Products/Edit', [
+            'product' => $productFormattedData,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'statuses' => $statuses,
+        ]);
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:3'],
+            'sku' => [
+                'required',
+                'regex:/^[A-Z0-9_-]+$/',
+                'min:6',
+                'string',
+                Rule::unique('products', 'sku')->ignore($product->id),
+            ],
+            'short_description' => ['required', 'min:10'],
+            'long_description' => ['required', 'min:50'],
+            'status' => ['required', 'exists:statuses,id'],
+            'subcategory' => ['required', 'exists:sub_categories,id'],
+            'lead_time_days' => ['nullable', 'integer'],
+        ]);
+        $data = [
+            'sku'                => $validated['sku'],
+            'name'               => $validated['name'],
+            'subcategory_id'     => $validated['subcategory'],
+            'short_description'  => $validated['short_description'],
+            'long_description'   => $validated['long_description'],
+            'status_id'          => $validated['status'],
+            'lead_time_days'     => $validated['lead_time_days'],
+        ];
+        $product->update($data);
+
+        return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) updated successfully!");
     }
     public function statusUpdate(Request $request, Product $product)
     {
