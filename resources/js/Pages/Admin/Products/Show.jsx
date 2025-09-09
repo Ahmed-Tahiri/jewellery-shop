@@ -18,8 +18,7 @@ export default function Show({ product, productImages }) {
             <div>
                 <div className="flex flex-row items-start justify-between shadow">
                     <div className="flex flex-row p-5 gap-x-5 w-full bg-white rounded">
-                        <div className="w-4/10">
-
+                        <div className="w-114">
                             <ProductImagesCarousel images={productImages} />
                         </div>
                     </div>

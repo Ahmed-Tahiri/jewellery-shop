@@ -37,7 +37,7 @@ export let ProductImagesCarousel = ({ images }) => {
 
 
     return (
-        <div className="flex flex-col gap-2 w-114">
+        <div className="flex flex-col gap-2 w-full">
             <div className="relative  flex">
                 <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center z-10 px-4">
                     <button
