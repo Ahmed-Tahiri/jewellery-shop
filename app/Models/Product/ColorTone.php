@@ -10,6 +10,6 @@ class ColorTone extends Model
     protected $guarded = [];
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'color_id');
+        return $this->hasMany(ProductVariant::class, 'color_id');
     }
 }

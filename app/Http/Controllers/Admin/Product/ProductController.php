@@ -159,8 +159,10 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $productData = ['id' => $product->id];
-        return Inertia::render('Admin/Products/Show', ['product' => $productData]);
+        $productData =   $product->load(['subcategory:parent_id,id', 'subcategory.category', 'status', 'variants.images', 'variants.metal', 'variants.color_tone']);
+
+        $images = $productData->variants->pluck('images')->collapse()->unique('url')->values();
+        return Inertia::render('Admin/Products/Show', ['product' => $productData, 'productImages' => $images]);
     }
     public function statusUpdate(Request $request, Product $product)
     {
