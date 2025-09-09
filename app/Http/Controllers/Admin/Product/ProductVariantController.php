@@ -39,21 +39,16 @@ class ProductVariantController extends Controller
         ]);
     }
 
-    public function store(StoreProductVariantRequest $request, Product $product, ProductVariantService $variantService)
+    public function edit(Request $request, Product $product, ProductVariant $variant)
     {
-        $validated = $request->validated();
-        $variant = $variantService->create($product, $validated);
-        if ($validated['is_default'] && (bool)$validated['is_default'] === true) {
-            $variants = ProductVariant::where('product_id', $product->id)->get();
-            foreach ($variants as $prodVariant) {
-                $prodVariant->is_default = false;
-                $prodVariant->save();
-            }
-            $variant->is_default = true;
-            $variant->save();
-        };
-        return redirect()
-            ->route('admin.products.variants.successful', $product->id)
-            ->with('success', "{$product->name} variant SKU:({$variant->sku}) added successfully!");
+        dd('Edit');
+    }
+    public function destroy(Request $request, Product $product, ProductVariant $variant)
+    {
+        dd('Delete');
+    }
+    public function show(Request $request, Product $product, ProductVariant $variant)
+    {
+        dd('Show');
     }
 }

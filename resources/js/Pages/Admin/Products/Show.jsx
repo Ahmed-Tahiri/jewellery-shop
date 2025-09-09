@@ -3,14 +3,15 @@ import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeadin
 import { ProductImagesCarousel } from "../../../Shared/ProductImagesCarousel";
 import { ItemData } from "../../../Components/Admin/ItemData";
 import { format } from "date-fns";
+import { VariantCard } from "../../../Components/Admin/VariantCard";
 
 
 export default function Show({ product, productImages }) {
 
     const createdAtFormatted = product.createdAt ? format(new Date(product.createdAt), "EEEE, do MMMM yyyy p") : "N/A";
     const updatedAtFormatted = product.updatedAt ? format(new Date(product.updatedAt), "EEEE, do MMMM yyyy p") : "N/A";
-    console.log(product);
-    return <section className="w-full min-h-170">
+
+    return (<section className="w-full min-h-170">
         <div className="w-full flex flex-col gap-y-8">
             <div className="w-full flex flex-row justify-between items-center">
                 <AdminSectionSubHeading heading={"Product Information"} />
@@ -47,13 +48,18 @@ export default function Show({ product, productImages }) {
                     </div>
                 </div>
             </div>
-            <div className="w-full flex flex-row justify-between items-center">
-                <AdminSectionSubHeading heading={"Product Variants"} />
-                <div className="flex flex-row items-center justify-end">
-                    <Link className="flex items-center justify-center font-poppins text-base bg-mustard text-white p-2 min-w-36 transition-colors ease-linear duration-200 hover:bg-mustard-dark" href={route("admin.products.variants.create", product.id)} >Add Variant</Link>
+            <div className="flex w-full flex-col gap-5">
+                <div className="w-full flex flex-row justify-between items-center">
+                    <AdminSectionSubHeading heading={"Product Variants"} />
+                    <div className="flex flex-row items-center justify-end">
+                        <Link className="flex items-center justify-center font-poppins text-base bg-mustard text-white p-2 min-w-36 transition-colors ease-linear duration-200 hover:bg-mustard-dark" href={route("admin.products.variants.create", product.id)} >Add Variant</Link>
+                    </div>
+                </div>
+                <div className="flex flex-row gap-10 justify-start flex-wrap">
+                    {product.variants.map((variant, idx) => <VariantCard key={`productVariantCard${variant.id}`} product={product} variant={variant} />)}
                 </div>
             </div>
-        </div>
-    </section>
 
+        </div>
+    </section>);
 }

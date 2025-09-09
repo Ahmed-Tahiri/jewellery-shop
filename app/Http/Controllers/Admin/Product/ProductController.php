@@ -179,7 +179,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $productData =   $product->load(['subcategory:parent_id,id,name', 'subcategory.category', 'status', 'variants.images', 'variants.metal', 'variants.color_tone']);
+        $productData =   $product->load(['subcategory:parent_id,id,name', 'subcategory.category', 'status', 'variants.primaryImage', 'variants.metal', 'variants.color_tone']);
         $productFormattedData = [
             'id' => $productData->id,
             'name' => $productData->name,
@@ -194,7 +194,10 @@ class ProductController extends Controller
             'createdAt' => $productData->created_at,
             'updatedAt' => $productData->updated_at,
         ];
-        $images = $productData->variants->pluck('images')->collapse()->unique('url')->values();
+        $images = $productData->variants->flatMap->images
+            ->where('is_primary', true)
+            ->unique('url')
+            ->values();
         return Inertia::render('Admin/Products/Show', ['product' => $productFormattedData, 'productImages' => $images]);
     }
     public function edit(Product $product)
