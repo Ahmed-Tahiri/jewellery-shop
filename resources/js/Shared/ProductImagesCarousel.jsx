@@ -2,6 +2,8 @@ import { useState, useRef } from "react"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper/modules";
+import InnerImageZoom from "react-inner-image-zoom";
+import 'react-inner-image-zoom/lib/styles.min.css';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
@@ -29,16 +31,16 @@ export let ProductImagesCarousel = ({ images }) => {
 
     return (
         <div className="flex flex-col gap-2 w-full">
-            <div className="relative  flex">
-                <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center z-10 px-4">
-                    <button onClick={handlePrev} className={`cursor-pointer h-12 w-12 flex justify-center items-center shadow-xs ${isBeginning ? "bg-zinc text-white" : "bg-mustard text-zinc"}`}>
+            <div className="relative  flex ">
+                <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center z-10 px-4 pointer-events-none">
+                    <button onClick={handlePrev} className={`cursor-pointer h-12 w-12 flex justify-center items-center shadow-xs ${isBeginning ? "bg-zinc text-white" : "bg-mustard text-zinc"} pointer-events-auto`}>
                         <FaChevronLeft className="text-2xl" />
                     </button>
-                    <button onClick={handleNext} className={`cursor-pointer h-12 w-12 flex justify-center items-center shadow-xs  ${isEnd ? "bg-zinc text-white" : "bg-mustard text-zinc"}`} >
+                    <button onClick={handleNext} className={`cursor-pointer h-12 w-12 flex justify-center items-center shadow-xs  ${isEnd ? "bg-zinc text-white" : "bg-mustard text-zinc"} pointer-events-auto`} >
                         <FaChevronRight className="text-2xl" />
                     </button>
                 </div>
-                <div className=" flex-1 overflow-hidden">
+                <div className="flex-1 overflow-hidden">
                     <Swiper
                         modules={[Navigation, Thumbs]}
                         onSwiper={swipeHandler}
@@ -48,8 +50,13 @@ export let ProductImagesCarousel = ({ images }) => {
                         className="w-full"
                     >
                         {images.map((img, idx) => (
-                            <SwiperSlide key={`MainSlide-${idx}`} className="w-20">
-                                <img src={`/storage/${img.url}`} alt={`Product Main Image ${idx + 1}`} className="w-full aspect-square object-contain bg-powder-gray rounded-xs shadow" />
+                            <SwiperSlide key={`MainSlide-${idx}`} className="w-20 overflow-hidden">
+                                <InnerImageZoom
+                                    hasSpacer={true}
+                                    zoomType="hover-in-place"
+                                    fullscreenOnMobile={true}
+                                    zoomScale={2}
+                                    zoomSrc={`/storage/${img.url}`} src={`/storage/${img.url}`} alt={`Product Main Image ${idx + 1}`} className="w-full aspect-square object-contain bg-powder-gray rounded-xs shadow" />
                             </SwiperSlide>
                         ))}
                     </Swiper>
