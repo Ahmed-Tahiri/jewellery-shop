@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { ProductMainImage } from "../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../Shared/Admin/SecondaryImageList";
@@ -44,7 +44,7 @@ export default function Create() {
         secondary_images: secondaryImgs
     });
 
-    let inputChangeHandler = (e) => {
+    let inputChangeHandler = useCallback((e) => {
         const updated = { ...data, [e.target.name]: e.target.value };
         setData(e.target.name, e.target.value);
 
@@ -52,7 +52,7 @@ export default function Create() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }
+    }, [setData]);
     let formSubmitHandler = (e) => {
         e.preventDefault();
 

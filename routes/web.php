@@ -13,7 +13,6 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SignupCompleteController;
-use App\Models\Product\Product;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -70,13 +69,20 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/products/{product}/variants/create', [ProductVariantController::class, 'create'])->name('admin.products.variants.create');
     Route::post('/admin/products/{product}/variants', [ProductVariantController::class, 'store'])->name('admin.products.variants.post');
+    Route::post('/admin/products/{product}/variants/{variant}', [ProductVariantController::class, 'update'])->name('admin.products.variants.update');
+    Route::get('/admin/products/{product}/variants/{variant}/edit', [ProductVariantController::class, 'edit'])->name('admin.products.variants.edit');
+    Route::get('/admin/products/{product}/variants/{variant}/show', [ProductVariantController::class, 'show'])->name('admin.products.variants.show');
+    Route::delete('/admin/products/{product}/variants/{variant}/destroy', [ProductVariantController::class, 'destroy'])->name('admin.products.variants.destroy');
     Route::get('/admin/products/{product}/variants/successful', [ProductVariantController::class, 'index'])->name('admin.products.variants.successful');
+
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.post');
     Route::post('/admin/products/color', [ColorToneController::class, 'store'])->name('admin.products.add.color');
     Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
     Route::get('/admin/products/{product}/show', [ProductController::class, 'show'])->name('admin.products.show');
+    Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::patch('/admin/products/{product}/status', [ProductController::class, 'statusUpdate'])->name('admin.products.status.update');
 });
 

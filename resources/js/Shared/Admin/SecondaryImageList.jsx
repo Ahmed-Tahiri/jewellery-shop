@@ -1,15 +1,34 @@
 import { useEffect, useState } from "react";
 import { SecondaryImgCard } from "./SecondaryImageCard";
+import { v4 as uuid } from "uuid";
 
 export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages = [], setError }) => {
-    const [images, setImages] = useState([...initialImages, null]);
 
+    const normalizeImages = (initialImages) =>
+        initialImages.map((img) => ({
+            _key: uuid(),
+            id: img.id ?? null,
+            url: img.url ?? null,
+            file: null,
+        }));
+
+    const [images, setImages] = useState([
+        ...normalizeImages(initialImages),
+        null
+    ]);
     useEffect(() => setSecondaryImgs(images.filter((img) => img !== null)), [images]);
 
     const handleImageChange = (index, blob) => {
-        setImages((prev) => {
+        setImages(prev => {
             const updated = [...prev];
-            updated[index] = blob;
+            const old = updated[index];
+
+
+            updated[index] = {
+                ...old,
+                file: blob,
+                url: null,
+            };
 
             if (index === prev.length - 1 && updated.length < 6) {
                 updated.push(null);
@@ -18,8 +37,9 @@ export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages =
         });
     };
 
+
     const handleImageDelete = (index) => {
-        setImages((prev) => {
+        setImages(prev => {
             const updated = [...prev];
             updated.splice(index, 1);
 
@@ -34,12 +54,13 @@ export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages =
         <div className="flex gap-3 flex-wrap">
             {images.map((img, idx) => (
                 <SecondaryImgCard
-                    key={idx}
+                    key={img?._key ?? `placeholder-${idx}`}
                     setCanEdit={setCanEdit}
-                    file={img}
+                    img={img}
                     onImageChange={(blob) => handleImageChange(idx, blob)}
                     onImageDelete={() => handleImageDelete(idx)}
                     setError={setError}
+                    uniqueID={uuid()}
                 />
             ))}
         </div>

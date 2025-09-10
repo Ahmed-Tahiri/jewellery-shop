@@ -1,4 +1,6 @@
-export let FormTextArea = ({ data, error = null, label, name, id, placeholder, inputChangeHandler, rows = 8 }) => {
+import React from "react";
+
+let FormTextAreaComponent = ({ data, error = null, label, name, id, placeholder, inputChangeHandler, rows = 8 }) => {
     return (
         <>
             <label className="sm:text-lg text-base font-poppins font-medium text-semi-black" htmlFor={id} >
@@ -12,3 +14,4 @@ export let FormTextArea = ({ data, error = null, label, name, id, placeholder, i
         </>
     );
 };
+export const FormTextArea = React.memo(FormTextAreaComponent);

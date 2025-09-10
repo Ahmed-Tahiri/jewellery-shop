@@ -9,6 +9,6 @@ class Metal extends Model
 {
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'metal_id');
+        return $this->hasMany(ProductVariant::class, 'metal_id');
     }
 }

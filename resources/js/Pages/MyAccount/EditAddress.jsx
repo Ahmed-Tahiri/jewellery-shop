@@ -1,6 +1,6 @@
 import { useForm, usePage } from "@inertiajs/react";
 import { FormTextInput } from "../../Shared/FormTextInput";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 
 
@@ -21,9 +21,9 @@ export default function EditAddress() {
         is_primary: address.is_primary || false,
     });
 
-    const inputChangeHandler = (e) => {
+    const inputChangeHandler = useCallback((e) => {
         setData(e.target.name, e.target.value);
-    };
+    }, [setData]);
 
     const submitHandler = (e) => {
         e.preventDefault();

@@ -9,6 +9,6 @@ class MetalPurity extends Model
 {
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'metal_purity_id');
+        return $this->hasMany(ProductVariant::class, 'metal_purity_id');
     }
 }

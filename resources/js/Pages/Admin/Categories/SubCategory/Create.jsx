@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { FormTextInput } from "../../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../../Shared/FormTextArea";
 import { ParenCategoryDropDown } from "../../../../Components/Admin/ParentCategoryDropDown";
 import { SubCategoryMiniCard } from "../../../../Components/Admin/SubCategoryMiniCard";
+import { route } from "ziggy-js";
 
 export default function Create() {
     const [canAdd, setCanAdd] = useState(false);
@@ -78,7 +79,7 @@ export default function Create() {
         post(route("admin.subcategories.post"));
     };
 
-    let inputChangeHandler = (name, value) => {
+    let inputChangeHandler = useCallback((name, value) => {
         let updatedName = subName;
         let updatedDescription = subDescription;
         if (name === "name") {
@@ -93,7 +94,7 @@ export default function Create() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    };
+    }, [setData]);
 
     return <section className="w-full min-h-170">
         <div className="w-full flex flex-col gap-y-8">

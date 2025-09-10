@@ -25,22 +25,6 @@ class Product extends Model
     {
         return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
-    public function metal(): BelongsTo
-    {
-        return $this->belongsTo(Metal::class, 'metal_id');
-    }
-    public function metal_purity(): BelongsTo
-    {
-        return $this->belongsTo(MetalPurity::class, 'metal_purity_id');
-    }
-    public function color_tone(): BelongsTo
-    {
-        return $this->belongsTo(ColorTone::class, 'color_id');
-    }
-    public function finish(): BelongsTo
-    {
-        return $this->belongsTo(ProductFinish::class, 'finish_id');
-    }
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class, 'status_id');

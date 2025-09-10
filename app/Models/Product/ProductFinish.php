@@ -10,6 +10,6 @@ class ProductFinish extends Model
     protected $guarded = [];
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'finish_id');
+        return $this->hasMany(ProductVariant::class, 'finish_id');
     }
 }

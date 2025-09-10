@@ -2,6 +2,7 @@ import { Link, useForm } from "@inertiajs/react";
 import { PasswordField } from "../../Shared/PasswordField";
 import { FormTextInput } from "../../Shared/FormTextInput";
 import { AuthLayout } from "../../Shared/AuthLayout";
+import { route } from "ziggy-js";
 
 export default function Signup() {
     const { data, setData, post, processing, errors, reset } = useForm({

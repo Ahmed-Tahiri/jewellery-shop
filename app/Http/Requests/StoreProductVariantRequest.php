@@ -7,12 +7,33 @@ use Illuminate\Validation\Rule;
 
 class StoreProductVariantRequest extends FormRequest
 {
+    public function attributes(): array
+    {
+        $attributes = [];
+        if (request()->has('secondary_images')) {
+            foreach (request()->input('secondary_images') as $index => $image) {
+                $num = $index + 1;
+                $attributes["secondary_images.$index.id"]   = "Secondary image $num";
+                $attributes["secondary_images.$index.url"]  = "Secondary image $num";
+                $attributes["secondary_images.$index.file"] = "Secondary image $num";
+            }
+        }
+        return $attributes;
+    }
     public function rules()
     {
         return [
             'primary_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'secondary_images' => 'array|max:6',
-            'secondary_images.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
+            'secondary_images' => ['array', 'max:6'],
+            'secondary_images.*.id'   => ['nullable', 'integer', 'exists:product_images,id'],
+            'secondary_images.*.url'  => ['nullable', 'string'],
+            'secondary_images.*.file' => [
+                'nullable',
+                'file',
+                'image',
+                'mimes:jpeg,jpg,png,webp',
+                'max:2048'
+            ],
             'sku' => ['required', 'regex:/^[A-Z0-9_-]+$/', 'min:6', 'string', 'unique:products,sku'],
             'weight_grams' => ['required', 'decimal:0,2'],
             'metal_type' => ['required', 'exists:metals,id'],

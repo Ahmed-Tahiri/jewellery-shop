@@ -2,6 +2,7 @@ import { router, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import { FaPlus } from "react-icons/fa6";
+import { route } from "ziggy-js";
 
 export let ColorPicker = ({ colors, value, onChange, onAddColor }) => {
     const [showAdd, setShowAdd] = useState(false);

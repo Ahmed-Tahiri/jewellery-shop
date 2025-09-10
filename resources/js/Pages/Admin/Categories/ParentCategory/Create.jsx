@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../../Shared/FormTextArea";
 import { CategoryImg } from "../../../../Components/Admin/CategoryImg";
+import { route } from "ziggy-js";
 
 export default function Create() {
 
@@ -16,7 +17,7 @@ export default function Create() {
         image: null
     });
 
-    let inputChangeHandler = (e) => {
+    let inputChangeHandler = useCallback((e) => {
         const updated = { ...data, [e.target.name]: e.target.value };
         setData(e.target.name, e.target.value);
 
@@ -24,7 +25,7 @@ export default function Create() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }
+    }, [setData])
     let formSubmitHandler = (e) => {
         e.preventDefault();
 

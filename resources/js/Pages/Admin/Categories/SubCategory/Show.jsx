@@ -1,8 +1,9 @@
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, usePage } from "@inertiajs/react";
-import { CategoryData } from "../../../../Components/Admin/CategoryData";
+import { ItemData } from "../../../../Components/Admin/ItemData";
 import { format } from "date-fns";
 import { PieChart } from "../../../../Shared/Admin/PieChart";
+import { route } from "ziggy-js";
 
 
 export default function Show() {
@@ -26,12 +27,12 @@ export default function Show() {
                             <h2 className="font-poppins w-full text-xl font-medium text-semi-black pb-3 border-b-[1px] border-gray-300">Overview</h2>
                             <div className="w-full flex flex-row gap-x-5 justify-between items-center border-1 border-gray-300 rounded p-2 ">
                                 <div className="flex flex-col w-full  py-2 px-3 gap-y-2">
-                                    <CategoryData heading={'Name:'} data={subcategory.name} />
-                                    <CategoryData heading={'Description:'} data={subcategory.description} />
-                                    <CategoryData heading={'Slug:'} data={subcategory.slug} />
-                                    <CategoryData heading={'Sub categories:'} data={subcategory.sub_categories} />
-                                    <CategoryData heading={'Created at:'} data={createdAtFormatted} />
-                                    <CategoryData heading={'Last update at:'} data={updatedAtFormatted} />
+                                    <ItemData heading={'Name:'} data={subcategory.name} />
+                                    <ItemData heading={'Description:'} data={subcategory.description} />
+                                    <ItemData heading={'Slug:'} data={subcategory.slug} />
+                                    <ItemData heading={'Sub categories:'} data={subcategory.sub_categories} />
+                                    <ItemData heading={'Created at:'} data={createdAtFormatted} />
+                                    <ItemData heading={'Last update at:'} data={updatedAtFormatted} />
                                 </div>
                             </div>
                             <div className="w-full flex gap-x-2 justify-end">

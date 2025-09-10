@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('color_id')->nullable()->constrained('color_tones')->nullOnDelete();
             $table->integer('stock_quantity')->default(0);
             $table->enum('stock_status', ['in stock', 'out of stock']);
-            $table->decimal('weight_grams', 8, 3)->nullable();
+            $table->decimal('weight_grams', 8, 2)->nullable();
             $table->boolean('is_default')->default(false);
             $table->decimal('height_mm', 12, 2)->nullable();
             $table->decimal('width_mm', 12, 2)->nullable();

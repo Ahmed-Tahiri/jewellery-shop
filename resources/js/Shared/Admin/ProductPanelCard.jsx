@@ -4,12 +4,12 @@ import { FaEye } from "react-icons/fa6";
 import { useState } from "react";
 import Switch from "react-switch";
 import { format } from "date-fns";
+import { route } from "ziggy-js";
 
 
 
 export let ProductPanelCard = ({ product, index }) => {
 
-    console.log(product);
     const [checked, setChecked] = useState(product.is_active);
     const formattedDate = product.created_at ? format(new Date(product.created_at), "EEEE, do MMMM yyyy p") : "N/A";
 
