@@ -154,21 +154,7 @@ class ProductVariantController extends Controller
             'finish'       => ['required', 'exists:product_finishes,id'],
             'color_tone.id' => ['required', 'exists:color_tones,id'],
 
-            'is_default' => [
-                'boolean',
-                function ($attribute, $value, $fail) use ($product, $variant) {
-                    if ($value) {
-                        $exists = ProductVariant::where('product_id', $product->id)
-                            ->where('is_default', true)
-                            ->where('id', '!=', $variant->id)
-                            ->exists();
-
-                        if ($exists) {
-                            $fail('Another default variant already exists for this product.');
-                        }
-                    }
-                },
-            ],
+            'is_default' => 'boolean',
 
             'dimensions' => [
                 function ($attribute, $value, $fail) {
@@ -217,8 +203,11 @@ class ProductVariantController extends Controller
 
         $variant->update($variantData);
         $variant->refresh();
-
-        if (!$variant->is_default) {
+        if ($variant->is_default) {
+            $product->variants()
+                ->where('id', '!=', $variant->id)
+                ->update(['is_default' => false]);
+        } else {
             $otherDefaultExists = $product->variants()
                 ->where('is_default', true)
                 ->where('id', '!=', $variant->id)
