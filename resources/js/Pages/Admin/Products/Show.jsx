@@ -4,6 +4,7 @@ import { ProductImagesCarousel } from "../../../Shared/ProductImagesCarousel";
 import { ItemData } from "../../../Components/Admin/ItemData";
 import { format } from "date-fns";
 import { VariantCard } from "../../../Components/Admin/VariantCard";
+import { route } from "ziggy-js";
 
 
 export default function Show({ product, productImages }) {

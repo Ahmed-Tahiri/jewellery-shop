@@ -1,4 +1,5 @@
 import { Link, router, usePage } from "@inertiajs/react";
+import { route } from "ziggy-js";
 
 export default function Index({ product }) {
     const { flash } = usePage().props;

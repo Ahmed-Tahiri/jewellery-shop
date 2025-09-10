@@ -4,6 +4,7 @@ import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../../Shared/FormTextInput";
 import { FormTextArea } from "../../../../Shared/FormTextArea";
 import { CategoryImg } from "../../../../Components/Admin/CategoryImg";
+import { route } from "ziggy-js";
 
 export default function Create() {
 

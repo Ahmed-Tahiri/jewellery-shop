@@ -3,6 +3,7 @@ import { FaEye } from "react-icons/fa6";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import FormatPKR from './../../Utilities/FormatPKR';
 import { Link } from "@inertiajs/react";
+import { route } from "ziggy-js";
 export let VariantCard = ({ variant, product }) => {
     return (
         <div className="flex p-2 flex-col gap-3 bg-white shadow w-75 rounded-xs relative" >

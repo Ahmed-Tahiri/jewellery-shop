@@ -1,4 +1,5 @@
 import { Link } from "@inertiajs/react";
+import { route } from "ziggy-js";
 
 
 export let AddressCard = ({ id, city, street }) => {

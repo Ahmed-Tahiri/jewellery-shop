@@ -4,6 +4,7 @@ import { ProductMainImage } from "../../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../../Shared/Admin/SecondaryImageList";
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { ProductForm } from "../../../../Components/Admin/VariantProductForm";
+import { route } from "ziggy-js";
 export default function Create({ product }) {
 
     const [canAdd, setCanAdd] = useState(false);

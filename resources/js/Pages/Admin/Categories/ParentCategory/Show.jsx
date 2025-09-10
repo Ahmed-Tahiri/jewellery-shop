@@ -3,6 +3,7 @@ import { Link, usePage } from "@inertiajs/react";
 import { format } from "date-fns";
 import { PieChart } from "../../../../Shared/Admin/PieChart";
 import { ItemData } from "../../../../Components/Admin/ItemData";
+import { route } from "ziggy-js";
 
 
 

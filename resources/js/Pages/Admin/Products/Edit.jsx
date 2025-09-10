@@ -4,6 +4,7 @@ import { DropDown } from "../../../Shared/Admin/DropDown";
 import { FormTextInput } from "../../../Shared/FormTextInput";
 import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
 import { ProductForm } from "../../../Components/Admin/UpdateProductForm";
+import { route } from "ziggy-js";
 export default function Edit({ product }) {
 
     const [canAdd, setCanAdd] = useState(false);
