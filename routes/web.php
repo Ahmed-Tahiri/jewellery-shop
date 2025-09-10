@@ -70,6 +70,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/products/{product}/variants/create', [ProductVariantController::class, 'create'])->name('admin.products.variants.create');
     Route::post('/admin/products/{product}/variants', [ProductVariantController::class, 'store'])->name('admin.products.variants.post');
+    Route::post('/admin/products/{product}/variants/{variant}', [ProductVariantController::class, 'update'])->name('admin.products.variants.update');
     Route::get('/admin/products/{product}/variants/{variant}/edit', [ProductVariantController::class, 'edit'])->name('admin.products.variants.edit');
     Route::get('/admin/products/{product}/variants/{variant}/show', [ProductVariantController::class, 'show'])->name('admin.products.variants.show');
     Route::delete('/admin/products/{product}/variants/{variant}/destroy', [ProductVariantController::class, 'destroy'])->name('admin.products.variants.destroy');

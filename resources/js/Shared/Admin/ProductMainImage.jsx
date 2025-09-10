@@ -1,15 +1,18 @@
 import { GiBigDiamondRing } from "react-icons/gi";
 import Cropper from "react-easy-crop";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import getCroppedImg from "../../Utilities/CropImage";
 import { usePage } from "@inertiajs/react";
 
 
-export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
+export let ProductMainImage = ({ onImageCropped, setCanEdit, primaryImg }) => {
 
     let { url } = usePage();
     let cleanUrl = url.split('?')[0];
+
+
     const { errors } = usePage().props;
+    const [existingPrimaryImg, setExistingPrimaryImg] = useState(null);
     const [imageSrc, setImageSrc] = useState(null);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
@@ -18,11 +21,47 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
     const [zoom, setZoom] = useState(1);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
 
+    useEffect(() => {
+        return () => {
+            if (croppedImage && typeof croppedImage === 'string' && croppedImage.startsWith('blob:')) {
+                URL.revokeObjectURL(croppedImage);
+            }
+        }
+    }, [croppedImage]);
+
+    useEffect(() => {
+        if (!primaryImg) {
+            setExistingPrimaryImg(null);
+            setCroppedImage(null);
+            return;
+        }
+
+        if (primaryImg instanceof Blob || (typeof File !== 'undefined' && primaryImg instanceof File)) {
+            const preview = URL.createObjectURL(primaryImg);
+            setCroppedImage(preview);
+            setExistingPrimaryImg(null);
+            setCanEdit(true);
+        } else if (typeof primaryImg === 'string') {
+            setExistingPrimaryImg(primaryImg);
+            setCroppedImage(null);
+            setCanEdit(Boolean(primaryImg));
+        } else {
+            setExistingPrimaryImg(null);
+            setCroppedImage(null);
+            setCanEdit(false);
+        }
+    }, [primaryImg, setCanEdit]);
     const photoDeleteHandler = () => {
         setImageSrc(null);
         setCroppedAreaPixels(null);
+        if (croppedImage && typeof croppedImage === 'string' && croppedImage.startsWith('blob:')) {
+            URL.revokeObjectURL(croppedImage);
+        }
         setCroppedImage(null);
         setShowCropper(false);
+        setExistingPrimaryImg(null);
+        onImageCropped(null);
+        setCanEdit(true);
     }
     const onFileChange = async (e) => {
 
@@ -42,7 +81,6 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
             };
             reader.readAsDataURL(file);
         }
-        setCanEdit(true);
     };
 
     const onCropComplete = useCallback((_, croppedAreaPixels) => {
@@ -53,12 +91,17 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
         try {
             const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
             const previewUrl = URL.createObjectURL(croppedBlob);
-
+            if (croppedImage && typeof croppedImage === 'string' && croppedImage.startsWith('blob:')) {
+                URL.revokeObjectURL(croppedImage);
+            }
             setCroppedImage(previewUrl);
+            setExistingPrimaryImg(null);
             setShowCropper(false);
             onImageCropped(croppedBlob);
+            setCanEdit(true);
         } catch (e) {
             errors.image = 'Please select valid image';
+            setPrimaryImgError(true);
         }
     }, [imageSrc, croppedAreaPixels]);
 
@@ -89,7 +132,7 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
                 ) : <div className={`flex h-80 w-80  ${croppedImage ? '' : 'p-3'} flex-col justify-between items-center`}>
 
                     <div className="flex w-full h-full items-center flex-col gap-y-5">
-                        {croppedImage ? (<div className="w-full h-full bg-white"><img src={croppedImage} alt="Cropped" className="w-full h-full object-cover" /></div>) :
+                        {existingPrimaryImg ? (<div className="w-full h-full bg-white"><img src={`/storage/${existingPrimaryImg}`} alt="Primary Image" className="w-full h-full object-cover" /></div>) : croppedImage ? (<div className="w-full h-full bg-white"><img src={croppedImage} alt="Cropped" className="w-full h-full object-cover" /></div>) :
                             (<><div className="w-full flex items-center justify-center"><GiBigDiamondRing className="text-light-gray text-7xl" /></div>
                                 <p className="font-poppins text-sm text-light-gray text-center w-full">Please upload primary image with a <strong>transparent background</strong> and <strong>1:1 ratio </strong>(e.g., 800×800, 1000×1000) in JPG, JPEG, or PNG format. Max size <strong>2MB</strong>.</p>
                             </>)}
@@ -105,7 +148,7 @@ export let ProductMainImage = ({ onImageCropped, setCanEdit }) => {
                     (<div className="flex w-full flex-row items-center justify-between gap-x-2">
                         <div className="flex-1 flex items-center justify-center">
                             <label htmlFor="image" className="min-w-38 flex-1 text-center shadow-sm text-sm p-2 bg-zinc text-white font-poppins cursor-pointer hover:bg-zinc-dark transition-colors ease-linear duration-200">
-                                {!croppedImage ? 'Add Product Image' : 'Change Photo'}
+                                {!croppedImage ? `${existingPrimaryImg ? 'Change Product Image' : 'Add Product Image'}` : 'Change Photo'}
                             </label>
                             <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" name="image" id="image" className="hidden" onChange={onFileChange} />
                         </div>

@@ -3,11 +3,13 @@ import { FormNumInput } from "../../Shared/FormNumInput";
 import { useEffect, useState } from "react";
 import { ProductFeatures } from "./ProductFeatures";
 import { FaCheck } from "react-icons/fa6";
+import { usePage } from "@inertiajs/react";
 
 
 export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdit }) => {
+    let { variant } = usePage().props;
+    const [isDefault, setIsDefault] = useState(!!variant?.isDefault);
 
-    let [isDefault, setIsDefault] = useState(false);
     useEffect(() => { data.stock_quantity > 0 ? setData('stock_status', 'in stock') : setData('stock_status', 'out of stock') }, [data.stock_quantity]);
 
     return (<div className="flex w-full flex-col gap-y-5">

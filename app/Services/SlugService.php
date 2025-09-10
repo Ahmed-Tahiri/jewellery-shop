@@ -16,21 +16,4 @@ class SlugService
      * @param int|null $ignoreId  The record ID to ignore (for updates)
      * @return string
      */
-    public function createSlug(string $name, string $modelClass, string $column = 'slug', ?int $ignoreId = null): string
-    {
-        $slug = Str::slug($name);
-        $originalSlug = $slug;
-        $counter = 1;
-
-        while (
-            $modelClass::where($column, $slug)
-            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
-            ->exists()
-        ) {
-            $slug = "{$originalSlug}-{$counter}";
-            $counter++;
-        }
-
-        return $slug;
-    }
 }

@@ -56,7 +56,7 @@ export let ProductImagesCarousel = ({ images }) => {
                                     zoomType="hover-in-place"
                                     fullscreenOnMobile={true}
                                     zoomScale={2}
-                                    zoomSrc={`/storage/${img.url}`} src={`/storage/${img.url}`} alt={`Product Main Image ${idx + 1}`} className="w-full aspect-square object-contain bg-powder-gray rounded-xs shadow" />
+                                    zoomSrc={`/storage/${img.url}`} src={`/storage/${img.url}`} alt={`Product Main Image ${idx + 1}`} className="w-full aspect-square object-cover bg-powder-gray rounded-xs shadow" />
                             </SwiperSlide>
                         ))}
                     </Swiper>

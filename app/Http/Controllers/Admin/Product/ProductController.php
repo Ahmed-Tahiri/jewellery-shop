@@ -14,7 +14,6 @@ use App\Models\Product\ProductVariant;
 use App\Models\Product\Status;
 use App\Models\SubCategory;
 use App\Services\ProductVariantService;
-use App\Services\SlugService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -26,27 +25,20 @@ use Illuminate\Validation\Rule;
  */
 class ProductController extends Controller
 {
-    protected static function booted(): void
-    {
-        static::creating(function (Product $product) {
-            $slugService = app(SlugService::class);
-            $product->slug = $slugService->createSlug($product->name, static::class);
-        });
-
-        static::updating(function (Product $product) {
-            if ($product->isDirty('name')) {
-                $slugService = app(SlugService::class);
-                $product->slug = $slugService->createSlug($product->name, static::class, 'slug', $product->id);
-            }
-        });
-    }
-
     protected function productValidationRules(): array
     {
         return [
             'primary_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'secondary_images' => 'array|max:6',
-            'secondary_images.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
+            'secondary_images' => ['array', 'max:6'],
+            'secondary_images.*.id'   => ['nullable', 'integer', 'exists:product_images,id'],
+            'secondary_images.*.url'  => ['nullable', 'string'],
+            'secondary_images.*.file' => [
+                'nullable',
+                'file',
+                'image',
+                'mimes:jpeg,jpg,png,webp',
+                'max:2048'
+            ],
             'name' => ['required', 'string', 'min:3'],
             'sku' => ['required', 'regex:/^[A-Z0-9_-]+$/', 'min:6', 'string', 'unique:products,sku'],
             'short_description' => ['required', 'min:10'],
@@ -127,6 +119,7 @@ class ProductController extends Controller
             });
         return Inertia::render('Admin/Products/Index', ['products' => $variants]);
     }
+
     public function create()
     {
         $categories = Category::all(['name', 'id']);
@@ -146,6 +139,23 @@ class ProductController extends Controller
             'finishes' => $finishes,
         ]);
     }
+    protected function createSlug(string $name, string $modelClass, string $column = 'slug', ?int $ignoreId = null): string
+    {
+        $slug = Str::slug($name);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (
+            $modelClass::where($column, $slug)
+            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+            ->exists()
+        ) {
+            $slug = "{$originalSlug}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
+    }
     public function store(Request $request, ProductVariantService $productVariantService)
     {
         $attributes = [];
@@ -154,11 +164,11 @@ class ProductController extends Controller
                 $attributes["secondary_images.$index"] = "Secondary image " . ($index + 1);
             }
         }
-
         $validated = $request->validate($this->productValidationRules(),   $this->productValidationMessages(),   $attributes);
         $data = [
             'sku'                => $validated['sku'],
             'name'               => $validated['name'],
+            'slug' =>  $this->createSlug($validated['name'], Product::class),
             'subcategory_id'     => $validated['subcategory'],
             'short_description'  => $validated['short_description'],
             'long_description'   => $validated['long_description'],
