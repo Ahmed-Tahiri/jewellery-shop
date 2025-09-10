@@ -274,6 +274,30 @@ class ProductVariantController extends Controller
     }
     public function show(Product $product, ProductVariant $variant)
     {
-        dd('Show');
+        $variant->load(['images', 'metal', 'metal_purity', 'finish', 'color_tone']);
+        $variantFormattedData = [
+            'id' => $variant->id,
+            'sku' => $variant->sku,
+            'size' => $variant->size,
+            'price' => $variant->price,
+            'cost' => $variant->cost,
+            'weight' => $variant->weight_grams,
+            'createdAt' => $variant->created_at,
+            'updatedAt' => $variant->updated_at,
+            'metal' => $variant->metal->name,
+            'metalPurity' => $variant->metal_purity->purity,
+            'color' => $variant->color_tone->name,
+            'finish' => $variant->finish->name,
+            'stockStatus' => $variant->stock_status,
+            'stockQuantity' => $variant->stock_quantity,
+            'dimensions' => [
+                'height' => $variant->height_mm,
+                'width' => $variant->width_mm,
+                'diameter' => $variant->diameter_mm,
+                'length' => $variant->length_mm,
+            ],
+            'images' => $variant->images,
+        ];
+        return Inertia::render('Admin/Products/Variant/Show', ['variant' => $variantFormattedData, 'product' => $product->id]);
     }
 }
