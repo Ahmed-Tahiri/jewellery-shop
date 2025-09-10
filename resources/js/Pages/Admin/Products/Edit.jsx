@@ -5,7 +5,7 @@ import { FormTextInput } from "../../../Shared/FormTextInput";
 import { AdminSectionSubHeading } from "../../../Shared/Admin/AdminSectionHeading";
 import { ProductForm } from "../../../Components/Admin/UpdateProductForm";
 export default function Edit({ product }) {
-    console.log(product);
+
     const [canAdd, setCanAdd] = useState(false);
     const [parentCategory, setParentCategory] = useState(product.category.id ?? null);
     const [relatedSubCategories, setRelatedSubCategories] = useState([]);

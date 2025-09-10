@@ -20,10 +20,9 @@ export const SecondaryImgList = ({ setSecondaryImgs, setCanEdit, initialImages =
 
     const handleImageChange = (index, blob) => {
         setImages(prev => {
-            console.log(index);
             const updated = [...prev];
             const old = updated[index];
-            console.log("clicked index:", index);
+
 
             updated[index] = {
                 ...old,

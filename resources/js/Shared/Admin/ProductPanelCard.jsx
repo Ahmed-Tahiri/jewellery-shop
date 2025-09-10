@@ -9,7 +9,6 @@ import { format } from "date-fns";
 
 export let ProductPanelCard = ({ product, index }) => {
 
-    console.log(product);
     const [checked, setChecked] = useState(product.is_active);
     const formattedDate = product.created_at ? format(new Date(product.created_at), "EEEE, do MMMM yyyy p") : "N/A";
 

@@ -8,7 +8,6 @@ import { route } from "ziggy-js";
 
 export default function Create({ variant, product }) {
 
-    console.log(variant);
     const [canAdd, setCanAdd] = useState(false);
     const [secondaryUploadError, setSecondaryUploadError] = useState(false);
     const [secondaryImgs, setSecondaryImgs] = useState(variant?.secondaryImages ?? []);
@@ -28,13 +27,12 @@ export default function Create({ variant, product }) {
         height_mm: variant.height_mm ?? '',
         width_mm: variant.width_mm ?? '',
         length_mm: variant.length_mm ?? '',
-        diameter_mm: variant.diameter ?? '',
+        diameter_mm: variant.diameter_mm ?? '',
         price: variant.price ?? '',
         cost: variant.cost ?? '',
         primary_image: variant?.primaryImage?.url ?? null,
         secondary_images: variant?.secondaryImages ?? [],
     });
-
     let inputChangeHandler = useCallback((e) => {
         const updated = { ...data, [e.target.name]: e.target.value };
         setData(e.target.name, e.target.value);
