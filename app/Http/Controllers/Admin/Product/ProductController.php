@@ -159,9 +159,12 @@ class ProductController extends Controller
     public function store(Request $request, ProductVariantService $productVariantService)
     {
         $attributes = [];
-        if ($request->hasFile('secondary_images')) {
-            foreach ($request->file('secondary_images') as $index => $file) {
-                $attributes["secondary_images.$index"] = "Secondary image " . ($index + 1);
+        if ($request->has('secondary_images')) {
+            foreach ($request->input('secondary_images') as $index => $image) {
+                $num = $index + 1;
+                $attributes["secondary_images.$index.id"]   = "Secondary image $num";
+                $attributes["secondary_images.$index.url"]  = "Secondary image $num";
+                $attributes["secondary_images.$index.file"] = "Secondary image $num";
             }
         }
         $validated = $request->validate($this->productValidationRules(),   $this->productValidationMessages(),   $attributes);
@@ -255,6 +258,9 @@ class ProductController extends Controller
             'status' => ['required', 'exists:statuses,id'],
             'subcategory' => ['required', 'exists:sub_categories,id'],
             'lead_time_days' => ['nullable', 'integer'],
+        ], [
+            'status.required' => 'Please select status.',
+            'subcategory.required' => 'Please select categories.',
         ]);
         $data = [
             'sku'                => $validated['sku'],

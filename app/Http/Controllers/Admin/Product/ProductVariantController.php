@@ -19,7 +19,6 @@ use Inertia\Inertia;
 class ProductVariantController extends Controller
 {
 
-
     public function index(Product $product)
     {
         return Inertia::render('Admin/Products/Variant/Index', [
@@ -42,6 +41,7 @@ class ProductVariantController extends Controller
     }
     public function store(StoreProductVariantRequest $request, Product $product, ProductVariantService $variantService)
     {
+
         $validated = $request->validated();
         $variant = $variantService->create($product, $validated);
         if ($validated['is_default'] && (bool)$validated['is_default'] === true) {
@@ -98,7 +98,15 @@ class ProductVariantController extends Controller
 
     public function update(Request $request, Product $product, ProductVariant $variant)
     {
-
+        $attributes = [];
+        if ($request->has('secondary_images')) {
+            foreach ($request->input('secondary_images') as $index => $image) {
+                $num = $index + 1;
+                $attributes["secondary_images.$index.id"]   = "Secondary image $num";
+                $attributes["secondary_images.$index.url"]  = "Secondary image $num";
+                $attributes["secondary_images.$index.file"] = "Secondary image $num";
+            }
+        }
         $validated = $request->validate([
             'primary_image' => [
                 'required',
@@ -179,7 +187,16 @@ class ProductVariantController extends Controller
             'stock_status'   => ['required', 'in:in stock,out of stock'],
             'price'          => ['required', 'decimal:0,2'],
             'cost'           => ['required', 'decimal:0,2'],
-        ]);
+        ], [
+            'primary_image.required' => 'Please upload primary image.',
+            'primary_image.image' => 'Please upload valid image file.',
+            'primary_image.max' => 'Image is too large! Max allowed size is 2MB.',
+            'secondary_images.max' => 'Maximum 6 secondary images are allowed.',
+            'secondary_images.*.max' => ':attribute is too large (max 2MB).',
+            'metal_type.required' => 'Please select metal type.',
+            'finish.required' => 'Please select finish type.',
+            'color_tone.id.required' => 'Please select color tone.',
+        ], $attributes);
 
         $variantData = [
             'product_id'       => $product->id,

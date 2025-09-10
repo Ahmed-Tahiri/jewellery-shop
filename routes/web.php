@@ -13,7 +13,6 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SignupCompleteController;
-use App\Models\Product\Product;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 

@@ -7,6 +7,19 @@ use Illuminate\Validation\Rule;
 
 class StoreProductVariantRequest extends FormRequest
 {
+    public function attributes(): array
+    {
+        $attributes = [];
+        if (request()->has('secondary_images')) {
+            foreach (request()->input('secondary_images') as $index => $image) {
+                $num = $index + 1;
+                $attributes["secondary_images.$index.id"]   = "Secondary image $num";
+                $attributes["secondary_images.$index.url"]  = "Secondary image $num";
+                $attributes["secondary_images.$index.file"] = "Secondary image $num";
+            }
+        }
+        return $attributes;
+    }
     public function rules()
     {
         return [
