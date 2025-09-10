@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useForm } from "@inertiajs/react";
 import { ProductMainImage } from "../../../../Shared/Admin/ProductMainImage";
 import { SecondaryImgList } from "../../../../Shared/Admin/SecondaryImageList";
@@ -35,7 +35,7 @@ export default function Create({ variant, product }) {
         secondary_images: variant?.secondaryImages ?? [],
     });
 
-    let inputChangeHandler = (e) => {
+    let inputChangeHandler = useCallback((e) => {
         const updated = { ...data, [e.target.name]: e.target.value };
         setData(e.target.name, e.target.value);
 
@@ -43,7 +43,7 @@ export default function Create({ variant, product }) {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }
+    }, [setData])
     let formSubmitHandler = (e) => {
         e.preventDefault();
         post(route('admin.products.variants.update', [product, variant.id]), {

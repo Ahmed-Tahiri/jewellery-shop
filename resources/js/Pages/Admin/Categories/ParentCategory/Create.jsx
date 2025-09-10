@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AdminSectionSubHeading } from "../../../../Shared/Admin/AdminSectionHeading";
 import { Link, useForm } from "@inertiajs/react";
 import { FormTextInput } from "../../../../Shared/FormTextInput";
@@ -16,7 +16,7 @@ export default function Create() {
         image: null
     });
 
-    let inputChangeHandler = (e) => {
+    let inputChangeHandler = useCallback((e) => {
         const updated = { ...data, [e.target.name]: e.target.value };
         setData(e.target.name, e.target.value);
 
@@ -24,7 +24,7 @@ export default function Create() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }
+    }, [setData])
     let formSubmitHandler = (e) => {
         e.preventDefault();
 

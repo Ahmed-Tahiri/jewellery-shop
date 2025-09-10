@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { DropDown } from "../../../Shared/Admin/DropDown";
 import { FormTextInput } from "../../../Shared/FormTextInput";
@@ -20,7 +20,7 @@ export default function Edit({ product }) {
         status: product.status.id ?? '',
     });
 
-    let inputChangeHandler = (e) => {
+    let inputChangeHandler = useCallback((e) => {
         const updated = { ...data, [e.target.name]: e.target.value };
         setData(e.target.name, e.target.value);
 
@@ -28,7 +28,7 @@ export default function Edit({ product }) {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }
+    }, [setData]);
     let formSubmitHandler = (e) => {
         e.preventDefault();
         put(route('admin.products.update', product.id));
