@@ -185,4 +185,19 @@ class ProductImageController extends Controller
             }
         }
     }
+
+
+
+    public function destroy(ProductVariant $variant)
+    {
+        foreach ($variant->images as $image) {
+            if (
+                !Str::startsWith($image->url, ['http://', 'https://']) &&
+                Storage::disk('public')->exists($image->url)
+            ) {
+                Storage::disk('public')->delete($image->url);
+            }
+            $image->delete();
+        }
+    }
 }

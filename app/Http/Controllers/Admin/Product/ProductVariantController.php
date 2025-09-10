@@ -245,7 +245,27 @@ class ProductVariantController extends Controller
         return redirect()->route('admin.products.show', $product->id)->with('success', 'Variant updated successfully.');
     }
 
-    public function destroy(Request $request, Product $product, ProductVariant $variant) {}
+    public function destroy(Request $request, Product $product, ProductVariant $variant)
+    {
+        new ProductImageController()->destroy($variant);
+
+        $wasDefault = $variant->is_default;
+
+        $variant->delete();
+
+        if ($product->variants->count() === 0) {
+            $product->delete();
+        }
+
+        $product->load('variants');
+        if ($wasDefault) {
+            $newDefault = $product->variants->first();
+            if ($newDefault) {
+                $newDefault->update(['is_default' => true]);
+            }
+        }
+        return redirect()->route('admin.products')->with('success', 'Product variant deleted successfully');
+    }
     public function show(Product $product, ProductVariant $variant)
     {
         dd('Show');

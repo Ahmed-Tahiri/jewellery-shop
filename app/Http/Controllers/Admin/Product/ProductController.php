@@ -269,6 +269,18 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) updated successfully!");
     }
+
+    public function destroy(Request $request, Product $product)
+    {
+
+        foreach ($product->variants as $variant) {
+            new ProductImageController()->destroy($variant);
+            $variant->delete();
+        }
+        $product->delete();
+        return redirect()->route('admin.products')->with('success', 'Product variant deleted successfully');
+    }
+
     public function statusUpdate(Request $request, Product $product)
     {
         $activeInput = $request->input('is_active');
