@@ -42,7 +42,7 @@ export default function Edit({ variant, product }) {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }, [setData])
+    }, [setData, data])
     let formSubmitHandler = (e) => {
         e.preventDefault();
         console.log(data.is_default);

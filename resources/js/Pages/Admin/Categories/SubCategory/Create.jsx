@@ -94,7 +94,7 @@ export default function Create() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }, [setData]);
+    }, [setData, data]);
 
     return <section className="w-full min-h-170">
         <div className="w-full flex flex-col gap-y-8">

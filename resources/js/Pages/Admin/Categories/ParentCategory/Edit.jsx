@@ -26,7 +26,7 @@ export default function Edit() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanEdit(hasAnyValue);
-    }, [setData])
+    }, [setData, data])
 
     const formSubmitHandler = (e) => {
         e.preventDefault();

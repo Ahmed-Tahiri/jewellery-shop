@@ -26,7 +26,7 @@ export default function Edit() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanEdit(hasAnyValue);
-    }, [setData])
+    }, [setData, data])
 
     useEffect(() => {
         setData('parent_id', parent);
