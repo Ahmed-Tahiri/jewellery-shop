@@ -158,6 +158,7 @@ class ProductController extends Controller
     }
     public function store(Request $request, ProductVariantService $productVariantService)
     {
+
         $attributes = [];
         if ($request->has('secondary_images')) {
             foreach ($request->input('secondary_images') as $index => $image) {
@@ -168,6 +169,7 @@ class ProductController extends Controller
             }
         }
         $validated = $request->validate($this->productValidationRules(),   $this->productValidationMessages(),   $attributes);
+
         $data = [
             'sku'                => $validated['sku'],
             'name'               => $validated['name'],
@@ -178,6 +180,12 @@ class ProductController extends Controller
             'status_id'          => $validated['status'],
             'lead_time_days'     => $validated['lead_time_days'],
         ];
+        $subcategory = SubCategory::find($validated['subcategory']);
+        $parentCategoryName = Str::lower($subcategory->category->name);
+        if ($parentCategoryName == 'customized' || $parentCategoryName == 'customize' || $parentCategoryName == 'customized jewellery' || $parentCategoryName == 'personalized' || $parentCategoryName == 'personalize' || $parentCategoryName == 'personalized jewellery') {
+            $data['is_customizable'] = true;
+        }
+
         $status = Status::where('status', 'active')->first();
         if ($status->id === (int) $validated['status']) {
             $data['is_active'] = true;
@@ -271,6 +279,18 @@ class ProductController extends Controller
             'status_id'          => $validated['status'],
             'lead_time_days'     => $validated['lead_time_days'],
         ];
+        $subcategory = SubCategory::find($validated['subcategory']);
+        $parentCategoryName = Str::lower($subcategory->category->name);
+        if ($parentCategoryName == 'customized' || $parentCategoryName == 'customize' || $parentCategoryName == 'customized jewellery' || $parentCategoryName == 'personalized' || $parentCategoryName == 'personalize' || $parentCategoryName == 'personalized jewellery') {
+            $data['is_customizable'] = true;
+        } else {
+            $data['is_customizable'] = false;
+        }
+
+        $status = Status::where('status', 'active')->first();
+        if ($status->id === (int) $validated['status']) {
+            $data['is_active'] = true;
+        }
         $product->update($data);
 
         return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) updated successfully!");
