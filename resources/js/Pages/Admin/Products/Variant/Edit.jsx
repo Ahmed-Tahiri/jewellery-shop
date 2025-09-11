@@ -12,7 +12,6 @@ export default function Edit({ variant, product }) {
     const [secondaryUploadError, setSecondaryUploadError] = useState(false);
     const [secondaryImgs, setSecondaryImgs] = useState(variant?.secondaryImages ?? []);
     const [croppedImage, setCroppedImage] = useState(null);
-    console.log(Boolean(variant.isDefault));
     let { post, errors, data, setData, reset } = useForm({
         sku: variant.sku ?? '',
         is_default: Boolean(variant.isDefault) ?? false,
@@ -45,8 +44,6 @@ export default function Edit({ variant, product }) {
     }, [setData])
     let formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(data.is_default);
-
         post(route('admin.products.variants.update', [product, variant.id]), {
             data: data,
             forceFormData: true,
