@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\Product\ColorToneController;
 use App\Http\Controllers\Admin\Product\ProductController;
@@ -84,6 +85,11 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
     Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::patch('/admin/products/{product}/status', [ProductController::class, 'statusUpdate'])->name('admin.products.status.update');
+
+    Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin.customers');
+    Route::get('/admin/customers/{customer}/show', [AdminCustomerController::class, 'show'])->name('admin.customers.show');
+    Route::delete('/admin/customers/{customer}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
+    Route::patch('/admin/customers/{customer}/status', [AdminCustomerController::class, 'statusUpdate'])->name('admin.customers.status.update');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone', 30)->nullable();
             $table->string('password');
             $table->enum('role', ['customer'])->default('customer');
+            $table->enum('status', ['active', 'blocked'])->default('active');
             $table->string('avatar')->nullable();
             $table->datetime('last_login_at')->nullable();
             $table->foreignId('gender_id')->nullable()->constrained('genders')->nullOnDelete();

@@ -21,9 +21,8 @@ class AdminController extends Controller
 
         $customersData = Customer::orderBy('created_at', 'desc')
             ->take(7)
-            ->get(['first_name', 'last_name', 'email', 'created_at', 'id', 'avatar']);
+            ->get(['first_name', 'last_name', 'email', 'created_at', 'id', 'avatar', 'status']);
         $customerDataModified = [];
-
         foreach ($customersData as $customer) {
             $customerDataModified[] = [
                 'id' => $customer['id'],
@@ -31,11 +30,10 @@ class AdminController extends Controller
                 'lastname' => $customer['last_name'],
                 'email' => $customer['email'],
                 'datejoined' => $customer['created_at'],
-                'status' => 'active',
+                'status' => $customer['status'],
                 'avatar' => $customer['avatar'],
             ];
         }
-
         return Inertia::render('Admin/Dashboard', ['recentCustomers' => $customerDataModified]);
     }
     public function store(Request $request)
