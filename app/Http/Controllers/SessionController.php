@@ -35,7 +35,7 @@ class SessionController extends Controller
         $email    = $credentials['email'];
         $ip       = $request->ip();
         $customer = Customer::where('email', $email)->first();
-        if ($customer->status === 'blocked') {
+        if ($customer && $customer->status === 'blocked') {
             return redirect()->back()->withErrors([
                 'status' => 'Your account is currently disabled. Please contact support for assistance.'
             ]);
