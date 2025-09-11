@@ -37,7 +37,7 @@ export let Sidebar = () => {
     ];
     const productList = [
         {
-            title: 'Manage Products',
+            title: 'Manage Inventory',
             path: 'admin.products',
             icon: <AiOutlineUnorderedList className="text-light-gray text-xl" />,
         },
@@ -45,11 +45,6 @@ export let Sidebar = () => {
             title: 'Add Product',
             path: 'admin.products.create',
             icon: <HiOutlineViewGridAdd className="text-light-gray text-xl" />,
-        },
-        {
-            title: 'Manage Inventory',
-            path: 'admin.inventory',
-            icon: <BsBoxes className="text-light-gray text-xl" />,
         },
     ];
     const categoryList = [
@@ -84,7 +79,7 @@ export let Sidebar = () => {
                     <nav className="py-5 w-full flex h-[550px] overflow-y-auto overflow-x-hidden">
                         <ul className="w-full flex flex-col gap-y-0 px-3">
                             <NavLi title={'Dashboard'} path={'/admin'} icon={<MdOutlineSpaceDashboard className="text-2xl text-semi-black" />} />
-                            <SidebarDropdown title="Products" icon={<AiOutlineProduct className="text-2xl text-semi-black" />} links={productList} />
+                            <SidebarDropdown title="Inventory" icon={<BsBoxes className="text-semi-black text-2xl" />} links={productList} />
                             <SidebarDropdown title="Orders" icon={<LuClipboardList className="text-2xl text-semi-black" />} links={ordersList} />
                             <SidebarDropdown title="Categories" icon={<TbCategory2 className="text-2xl text-semi-black" />} links={categoryList} />
                             <NavLi path={'/admin/discounts'} title={'Discounts'} icon={<RiCoupon3Line className="text-2xl text-semi-black" />} />
