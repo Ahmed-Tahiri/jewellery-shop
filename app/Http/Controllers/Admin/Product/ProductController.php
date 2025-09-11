@@ -229,7 +229,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $productData =   $product->load(['subcategory:parent_id,id,name', 'subcategory.category', 'status', 'variants.primaryImage', 'variants.metal', 'variants.color_tone']);
+        $productData =   $product->load(['subcategory:parent_id,id,name', 'subcategory.category', 'status', 'variants.primaryImage', 'variants.metal', 'variants.color_tone', 'discount']);
         $productFormattedData = [
             'id' => $productData->id,
             'name' => $productData->name,
@@ -240,6 +240,7 @@ class ProductController extends Controller
             'longDescription' => $productData->long_description,
             'estimatedDeliverTime' => $productData->lead_time_days,
             'sku' => $productData->sku,
+            'discount' => $productData->discount->discount_percent,
             'status' => $productData->status->status,
             'createdAt' => $productData->created_at,
             'updatedAt' => $productData->updated_at,

@@ -35,9 +35,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Tags::class, 'product_tag', 'product_id', 'tag_id');
     }
-    public function discount_percentage(): BelongsTo
+    public function discount(): HasOne
     {
-        return $this->belongsTo(Discounts::class, 'product_id');
+        return $this->hasOne(Discounts::class, 'product_id', 'id');
     }
 
     public function getDefaultVariantAttribute()
