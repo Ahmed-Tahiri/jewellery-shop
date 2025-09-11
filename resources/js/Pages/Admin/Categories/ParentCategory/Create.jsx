@@ -25,7 +25,7 @@ export default function Create() {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }, [setData, data])
+    }, [setData])
     let formSubmitHandler = (e) => {
         e.preventDefault();
 

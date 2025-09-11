@@ -42,7 +42,7 @@ export default function Create({ product }) {
             (val) => val && val.toString().trim() !== ""
         );
         setCanAdd(hasAnyValue);
-    }, [setData, data])
+    }, [setData])
     let formSubmitHandler = (e) => {
         e.preventDefault();
 

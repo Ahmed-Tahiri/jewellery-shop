@@ -30,7 +30,7 @@ export default function Edit({ product }) {
             const hasAnyValue = Object.values(updated).some((val) => val && val.toString().trim() !== "");
             setCanAdd(hasAnyValue);
         },
-        [setData, data]
+        [setData]
     );
 
     let formSubmitHandler = (e) => {
