@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Discounts;
 use App\Models\SubCategory;
 use App\Models\Tags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -32,6 +34,10 @@ class Product extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tags::class, 'product_tag', 'product_id', 'tag_id');
+    }
+    public function discount_percentage(): BelongsTo
+    {
+        return $this->belongsTo(Discounts::class, 'product_id');
     }
 
     public function getDefaultVariantAttribute()

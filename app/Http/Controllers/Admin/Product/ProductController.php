@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TagsController;
 use App\Models\Category;
+use App\Models\Discounts;
 use App\Models\Product\ColorTone;
 use App\Models\Product\Metal;
 use App\Models\Product\MetalPurity;
@@ -91,6 +92,8 @@ class ProductController extends Controller
             'color_tone.id.required' => 'Please select color tone.',
             'status.required' => 'Please select status.',
             'subcategory.required' => 'Please select categories.',
+            'discount_start_time' => ['required_if:discount', 'date'],
+            'discount_end_time'   => ['required_if:discount', 'date', 'after:discount_start_time'],
         ];
     }
 
@@ -158,7 +161,6 @@ class ProductController extends Controller
     }
     public function store(Request $request, ProductVariantService $productVariantService)
     {
-
         $attributes = [];
         if ($request->has('secondary_images')) {
             foreach ($request->input('secondary_images') as $index => $image) {
@@ -169,7 +171,19 @@ class ProductController extends Controller
             }
         }
         $validated = $request->validate($this->productValidationRules(),   $this->productValidationMessages(),   $attributes);
-
+        $discountInput = $request->input('discount');
+        $discountValidation = [];
+        if ($discountInput !== null) {
+            $discountValidation = $request->validate([
+                'discount' => ['numeric', 'min:1', 'max:100'],
+                'discount_start_time' => ['required', 'date'],
+                'discount_end_time' => ['required', 'date', 'after:discount_start_time'],
+            ], [
+                'discount_end_time.after' => 'The discount end time must be after the start time.',
+                'discount_start_time.required' => 'Start time is required when a discount is set.',
+                'discount_end_time.required'   => 'End time is required when a discount is set.',
+            ]);
+        }
         $data = [
             'sku'                => $validated['sku'],
             'name'               => $validated['name'],
@@ -192,9 +206,24 @@ class ProductController extends Controller
         }
 
         $product = Product::create($data);
+
         $tags =  new TagsController()->store($validated);
+
         $product->tags()->sync($tags);
+
         $productVariantService->create($product, $validated);
+
+        if ($discountValidation) {
+            $modifiedDiscountData = [
+                'product_id' => $product->id,
+                'discount_percent' => $discountValidation['discount'],
+                'start_date' => $discountValidation['discount_start_time'],
+                'end_date' => $discountValidation['discount_end_time'],
+                'is_active' => true,
+                'type' => 'product'
+            ];
+            Discounts::create($modifiedDiscountData);
+        }
         return redirect()->route('admin.products.variants.successful',  $product->id)->with('success', "$product->name SKU:($product->sku) added successfully!");
     }
 

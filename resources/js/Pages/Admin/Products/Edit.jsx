@@ -8,7 +8,7 @@ import { route } from "ziggy-js";
 export default function Edit({ product }) {
     const [existingSubCategory, setExistingSubCategory] = useState(product.subcategory ?? null);
     const [canAdd, setCanAdd] = useState(false);
-    const [parentCategory, setParentCategory] = useState(product.category.id ?? null); // id
+    const [parentCategory, setParentCategory] = useState(product.category.id ?? null);
     const [relatedSubCategories, setRelatedSubCategories] = useState([]);
     const { categories, subcategories, statuses } = usePage().props;
 

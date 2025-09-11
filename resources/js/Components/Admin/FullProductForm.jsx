@@ -41,7 +41,7 @@ export let ProductForm = ({ errors, data, inputChangeHandler, setData, setCanEdi
                     <div className="w-full mt-5">
                         <div className="w-full flex items-start justify-start flex-col gap-y-3">
                             <div className={`w-full flex flex-col gap-y-1"`}>
-                                <DropDown data={statuses} setOption={(status) => setData('status', status)} dropDownLabel="Choose Status" inputLabel="Status *" setCanEdit={setCanEdit} />
+                                <DropDown data={statuses} setOption={(status) => setData('status', status.id)} dropDownLabel="Choose Status" inputLabel="Status *" setCanEdit={setCanEdit} />
                                 {errors.status && (<span className="text-red-700 font-poppins text-sm ">{errors.status}</span>)}
                             </div>
                             <FormNumInput label={'Stock Quantity *'} name={'stock_quantity'} id={'stockQuantity'} placeholder={'Enter Stock Quantity'} data={data.stock_quantity} inputChangeHandler={inputChangeHandler} error={errors.stock_quantity} pattern={"^(0|[1-9]\d*)$"} />
