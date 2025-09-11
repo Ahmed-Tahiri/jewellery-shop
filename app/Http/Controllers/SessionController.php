@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\LoginAttempt;
 use App\Models\Session;
 use Carbon\Carbon;
@@ -27,9 +28,18 @@ class SessionController extends Controller
             'password.required' => 'Please enter password',
         ]);
 
+
+
+
         $remember = $request->boolean('remember');
         $email    = $credentials['email'];
         $ip       = $request->ip();
+        $customer = Customer::where('email', $email)->first();
+        if ($customer->status === 'blocked') {
+            return redirect()->back()->withErrors([
+                'status' => 'Your account is currently disabled. Please contact support for assistance.'
+            ]);
+        };
 
         if ($request->session()->has('guard')) {
             return back()->withErrors([

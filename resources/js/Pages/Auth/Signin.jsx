@@ -30,6 +30,10 @@ export default function Signin() {
                 <form className="w-full flex flex-col gap-y-5" onSubmit={submitHandler}>
                     <div className="flex flex-col items-start justify-start  w-full gap-y-2">
                         <FormTextInput type={'email'} data={data.email} label={'Email *'} placeholder={'Enter Email Address'} error={errors.email} name={'email'} id={'email'} inputChangeHandler={inputChangeHandler} />
+                        <div className="w-full flex flex-col items-start">
+                            {errors.status && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.status}</span></div>)}
+                            {errors.status && <a href="mailto:support@jewelleryshop.com" className="underline text-zinc">support@jewelleryshop.com</a>}
+                        </div>
                         {errors.auth && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.auth}</span></div>)}
                         {errors.retry_after && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.retry_after}</span></div>)}
                         {errors.retry_block && (<div><span className="text-red-700 text-sm font-poppins -mt-1">{errors.retry_block}</span></div>)}
