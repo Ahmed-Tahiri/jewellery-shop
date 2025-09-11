@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\LoginAttempt;
-use App\Models\Session;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
