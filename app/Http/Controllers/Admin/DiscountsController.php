@@ -194,6 +194,11 @@ class DiscountsController extends Controller
         $product->only(['id', 'sku']);
         return Inertia::render('Admin/Discounts/ProductDiscountShow', ['product' => $product, 'discount' => $discount]);
     }
+    public function productDiscountDestroy(Discounts $discount,)
+    {
+        $discount->delete();
+        return redirect()->route('admin.discounts.products.list')->with('success', 'Discount deleted created successfully');
+    }
 
     public function statusUpdate(Request $request, Discounts $discount)
     {

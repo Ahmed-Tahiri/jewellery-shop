@@ -105,6 +105,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/discounts/{discount}/products/{product}/edit', [DiscountsController::class, 'productDiscountEdit'])->name('admin.discounts.products.edit');
     Route::get('/admin/discounts/{discount}/products/{product}/show', [DiscountsController::class, 'productDiscountShow'])->name('admin.discounts.products.show');
     Route::put('/admin/discounts/{discount}/products', [DiscountsController::class, 'productDiscountUpdate'])->name('admin.discounts.products.update');
+    Route::delete('/admin/discounts/{discount}/products', [DiscountsController::class, 'productDiscountDestroy'])->name('admin.discounts.products.destroy');
     Route::patch('/admin/discounts/{discount}/status', [DiscountsController::class, 'statusUpdate'])->name('admin.discounts.status.update');
 });
 
