@@ -156,12 +156,40 @@ class DiscountsController extends Controller
         Discounts::create($discountFormattedData);
         return redirect()->route('admin.discounts.products.list')->with('success', 'Discount code created successfully');
     }
-    public function productDiscountEdit(Product $product, Discounts $discount)
+    public function productDiscountUpdate(Request $request, Discounts $discount)
+    {
+        $validated = $request->validate(
+            [
+                'name' => ['required', 'string', 'min:3', 'max:50'],
+                'discount' => ['required', 'numeric', 'min:0', 'max:100'],
+                'start_date' => ['required', 'date', 'after_or_equal:today'],
+                'end_date' => ['nullable', 'date', 'after:start_date'],
+            ],
+            [
+                'end_date.after' => 'The discount end date must be after the start date.',
+                'start_date.after_or_equal' => 'The discount start date must be today or a future date.',
+            ]
+        );
+        $startDate = Carbon::parse($validated['start_date']);
+        $today = Carbon::today();
+        $discountFormattedData = [
+            'name' => $validated['name'],
+            'discount_percent' => $validated['discount'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'type' => 'product',
+            'is_active' => $startDate->isSameDay($today),
+        ];
+
+        $discount->update($discountFormattedData);
+        return redirect()->route('admin.discounts.products.list')->with('success', 'Discount code created successfully');
+    }
+    public function productDiscountEdit(Discounts $discount, Product $product)
     {
         $discount->only(['name', 'discount_percent', 'start_date', 'end_date']);
         return Inertia::render('Admin/Discounts/ProductDiscountEdit', ['product' => $product->sku, 'discount' => $discount]);
     }
-    public function productDiscountShow(Product $product, Discounts $discount)
+    public function productDiscountShow(Discounts $discount, Product $product)
     {
         $product->only(['id', 'sku']);
         return Inertia::render('Admin/Discounts/ProductDiscountShow', ['product' => $product, 'discount' => $discount]);

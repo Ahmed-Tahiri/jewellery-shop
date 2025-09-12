@@ -6,7 +6,7 @@ import { ProductDiscountForm } from "../../../Components/Admin/ProductDiscountFo
 export default function ProductDiscountEdit({ discount, product }) {
 
     const [canAdd, setCanAdd] = useState(false);
-    let { post, errors, data, setData, reset } = useForm({
+    let { put, errors, data, setData, reset } = useForm({
         name: discount.name ?? '',
         discount: discount.discount_percent ?? '',
         start_date: discount.start_date ?? '',
@@ -25,7 +25,7 @@ export default function ProductDiscountEdit({ discount, product }) {
     let formSubmitHandler = (e) => {
         e.preventDefault();
 
-        post(route('admin.discounts.products.update', product.id), {
+        put(route('admin.discounts.products.update', discount.id), {
             onSuccess: () => reset(),
         });
     }
@@ -33,7 +33,7 @@ export default function ProductDiscountEdit({ discount, product }) {
         <section className="w-full min-h-170">
             <div className="w-full flex flex-col gap-y-8">
                 <div className="w-full flex flex-row justify-between items-center">
-                    <AdminSectionSubHeading heading={`Create Product(${product.sku}) Discount`} />
+                    <AdminSectionSubHeading heading={`Create Product(${product}) Discount`} />
                     <div className="flex flex-row items-center justify-end">{
                         canAdd ? (
                             <div className="flex flex-row items-center justify-end gap-x-3">

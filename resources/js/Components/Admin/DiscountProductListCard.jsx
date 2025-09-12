@@ -35,7 +35,7 @@ export let DiscountProductListCard = ({ product, index }) => {
         <td className="px-3 py-2 font-poppins font-normal text-base border-x-1 border-gray-300">{`${startFormattedDate} - ${endFormattedDate}`}</td>
 
         <td className="px-3 py-2 font-poppins font-normal text-base  flex items-center justify-center gap-3 mt-2">
-            {product.existingDiscount ? <Link href={route(`admin.discounts.products.show`, [product.id, product.existingDiscount.id])} className="text-green-600 hover:text-green-800">
+            {product.existingDiscount ? <Link href={route(`admin.discounts.products.show`, [product.existingDiscount.id, product.id])} className="text-green-600 hover:text-green-800">
                 <TbPencilDiscount className="text-3xl" />
             </Link> : <Link href={route('admin.discounts.products.create', product.id)} className="text-blue-600 hover:text-blue-800">
                 <MdAddBox className="text-3xl" />

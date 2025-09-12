@@ -39,7 +39,7 @@ export default function ProductDiscountShow({ discount, product }) {
                                 </div>
                             </div>
                             <div className="w-full flex gap-x-2 justify-end">
-                                <Link href={route('admin.discounts.products.edit', [product.id, discount.id])} className="min-w-25  font-poppins p-2 bg-zinc text-white text-center shadow-sm cursor-pointer  hover:bg-zinc-dark transition-colors ease-linear duration-200">Edit</Link>
+                                <Link href={route('admin.discounts.products.edit', [discount.id, product.id])} className="min-w-25  font-poppins p-2 bg-zinc text-white text-center shadow-sm cursor-pointer  hover:bg-zinc-dark transition-colors ease-linear duration-200">Edit</Link>
                                 <Link method="delete" as={'button'} href={route('admin.discounts.destroy', discount.id)} className="min-w-25  font-poppins p-2 bg-mustard text-white hover:bg-mustard-dark text-center shadow-sm cursor-pointer transition-colors ease-linear duration-200">Delete</Link>
                             </div>
                         </div>
