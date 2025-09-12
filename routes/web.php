@@ -95,6 +95,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/discounts', [DiscountsController::class, 'index'])->name('admin.discounts');
     Route::post('/admin/discounts', [DiscountsController::class, 'store'])->name('admin.discounts.post');
     Route::put('/admin/discounts/{discount}', [DiscountsController::class, 'update'])->name('admin.discounts.update');
+    Route::delete('/admin/discounts/{discount}', [DiscountsController::class, 'destroy'])->name('admin.discounts.destroy');
     Route::get('/admin/discounts/create', [DiscountsController::class, 'create'])->name('admin.discounts.create');
     Route::get('/admin/discounts/{discount}/edit', [DiscountsController::class, 'edit'])->name('admin.discounts.edit');
     Route::get('/admin/discounts/{discount}/show', [DiscountsController::class, 'show'])->name('admin.discounts.show');

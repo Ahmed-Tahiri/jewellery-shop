@@ -95,7 +95,7 @@ class DiscountsController extends Controller
     }
     public function show(Discounts $discount)
     {
-        return Inertia::render('Admin/Discounts/Show',);
+        return Inertia::render('Admin/Discounts/Show', ['discount' => $discount, 'percentage' => 39]);
     }
     public function statusUpdate(Request $request, Discounts $discount)
     {
