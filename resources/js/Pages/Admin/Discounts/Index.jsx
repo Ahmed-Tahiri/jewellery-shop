@@ -1,3 +1,5 @@
+import { CodeDiscounts } from "../../../Components/Admin/CodeDiscounts";
+import { ProductDiscounts } from "../../../Components/Admin/ProductDiscounts";
 import { AdminSectionHeading } from "../../../Shared/Admin/AdminSectionHeading";
 
 
@@ -8,7 +10,8 @@ export default function Index({ codeDiscounts, productDiscounts }) {
             <div className="w-full flex flex-col justify-center items-start">
                 <AdminSectionHeading heading={'Discounts'} />
             </div>
-            {/* <AllCustomers customers={customers} /> */}
+            <CodeDiscounts discounts={codeDiscounts} />
+            <ProductDiscounts discounts={productDiscounts} />
         </div>
     </section>
     );

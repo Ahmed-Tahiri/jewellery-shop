@@ -93,6 +93,10 @@ Route::middleware(['admin'])->group(function () {
     Route::patch('/admin/customers/{customer}/status', [AdminCustomerController::class, 'statusUpdate'])->name('admin.customers.status.update');
 
     Route::get('/admin/discounts', [DiscountsController::class, 'index'])->name('admin.discounts');
+    Route::post('/admin/discounts', [DiscountsController::class, 'store'])->name('admin.discounts.post');
+    Route::get('/admin/discounts/create', [DiscountsController::class, 'create'])->name('admin.discounts.create');
+    Route::get('/admin/discounts/products/list', [DiscountsController::class, 'products'])->name('admin.discounts.products.list');
+    Route::get('/admin/discounts/products/{product}/create', [DiscountsController::class, 'productDiscountCreate'])->name('admin.discounts.products.create');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
