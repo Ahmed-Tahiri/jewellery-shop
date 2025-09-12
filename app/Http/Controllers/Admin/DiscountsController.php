@@ -12,7 +12,9 @@ class DiscountsController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/Discounts/Index');
+        $codeDiscounts = Discounts::where('type', 'code')->get();
+        $productDiscounts = Discounts::where('type', 'product')->get();
+        return Inertia::render('Admin/Discounts/Index', ['codeDiscounts' => $codeDiscounts, 'productDiscounts' => $productDiscounts]);
     }
     public function create()
     {
@@ -50,5 +52,12 @@ class DiscountsController extends Controller
 
         Discounts::create($discountFormattedData);
         return redirect()->route('admin.discounts')->with('success', 'Discount code created successfully');
+    }
+
+    public function statusUpdate(Request $request, Discounts $discount)
+    {
+        $discount->is_active = $request->input('is_active');
+        $discount->save();
+        return redirect()->back()->with('success', 'Discount status updated successfully');
     }
 }

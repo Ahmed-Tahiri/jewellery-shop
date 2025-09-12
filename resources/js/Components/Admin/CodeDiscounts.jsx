@@ -1,4 +1,5 @@
 import { SectionLink } from "../../Shared/Admin/SectionLink";
+import { CodeDiscountCard } from "./CodeDiscountCard";
 
 export let CodeDiscounts = ({ discounts }) => {
     return (<div className="flex w-full bg-white shadow rounded flex-col gap-y-5 p-5">
@@ -19,14 +20,14 @@ export let CodeDiscounts = ({ discounts }) => {
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Limitation</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">Start Date</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark">End Date</th>
-                            <th className="px-3 py-2 border-x-1 border-zinc-dark">Status</th>
+                            <th className="px-3 py-2 border-x-1 border-zinc-dark">Is Active</th>
                             <th className="px-3 py-2 border-x-1 border-zinc-dark text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-300 shadow">
-                        {/* {customers.map((c, idx) => (
-                                <AdminPanelCustomerCard key={`customerCard${c.id}`} customer={c} index={idx} />
-                            ))} */}
+                        {discounts.map((d, idx) => (
+                            <CodeDiscountCard key={`codeDiscountCard${d.id}`} discount={d} index={idx} />
+                        ))}
                     </tbody>
                 </table>
             </div>

@@ -95,8 +95,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/discounts', [DiscountsController::class, 'index'])->name('admin.discounts');
     Route::post('/admin/discounts', [DiscountsController::class, 'store'])->name('admin.discounts.post');
     Route::get('/admin/discounts/create', [DiscountsController::class, 'create'])->name('admin.discounts.create');
+    Route::get('/admin/discounts/{discount}/edit', [DiscountsController::class, 'edit'])->name('admin.discounts.edit');
+    Route::get('/admin/discounts/{discount}/show', [DiscountsController::class, 'show'])->name('admin.discounts.show');
     Route::get('/admin/discounts/products/list', [DiscountsController::class, 'products'])->name('admin.discounts.products.list');
     Route::get('/admin/discounts/products/{product}/create', [DiscountsController::class, 'productDiscountCreate'])->name('admin.discounts.products.create');
+    Route::patch('/admin/discounts/{discount}/status', [DiscountsController::class, 'statusUpdate'])->name('admin.discounts.status.update');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');
