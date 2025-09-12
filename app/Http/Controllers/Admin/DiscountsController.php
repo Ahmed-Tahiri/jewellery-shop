@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discounts;
+use App\Models\Product\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -102,6 +103,66 @@ class DiscountsController extends Controller
         $discount->delete();
         return redirect()->route('admin.discounts')->with('success', 'Discount code deleted successfully');
     }
+    public function allProducts()
+    {
+        $products = Product::with(['discount', 'defaultVariant.primaryImage'])->get();
+        $productWithRelationsModifiedData = [];
+        foreach ($products as $product) {
+            $productWithRelationsModifiedData[] = [
+                'id' => $product->id,
+                'sku' => $product->sku,
+                'img' => $product->defaultVariant->primaryImage,
+                'cost' => $product->defaultVariant->cost,
+                'price' => $product->defaultVariant->price,
+                'status' => $product->status->status,
+                'existingDiscount' => $product->discount,
+            ];
+        }
+
+        return Inertia::render('Admin/Discounts/ProductsList', ['products' => $productWithRelationsModifiedData]);
+    }
+
+    public function productDiscountCreate(Product $product)
+    {
+        $product->only(['id', 'sku']);
+        return Inertia::render('Admin/Discounts/ProductDiscountCreate', ['product' => $product]);
+    }
+    public function productDiscountStore(Request $request, Product $product)
+    {
+        $validated = $request->validate(
+            [
+                'name' => ['required', 'string', 'min:3', 'max:50'],
+                'discount' => ['required', 'numeric', 'min:0', 'max:100'],
+                'start_date' => ['required', 'date', 'after_or_equal:today'],
+                'end_date' => ['nullable', 'date', 'after:start_date'],
+            ],
+            [
+                'end_date.after' => 'The discount end date must be after the start date.',
+                'start_date.after_or_equal' => 'The discount start date must be today or a future date.',
+            ]
+        );
+        $startDate = Carbon::parse($validated['start_date']);
+        $today = Carbon::today();
+        $discountFormattedData = [
+            'name' => $validated['name'],
+            'product_id' => $product->id,
+            'discount_percent' => $validated['discount'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'type' => 'product',
+            'is_active' => $startDate->isSameDay($today),
+        ];
+
+        Discounts::create($discountFormattedData);
+        return redirect()->route('admin.discounts.products.list')->with('success', 'Discount code created successfully');
+    }
+    public function productDiscountEdit(Product $product)
+    {
+        // $discount->only(['name', 'discount_percent', 'start_date', 'end_date']);
+        return Inertia::render('Admin/Discounts/ProductDiscountEdit', ['product' => $product->sku]);
+        dd($discount);
+    }
+
     public function statusUpdate(Request $request, Discounts $discount)
     {
         $discount->is_active = $request->input('is_active');

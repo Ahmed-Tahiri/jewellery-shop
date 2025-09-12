@@ -99,8 +99,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/discounts/create', [DiscountsController::class, 'create'])->name('admin.discounts.create');
     Route::get('/admin/discounts/{discount}/edit', [DiscountsController::class, 'edit'])->name('admin.discounts.edit');
     Route::get('/admin/discounts/{discount}/show', [DiscountsController::class, 'show'])->name('admin.discounts.show');
-    Route::get('/admin/discounts/products/list', [DiscountsController::class, 'products'])->name('admin.discounts.products.list');
+    Route::get('/admin/discounts/products/list', [DiscountsController::class, 'allProducts'])->name('admin.discounts.products.list');
     Route::get('/admin/discounts/products/{product}/create', [DiscountsController::class, 'productDiscountCreate'])->name('admin.discounts.products.create');
+    Route::post('/admin/discounts/products/{product}/create', [DiscountsController::class, 'productDiscountStore'])->name('admin.discounts.products.post');
+    Route::get('/admin/discounts/products/{product}/edit/{discount}', [DiscountsController::class, 'productDiscountEdit'])->name('admin.discounts.products.edit');
     Route::patch('/admin/discounts/{discount}/status', [DiscountsController::class, 'statusUpdate'])->name('admin.discounts.status.update');
 });
 

@@ -40,8 +40,9 @@ class Product extends Model
         return $this->hasOne(Discounts::class, 'product_id', 'id');
     }
 
-    public function getDefaultVariantAttribute()
+    public function defaultVariant(): HasOne
     {
-        return $this->variants()->where('is_default', true)->first();
+        return $this->hasOne(ProductVariant::class, 'product_id')
+            ->where('is_default', true);
     }
 }
