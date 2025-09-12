@@ -156,11 +156,15 @@ class DiscountsController extends Controller
         Discounts::create($discountFormattedData);
         return redirect()->route('admin.discounts.products.list')->with('success', 'Discount code created successfully');
     }
-    public function productDiscountEdit(Product $product)
+    public function productDiscountEdit(Product $product, Discounts $discount)
     {
-        // $discount->only(['name', 'discount_percent', 'start_date', 'end_date']);
-        return Inertia::render('Admin/Discounts/ProductDiscountEdit', ['product' => $product->sku]);
-        dd($discount);
+        $discount->only(['name', 'discount_percent', 'start_date', 'end_date']);
+        return Inertia::render('Admin/Discounts/ProductDiscountEdit', ['product' => $product->sku, 'discount' => $discount]);
+    }
+    public function productDiscountShow(Product $product, Discounts $discount)
+    {
+        $product->only(['id', 'sku']);
+        return Inertia::render('Admin/Discounts/ProductDiscountShow', ['product' => $product, 'discount' => $discount]);
     }
 
     public function statusUpdate(Request $request, Discounts $discount)

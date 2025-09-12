@@ -101,8 +101,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/discounts/{discount}/show', [DiscountsController::class, 'show'])->name('admin.discounts.show');
     Route::get('/admin/discounts/products/list', [DiscountsController::class, 'allProducts'])->name('admin.discounts.products.list');
     Route::get('/admin/discounts/products/{product}/create', [DiscountsController::class, 'productDiscountCreate'])->name('admin.discounts.products.create');
-    Route::post('/admin/discounts/products/{product}/create', [DiscountsController::class, 'productDiscountStore'])->name('admin.discounts.products.post');
+    Route::post('/admin/discounts/products/{product}', [DiscountsController::class, 'productDiscountStore'])->name('admin.discounts.products.post');
     Route::get('/admin/discounts/products/{product}/edit/{discount}', [DiscountsController::class, 'productDiscountEdit'])->name('admin.discounts.products.edit');
+    Route::get('/admin/discounts/products/{product}/show/{discount}', [DiscountsController::class, 'productDiscountShow'])->name('admin.discounts.products.show');
+    Route::put('/admin/discounts/products/{product}/edit/{discount}', [DiscountsController::class, 'productDiscountUpdate'])->name('admin.discounts.products.edit');
     Route::patch('/admin/discounts/{discount}/status', [DiscountsController::class, 'statusUpdate'])->name('admin.discounts.status.update');
 });
 
