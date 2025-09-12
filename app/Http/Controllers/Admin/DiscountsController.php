@@ -97,6 +97,11 @@ class DiscountsController extends Controller
     {
         return Inertia::render('Admin/Discounts/Show', ['discount' => $discount, 'percentage' => 39]);
     }
+    public function destroy(Discounts $discount)
+    {
+        $discount->delete();
+        return redirect()->route('admin.discounts')->with('success', 'Discount code deleted successfully');
+    }
     public function statusUpdate(Request $request, Discounts $discount)
     {
         $discount->is_active = $request->input('is_active');
