@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
+use App\Http\Controllers\Admin\DiscountsController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\Product\ColorToneController;
 use App\Http\Controllers\Admin\Product\ProductController;
@@ -90,6 +91,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/customers/{customer}/show', [AdminCustomerController::class, 'show'])->name('admin.customers.show');
     Route::delete('/admin/customers/{customer}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
     Route::patch('/admin/customers/{customer}/status', [AdminCustomerController::class, 'statusUpdate'])->name('admin.customers.status.update');
+
+    Route::get('/admin/discounts', [DiscountsController::class, 'index'])->name('admin.discounts');
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'index'])->middleware('customer_or_guest');

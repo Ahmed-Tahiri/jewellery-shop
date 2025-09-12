@@ -176,6 +176,7 @@ class ProductController extends Controller
         if ($discountInput !== null) {
             $discountValidation = $request->validate([
                 'discount' => ['numeric', 'min:1', 'max:100'],
+                'discount_name' => ['string', 'min:3', 'max:50'],
                 'discount_start_time' => ['required', 'date'],
                 'discount_end_time' => ['required', 'date', 'after:discount_start_time'],
             ], [
@@ -217,6 +218,7 @@ class ProductController extends Controller
             $modifiedDiscountData = [
                 'product_id' => $product->id,
                 'discount_percent' => $discountValidation['discount'],
+                'name' => $discountValidation['discount_name'],
                 'start_date' => $discountValidation['discount_start_time'],
                 'end_date' => $discountValidation['discount_end_time'],
                 'is_active' => true,

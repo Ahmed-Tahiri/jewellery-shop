@@ -27,6 +27,7 @@ export default function Create() {
         lead_time_days: '',
         subcategory: null,
         discount: '',
+        discount_name: '',
         discount_start_time: '',
         discount_end_time: '',
         status: '',
@@ -138,9 +139,10 @@ export default function Create() {
                                 </div>
                             </div>
                             <div className="w-full p-5 bg-white rounded shadow flex flex-col gap-y-5">
-                                <h6 className="font-poppins text-lg font-medium">Product Discount</h6>
+                                <h6 className="font-poppins text-lg font-medium">{`Product Discount (optional)`}</h6>
                                 <div className="flex flex-col items-start gap-y-3 w-full">
-                                    <FormNumInput label={'Discount (optional)'} name={'discount'} id={'discount'} placeholder={'Enter Discount Percentage'} error={errors.discount} inputChangeHandler={inputChangeHandler} data={data.discount} />
+                                    <FormTextInput type={'text'} label={'Discount Name'} name={'discount_name'} id={'discountName'} placeholder={'Enter Discount Name'} error={errors.discount_name} inputChangeHandler={inputChangeHandler} data={data.discount_name} />
+                                    <FormNumInput label={'Discount'} name={'discount'} id={'discount'} placeholder={'Enter Discount Percentage'} error={errors.discount} inputChangeHandler={inputChangeHandler} data={data.discount} />
                                     <FormDateTimeInput label={'Start Time'} name={'discount_start_time'} data={data.discount_start_time} id={'DiscountStartTime'} error={errors.discount_start_time} inputChangeHandler={inputChangeHandler} />
                                     <FormDateTimeInput label={'End Time'} name={'discount_end_time'} data={data.discount_end_time} id={'DiscountEndTime'} error={errors.discount_end_time} inputChangeHandler={inputChangeHandler} />
                                 </div>
