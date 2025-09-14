@@ -9,7 +9,6 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
 
-
 export let JewelleryCard = ({ isLimited = null }) => {
     let [wishListIconHovered, setWishListIconHovered] = useState(false);
     let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);

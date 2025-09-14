@@ -26,5 +26,5 @@ export let TrendyDesigns = () => {
                 </div>
             </div>
         </div>
-    </div>)
+    </div>);
 }

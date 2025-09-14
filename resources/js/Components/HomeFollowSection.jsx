@@ -10,7 +10,6 @@ import FollowImg6 from './../../images/followImg6.jpg';
 import FollowImg7 from './../../images/followImg7.jpg';
 import FollowImg8 from './../../images/followImg8.jpg';
 
-
 export let HomeFollowSection = () => {
 
     return (<div className="flex bg-white justify-center items-center py-30 px-5 md:px-10 lg:px-15 xl:px-20">

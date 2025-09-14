@@ -7,7 +7,6 @@ import { ShopCategoryCard } from "./ShopCategoryCard"
 
 export let Categories = () => {
 
-
     const categories = [
         {
             name: 'Earrings',

@@ -1,7 +1,7 @@
 import { SectionMainHeading } from "../Shared/SectionMainHeading";
 import { SectionSubHeading } from "../Shared/SectionSubHeading";
-import PlantImage from './../../images/plants.png';
 import { NewArrivalJewelleryCard } from "./NewArrivalJewelleryCard";
+import PlantImage from './../../images/plants.png';
 
 export let NewArrivals = () => {
 
