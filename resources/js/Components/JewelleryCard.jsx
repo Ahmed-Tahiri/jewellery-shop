@@ -10,7 +10,7 @@ import { useState } from "react";
 
 
 
-export let JewelleryCard = () => {
+export let JewelleryCard = ({ isLimited = null }) => {
     let [wishListIconHovered, setWishListIconHovered] = useState(false);
     let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
     let [previewIconHovered, setPreviewIconHovered] = useState(false);
@@ -32,7 +32,7 @@ export let JewelleryCard = () => {
                         {previewIconHovered ? <IoOpen className='text-mustard text-2xl' /> : <LuExpand className='text-semi-black text-2xl' />}
                     </button></div>
                 </div>
-                <SaleCountdown target={'2025-09-15 15:37:19'} />
+                {isLimited && <SaleCountdown target={'2025-09-15 15:37:19'} />}
             </div>
         </Link>
         <div className="flex flex-col w-full gap-y-1 items-start">

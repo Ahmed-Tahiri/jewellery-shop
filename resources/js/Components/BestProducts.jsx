@@ -39,7 +39,7 @@ export let BestProducts = () => {
                             onProgress={(swiper, p) => setProgress(p)}
                         >
                             {slides.map((slide, idx) => (<SwiperSlide key={`swiperSlides${idx + 1}`}>
-                                <JewelleryCard />
+                                <JewelleryCard isLimited='yes' />
                             </SwiperSlide>))}
 
                         </Swiper>
