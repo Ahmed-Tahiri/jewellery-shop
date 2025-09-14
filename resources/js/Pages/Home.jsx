@@ -1,3 +1,4 @@
+import { AboutLanding } from "../Components/AboutLanding";
 import { Categories } from "../Components/Categories";
 import { Landing } from "../Components/Landing";
 import { SaleHeading } from "../Components/SaleHeading";
@@ -15,6 +16,7 @@ export default function Home() {
             <Landing />
             <Services />
             <Categories />
+            <AboutLanding />
             <Footer />
         </section>
     );
