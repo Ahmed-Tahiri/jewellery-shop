@@ -29,7 +29,7 @@ export let AboutLanding = () => {
                     <div className="flex flex-row items-center justify-between w-full gap-x-3">
                         <div className="flex flex-col gap-y-5">
                             <SectionSubHeading heading={'About Us'} />
-                            <SectionMainHeading heading={'The Art and Soul Behind Out Jewellery'} />
+                            <SectionMainHeading heading={'The Art and Soul Behind Our Jewellery'} />
                         </div>
                         <div className="w-58 h-44 bg-red-400 relative shadow-xs">
                             <img src={AboutMiniImg} alt="About Mini img" className="w-full h-full object-cover aspect-square" />
