@@ -8,7 +8,7 @@ import PlantImage from './../../images/plants.png';
 export let AboutLanding = () => {
     const aboutData = [
         { count: 104, label: 'Categories' },
-        { count: 493, label: 'Products' },
+        { count: 1485, label: 'Products' },
         { count: 99, label: 'Satisfied Customer' },
     ];
 
