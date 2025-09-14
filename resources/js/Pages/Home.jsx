@@ -2,6 +2,7 @@ import { AboutLanding } from "../Components/AboutLanding";
 import { BestProducts } from "../Components/BestProducts";
 import { Categories } from "../Components/Categories";
 import { Landing } from "../Components/Landing";
+import { NewArrivals } from "../Components/NewArrivals";
 import { SaleHeading } from "../Components/SaleHeading";
 import { Services } from "../Components/Services";
 import { Footer } from "../Shared/Footer";
@@ -19,6 +20,7 @@ export default function Home() {
             <Categories />
             <AboutLanding />
             <BestProducts />
+            <NewArrivals />
             <Footer />
         </section>
     );

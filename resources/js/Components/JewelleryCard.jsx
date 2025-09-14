@@ -24,7 +24,6 @@ export let JewelleryCard = () => {
                     <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer transition-all ease-linear duration-200" onMouseEnter={() => setWishListIconHovered(true)} onMouseLeave={() => setWishListIconHovered(false)}>
                         {wishListIconHovered ? (<GoHeartFill className='text-red-500 text-2xl' />) : (<GoHeart className='text-semi-black text-2xl' />)}
                     </button></div>
-
                     <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer" onMouseEnter={() => setShoppingBagIconHovered(true)} onMouseLeave={() => setShoppingBagIconHovered(false)}>
                         {shoppingBagIconHovered ? <HiShoppingBag className='text-zinc text-2xl' /> : <HiOutlineShoppingBag className='text-semi-black text-2xl' />}
                     </button></div>
