@@ -1,6 +1,7 @@
 import { AboutLanding } from "../Components/AboutLanding";
 import { BestProducts } from "../Components/BestProducts";
 import { Categories } from "../Components/Categories";
+import { FAQ } from "../Components/FAQs";
 import { HomeFollowSection } from "../Components/HomeFollowSection";
 import { Landing } from "../Components/Landing";
 import { NewArrivals } from "../Components/NewArrivals";
@@ -25,6 +26,7 @@ export default function Home() {
             <NewArrivals />
             <TrendyDesigns />
             <HomeFollowSection />
+            <FAQ />
             <Footer />
         </section>
     );
