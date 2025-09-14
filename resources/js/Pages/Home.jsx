@@ -1,4 +1,5 @@
 import { AboutLanding } from "../Components/AboutLanding";
+import { BestProducts } from "../Components/BestProducts";
 import { Categories } from "../Components/Categories";
 import { Landing } from "../Components/Landing";
 import { SaleHeading } from "../Components/SaleHeading";
@@ -17,6 +18,7 @@ export default function Home() {
             <Services />
             <Categories />
             <AboutLanding />
+            <BestProducts />
             <Footer />
         </section>
     );

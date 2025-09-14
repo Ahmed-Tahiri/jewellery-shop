@@ -1,4 +1,3 @@
-import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, A11y } from "swiper/modules";
 import "swiper/css";
@@ -58,6 +57,7 @@ export let Categories = () => {
                     freeMode={true}
                     speed={3000}
                     autoplay={{ delay: 0, disableOnInteraction: false, }}
+                    a11y={{ enabled: true }}
                 >
                     {categories.map((cat, idx) => (<SwiperSlide key={`HomeCategoryCardSlide${idx + 1}`}><ShopCategoryCard image={cat.url} name={cat.name} link={cat.link} /></SwiperSlide>))}
                 </Swiper>
