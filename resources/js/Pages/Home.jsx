@@ -1,3 +1,4 @@
+import { Categories } from "../Components/Categories";
 import { Landing } from "../Components/Landing";
 import { SaleHeading } from "../Components/SaleHeading";
 import { Services } from "../Components/Services";
@@ -13,6 +14,7 @@ export default function Home() {
             <Header />
             <Landing />
             <Services />
+            <Categories />
             <Footer />
         </section>
     );

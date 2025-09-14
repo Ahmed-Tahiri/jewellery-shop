@@ -1,5 +1,5 @@
 import LeafImg from './../../images/leaf.png';
-export let SectionHeading = ({ heading, breadcrumb }) => {
+export let PageHeading = ({ heading, breadcrumb }) => {
     return <div className="overflow-hidden w-full h-20 sm:h-30 md:h-40 lg:h-50 bg-powder-gray relative">
         <div className='absolute left-2 sm:left-20 lg:left-36 -bottom-5 sm:-bottom-7 md:-bottom-9 lg:-bottom-10'>
             <img src={LeafImg} alt='leafImg' className='h-20 sm:h-30 md:h-40 lg:h-50 transform scale-y-[-1]' />
