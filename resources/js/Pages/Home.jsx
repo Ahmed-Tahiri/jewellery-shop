@@ -5,6 +5,7 @@ import { Landing } from "../Components/Landing";
 import { NewArrivals } from "../Components/NewArrivals";
 import { SaleHeading } from "../Components/SaleHeading";
 import { Services } from "../Components/Services";
+import { TrendyDesigns } from "../Components/TrendyDesigns";
 import { Footer } from "../Shared/Footer";
 import { Header } from "../Shared/Header";
 import { MobileHeader } from "../Shared/MobileHeader";
@@ -21,6 +22,7 @@ export default function Home() {
             <AboutLanding />
             <BestProducts />
             <NewArrivals />
+            <TrendyDesigns />
             <Footer />
         </section>
     );
