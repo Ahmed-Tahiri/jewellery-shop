@@ -4,6 +4,7 @@ import { IoSparklesSharp } from "react-icons/io5";
 import AboutImage from './../../images/AboutImg.jpg';
 import AboutMiniImg from './../../images/AboutMiniImg.jpg';
 import PlantImage from './../../images/plants.png';
+import { SectionDescription } from "../Shared/SectionDesctiptionText";
 
 export let AboutLanding = () => {
     const aboutData = [
@@ -38,7 +39,7 @@ export let AboutLanding = () => {
                             </div>
                         </div>
                     </div>
-                    <p className="flex-1 text-semi-black font-poppins text-base">Our jewellery is crafted with passion, blending timeless artistry with modern elegance. Each piece tells a story of beauty, dedication, and soulful craftsmanship.</p>
+                    <SectionDescription message={'Our jewellery is crafted with passion, blending timeless artistry with modern elegance. Each piece tells a story of beauty, dedication, and soulful craftsmanship.'} />
                 </div>
                 <div className="w-full flex flex-row bg-zinc shadow-sm">
                     {aboutData.map((data, idx) => (<div key={`AboutDataCard${idx + 1}`} className="flex-1 flex flex-col p-5  items-center justify-center">
