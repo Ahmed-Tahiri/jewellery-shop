@@ -1,15 +1,16 @@
 import { Link } from '@inertiajs/react';
 import JewelleryLogo from './../../images/JewelleryLogo.png';
 import { RiSearch2Line } from "react-icons/ri";
-import { GoHeart, GoPerson } from "react-icons/go";
+import { GoHeart, GoHeartFill, GoPerson, GoPersonFill } from "react-icons/go";
+import { HiOutlineShoppingBag, HiShoppingBag } from "react-icons/hi2";
 import { NavLink } from './NavLink';
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { useState } from 'react';
+
 
 export let Header = () => {
-
-
-
-
+    let [wishListIconHovered, setWishListIconHovered] = useState(false);
+    let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
+    let [personIconHovered, setPersonIconHovered] = useState(false);
 
     let navLinks = [
         { name: "Home", link: '/' },
@@ -19,13 +20,6 @@ export let Header = () => {
         { name: "About Us", link: '/about' },
         { name: "Contact Us", link: '/contact' },
     ];
-
-    let navIcons = [
-        { name: <RiSearch2Line className='text-zinc text-2xl' />, link: '#' },
-        { name: <GoHeart className='text-zinc text-2xl' />, link: '#' },
-        { name: <HiOutlineShoppingBag className='text-zinc text-2xl' />, link: '#' },
-        { name: <GoPerson className='text-zinc text-2xl' />, link: '/myaccount' },
-    ]
 
     return (<>
 
@@ -43,7 +37,21 @@ export let Header = () => {
                 </div>
                 <div>
                     <div className='w-full flex flex-row items-center justify-end gap-x-6'>
-                        {navIcons.map((icon, idx) => <div key={`navIcon${idx + 1}`}><Link href={icon.link}>{icon.name}</Link></div>)}
+                        <div>
+                            <Link href='#'>
+                                <RiSearch2Line className='text-zinc text-2xl' />
+                            </Link></div>
+                        <div ><Link onMouseEnter={() => setWishListIconHovered(true)} onMouseLeave={() => setWishListIconHovered(false)} href='/wishlist'>
+                            {wishListIconHovered ? (<GoHeartFill className='text-red-500 text-2xl' />) : (<GoHeart className='text-zinc text-2xl' />)}
+                        </Link></div>
+                        <div>
+                            <Link onMouseEnter={() => setShoppingBagIconHovered(true)} onMouseLeave={() => setShoppingBagIconHovered(false)} href='/cart'>
+                                {shoppingBagIconHovered ? (<HiShoppingBag className='text-2xl text-zinc' />) : (<HiOutlineShoppingBag className='text-zinc text-2xl' />)}
+                            </Link></div>
+                        <div >
+                            <Link onMouseEnter={() => setPersonIconHovered(true)} onMouseLeave={() => setPersonIconHovered(false)} href='/myaccount'>
+                                {personIconHovered ? (<GoPersonFill className='text-2xl text-mustard' />) : (<GoPerson className='text-zinc text-2xl' />)}
+                            </Link></div>
                     </div>
                 </div>
             </div>

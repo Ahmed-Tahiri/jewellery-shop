@@ -1,10 +1,10 @@
 import { HiOutlineShoppingBag, HiShoppingBag } from "react-icons/hi2";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import { FaStar } from "react-icons/fa6";
 import { LuExpand } from "react-icons/lu";
 import { IoOpen } from "react-icons/io5";
 import Earrings from './../../images/cardEarrings.png';
 import SaleCountdown from "./SaleCountDown";
-import { GoHeart, GoHeartFill } from "react-icons/go";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
