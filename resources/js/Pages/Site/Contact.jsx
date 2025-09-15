@@ -5,9 +5,10 @@ import { ContactForm } from "../../Components/ContactForm";
 import { PiMapPinLight } from "react-icons/pi";
 import { TbPhoneCall } from "react-icons/tb";
 import { HiOutlineEnvelope } from "react-icons/hi2";
+import { ContactMap } from "../../Components/ContactMap";
 
 let ContactDataCard = ({ label, data, icon }) => {
-    return <div className="flex-1 w-full max-w-100 flex items-center justify-center flex-col gap-y-5 bg-powder-gray p-10 shadow-sm min-h-60">
+    return <div className="flex-1 w-full flex items-center justify-center flex-col gap-y-5 bg-powder-gray p-10 shadow-sm min-h-60">
         <div className="relative inline-flex items-center justify-center">
             {icon}
             <span className="w-4 h-4 absolute top-5 right-4 bg-mustard rounded-full shadow-xs" />
@@ -60,6 +61,9 @@ export default function Contact() {
             <div className="w-full flex flex-row items-start justify-center  max-w-7xl gap-x-10">
                 {contactDetails.map((contact, idx) => <ContactDataCard key={`contactDataCard${idx + 1}`} label={contact.label} icon={contact.icon} data={contact.data} />)}
             </div>
+        </div>
+        <div className="flex bg-white justify-center max-w-7xl mx-auto items-center py-10 mb-20  overflow-hidden shadow-sm">
+            <ContactMap />
         </div>
     </>
 }
