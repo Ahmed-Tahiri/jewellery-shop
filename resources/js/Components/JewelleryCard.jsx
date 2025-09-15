@@ -9,13 +9,13 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
 
-export let JewelleryCard = ({ isLimited = null }) => {
+export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white' }) => {
     let [wishListIconHovered, setWishListIconHovered] = useState(false);
     let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
     let [previewIconHovered, setPreviewIconHovered] = useState(false);
     let [shoppingCardIsHovered, setShoppingCardIsHovered] = useState(false);
     return (<div className="w-70 flex flex-col gap-y-3">
-        <Link href={'/'} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className="w-full aspect-square bg-white relative shadow-sm rounded-t-sm">
+        <Link href={'/'} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className={`w-full aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
             <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">20% off</span>
             <img src={Earrings} className="object-cover w-full aspect-square" alt="Product Image" />
             <div className={`${shoppingCardIsHovered ? 'flex' : 'hidden'} w-full h-full p-2 aspect-square absolute bg-transparent bottom-0 left-0 pointer-events-none flex-col gap-y-5 items-end justify-between`}>

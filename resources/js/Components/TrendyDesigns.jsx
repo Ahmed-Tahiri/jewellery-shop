@@ -17,12 +17,12 @@ export let TrendyDesigns = () => {
                     <div className="absolute top-0 left-0 h-full w-full p-2"><div className="h-full w-full border-2 border-white"></div></div>
                 </div>
                 <div className="w-9/12 flex flex-row flex-wrap items-start justify-start gap-8">
-                    <JewelleryCard />
-                    <JewelleryCard />
-                    <JewelleryCard />
-                    <JewelleryCard />
-                    <JewelleryCard />
-                    <JewelleryCard />
+                    <JewelleryCard bgColor='bg-powder-gray' />
+                    <JewelleryCard bgColor='bg-powder-gray' />
+                    <JewelleryCard bgColor='bg-powder-gray' />
+                    <JewelleryCard bgColor='bg-powder-gray' />
+                    <JewelleryCard bgColor='bg-powder-gray' />
+                    <JewelleryCard bgColor='bg-powder-gray' />
                 </div>
             </div>
         </div>
