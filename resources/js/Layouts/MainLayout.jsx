@@ -9,12 +9,12 @@ import { PageHeading } from '../Shared/PageHeading';
 export default function MainLayout({ children, heading, breadcrumb }) {
 
     return (
-        <section className="w-full">
+        <section className="w-full relative">
             <SaleHeading />
             <Header />
             <MobileHeader />
             <PageHeading heading={heading} breadcrumb={breadcrumb} />
-            <main className="w-full px-5 md:px-10 lg:px-15 xl:px-20 py-15 max-w-7xl mx-auto">
+            <main className="w-full">
                 {children}
             </main>
             <Services />

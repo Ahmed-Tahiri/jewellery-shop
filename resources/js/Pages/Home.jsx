@@ -23,6 +23,8 @@ export default function Home() {
             <Services />
             <Categories />
             <AboutLanding />
+            {/* <section className="py-20 px-5 md:px-10 lg:px-15 xl:px-20 "> 
+             </section> */}
             <BestProducts />
             <NewArrivals />
             <SaleSection />
