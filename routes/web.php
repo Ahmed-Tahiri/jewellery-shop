@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Product\ColorToneController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductVariantController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
 use App\Http\Controllers\Customer\CustomerController;
@@ -18,16 +19,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SignupCompleteController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::middleware(['customer_or_guest'])->group(function () {
-    Route::get('/about', [AboutController::class, 'index'])->name('about');
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/about', [AboutController::class, 'index'])->name('about');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 });
 
-// Route::get('/', function () {
-//     return Inertia::render('Home');
-// })->name('home')->middleware('customer_or_guest');
 Route::get('/signup', [CustomerController::class, 'index'])->name('signup')->middleware('guest');
 Route::post('/signup', [CustomerController::class, 'store']);
 Route::get('/signup/complete', [SignupCompleteController::class, 'index'])->name('signup.complete')->middleware('customer');
