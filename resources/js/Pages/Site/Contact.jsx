@@ -62,7 +62,7 @@ export default function Contact() {
                 {contactDetails.map((contact, idx) => <ContactDataCard key={`contactDataCard${idx + 1}`} label={contact.label} icon={contact.icon} data={contact.data} />)}
             </div>
         </div>
-        <div className="flex bg-white justify-center max-w-7xl mx-auto items-center py-10 mb-20  overflow-hidden shadow-sm">
+        <div className="flex bg-white justify-center max-w-7xl mx-auto items-center py-10 mb-20  overflow-hidden">
             <ContactMap />
         </div>
     </>

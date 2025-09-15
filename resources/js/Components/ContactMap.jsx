@@ -3,10 +3,10 @@ export let ContactMap = () => {
     const lng = 73.0572;
 
     return (
-        <div className="w-full  h-80">
+        <div className="w-full">
             <iframe
                 title="location-map"
-                className="h-100 w-full"
+                className="h-100 shadow-sm w-full"
                 src={`https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`}
                 allowFullScreen
                 aria-label="Map showing location"
