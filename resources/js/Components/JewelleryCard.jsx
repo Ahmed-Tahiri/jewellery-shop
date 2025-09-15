@@ -14,7 +14,7 @@ export let JewelleryCard = ({ isLimited = null }) => {
     let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
     let [previewIconHovered, setPreviewIconHovered] = useState(false);
     let [shoppingCardIsHovered, setShoppingCardIsHovered] = useState(false);
-    return (<div className="w-74 flex flex-col gap-y-3">
+    return (<div className="w-70 flex flex-col gap-y-3">
         <Link href={'/'} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className="w-full aspect-square bg-white relative shadow-sm rounded-t-sm">
             <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">20% off</span>
             <img src={Earrings} className="object-cover w-full aspect-square" alt="Product Image" />

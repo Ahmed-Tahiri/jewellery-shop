@@ -12,7 +12,7 @@ import FollowImg8 from './../../images/followImg8.jpg';
 
 export let HomeFollowSection = () => {
 
-    return (<div className="flex bg-white justify-center items-center py-30 px-5 md:px-10 lg:px-15 xl:px-20">
+    return (<div className="flex bg-powder-gray justify-center items-center py-30 px-5 md:px-10 lg:px-15 xl:px-20">
         <div className="w-full flex flex-col items-center justify-center gap-y-14  max-w-7xl gap-10 ">
             <div className="w-full flex flex-col items-center justify-center gap-y-4">
                 <SectionSubHeading heading={'Follow Us'} />
