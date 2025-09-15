@@ -3,6 +3,7 @@ import { BestProducts } from "../Components/BestProducts";
 import { Categories } from "../Components/Categories";
 import { FAQ } from "../Components/FAQs";
 import { HomeFollowSection } from "../Components/HomeFollowSection";
+import { SaleSection } from "../Components/HomeSaleSection";
 import { Landing } from "../Components/Landing";
 import { NewArrivals } from "../Components/NewArrivals";
 import { SaleHeading } from "../Components/SaleHeading";
@@ -24,6 +25,7 @@ export default function Home() {
             <AboutLanding />
             <BestProducts />
             <NewArrivals />
+            <SaleSection />
             <TrendyDesigns />
             <HomeFollowSection />
             <FAQ />
