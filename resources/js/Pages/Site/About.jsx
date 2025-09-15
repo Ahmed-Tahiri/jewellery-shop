@@ -5,11 +5,12 @@ import { SectionMainHeading } from "../../Shared/SectionMainHeading";
 import { SectionSubHeading } from "../../Shared/SectionSubHeading";
 import { LiaGem } from "react-icons/lia";
 import { AiOutlineGold } from "react-icons/ai";
+import { OurTeam } from "../../Components/OurTeam";
 
 export default function About() {
     return <>
         <AboutLanding />
-        <div className="flex flex-row  bg-powder-gray justify-start items-center  overflow-hidden gap-x-8">
+        <section className="flex flex-row  bg-powder-gray justify-start items-center  overflow-hidden gap-x-8">
             <div className="w-5/12 aspect-square shadow-xs relative ">
                 <div className="w-full"><img className="w-full aspect-square object-cover" src="https://images.unsplash.com/photo-1631982690223-8aa4be0a2497?ixid=M3wzOTE5Mjl8MHwxfHNlYXJjaHwyfHxqZXdlbHJ5JTIwY29sbGVjdGlvbnxlbnwwfHx8fDE3MjU4ODQ2ODV8MA&ixlib=rb-4.0.3&auto=format&fit=crop&w=576&h=720&q=100" alt="About Page Rings Image" /></div>
                 <div className="w-full aspect-square p-2 absolute top-0 left-0">
@@ -45,7 +46,8 @@ export default function About() {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <OurTeam />
     </>
 
 }
