@@ -5,6 +5,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
 import AdminLayout from './Layouts/AdminLayout';
 import MyAccountLayout from './Layouts/MyAccountLayout';
+import MainLayout from './Layouts/MainLayout';
 
 createInertiaApp({
     resolve: name => {
@@ -21,6 +22,9 @@ createInertiaApp({
         }
         if (!Page.layout && name.startsWith('MyAccount/')) {
             Page.layout = page => <MyAccountLayout>{page}</MyAccountLayout>;
+        }
+        if (!Page.layout && name.startsWith('Site/')) {
+            Page.layout = page => <MainLayout>{page}</MainLayout>;
         }
 
         return Page;
