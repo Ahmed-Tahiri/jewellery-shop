@@ -1,10 +1,16 @@
+
 import { AboutLanding } from "../../Components/AboutLanding";
+import { Navbar } from "../../Components/MyAccount/Navbar";
+import { NewArrivals } from "../../Components/NewArrivals";
+import { SaleSlider } from "../../Components/SaleSlider";
 import MainLayout from "../../Layouts/MainLayout";
 
 export default function About() {
-    return <section className="w-full relative h-100  px-5 md:px-10 lg:px-15 xl:px-20 py-15 ">
+    return <>
         <AboutLanding />
-    </section>
+
+    </>
+
 }
 
 About.layout = page => (

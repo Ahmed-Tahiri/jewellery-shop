@@ -5,7 +5,6 @@ import PlantImage from './../../images/plants.png';
 
 export let NewArrivals = () => {
 
-
     return (<div className="flex relative bg-white justify-center items-center py-20 px-5 md:px-10 lg:px-15 xl:px-20 overflow-hidden">
         <div className="absolute top-10 -left-15 h-40 z-50"><img className="h-40 transform-scale-y-[-1] rotate-340" src={PlantImage} alt="Leaf Image for design" /></div>
         <div className="absolute bottom-44 -right-12 h-30 z-50"><img className="h-30 transform-scale-y-[-1] rotate-245" src={PlantImage} alt="Leaf Image for design" /></div>
