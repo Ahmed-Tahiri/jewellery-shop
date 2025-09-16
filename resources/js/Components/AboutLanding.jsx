@@ -32,7 +32,7 @@ export let AboutLanding = () => {
                             <SectionSubHeading heading={'About Us'} />
                             <SectionMainHeading heading={'The Art and Soul Behind Our Jewellery'} />
                         </div>
-                        <div className="w-58 h-44 bg-red-400 relative shadow-xs">
+                        <div className="w-58 h-44 bg-powder-gray relative shadow-xs">
                             <img src={AboutMiniImg} alt="About Mini img" className="w-full h-full object-cover aspect-square" />
                             <div className="w-full h-full absolute top-0 left-0 bg-transparent p-2 z-10">
                                 <div className="w-full h-full border-2 border-white bg-transparent"></div>
