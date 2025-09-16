@@ -15,7 +15,7 @@ export let SelectedFilterCard = ({ label, id }) => {
     </div>
 }
 
-export default function Index({ materials, categories, colors }) {
+export default function Index({ materials, categories, colors, product }) {
 
     const availabilities = [
         { id: 1, status: 'in stock', name: 'In Stock' },
@@ -75,6 +75,8 @@ export default function Index({ materials, categories, colors }) {
                         <div><button className="font-poppins underline text-zinc cursor-pointer">Clear All</button></div>
                     </div>
                     <div className="flex flex-row flex-wrap gap-7 mt-5">
+                        <JewelleryCard bgColor="bg-powder-gray" productData={product} />
+                        {/* <JewelleryCard bgColor="bg-powder-gray" />
                         <JewelleryCard bgColor="bg-powder-gray" />
                         <JewelleryCard bgColor="bg-powder-gray" />
                         <JewelleryCard bgColor="bg-powder-gray" />
@@ -84,9 +86,7 @@ export default function Index({ materials, categories, colors }) {
                         <JewelleryCard bgColor="bg-powder-gray" />
                         <JewelleryCard bgColor="bg-powder-gray" />
                         <JewelleryCard bgColor="bg-powder-gray" />
-                        <JewelleryCard bgColor="bg-powder-gray" />
-                        <JewelleryCard bgColor="bg-powder-gray" />
-                        <JewelleryCard bgColor="bg-powder-gray" />
+                        <JewelleryCard bgColor="bg-powder-gray" /> */}
                     </div>
                     <div className="flex w-full items-center justify-center mt-5">
                         <div><button className="flex h-10 aspect-square hover:bg-mustard items-center justify-center  cursor-pointer"><FaChevronLeft className="text-lg text-zinc-dark" /></button></div>

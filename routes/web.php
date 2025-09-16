@@ -28,6 +28,7 @@ Route::middleware(['customer_or_guest'])->group(function () {
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
     Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/shop/{category}/{slug}', [ShopController::class, 'show'])->name('shop.product.show');
 });
 
 Route::get('/signup', [CustomerController::class, 'index'])->name('signup')->middleware('guest');
