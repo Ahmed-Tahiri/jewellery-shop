@@ -17,6 +17,7 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SignupCompleteController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,8 @@ Route::middleware(['customer_or_guest'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/about', [AboutController::class, 'index'])->name('about');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::get('/wishlist', [WishlistController::class, 'index'])->name('contact');
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 });
 
 Route::get('/signup', [CustomerController::class, 'index'])->name('signup')->middleware('guest');
