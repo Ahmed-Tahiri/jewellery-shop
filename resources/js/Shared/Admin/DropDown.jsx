@@ -29,7 +29,7 @@ export let DropDown = ({ data = [], setOption, dropDownLabel = '', inputLabel = 
 
     return (
         <>
-            <h6 className="w-full sm:text-lg text-base font-poppins font-medium text-semi-black">{inputLabel}</h6>
+            {inputLabel && <h6 className="w-full sm:text-lg text-base font-poppins font-medium text-semi-black">{inputLabel}</h6>}
 
             <div ref={wrapperRef} className="w-full flex flex-col items-start">
                 <button type="button" aria-haspopup="listbox" aria-expanded={isOpen} className="border-2 font-poppins border-gray-300 shadow-xs w-full p-2 text-semi-black outline-0 focus:border-light-gray focus:border-[3px] cursor-pointer flex items-center justify-between font-medium transition-all ease-linear duration-200" onClick={() => setIsOpen((s) => !s)} >
