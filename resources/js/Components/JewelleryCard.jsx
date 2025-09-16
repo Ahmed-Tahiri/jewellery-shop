@@ -14,7 +14,7 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white' }) => {
     let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
     let [previewIconHovered, setPreviewIconHovered] = useState(false);
     let [shoppingCardIsHovered, setShoppingCardIsHovered] = useState(false);
-    return (<div className="w-70 flex flex-col gap-y-3">
+    return (<div className="w-64 flex flex-col gap-y-3">
         <Link href={'/'} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className={`w-full aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
             <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">20% off</span>
             <img src={Earrings} className="object-cover w-full aspect-square" alt="Product Image" />
@@ -39,8 +39,8 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white' }) => {
                 <p className="text-dark-gray font-poppins font-medium">Earrings</p>
                 <p className="flex flex-row gap-x-1"><FaStar className="text-2xl text-mustard" /><span className="font-poppins text-semi-black font-semibold text-lg">4.9</span></p>
             </div>
-            <p className="text-semi-black font-poppins text-xl font-semibold">Gold Earring</p>
-            <div className="mt-3 flex w-full justify-start items-center flex-row gap-x-2"><span className="text-xl font-poppins font-semibold text-semi-black">Rs 320.00</span><span className="text-lg font-poppins font-medium text-dark-gray line line-through">Rs 400.00</span></div>
+            <p className="text-semi-black font-poppins text-lg font-semibold">Gold Earring</p>
+            <div className="mt-3 flex w-full justify-start items-center flex-row gap-x-2"><span className="text-lg font-poppins font-semibold text-semi-black">Rs 320.00</span><span className="text-base font-poppins font-medium text-dark-gray line line-through">Rs 400.00</span></div>
         </div>
     </div>);
 }
