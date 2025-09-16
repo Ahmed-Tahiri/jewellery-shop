@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin 'tailwind-scrollbar';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -55,4 +55,58 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+.price-range-slider input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    position: absolute;
+    height: 0;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+}
+
+.price-range-slider input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: transparent;
+}
+
+.price-range-slider input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: transparent;
+}
+
+.price-range-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    background-color: #08232a !important;
+    border: 2px solid #fff;
+    cursor: pointer;
+    margin-top: -8px;
+}
+
+.price-range-slider input[type="range"]::-moz-range-thumb {
+    pointer-events: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    background-color: #08232a !important;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+.price-range-slider input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.1);
+}
+
+.price-range-slider input[type="range"]:active::-moz-range-thumb {
+    transform: scale(1.1);
 }
