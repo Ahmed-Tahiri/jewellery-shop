@@ -17,7 +17,6 @@ class ShopController extends Controller
         $materials = Metal::all(['name', 'id']);
         $colors = ColorTone::all(['name', 'hex_code as colorCode', 'id']);
         $defaultVariant = Product::with(['defaultVariant', 'defaultVariant.primaryImage', 'subcategory.category', 'discount'])->first();
-
         $modifiedData = [
             'id' => $defaultVariant->id,
             'name' => $defaultVariant->name,
@@ -31,16 +30,23 @@ class ShopController extends Controller
     }
     public function show($category, $slug)
     {
-        $product = Product::where('slug', $slug)->with(['defaultVariant', 'defaultVariant.primaryImage', 'subcategory.category', 'discount'])->firstOrFail();
+        $product = Product::where('slug', $slug)->with(['defaultVariant.images', 'variants.images', 'variants.metal', 'variants.metal_purity', 'variants.color_tone', 'variants.finish', 'subcategory.category', 'tags', 'discount'])->firstOrFail();
         $modifiedData = [
             'id' => $product->id,
             'name' => $product->name,
+            'shortDescription' => $product->short_description,
+            'longDescription' => $product->long_description,
+            'sku' => $product->sku,
+            'deliveryTime' => $product->lead_time_days ?? null,
             'discount' => $product->discount->discount_percent,
             'price' => $product->defaultVariant->price,
             'category' => $product->subcategory->category->name,
-            'img' => $product->defaultVariant->primaryImage,
+            'defaultVariant' => $product->defaultVariant,
+            'variants' => $product->variants,
             'slug' => $product->slug,
+            'tags' => $product->tags
         ];
+
         return Inertia::render('Site/Shop/Show', ['product' => $modifiedData]);
     }
 }

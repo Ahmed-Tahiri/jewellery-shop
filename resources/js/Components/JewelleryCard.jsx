@@ -9,10 +9,11 @@ import SaleCountdown from "./SaleCountDown";
 import { Link } from "@inertiajs/react";
 import { useMemo, useState } from "react";
 import { route } from "ziggy-js";
+import { getDiscount } from "../Utilities/getDiscount";
 
 
 export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productData }) => {
-    console.log(productData);
+
     let [wishListIconHovered, setWishListIconHovered] = useState(false);
     let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
     let [previewIconHovered, setPreviewIconHovered] = useState(false);
@@ -20,10 +21,10 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productDat
     const price = productData?.price ?? 0;
     const discountPercentage = productData?.discount ?? 0;
 
-    const discountedPrice = useMemo(() => {
-        if (!discountPercentage) return price;
-        return price - (price * (discountPercentage / 100));
-    }, [price, discountPercentage]);
+    const discountedPrice = useMemo(
+        () => getDiscount(price, discountPercentage),
+        [price, discountPercentage]
+    );
 
     return (<div className="w-64 flex flex-col gap-y-3">
         <Link href={route('shop.product.show', { category: productData?.category.toLowerCase(), slug: productData?.slug })} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className={`w-full aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
