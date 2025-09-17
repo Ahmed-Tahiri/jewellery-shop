@@ -19,7 +19,7 @@ export let ProductAdditionalInfo = ({ product }) => {
         setDescriptionSectionIsVisible(false);
         setAdditionalInfoIsVisible(true);
     }
-    const renderAdditionalInfo = (arr) => arr.length > 1 ? arr.join(", ") : arr[0] || "";
+    const renderAdditionalInfo = (arr) => Array.isArray(arr) ? (arr.length > 1 ? arr.join(", ") : arr[0] || "") : arr;
     useEffect(() => {
         let uniqueMetals = [...new Set(product.variants.map((variant) => variant.metal.name))];
         let uniquePurities = [...new Set(product.variants.map((variant) => variant.metal_purity.purity))];
