@@ -31,7 +31,16 @@ class ShopController extends Controller
     }
     public function show($category, $slug)
     {
-        $product = Product::where('slug', $slug)->with(['variants', 'subcategory.category'])->firstOrFail();
-        dd($product);
+        $product = Product::where('slug', $slug)->with(['defaultVariant', 'defaultVariant.primaryImage', 'subcategory.category', 'discount'])->firstOrFail();
+        $modifiedData = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'discount' => $product->discount->discount_percent,
+            'price' => $product->defaultVariant->price,
+            'category' => $product->subcategory->category->name,
+            'img' => $product->defaultVariant->primaryImage,
+            'slug' => $product->slug,
+        ];
+        return Inertia::render('Site/Shop/Show', ['product' => $modifiedData]);
     }
 }

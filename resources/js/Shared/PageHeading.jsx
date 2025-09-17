@@ -9,7 +9,7 @@ export let PageHeading = ({ heading, breadcrumb }) => {
         </div>
         <div className='w-full flex items-center justify-center flex-col gap-y-1 lg:gap-y-5 h-full z-10 relative'>
             <h2 className='font-mod20 text-semi-black text-3xl md:text-4xl lg:text-5xl'>{heading}</h2>
-            <p className='font-poppins text-semi-black text-xs sm:text-sm lg:text-lg font-medium'>{breadcrumb}</p>
+            <p className='font-poppins text-semi-black text-xs sm:text-sm lg:text-lg font-medium capitalize'>{breadcrumb}</p>
         </div>
     </div>
 }

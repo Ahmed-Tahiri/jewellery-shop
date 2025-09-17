@@ -26,7 +26,7 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productDat
     }, [price, discountPercentage]);
 
     return (<div className="w-64 flex flex-col gap-y-3">
-        <Link href={route('shop.product.show', { category: productData.category.toLowerCase(), slug: productData.slug })} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className={`w-full aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
+        <Link href={route('shop.product.show', { category: productData?.category.toLowerCase(), slug: productData?.slug })} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className={`w-full aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
             <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">{productData?.discount}% off</span>
             <img src={`/storage/${productData?.img.url}`} className="object-cover w-full aspect-square" alt="Product Image" />
             <div className={`${shoppingCardIsHovered ? 'flex' : 'hidden'} w-full h-full p-2 aspect-square absolute bg-transparent bottom-0 left-0 pointer-events-none flex-col gap-y-5 items-end justify-between`}>
