@@ -8,7 +8,7 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 import { ProductAdditionalInfo } from "../../../Components/ProductAdditionalInfo";
 
 export let VariantMiniCard = ({ value }) => {
-    return <div><button className="p-1.5  text-zinc-dark font-poppins text-lg font-medium min-w-14 h-11 cursor-pointer border-[1px] border-gray-300 hover:bg-mustard transition-colors ease-linear duration-200">{value}</button></div>
+    return <div><button className="p-1.5  text-zinc-dark font-poppins text-lg font-medium min-w-14 h-11 cursor-pointer border-[1px] border-gray-300 hover:bg-mustard transition-colors ease-linear duration-200" >{value}</button></div>
 }
 
 export default function Show({ product }) {
@@ -23,6 +23,12 @@ export default function Show({ product }) {
     const [isSizeSame, setIsSizeSame] = useState(false);
     const [isColorSame, setIsColorSame] = useState(false);
     const [cartQuantity, setCartQuantity] = useState(1);
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [purities, setPurities] = useState(null);
+    const [colors, setColors] = useState(null);
+    const [metals, setMetals] = useState(null);
+    const [sizes, setSizes] = useState(null);
+    const [finishes, setFinishes] = useState(null);
 
     const tags = [];
     for (const key in product.tags) {
@@ -45,9 +51,19 @@ export default function Show({ product }) {
         setIsSizeSame(new Set(sizes).size === 1);
         const colors = product.variants.map(v => v.color_tone.hex_code);
         setIsColorSame(new Set(colors).size === 1);
+        setMetals([...new Set(metals)]);
+        setPurities([...new Set(purities)]);
+        setColors([...new Set(colors)]);
+        setSizes([...new Set(sizes)]);
+        setFinishes([...new Set(finishes)]);
 
     }, [product.variants]);
-
+    useEffect(() => {
+        if (selectedColor) {
+            let selectedVariant = selectedColor && product.variants.find((variant) => variant.color_tone.hex_code.toLowerCase() === selectedColor.toLowerCase());
+            setCarouselImagesArr(selectedVariant.images);
+        }
+    }, [selectedColor])
     return (<section className="flex bg-white justify-center items-center py-20 px-5 md:px-10 lg:px-15 xl:px-20">
         <div className="w-full flex flex-col items-start justify-between gap-y-10  max-w-7xl ">
             <div className="flex items-start w-full justify-between flex-row gap-x-10">
@@ -68,36 +84,35 @@ export default function Show({ product }) {
                         {!isPuritySame && <div className="flex flex-col w-full gap-y-1.5">
                             <p className="font-poppins text-xl font-medium text-semi-black">Purity</p>
                             <div className="flex w-full flex-wrap items-center justify-start gap-x-2">
-                                {product.variants.map((variant) => <VariantMiniCard key={`VariantPurityCard${variant.id}`} value={variant.metal_purity.purity} />)}
+                                {purities?.map((purity, idx) => <VariantMiniCard key={`VariantPurityCard${idx + 1}`} value={purity} />)}
                             </div>
                         </div>}
                         {!isMetalsSame && <div className="flex flex-col w-full gap-y-1.5">
                             <p className="font-poppins text-xl font-medium text-semi-black">Metal</p>
                             <div className="flex w-full flex-wrap items-center justify-start gap-x-2">
-                                {product.variants.map((variant) => <VariantMiniCard key={`VariantMetalCard${variant.id}`} value={variant.metal.name} />)}
+                                {metals?.map((metal, idx) => <VariantMiniCard key={`VariantMetalCard${metal + 1}`} value={metal} />)}
                             </div>
                         </div>}
                         {!isFinishSame && <div className="flex flex-col w-full gap-y-1.5">
                             <p className="font-poppins text-xl font-medium text-semi-black">Finish</p>
                             <div className="flex w-full flex-wrap items-center justify-start gap-x-2">
-                                {product.variants.map((variant) => <VariantMiniCard key={`VariantFinishCard${variant.id}`} value={variant.finish.name} />)}
+                                {finishes?.map((finish, idx) => <VariantMiniCard key={`VariantFinishCard${idx + 1}`} value={finish} />)}
                             </div>
                         </div>}
                         {!isSizeSame && <div className="flex flex-col w-full gap-y-1.5">
                             <p className="font-poppins text-xl font-medium text-semi-black">Size</p>
                             <div className="flex w-full flex-wrap items-center justify-start gap-x-2">
-                                {product.variants.map((variant) => <VariantMiniCard key={`VariantSizeCard${variant.id}`} value={variant.size} />)}
+                                {sizes?.map((size, idx) => <VariantMiniCard key={`VariantSizeCard${idx + 1}`} value={size} />)}
                             </div>
                         </div>}
                         {!isColorSame && <div className="flex flex-col w-full gap-y-1.5">
                             <p className="font-poppins text-xl font-medium text-semi-black">Color</p>
                             <div className="flex w-full flex-wrap items-center justify-start gap-x-3">
-                                {product.variants.map((variant) => <div key={`VariantColorCard${variant.id}`} className="flex flex-row gap-x-1 items-center">
-                                    <button type="button" className="h-11  p-1.5 min-w-14 cursor-pointer border-[1px] border-gray-300  shadow-xs" style={{ backgroundColor: `${variant.color_tone.hex_code}` }} />
+                                {colors?.map((color, idx) => <div key={`VariantColorCard${idx + 1}`} className="flex flex-row gap-x-1 items-center">
+                                    <button type="button" className="h-11  p-1.5 min-w-14 cursor-pointer border-[1px] border-gray-300  shadow-xs" style={{ backgroundColor: `${color}` }} onClick={() => setSelectedColor(color)} />
                                 </div>)}
                             </div>
                         </div>}
-
                         <div className="flex flex-row gap-x-1.5">
                             <div className="flex flex-row items-center">
                                 <button onClick={cartDecHandler} className=" flex items-center justify-center cursor-pointer h-11 aspect-square border-[1px] border-gray-300 shadow-xs hover:bg-mustard text-dark-zinc"><FiMinus className="text-xl text-zinc-dark" /></button>
