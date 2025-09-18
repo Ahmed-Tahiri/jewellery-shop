@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { parse, parseISO, isValid } from "date-fns";
 
 export default function SaleCountdown({ target }) {
+
     const [timeLeft, setTimeLeft] = useState({
         days: "--",
         hours: "--",

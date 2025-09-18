@@ -2,9 +2,11 @@ import { SectionMainHeading } from "../Shared/SectionMainHeading";
 import { SectionSubHeading } from "../Shared/SectionSubHeading";
 import { JewelleryCard } from "./JewelleryCard";
 import TrendyDesignImg from './../../images/TrendyDesignImg.jpg';
+import { usePage } from "@inertiajs/react";
 
 export let TrendyDesigns = () => {
 
+    const { products } = usePage().props
     return (<div className="flex bg-white justify-center items-center py-30 px-5 md:px-10 lg:px-15 xl:px-20">
         <div className="w-full flex flex-col items-center justify-center gap-y-14  max-w-7xl gap-10 ">
             <div className="w-full flex flex-col items-center justify-center gap-y-4">
@@ -17,12 +19,7 @@ export let TrendyDesigns = () => {
                     <div className="absolute top-0 left-0 h-full w-full p-2"><div className="h-full w-full border-2 border-white"></div></div>
                 </div>
                 <div className="w-9/12 flex flex-row flex-wrap items-start justify-start gap-8">
-                    <JewelleryCard bgColor='bg-powder-gray' />
-                    <JewelleryCard bgColor='bg-powder-gray' />
-                    <JewelleryCard bgColor='bg-powder-gray' />
-                    <JewelleryCard bgColor='bg-powder-gray' />
-                    <JewelleryCard bgColor='bg-powder-gray' />
-                    <JewelleryCard bgColor='bg-powder-gray' />
+                    {products.map((product) => <JewelleryCard key={`TrendingProductCard${product.id}`} productData={product} bgColor='bg-powder-gray' />)}
                 </div>
             </div>
         </div>

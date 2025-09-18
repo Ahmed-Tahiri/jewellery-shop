@@ -2,9 +2,11 @@ import { SectionMainHeading } from "../Shared/SectionMainHeading";
 import { SectionSubHeading } from "../Shared/SectionSubHeading";
 import { NewArrivalJewelleryCard } from "./NewArrivalJewelleryCard";
 import PlantImage from './../../images/plants.png';
+import { usePage } from "@inertiajs/react";
 
 export let NewArrivals = () => {
 
+    const { products } = usePage().props;
     return (<div className="flex relative bg-white justify-center items-center py-20 px-5 md:px-10 lg:px-15 xl:px-20 overflow-hidden">
         <div className="absolute top-10 -left-15 h-40 z-50"><img className="h-40 transform-scale-y-[-1] rotate-340" src={PlantImage} alt="Leaf Image for design" /></div>
         <div className="absolute bottom-44 -right-12 h-30 z-50"><img className="h-30 transform-scale-y-[-1] rotate-245" src={PlantImage} alt="Leaf Image for design" /></div>
@@ -25,8 +27,8 @@ export let NewArrivals = () => {
 
                 </div>
                 <div className="w-full flex flex-row  gap-x-10">
-                    <NewArrivalJewelleryCard />
-                    <NewArrivalJewelleryCard />
+                    {products.map((product) => <NewArrivalJewelleryCard key={`newArrivalProductCard${product.id}`} productData={product} />)}
+
                 </div>
             </div>
         </div>

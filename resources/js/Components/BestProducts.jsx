@@ -4,14 +4,14 @@ import { SectionSubHeading } from "../Shared/SectionSubHeading";
 import { JewelleryCard } from "./JewelleryCard";
 import { Autoplay, A11y } from "swiper/modules";
 import "swiper/css/scrollbar";
-
 import "swiper/css";
 import { useState } from "react";
+import { usePage } from "@inertiajs/react";
 
 
 export let BestProducts = () => {
     const [progress, setProgress] = useState(0);
-    const slides = [1, 2, 3, 4, 5, 6, 7];
+    const { products } = usePage().props;
     return (
         <div className="flex  bg-powder-gray justify-center items-center py-20 px-5 md:px-10 lg:px-15 xl:px-20 overflow-hidden">
 
@@ -38,8 +38,8 @@ export let BestProducts = () => {
                             a11y={{ enabled: true }}
                             onProgress={(swiper, p) => setProgress(p)}
                         >
-                            {slides.map((slide, idx) => (<SwiperSlide key={`swiperSlides${idx + 1}`}>
-                                <JewelleryCard isLimited='yes' />
+                            {products.map((product, idx) => (<SwiperSlide key={`BestProductsSlide${product.id}`}>
+                                <JewelleryCard isLimited={product?.discount?.end_date ?? null} productData={product} />
                             </SwiperSlide>))}
 
                         </Swiper>

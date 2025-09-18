@@ -3,20 +3,18 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 import { FaStar } from "react-icons/fa6";
 import { LuExpand } from "react-icons/lu";
 import { IoOpen } from "react-icons/io5";
-import Earrings from './../../images/cardEarrings.png';
 import FormatPKR from "../Utilities/FormatPKR";
 import SaleCountdown from "./SaleCountDown";
 import { Link } from "@inertiajs/react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { route } from "ziggy-js";
 import { getDiscount } from "../Utilities/getDiscount";
 
 
 export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productData }) => {
 
-    let [shoppingCardIsHovered, setShoppingCardIsHovered] = useState(false);
     const price = productData?.price ?? 0;
-    const discountPercentage = productData?.discount ?? 0;
+    const discountPercentage = productData?.discount.discount_percent ?? 0;
 
     const discountedPrice = useMemo(
         () => getDiscount(price, discountPercentage),
@@ -25,7 +23,7 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productDat
 
     return (<div className="w-64 flex flex-col gap-y-3">
         <Link href={route('shop.product.show', { category: productData?.category.toLowerCase(), slug: productData?.slug })} className={`w-full group/main aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
-            <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">{productData?.discount}% off</span>
+            <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">{discountPercentage}% off</span>
             <img src={`/storage/${productData?.img.url}`} className="object-cover w-full aspect-square" alt="Product Image" />
             <div className={`group-hover/main:flex hidden w-full h-full p-2 aspect-square absolute bg-transparent bottom-0 left-0 pointer-events-none flex-col gap-y-5 items-end justify-between`}>
                 <div className="h-full flex flex-col gap-y-1.5 p-1 pointer-events-auto">
@@ -40,7 +38,7 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productDat
                         <IoOpen className='text-mustard text-2xl hidden group-hover:block' />  <LuExpand className='text-semi-black text-2xl group-hover:hidden' />
                     </button></div>
                 </div>
-                {isLimited && <SaleCountdown target={'2025-09-15 15:37:19'} />}
+                {isLimited && <SaleCountdown target={productData.discount.end_date} />}
             </div>
         </Link>
         <div className="flex flex-col w-full gap-y-1 items-start">
