@@ -8,9 +8,7 @@ import { useState } from 'react';
 
 
 export let Header = () => {
-    let [wishListIconHovered, setWishListIconHovered] = useState(false);
-    let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
-    let [personIconHovered, setPersonIconHovered] = useState(false);
+
 
     let navLinks = [
         { name: "Home", link: '/' },
@@ -40,18 +38,23 @@ export let Header = () => {
                         <div>
                             <Link href='#'>
                                 <RiSearch2Line className='text-zinc text-2xl' />
-                            </Link></div>
-                        <div ><Link onMouseEnter={() => setWishListIconHovered(true)} onMouseLeave={() => setWishListIconHovered(false)} href='/wishlist'>
-                            {wishListIconHovered ? (<GoHeartFill className='text-red-500 text-2xl' />) : (<GoHeart className='text-zinc text-2xl' />)}
-                        </Link></div>
+                            </Link>
+                        </div>
                         <div>
-                            <Link onMouseEnter={() => setShoppingBagIconHovered(true)} onMouseLeave={() => setShoppingBagIconHovered(false)} href='/cart'>
-                                {shoppingBagIconHovered ? (<HiShoppingBag className='text-2xl text-zinc' />) : (<HiOutlineShoppingBag className='text-zinc text-2xl' />)}
-                            </Link></div>
-                        <div >
-                            <Link onMouseEnter={() => setPersonIconHovered(true)} onMouseLeave={() => setPersonIconHovered(false)} href='/myaccount'>
-                                {personIconHovered ? (<GoPersonFill className='text-2xl text-mustard' />) : (<GoPerson className='text-zinc text-2xl' />)}
-                            </Link></div>
+                            <Link href='/wishlist' className='group'>
+                                <GoHeartFill className='text-red-500 text-2xl hidden group-hover:block' /> <GoHeart className='text-zinc text-2xl group-hover:hidden' />
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href='/cart' className='group'>
+                                <HiShoppingBag className='text-2xl text-zinc hidden group-hover:block' /><HiOutlineShoppingBag className='text-zinc text-2xl group-hover:hidden' />
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href='/myaccount' className='group'>
+                                <GoPersonFill className='text-2xl text-mustard hidden group-hover:block' /> <GoPerson className='text-zinc text-2xl group-hover:hidden' />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

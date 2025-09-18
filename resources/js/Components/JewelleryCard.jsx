@@ -14,9 +14,6 @@ import { getDiscount } from "../Utilities/getDiscount";
 
 export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productData }) => {
 
-    let [wishListIconHovered, setWishListIconHovered] = useState(false);
-    let [shoppingBagIconHovered, setShoppingBagIconHovered] = useState(false);
-    let [previewIconHovered, setPreviewIconHovered] = useState(false);
     let [shoppingCardIsHovered, setShoppingCardIsHovered] = useState(false);
     const price = productData?.price ?? 0;
     const discountPercentage = productData?.discount ?? 0;
@@ -27,20 +24,20 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productDat
     );
 
     return (<div className="w-64 flex flex-col gap-y-3">
-        <Link href={route('shop.product.show', { category: productData?.category.toLowerCase(), slug: productData?.slug })} onMouseEnter={() => setShoppingCardIsHovered(true)} onMouseLeave={() => setShoppingCardIsHovered(false)} className={`w-full aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
+        <Link href={route('shop.product.show', { category: productData?.category.toLowerCase(), slug: productData?.slug })} className={`w-full group/main aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
             <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">{productData?.discount}% off</span>
             <img src={`/storage/${productData?.img.url}`} className="object-cover w-full aspect-square" alt="Product Image" />
-            <div className={`${shoppingCardIsHovered ? 'flex' : 'hidden'} w-full h-full p-2 aspect-square absolute bg-transparent bottom-0 left-0 pointer-events-none flex-col gap-y-5 items-end justify-between`}>
+            <div className={`group-hover/main:flex hidden w-full h-full p-2 aspect-square absolute bg-transparent bottom-0 left-0 pointer-events-none flex-col gap-y-5 items-end justify-between`}>
                 <div className="h-full flex flex-col gap-y-1.5 p-1 pointer-events-auto">
-                    <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer transition-all ease-linear duration-200" onMouseEnter={() => setWishListIconHovered(true)} onMouseLeave={() => setWishListIconHovered(false)}>
-                        {wishListIconHovered ? (<GoHeartFill className='text-red-500 text-2xl' />) : (<GoHeart className='text-semi-black text-2xl' />)}
+                    <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer transition-all ease-linear duration-200 group">
+                        <GoHeartFill className='text-red-500 text-2xl group-hover:block hidden' /><GoHeart className='text-semi-black text-2xl group-hover:hidden' />
                     </button></div>
-                    <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer" onMouseEnter={() => setShoppingBagIconHovered(true)} onMouseLeave={() => setShoppingBagIconHovered(false)}>
-                        {shoppingBagIconHovered ? <HiShoppingBag className='text-zinc text-2xl' /> : <HiOutlineShoppingBag className='text-semi-black text-2xl' />}
+                    <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer group">
+                        <HiShoppingBag className='text-zinc text-2xl group-hover:block hidden' /> <HiOutlineShoppingBag className='text-semi-black text-2xl group-hover:hidden' />
                     </button></div>
 
-                    <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer" onMouseEnter={() => setPreviewIconHovered(true)} onMouseLeave={() => setPreviewIconHovered(false)}>
-                        {previewIconHovered ? <IoOpen className='text-mustard text-2xl' /> : <LuExpand className='text-semi-black text-2xl' />}
+                    <div><button className="p-1.5 bg-white shadow-xs rounded-full cursor-pointer group" >
+                        <IoOpen className='text-mustard text-2xl hidden group-hover:block' />  <LuExpand className='text-semi-black text-2xl group-hover:hidden' />
                     </button></div>
                 </div>
                 {isLimited && <SaleCountdown target={'2025-09-15 15:37:19'} />}
