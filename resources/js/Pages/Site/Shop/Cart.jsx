@@ -1,6 +1,6 @@
-import MainLayout from "../../Layouts/MainLayout";
-import FormatPKR from "../../Utilities/FormatPKR";
-import { CartProductCard } from "../../Components/CartProductCard";
+import MainLayout from "../../../Layouts/MainLayout";
+import FormatPKR from "../../../Utilities/FormatPKR";
+import { CartProductCard } from "../../../Components/CartProductCard";
 
 export const SummaryDataComponent = ({ heading, data }) => {
     return <div className="flex w-full items-center justify-between">

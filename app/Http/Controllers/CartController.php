@@ -9,6 +9,6 @@ class CartController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Site/Cart');
+        return Inertia::render('Site/Shop/Cart');
     }
 }
