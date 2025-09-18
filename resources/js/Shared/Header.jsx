@@ -4,7 +4,6 @@ import { RiSearch2Line } from "react-icons/ri";
 import { GoHeart, GoHeartFill, GoPerson, GoPersonFill } from "react-icons/go";
 import { HiOutlineShoppingBag, HiShoppingBag } from "react-icons/hi2";
 import { NavLink } from './NavLink';
-import { useState } from 'react';
 
 
 export let Header = () => {

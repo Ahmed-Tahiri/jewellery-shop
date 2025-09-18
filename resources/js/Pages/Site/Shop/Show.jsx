@@ -6,6 +6,7 @@ import FormatPKR from './../../../Utilities/FormatPKR';
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { ProductAdditionalInfo } from "../../../Components/ProductAdditionalInfo";
+import { ProductQuantityComponent } from "../../../Shared/ProductQuantityComponent";
 
 export let VariantMiniCard = ({ value }) => {
     return <div><button className="p-1.5  text-zinc-dark font-poppins text-lg font-medium min-w-14 h-11 cursor-pointer border-[1px] border-gray-300 hover:bg-mustard transition-colors ease-linear duration-200" >{value}</button></div>
@@ -22,7 +23,6 @@ export default function Show({ product }) {
     const [isFinishSame, setIsFinishSame] = useState(false);
     const [isSizeSame, setIsSizeSame] = useState(false);
     const [isColorSame, setIsColorSame] = useState(false);
-    const [cartQuantity, setCartQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState(null);
     const [purities, setPurities] = useState(null);
     const [colors, setColors] = useState(null);
@@ -37,8 +37,6 @@ export default function Show({ product }) {
     };
 
 
-    let cartIncHandler = () => { setCartQuantity(prev => prev + 1); }
-    let cartDecHandler = () => { if (cartQuantity > 1) { setCartQuantity(prev => prev - 1); } }
 
     useEffect(() => {
         const metals = product.variants.map(v => v.metal.name);
@@ -114,11 +112,7 @@ export default function Show({ product }) {
                             </div>
                         </div>}
                         <div className="flex flex-row gap-x-1.5">
-                            <div className="flex flex-row items-center">
-                                <button onClick={cartDecHandler} className=" flex items-center justify-center cursor-pointer h-11 aspect-square border-[1px] border-gray-300 shadow-xs hover:bg-mustard text-dark-zinc"><FiMinus className="text-xl text-zinc-dark" /></button>
-                                <input readOnly={true} value={cartQuantity} className="cursor-default border-t-[1px] border-b-[1px] font-poppins border-gray-300 shadow-xs h-11 w-10 text-center aspect-square flex items-center justify-center text-zinc-dark outline-0  transition-all ease-linear duration-200 " />
-                                <button onClick={cartIncHandler} className=" flex items-center justify-center cursor-pointer h-11 aspect-square border-[1px] border-gray-300 shadow-xs hover:bg-mustard text-dark-zinc"><FiPlus className="text-xl text-zinc-dark" /></button>
-                            </div>
+                            <ProductQuantityComponent />
                             <div className="flex flex-row items-center gap-x-1.5">
                                 <div><button type="button" className="py-2 cursor-pointer px-4 h-11 text-base font-poppins text-white font-normal bg-zinc border-[1px] border-gray-300 shadow-xs">Add To Cart</button></div>
                                 <div><button type="button" className="py-2 cursor-pointer px-4 shadow-xs h-11 text-base font-poppins bg-mustard font-normal text-zinc-dark border-[1px] border-gray-300">Buy Now</button></div>

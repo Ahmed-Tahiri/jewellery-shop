@@ -38,35 +38,6 @@ Copy `.env.example` to `.env`:
 cp .env.example .env
 ```
 
-Update `.env` with your configuration:
-
-```ini
-APP_NAME=jewellery_shop
-APP_ENV=local
-APP_KEY=base64:tyZNOX35J/xZvVKV14m6py3ILU9KVBp7m9fIq9dkMw8=
-APP_DEBUG=true
-APP_URL=https://jewellery-shop.test
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=jewellery_shop
-DB_USERNAME=root
-DB_PASSWORD=Ahmed12/3
-
-
-MAIL_MAILER=smtp
-MAIL_HOST=sandbox.smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=a27162e98f46aa
-MAIL_PASSWORD=8a48f8a6295367
-MAIL_SCHEME=null
-MAIL_FROM_ADDRESS="admin@jewelleryshop.com"
-MAIL_FROM_NAME="${APP_NAME}"
-
-FILESYSTEM_DISK=public
-```
-
 Generate app key:
 
 ```bash
