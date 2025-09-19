@@ -18,6 +18,7 @@ use App\Http\Controllers\Customer\AddressController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Customer\MyAccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SignupCompleteController;
@@ -139,4 +140,6 @@ Route::middleware(['customer'])->group(function () {
     Route::post('/cart/checkout/addressStore', [CheckoutController::class, 'addressStore'])->name('checkout.address.store');
     Route::get('/cart/checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
     Route::post('/cart/checkout/order/submit', [CheckoutController::class, 'orderSubmit'])->name('checkout.order.submit');
+
+    Route::get('/order/status', [OrderController::class, 'orderStatus'])->name('order.track.status');
 });
