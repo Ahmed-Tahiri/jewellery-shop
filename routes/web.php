@@ -142,4 +142,5 @@ Route::middleware(['customer'])->group(function () {
     Route::post('/cart/checkout/order/submit', [CheckoutController::class, 'orderSubmit'])->name('checkout.order.submit');
 
     Route::get('/order/status', [OrderController::class, 'orderStatus'])->name('order.track.status');
+    Route::get('/myaccount/orders', [OrderController::class, 'index'])->name('myaccount.orders');
 });
