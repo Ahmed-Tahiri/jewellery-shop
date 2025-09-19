@@ -4,8 +4,12 @@ import MainLayout from "../../../Layouts/MainLayout";
 import FormatPKR from "../../../Utilities/FormatPKR";
 import { route } from "ziggy-js";
 import { FaMoneyCheck } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 export default function Payment() {
+    const [paymentMethod, setPaymentMethod] = useState(null);
+
+    useEffect(() => { }, [paymentMethod]);
 
     return (<section className="flex bg-white justify-center items-center py-20 px-5 md:px-10 lg:px-15 xl:px-20">
         <div className="w-full flex flex-col items-center justify-center gap-y-10  max-w-7xl ">
@@ -15,7 +19,7 @@ export default function Payment() {
                         <h3 className="w-full font-poppins font-semibold text-semi-black text-xl">Choose from Existing</h3>
                         <div className="w-full flex items-start gap-y-2 flex-col">
                             <label htmlFor="paymentMethod" className=" cursor-pointer hover:bg-powder-gray transition-colors ease-linear duration-200 flex w-full flex-row gap-x-5 items-center justify-start border-[1px] border-gray-300 p-4"><input checked
-                                value={'cod'} type="radio" name="checkoutPayment" id={`paymentMethod`} className="cursor-pointer h-5 w-5" />
+                                value={'cod'} type="radio" name="checkoutPayment" id={`paymentMethod`} onChange={(e) => setPaymentMethod(e.target.value)} className="cursor-pointer h-5 w-5" />
                                 <p className="flex flex-row items-center gap-x-3"><FaMoneyCheck className="text-green-800 text-3xl" /><span className="font-poppins text-base text-semi-black font-medium capitalize">Cash on Delivery</span></p>
                             </label>
                         </div>

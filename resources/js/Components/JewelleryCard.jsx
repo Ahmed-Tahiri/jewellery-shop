@@ -23,7 +23,7 @@ export let JewelleryCard = ({ isLimited = null, bgColor = 'bg-white', productDat
 
     return (<div className="w-64 flex flex-col gap-y-3">
         <Link href={route('shop.product.show', { category: productData?.category.toLowerCase(), slug: productData?.slug })} className={`w-full group/main aspect-square ${bgColor} relative shadow-sm rounded-t-sm`}>
-            <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">{discountPercentage}% off</span>
+            {discountPercentage > 0 && <span className="bg-mustard p-2 min-w-20 inline-block absolute top-3 left-3 text-sm font-poppins font-medium text-zinc text-center">{discountPercentage}% off</span>}
             <img src={`/storage/${productData?.img.url}`} className="object-cover w-full aspect-square" alt="Product Image" />
             <div className={`group-hover/main:flex hidden w-full h-full p-2 aspect-square absolute bg-transparent bottom-0 left-0 pointer-events-none flex-col gap-y-5 items-end justify-between`}>
                 <div className="h-full flex flex-col gap-y-1.5 p-1 pointer-events-auto">

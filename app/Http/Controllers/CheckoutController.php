@@ -23,6 +23,6 @@ class CheckoutController extends Controller
     }
     public function orderSubmit()
     {
-        dd('Order Submitted Successfully');
+        return Inertia::render('Site/Shop/OrderComplete');
     }
 }
