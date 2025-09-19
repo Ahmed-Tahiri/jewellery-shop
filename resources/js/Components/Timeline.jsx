@@ -64,11 +64,11 @@ export let Timeline = () => {
         <div className="flex flex-row w-full items-center justify-between px-3">
 
             <div className="flex flex-col gap-y-0 items-center max-w-36">
-                <span className={`font-poppins ${isPlaced ? 'text-semi-black' : 'text-light-gray'} text-sm font-medium`}>20 June 2024</span>
+                <span className={`font-poppins ${isPlaced ? 'text-semi-black' : 'text-light-gray'} text-sm font-medium`}>20 September 2025</span>
                 <p className={`font-poppins ${isPlaced ? 'text-semi-black' : 'text-light-gray'} text-sm font-medium`}>11:00 AM</p>
             </div>
             <div className="flex flex-col gap-y-0 items-center max-w-36">
-                <span className={`font-poppins ${isAccepted ? 'text-semi-black' : 'text-light-gray'} text-sm font-medium`}>20 June 2024</span>
+                <span className={`font-poppins ${isAccepted ? 'text-semi-black' : 'text-light-gray'} text-sm font-medium`}>21 September 2024</span>
                 <p className={`font-poppins ${isAccepted ? 'text-semi-black' : 'text-light-gray'} text-sm font-medium`}>11:00 AM</p>
             </div>
             <div className="flex flex-col gap-y-0 items-center max-w-36">
