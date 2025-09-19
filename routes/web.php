@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductVariantController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Customer\PasswordController as CustomerPasswordController;
 use App\Http\Controllers\Customer\AddressController;
@@ -134,4 +135,7 @@ Route::middleware(['customer'])->group(function () {
     Route::post('/myaccount/address', [AddressController::class, 'store']);
     Route::get('/myaccount/password', [CustomerPasswordController::class, 'index']);
     Route::put('/myaccount/password', [CustomerPasswordController::class, 'update']);
+    Route::get('/cart/checkout/address', [CheckoutController::class, 'address'])->name('checkout.address');
+    Route::post('/cart/checkout/addressStore', [CheckoutController::class, 'addressStore'])->name('checkout.address.store');
+    Route::get('/cart/checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
 });

@@ -1,13 +1,10 @@
 import MainLayout from "../../../Layouts/MainLayout";
 import FormatPKR from "../../../Utilities/FormatPKR";
 import { CartProductCard } from "../../../Components/CartProductCard";
+import { Link } from "@inertiajs/react";
+import { route } from "ziggy-js";
+import { SummaryDataComponent } from "../../../Components/SummaryData";
 
-export const SummaryDataComponent = ({ heading, data }) => {
-    return <div className="flex w-full items-center justify-between">
-        <p className="font-poppins text-light-gray font-medium text-base">{heading}</p>
-        <p className="font-poppins text-base text-semi-black font-medium">{data}</p>
-    </div>
-}
 
 export let removeFromCart = () => { }
 export default function Cart() {
@@ -57,7 +54,7 @@ export default function Cart() {
                         <SummaryDataComponent heading={'Total'} data={FormatPKR(3570)} />
                     </div>
                     <div className="flex w-full flex-col gap-y-3 py-4">
-                        <button className="p-3 text-white bg-zinc w-full font-poppins cursor-pointer text-base hover:bg-zinc-dark shadow-sm">Proceed to Checkout</button>
+                        <Link as={'button'} href={route('checkout.address')} className="p-3 text-white bg-zinc w-full font-poppins cursor-pointer text-base hover:bg-zinc-dark shadow-sm">Proceed to Checkout</Link>
                     </div>
                 </div>
             </div>

@@ -3,10 +3,12 @@ import { AddressCard } from "../../Components/MyAccount/Address";
 import { FormTextInput } from "../../Shared/FormTextInput";
 import { useCallback, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
+import { AddressForm } from "../../Components/AddressForm";
 
 export default function Address() {
 
     let [isPrimary, setIsPrimary] = useState(false);
+    let { addresses } = usePage().props;
     const { data, setData, post, processing, errors, reset } = useForm({
         first_name: "",
         last_name: "",
@@ -20,7 +22,6 @@ export default function Address() {
         is_primary: isPrimary,
     });
 
-    const inputChangeHandler = useCallback((e) => { setData(e.target.name, e.target.value); }, [setData]);
     const submitHandler = (e) => {
         e.preventDefault();
         post("/myaccount/address", {
@@ -38,13 +39,10 @@ export default function Address() {
                     street: "",
                     is_primary: isPrimary,
                 });
+                reset();
             },
         });
     };
-
-
-    let { addresses } = usePage().props;
-
 
     return (
         <div className="lg:w-6/8 md:w-5/7 w-10/12">
@@ -56,42 +54,7 @@ export default function Address() {
                 <div className="w-full">
                     <form onSubmit={submitHandler} className="w-full flex flex-col items-start">
                         <div className="w-full flex flex-col items-start gap-y-5">
-                            <div className="w-full flex md:flex-row flex-col gap-5">
-                                <div className="w-full md:w-1/2">
-                                    <FormTextInput label={'First Name *'} type={'text'} name={'first_name'} id={'fName'} inputChangeHandler={inputChangeHandler} error={errors.first_name} data={data.first_name} placeholder={'Enter First Name'} />
-                                </div>
-                                <div className=" w-full md:w-1/2">
-                                    <FormTextInput label={'Last Name *'} type={'text'} name={'last_name'} id={'lName'} inputChangeHandler={inputChangeHandler} error={errors.last_name} data={data.last_name} placeholder={'Enter Last Name'} />
-                                </div>
-                            </div>
-                            <div className="w-full flex md:flex-row flex-col gap-5">
-                                <div className="w-full md:w-1/2">
-                                    <FormTextInput label={'Country *'} type={'text'} name={'country'} id={'country'} inputChangeHandler={inputChangeHandler} error={errors.country} data={data.country} placeholder={'Enter Country'} />
-                                </div>
-                                <div className="w-full md:w-1/2">
-                                    <FormTextInput label={'State *'} type={'text'} name={'state'} id={'state'} inputChangeHandler={inputChangeHandler} error={errors.state} data={data.state} placeholder={'Enter State'} />
-                                </div>
-
-                            </div>
-                            <div className="w-full flex md:flex-row flex-col gap-5">
-                                <div className="w-full md:w-1/2">
-                                    <FormTextInput label={'City *'} type={'text'} name={'city'} id={'city'} inputChangeHandler={inputChangeHandler} error={errors.city} data={data.city} placeholder={'Enter City'} />
-                                </div>
-                                <div className="w-full md:w-1/2">
-                                    <FormTextInput label={'Zip Code *'} type={'text'} name={'zipcode'} id={'zipCode'} inputChangeHandler={inputChangeHandler} error={errors.zipcode} data={data.zipcode} placeholder={'Enter Zip Code'} />
-                                </div>
-                            </div>
-
-                            <div className="w-full">
-                                <FormTextInput label={'Street Address *'} type={'text'} name={'street'} id={'street'} inputChangeHandler={inputChangeHandler} error={errors.street} data={data.street} placeholder={'Enter Street Address'} />
-                            </div>
-
-                            <div className="w-full">
-                                <FormTextInput label={'Email *'} type={'email'} name={'email'} id={'email'} inputChangeHandler={inputChangeHandler} error={errors.email} data={data.email} placeholder={'Enter Email'} />
-                            </div>
-                            <div className="w-full">
-                                <FormTextInput label={'Phone *'} type={'text'} name={'phone'} id={'phone'} inputChangeHandler={inputChangeHandler} error={errors.phone} data={data.phone} placeholder={'Enter Phone'} />
-                            </div>
+                            <AddressForm data={data} errors={errors} setData={setData} />
                             <div className="w-full flex items-center justify-between -mt-3 mb-3">
                                 <div className="flex flex-row gap-x-1 items-center mt-1">
                                     <label htmlFor="is_primary" className="relative flex flex-row items-center gap-x-2 cursor-pointer select-none">
@@ -110,7 +73,6 @@ export default function Address() {
                                         </div>
                                         <span className="text-zinc font-poppins text-sm font-semibold">Set as primary address</span>
                                     </label>
-
                                 </div>
                             </div>
                             <div>
