@@ -138,4 +138,5 @@ Route::middleware(['customer'])->group(function () {
     Route::get('/cart/checkout/address', [CheckoutController::class, 'address'])->name('checkout.address');
     Route::post('/cart/checkout/addressStore', [CheckoutController::class, 'addressStore'])->name('checkout.address.store');
     Route::get('/cart/checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
+    Route::post('/cart/checkout/order/submit', [CheckoutController::class, 'orderSubmit'])->name('checkout.order.submit');
 });
